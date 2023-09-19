@@ -10,7 +10,7 @@ Nuestro equipo está formado por 6 personas apasionadas por los videojuegos de m
 
 ## Contacto
 
-Para más información, visite nuestro twitter @OongaBungaGames o contáctenos por correo electrónico a oongabungagames@gmail.com.
+Para más información, visite nuestro twitter [@OongaBungaGames](https://twitter.com/OongaBungaGames) o contáctenos por correo electrónico a oongabungagames@gmail.com.
 
 ## Enlaces
 
