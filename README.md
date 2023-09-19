@@ -14,4 +14,4 @@ Para más información, visite nuestro twitter @OongaBungaGames o contáctenos p
 
 ## Enlaces
 
-* Twitter: @OongaBungaGames
+* Twitter: [@OongaBungaGames](https://twitter.com/OongaBungaGames)
