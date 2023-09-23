@@ -47,6 +47,7 @@ public class InputManager : MonoBehaviour
     public InputAction Jump;
     public InputAction Attack;
     public InputAction Interact;
+    public InputAction DropWeapon;
 
     private Dictionary<string, ICommand> commands;
 
@@ -84,7 +85,8 @@ public class InputManager : MonoBehaviour
                 { "move", new MoveCommand(player) },
                 { "jump", new JumpCommand(player) },
                 { "attack", new AttackCommand(player) },
-                { "interact", new InteractCommand(player) }
+                { "interact", new InteractCommand(player) },
+                { "dropWeapon", new DropWeaponCommand(player) }
             };
 
         Move.Enable();
@@ -114,6 +116,12 @@ public class InputManager : MonoBehaviour
             commands["interact"].Execute();
         };
         Interact.Enable();
+
+        DropWeapon.started += context =>
+        {
+            commands["dropWeapon"].Execute();
+        };
+        DropWeapon.Enable();
     }
 
     #endregion

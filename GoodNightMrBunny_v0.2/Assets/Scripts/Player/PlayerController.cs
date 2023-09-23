@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private Rigidbody rb;
     private Transform cameraTransform;
     private AWeapon currentWeapon;
+    [SerializeField] private List<AWeapon> weaponList;
 
     #endregion
 
@@ -77,6 +79,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         lastGroundedTime = 0;
         lastJumpTime = 0;
         localGravityScale = 1f;
+
+        currentWeapon = GetComponentInChildren<EmptyWeapon>();
     }
 
     #endregion
@@ -253,7 +257,41 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void Interact()
     {
-        closestInteractable.Interacted();
+        if (closestInteractable != null)
+        {
+            closestInteractable.Interacted(this);
+        }
+    }
+
+    /// <summary>
+    /// El jugador suelta en el suelo el arma que tiene equipada, y pasa a tener equipada el arma que recive como
+    /// parámetro
+    /// El jugador posee todas las armas, pero solo tiene una activa en cada momento
+    /// </summary>
+    /// <param name="weaponType">Tipo de arma a la que cambia el jugador</param>
+    public void ChangeWeapon(IPlayerReceiver.WeaponType weaponType)
+    {
+        currentWeapon.Drop();
+
+        foreach (AWeapon weapon in weaponList)
+        {
+            if (weaponType == weapon.weaponType)
+            {
+                weapon.gameObject.SetActive(true);
+                currentWeapon = weapon;
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Es similar al método ChangeWeapon, la única diferencia es que el arma a la que cambia el jugador es la vacía
+    /// </summary>
+    public void DropWeapon()
+    {
+        currentWeapon.Drop();
+        weaponList[0].gameObject.SetActive(true);
+        currentWeapon = weaponList[0];
     }
 
     #endregion
