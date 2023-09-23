@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Movement")]
 
-    [SerializeField] private float maxMoveSpeed = 14.0f; // Velocidad máxima de movimiento
-    [SerializeField] private float acceleration = 8f; // Fuerza de Aceleración al recibir inputs de movimiento WASD
-    [SerializeField] private float decceleration = 24f; // Fuerza de deceleración al no recibir inputs de movimiento WASD
-    [SerializeField] private float velPower = 0.97f; // Ni idea de para que sirve, pero aquí está, no quitar
+    [SerializeField] private float maxMoveSpeed = 14.0f; // Velocidad mï¿½xima de movimiento
+    [SerializeField] private float acceleration = 8f; // Fuerza de Aceleraciï¿½n al recibir inputs de movimiento WASD
+    [SerializeField] private float decceleration = 24f; // Fuerza de deceleraciï¿½n al no recibir inputs de movimiento WASD
+    [SerializeField] private float velPower = 0.97f; // Ni idea de para que sirve, pero aquï¿½ estï¿½, no quitar
 
-    [SerializeField] private float groundFrictionAmount = 0.44f; // Fricción en el suelo
-    [SerializeField] private float airFrictionAmount = 0.22f; // Fricción en el aire
+    [SerializeField] private float groundFrictionAmount = 0.44f; // Fricciï¿½n en el suelo
+    [SerializeField] private float airFrictionAmount = 0.22f; // Fricciï¿½n en el aire
 
     #endregion
 
@@ -27,12 +27,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [SerializeField] [Range(0.0f, 1.0f)] private float jumpCutMultiplier = 0.4f; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
-    // haya pasado más de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
+    // haya pasado mï¿½s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
     private float lastGroundedTime;
     [SerializeField] private float jumpCoyoteTime = 0.15f;
 
     // Este temporizador junto a su valor por defecto definen el buffer de salto, que permite al jugador saltar si se ha
-    // presionado la tecla correspondiente en los últimos x segundos (x = jumpBufferTime), es decir, mientras el valor de
+    // presionado la tecla correspondiente en los ï¿½ltimos x segundos (x = jumpBufferTime), es decir, mientras el valor de
     // lastJumpTime sea mayor que 0
     private float lastJumpTime;
     [SerializeField] private float jumpBufferTime = 0.1f;
@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Checks")]
 
-    [SerializeField] private BoxCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el método IsPlayerGrounded
-    [SerializeField] private float maxGroundCheckDistance = 0.1f; // Distancia máxima para el BoxCast / Distancia a la que el jugador detecta el suelo
+    [SerializeField] private BoxCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el mï¿½todo IsPlayerGrounded
+    [SerializeField] private float maxGroundCheckDistance = 0.1f; // Distancia mï¿½xima para el BoxCast / Distancia a la que el jugador detecta el suelo
     [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
-    private AInteractable closestInteractable; // Almacena el objeto interactuable más cercano al jugador en todo momento
-    [SerializeField] private float interactionDistance = 3f; // Distancia máxima para interactuar con un objeto
+    private AInteractable closestInteractable; // Almacena el objeto interactuable mï¿½s cercano al jugador en todo momento
+    [SerializeField] private float interactionDistance = 3f; // Distancia mï¿½xima para interactuar con un objeto
     [SerializeField] private LayerMask interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
 
     #endregion
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private Transform cameraTransform;
     private AWeapon currentWeapon;
     [SerializeField] private List<AWeapon> weaponList;
+    private PauseManager pauseManager;
 
     #endregion
 
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         localGravityScale = 1f;
 
         currentWeapon = GetComponentInChildren<EmptyWeapon>();
+        pauseManager = FindObjectOfType<PauseManager>();
     }
 
     #endregion
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             JumpAction();
         }
 
-        // Aumentar la gravedad si el jugador está cayendo
+        // Aumentar la gravedad si el jugador estï¿½ cayendo
 
         if (rb.velocity.y < 0)
         {
@@ -128,7 +130,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             localGravityScale = 1f;
         }
 
-        // Actualizamos el valor de closestInteractable para que sea el del IInteractable más cercano
+        // Actualizamos el valor de closestInteractable para que sea el del IInteractable mï¿½s cercano
 
         closestInteractable = GetClosestInteractable();
     }
@@ -138,19 +140,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     #region PlayerActions
 
     /// <summary>
-    /// Mueve al jugador horizontalmente en la dirección recibida, limita la velocidad y añade fricción
+    /// Mueve al jugador horizontalmente en la direcciï¿½n recibida, limita la velocidad y aï¿½ade fricciï¿½n
     /// </summary>
-    /// <param name="direction">Dirección de movimiento recibida a partir del input WASD</param>
+    /// <param name="direction">Direcciï¿½n de movimiento recibida a partir del input WASD</param>
     public void Move(Vector2 direction)
     {
-        // Cálculo de la dirección de movimiento con respecto a la cámara
+        if (pauseManager.isPaused) return;
+        // Cï¿½lculo de la direcciï¿½n de movimiento con respecto a la cï¿½mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0f;
         move = move.normalized;
 
-        // Cálculo de la velocidad necesaria
+        // Cï¿½lculo de la velocidad necesaria
 
         Vector2 horizontalSpeed = new Vector2(rb.velocity.x, rb.velocity.z);
 
@@ -162,11 +165,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         float movement = Mathf.Pow(speedDif.magnitude * accelRate, velPower);
 
-        // Aplicación del movimiento mediante una fuerza
+        // Aplicaciï¿½n del movimiento mediante una fuerza
 
         rb.AddForce(move * movement);
 
-        // Limitación de velocidad
+        // Limitaciï¿½n de velocidad
 
         if (horizontalSpeed.magnitude > maxMoveSpeed)
         {
@@ -175,7 +178,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
         }
 
-        // Fricción en el suelo y el aire cuando el jugador no introduce input de movimiento WASD
+        // Fricciï¿½n en el suelo y el aire cuando el jugador no introduce input de movimiento WASD
 
         if (move.magnitude < 0.01f)
         {
@@ -193,13 +196,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             }
         }
     }
-    
+
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona o suelta la tecla de salto, y llama al método correspondiente
+    /// Se ejecuta cuando el jugador presiona o suelta la tecla de salto, y llama al mï¿½todo correspondiente
     /// </summary>
     /// <param name="jumpInput">Tipo de input, Down o Up</param>
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
+        if (pauseManager.isPaused) return;
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
             JumpDown();
@@ -219,7 +223,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Si el jugador está saltando y deja de pulsar la tecla de salto este se acorta
+    /// Si el jugador estï¿½ saltando y deja de pulsar la tecla de salto este se acorta
     /// </summary>
     private void JumpUp()
     {
@@ -232,7 +236,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Aplicación del salto mediante una fuerza instantanea (Impulse), se resetean los temporizadores
+    /// Aplicaciï¿½n del salto mediante una fuerza instantanea (Impulse), se resetean los temporizadores
     /// </summary>
     private void JumpAction()
     {
@@ -242,7 +246,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al método Attack del arma que posee el
+    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al mï¿½todo Attack del arma que posee el
     /// jugador en ese momento
     /// </summary>
     /// <param name="attackInput">Tipo de input, Down, Hold o Up</param>
@@ -252,7 +256,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de interactuar, y ejecuta el método interacted de
+    /// Se ejecuta cuando el jugador presiona la tecla de interactuar, y ejecuta el mï¿½todo interacted de
     /// closestInteractable
     /// </summary>
     public void Interact()
@@ -265,7 +269,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     /// <summary>
     /// El jugador suelta en el suelo el arma que tiene equipada, y pasa a tener equipada el arma que recive como
-    /// parámetro
+    /// parï¿½metro
     /// El jugador posee todas las armas, pero solo tiene una activa en cada momento
     /// </summary>
     /// <param name="weaponType">Tipo de arma a la que cambia el jugador</param>
@@ -285,7 +289,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Es similar al método ChangeWeapon, la única diferencia es que el arma a la que cambia el jugador es la vacía
+    /// Es similar al mï¿½todo ChangeWeapon, la ï¿½nica diferencia es que el arma a la que cambia el jugador es la vacï¿½a
     /// </summary>
     public void DropWeapon()
     {
@@ -299,7 +303,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     #region Utility Methods
 
     /// <summary>
-    /// Devuelve true si el jugador está tocando el suelo, usando un BoxCast
+    /// Devuelve true si el jugador estï¿½ tocando el suelo, usando un BoxCast
     /// </summary>
     /// <returns>true o false</returns>
     private bool IsPlayerGrounded()
@@ -308,7 +312,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Devuelve el objeto interactuable más cercano al jugador
+    /// Devuelve el objeto interactuable mï¿½s cercano al jugador
     /// </summary>
     /// <returns></returns>
     private AInteractable GetClosestInteractable()
