@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [Header("Movement")]
 
     [SerializeField] private float maxMoveSpeed = 14.0f; // Velocidad m�xima de movimiento
-    [SerializeField] private float acceleration = 8f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD
+    [SerializeField] private float acceleration = 8f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
     [SerializeField] private float decceleration = 24f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
+    [SerializeField] [Range(0.0f, 1.0f)] private float airAccelerationModifier = 0.25f; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
     [SerializeField] private float velPower = 0.97f; // Ni idea de para que sirve, pero aqu� est�, no quitar
 
     [SerializeField] private float groundFrictionAmount = 0.44f; // Fricci�n en el suelo
@@ -162,6 +163,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         Vector2 speedDif = targetSpeed - horizontalSpeed;
 
         float accelRate = (targetSpeed.magnitude > 0.01f) ? acceleration : decceleration;
+
+        if (!IsPlayerGrounded())
+        {
+            accelRate *= airAccelerationModifier;
+        }
 
         float movement = Mathf.Pow(speedDif.magnitude * accelRate, velPower);
 
@@ -335,6 +341,15 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                     closestDistance = distance;
                 }
             }
+        }
+
+        if (closestInteractable != null)
+        {
+            closestInteractable.DisableOutline();
+        }
+        if (bestInteractable != null)
+        {
+            bestInteractable.EnableOutline();
         }
 
         return bestInteractable;

@@ -17,7 +17,7 @@ public class AWeapon : MonoBehaviour, IWeapon
     {
         if (weaponPickupPrefab != null)
         {
-            Instantiate(weaponPickupPrefab);
+            GameObject pickup = Instantiate(weaponPickupPrefab);
         }
         
         gameObject.SetActive(false);
