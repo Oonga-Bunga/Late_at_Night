@@ -31,6 +31,11 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
 
     #region Methods
 
+    public virtual void TakeHit(float damage)
+    {
+        ChangeHealth(damage, true);
+    }
+
     /// <summary>
     /// Resta el valor de Value a la currentHealth de la entidad si isDamage es true, y si es false lo suma.
     /// Si la entidad llega a 0 de vida muere.
@@ -49,18 +54,19 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         }
         else
         {
-            currentHealth = Mathf.Min(currentHealth - value, maxHealth);
+            currentHealth = Mathf.Min(currentHealth + value, maxHealth);
         }
     }
-    
+
     /// <summary>
     /// Si currentHealth <= 0 destruye el objeto
     /// </summary>
     public virtual void Die()
     {
+        dead = true;
         Destroy(gameObject);
     }
 
     #endregion
-    
+
 }
