@@ -244,9 +244,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Run(IPlayerReceiver.InputType jumpInput)
     {
         if (pauseManager.isPaused) return;
-        if (jumpInput == IPlayerReceiver.InputType.Down)
+        if (jumpInput != IPlayerReceiver.InputType.Up)
         {
-            if ((currentStamina / maxStamina) > minimumStaminaForRunning)
+            if ((currentStamina / maxStamina) > minimumStaminaForRunning && !isRunning)
             {
                 RunDown();
             }
