@@ -44,6 +44,7 @@ public class InputManager : MonoBehaviour
     #region Input Actions
 
     public InputAction Move;
+    public InputAction Run;
     public InputAction Jump;
     public InputAction Attack;
     public InputAction Interact;
@@ -83,6 +84,7 @@ public class InputManager : MonoBehaviour
     {
         commands = new Dictionary<string, ICommand> {
                 { "move", new MoveCommand(player) },
+                { "run", new RunCommand(player) },
                 { "jump", new JumpCommand(player) },
                 { "attack", new AttackCommand(player) },
                 { "interact", new InteractCommand(player) },
@@ -90,6 +92,16 @@ public class InputManager : MonoBehaviour
             };
 
         Move.Enable();
+
+        Run.started += context =>
+        {
+            commands["run"].Execute(IPlayerReceiver.InputType.Down);
+        };
+        Run.canceled += context =>
+        {
+            commands["run"].Execute(IPlayerReceiver.InputType.Up);
+        };
+        Run.Enable();
 
         Jump.started += context =>
         {

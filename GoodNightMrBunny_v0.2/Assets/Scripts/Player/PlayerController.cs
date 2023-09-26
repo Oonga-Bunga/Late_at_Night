@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
@@ -9,7 +12,18 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Movement")]
 
-    [SerializeField] private float maxMoveSpeed = 14.0f; // Velocidad m�xima de movimiento
+    private float maxCurrentSpeed = 7.0f;
+    [SerializeField] private float maxWalkingSpeed = 7.0f; // Velocidad m�xima al caminar
+    [SerializeField] private float maxRunningSpeed = 14.0f; // Velocidad m�xima al correr
+
+    [SerializeField] private float maxStamina = 100.0f; // Máxima energia del jugador
+    private float currentStamina = 100.0f; // Energia del jugador que consume para correr
+    [SerializeField] private float staminaRecoveryRate = 10.0f; // Ratio de recuperación de energia
+    [SerializeField] private float staminaComsumptionRate = 20.0f; // Ratio de recuperación de energia
+    [SerializeField] [Range(0.0f, 1.0f)] private float minimumStaminaForRunning = 0.2f; // Porcentaje de energía mínimo para empezar a correr
+    private bool isRunning = false; // Si el jugador está corriendo o no
+    public EventHandler<float> staminaChanged; //Se invoca si cmabia el valor de la energía del jugador
+
     [SerializeField] private float acceleration = 8f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
     [SerializeField] private float decceleration = 24f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
     [SerializeField] [Range(0.0f, 1.0f)] private float airAccelerationModifier = 0.25f; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
@@ -78,6 +92,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         cameraTransform = Camera.main.transform;
 
+        maxCurrentSpeed = maxWalkingSpeed;
+
+        currentStamina = maxStamina;
+
         lastGroundedTime = 0;
         lastJumpTime = 0;
         localGravityScale = 1f;
@@ -131,6 +149,26 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             localGravityScale = 1f;
         }
 
+        // Modificamos la energia dependiendo de si el jugador está corriendo o no
+        if (isRunning)
+        {
+            if (currentStamina == 0)
+            {
+                maxCurrentSpeed = maxWalkingSpeed;
+                isRunning = false;
+            }
+            else
+            {
+                currentStamina = Mathf.Max(currentStamina - staminaComsumptionRate * Time.deltaTime, 0);
+                staminaChanged.Invoke(this, currentStamina);
+            }
+        }
+        else
+        {
+            currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
+            staminaChanged.Invoke(this, currentStamina);
+        }
+
         // Actualizamos el valor de closestInteractable para que sea el del IInteractable m�s cercano
 
         closestInteractable = GetClosestInteractable();
@@ -158,7 +196,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         Vector2 horizontalSpeed = new Vector2(rb.velocity.x, rb.velocity.z);
 
-        Vector2 targetSpeed = new Vector2(move.x, move.z) * maxMoveSpeed;
+        Vector2 targetSpeed = new Vector2(move.x, move.z) * maxCurrentSpeed;
 
         Vector2 speedDif = targetSpeed - horizontalSpeed;
 
@@ -177,9 +215,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         // Limitaci�n de velocidad
 
-        if (horizontalSpeed.magnitude > maxMoveSpeed)
+        if (horizontalSpeed.magnitude > maxCurrentSpeed)
         {
-            float adjustment = maxMoveSpeed / horizontalSpeed.magnitude;
+            float adjustment = maxCurrentSpeed / horizontalSpeed.magnitude;
 
             rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
         }
@@ -201,6 +239,34 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                 rb.AddForce(new Vector3(horizontalSpeed.normalized.x, 0, horizontalSpeed.normalized.y) * -amount, ForceMode.Impulse);
             }
         }
+    }
+
+    public void Run(IPlayerReceiver.InputType jumpInput)
+    {
+        if (pauseManager.isPaused) return;
+        if (jumpInput == IPlayerReceiver.InputType.Down)
+        {
+            if ((currentStamina / maxStamina) > minimumStaminaForRunning)
+            {
+                RunDown();
+            }
+        }
+        else
+        {
+            RunUp();
+        }
+    }
+
+    private void RunDown()
+    {
+        maxCurrentSpeed = maxRunningSpeed;
+        isRunning = true;
+    }
+
+    private void RunUp()
+    {
+        maxCurrentSpeed = maxWalkingSpeed;
+        isRunning = false;
     }
 
     /// <summary>
@@ -362,6 +428,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(groundCheck.gameObject.transform.position - transform.up * maxGroundCheckDistance, groundCheck.size);
+    }
+
+    public float GetMaxStamina()
+    {
+        return maxStamina;
     }
 
     #endregion
