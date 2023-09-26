@@ -70,6 +70,11 @@ public class InputManager : MonoBehaviour
         {
             commands["attack"].Execute(IPlayerReceiver.InputType.Hold);
         }
+
+        if (Run.ReadValue<float>() == 1f)
+        {
+            commands["run"].Execute(IPlayerReceiver.InputType.Hold);
+        }
     }
 
     /// <summary>
