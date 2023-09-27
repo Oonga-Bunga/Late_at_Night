@@ -5,7 +5,7 @@ using UnityEngine;
 public class AEquippableObject : MonoBehaviour, IEquippableObject
 {
     private PlayerController player;
-    [SerializeField] protected GameObject objectPrefab;
+    [SerializeField] protected GameObject droppedObject;
     [SerializeField] public IPlayerReceiver.EquippableObjectType pickupType;
 
     public virtual void Use(IPlayerReceiver.InputType attackInput)
@@ -15,9 +15,9 @@ public class AEquippableObject : MonoBehaviour, IEquippableObject
 
     public virtual void Drop()
     {
-        if (objectPrefab != null)
+        if (droppedObject != null)
         {
-            GameObject pickup = Instantiate(objectPrefab);
+            GameObject pickup = Instantiate(droppedObject);
         }
         
         gameObject.SetActive(false);

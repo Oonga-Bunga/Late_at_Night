@@ -225,9 +225,18 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (horizontalSpeed.magnitude > maxCurrentSpeed)
         {
-            float adjustment = maxCurrentSpeed / horizontalSpeed.magnitude;
+            if (!IsPlayerGrounded() && horizontalSpeed.magnitude >= maxRunningSpeed)
+            {
+                float adjustment = maxRunningSpeed / horizontalSpeed.magnitude;
 
-            rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
+                rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
+            }
+            else
+            {
+                float adjustment = maxCurrentSpeed / horizontalSpeed.magnitude;
+
+                rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
+            }
         }
 
         // Fricci�n en el suelo y el aire cuando el jugador no introduce input de movimiento WASD

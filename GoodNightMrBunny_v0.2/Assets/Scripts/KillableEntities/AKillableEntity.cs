@@ -23,7 +23,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     {
         this.maxHealth = health;
         this.currentHealth = maxHealth;
-        this.dead = false;
         this.hitbox = GetComponent<Collider>();
     }
 
@@ -31,6 +30,10 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
 
     #region Methods
 
+    /// <summary>
+    /// Este método se invocaría cada vez que este gameobject recibe un golpe
+    /// </summary>
+    /// <param name="damage"></param>
     public virtual void TakeHit(float damage)
     {
         ChangeHealth(damage, true);
@@ -63,7 +66,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// </summary>
     public virtual void Die()
     {
-        dead = true;
         Destroy(gameObject);
     }
 

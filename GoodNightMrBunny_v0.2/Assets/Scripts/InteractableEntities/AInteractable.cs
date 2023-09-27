@@ -26,6 +26,7 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     public virtual void Awake()
     {
+        player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
     }
 
@@ -42,7 +43,7 @@ public class AInteractable : MonoBehaviour, IInteractable
         if (isBeingInteracted)
         {
             currentHoldTime += Time.deltaTime;
-
+            
             if (currentHoldTime >= holdDuration)
             {
                 currentHoldTime = 0;
