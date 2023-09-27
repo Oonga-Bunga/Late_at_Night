@@ -22,5 +22,5 @@ public interface IPlayerReceiver
     public void UseEquippedObject(InputType useImput);
     public void Interact(InputType interactInput);
     public void ChangeEquippedObject(EquippableObjectType pickupType);
-    public void DropWeapon();
+    public void DropObject();
 }

@@ -6,6 +6,7 @@ public class AEquippableObject : MonoBehaviour, IEquippableObject
 {
     private PlayerController player;
     [SerializeField] protected GameObject objectPrefab;
+    [SerializeField] public IPlayerReceiver.EquippableObjectType pickupType;
 
     public virtual void Use(IPlayerReceiver.InputType attackInput)
     {

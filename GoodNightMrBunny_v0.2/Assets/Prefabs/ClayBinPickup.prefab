@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2355206759110644541}
   - component: {fileID: 1387129877396919093}
   - component: {fileID: 4392790209136263396}
-  - component: {fileID: 5459541296551765339}
   - component: {fileID: 7851310252676677304}
+  - component: {fileID: 3879708865922388819}
   m_Layer: 6
-  m_Name: FlashlightPickup
+  m_Name: ClayBinPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,19 +137,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &5459541296551765339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7547812807105234605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1383ee5c18caac14095e6d91485c76c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 1
 --- !u!114 &7851310252676677304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +246,20 @@ MonoBehaviour:
     - {x: -0.5720614, y: 0.70710677, z: 0.41562694}
     - {x: -0.6724985, y: 0.70710677, z: 0.21850798}
     - {x: -0.8944272, y: 0.4472136, z: 0}
+--- !u!114 &3879708865922388819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547812807105234605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b5342e4971445458c185597798cc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactType: 2
+  holdDuration: 3
+  pressBuffer: 0.2
+  isBeingInteracted: 0
+  canBeInteracted: 1

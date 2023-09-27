@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlashlightPickup : AWeaponPickup
+public class FlashlightPickup : AInteractable
 {
-    void Start()
+    private void Start()
     {
-        weaponType = IPlayerReceiver.EquippableObjectType.Flashlight;
+        interactType = IInteractable.InteractType.Press;
+    }
+
+    public override void InteractedPressAction()
+    {
+        player.ChangeEquippedObject(IPlayerReceiver.EquippableObjectType.Flashlight);
     }
 }

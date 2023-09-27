@@ -9,17 +9,10 @@ public interface IInteractable
         PressAndHold
     }
 
-    public void Interacted(PlayerController player, IPlayerReceiver.InputType interactInput);
-
-    public void InteractedDown();
-
-    public void InteractedUp();
-
+    public void Interacted(IPlayerReceiver.InputType interactInput);
     public void InteractedPressAction();
-
     public void InteractedHoldAction();
-
+    public void PlayerExitedRange();
     public void EnableOutline();
-
     public void DisableOutline();
 }
