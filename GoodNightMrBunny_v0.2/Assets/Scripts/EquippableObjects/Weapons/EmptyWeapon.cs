@@ -6,6 +6,6 @@ public class EmptyWeapon : AWeapon
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.PickupType.Empty;
+        pickupType = IPlayerReceiver.EquippableObjectType.Empty;
     }
 }

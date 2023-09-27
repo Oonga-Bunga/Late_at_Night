@@ -2128,7 +2128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3881087803815115471, guid: ec536a7718376554185e4a856d5ae230, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2458,7 +2458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3374,10 +3374,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  weaponList:
-  - {fileID: 1024943262}
-  - {fileID: 161473817}
-  - {fileID: 210844199}
+  equippableObjectList: []
 --- !u!4 &1261367747
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,22 +3534,14 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
-  Attack:
-    m_Name: Attack
+  Use:
+    m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 577e46de-c2b8-4ff7-b3e1-c52d554f8077
+    m_Id: 
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 8e0f0544-4e39-4f9c-b51a-741d8ccd48c5
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
   Interact:
     m_Name: Interact
@@ -3936,7 +3925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1354295993
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AWeapon : AEquippableObject
 {
     [SerializeField] private float baseDamage = 2f;
-    [SerializeField] public IPlayerReceiver.PickupType pickupType;
+    [SerializeField] public IPlayerReceiver.EquippableObjectType pickupType;
 
     // Start is called before the first frame update
     void Start()

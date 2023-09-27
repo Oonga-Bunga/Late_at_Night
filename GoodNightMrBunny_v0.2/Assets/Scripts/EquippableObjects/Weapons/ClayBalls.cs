@@ -6,6 +6,6 @@ public class Slingshot : AWeapon
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.PickupType.ClayBalls;
+        pickupType = IPlayerReceiver.EquippableObjectType.ClayBalls;
     }
 }

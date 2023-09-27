@@ -75,8 +75,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     private Rigidbody rb;
     private Transform cameraTransform;
-    private AWeapon currentWeapon;
-    [SerializeField] private List<AWeapon> weaponList;
+    private AEquippableObject currentEquippedObject;
+    [SerializeField] private List<AEquippableObject> equippableObjectList;
     private PauseManager pauseManager;
 
     #endregion
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         lastJumpTime = 0;
         localGravityScale = 1f;
 
-        currentWeapon = GetComponentInChildren<EmptyWeapon>();
+        currentEquippedObject = GetComponentInChildren<EmptyWeapon>();
         pauseManager = FindObjectOfType<PauseManager>();
     }
 
@@ -318,13 +318,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo Attack del arma que posee el
+    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo UseEquippedObject del arma que posee el
     /// jugador en ese momento
     /// </summary>
-    /// <param name="attackInput">Tipo de input, Down, Hold o Up</param>
-    public void Attack(IPlayerReceiver.InputType attackInput)
+    /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
+    public void UseEquippedObject(IPlayerReceiver.InputType useInput)
     {
-        currentWeapon.Use(attackInput);
+        currentEquippedObject.Use(useInput);
     }
 
     /// <summary>
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (closestInteractable != null)
         {
-            closestInteractable.Interacted(this);
+            closestInteractable.Interacted(this, interactInput);
         }
     }
 
@@ -345,16 +345,16 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// El jugador posee todas las armas, pero solo tiene una activa en cada momento
     /// </summary>
     /// <param name="weaponType">Tipo de arma a la que cambia el jugador</param>
-    public void ChangeEquippedObject(IPlayerReceiver.PickupType weaponType)
+    public void ChangeEquippedObject(IPlayerReceiver.EquippableObjectType weaponType)
     {
-        currentWeapon.Drop();
+        currentEquippedObject.Drop();
 
-        foreach (AWeapon weapon in weaponList)
+        foreach (AWeapon weapon in equippableObjectList)
         {
             if (weaponType == weapon.pickupType)
             {
                 weapon.gameObject.SetActive(true);
-                currentWeapon = weapon;
+                currentEquippedObject = weapon;
                 return;
             }
         }
@@ -365,9 +365,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void DropWeapon()
     {
-        currentWeapon.Drop();
-        weaponList[0].gameObject.SetActive(true);
-        currentWeapon = weaponList[0];
+        currentEquippedObject.Drop();
+        equippableObjectList[0].gameObject.SetActive(true);
+        currentEquippedObject = equippableObjectList[0];
     }
 
     #endregion
@@ -412,6 +412,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         if (closestInteractable != null)
         {
             closestInteractable.DisableOutline();
+            
+            if (closestInteractable != bestInteractable)
+            {
+                closestInteractable.InteractedUp();
+            }
         }
         if (bestInteractable != null)
         {

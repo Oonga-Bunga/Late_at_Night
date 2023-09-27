@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour
     public InputAction Move;
     public InputAction Run;
     public InputAction Jump;
-    public InputAction Attack;
+    public InputAction Use;
     public InputAction Interact;
     public InputAction DropWeapon;
 
@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Attack.ReadValue<float>() == 1f)
+        if (Use.ReadValue<float>() == 1f)
         {
             commands["attack"].Execute(IPlayerReceiver.InputType.Hold);
         }
@@ -74,11 +74,6 @@ public class InputManager : MonoBehaviour
         if (Run.ReadValue<float>() == 1f)
         {
             commands["run"].Execute(IPlayerReceiver.InputType.Hold);
-        }
-
-        if (Interact.ReadValue<float>() == 1f)
-        {
-            commands["interact"].Execute(IPlayerReceiver.InputType.Hold);
         }
     }
 
@@ -123,15 +118,15 @@ public class InputManager : MonoBehaviour
         };
         Jump.Enable();
 
-        Attack.started += context =>
+        Use.started += context =>
         {
             commands["attack"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Attack.canceled += context =>
+        Use.canceled += context =>
         {
             commands["attack"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Attack.Enable();
+        Use.Enable();
 
         Interact.started += context =>
         {

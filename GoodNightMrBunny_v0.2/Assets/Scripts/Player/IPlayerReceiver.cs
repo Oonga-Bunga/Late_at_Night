@@ -8,7 +8,7 @@ public interface IPlayerReceiver
         Up
     }
 
-    public enum PickupType
+    public enum EquippableObjectType
     {
         Empty,
         Flashlight,
@@ -19,8 +19,8 @@ public interface IPlayerReceiver
     public void Move(Vector2 direction);
     public void Run(InputType runInput);
     public void Jump(InputType jumpInput);
-    public void Attack(InputType attackInput);
+    public void UseEquippedObject(InputType useImput);
     public void Interact(InputType interactInput);
-    public void ChangeEquippedObject(PickupType pickupType);
+    public void ChangeEquippedObject(EquippableObjectType pickupType);
     public void DropWeapon();
 }

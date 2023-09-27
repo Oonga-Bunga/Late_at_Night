@@ -6,6 +6,6 @@ public class Flashlight : AWeapon
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.PickupType.Flashlight;
+        pickupType = IPlayerReceiver.EquippableObjectType.Flashlight;
     }
 }

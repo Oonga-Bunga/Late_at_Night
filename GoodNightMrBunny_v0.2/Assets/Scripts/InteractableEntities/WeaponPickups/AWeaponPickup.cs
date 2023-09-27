@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AWeaponPickup : AInteractable
 {
-    public IPlayerReceiver.PickupType weaponType;
+    public IPlayerReceiver.EquippableObjectType weaponType;
 
-    public override void Interacted(object player)
+    public override void InteractedPressAction()
     {
-        ((IPlayerReceiver)player).ChangeEquippedObject(weaponType);
+        player.ChangeEquippedObject(weaponType);
         Destroy(gameObject);
     }
 }

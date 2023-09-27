@@ -8,11 +8,11 @@ public class AttackCommand : ACommand
 
     public override void Execute()
     {
-        Client.Attack(IPlayerReceiver.InputType.Down);
+        Client.UseEquippedObject(IPlayerReceiver.InputType.Down);
     }
 
     public override void Execute(object data)
     {
-        Client.Attack((IPlayerReceiver.InputType)data);
+        Client.UseEquippedObject((IPlayerReceiver.InputType)data);
     }
 }

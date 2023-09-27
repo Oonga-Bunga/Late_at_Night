@@ -6,6 +6,6 @@ public class SlingshotPickup : AWeaponPickup
 {
     void Start()
     {
-        weaponType = IPlayerReceiver.PickupType.ClayBalls;
+        weaponType = IPlayerReceiver.EquippableObjectType.ClayBalls;
     }
 }
