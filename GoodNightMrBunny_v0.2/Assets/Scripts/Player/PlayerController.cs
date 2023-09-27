@@ -324,14 +324,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="attackInput">Tipo de input, Down, Hold o Up</param>
     public void Attack(IPlayerReceiver.InputType attackInput)
     {
-        currentWeapon.Attack(attackInput);
+        currentWeapon.Use(attackInput);
     }
 
     /// <summary>
     /// Se ejecuta cuando el jugador presiona la tecla de interactuar, y ejecuta el m�todo interacted de
     /// closestInteractable
     /// </summary>
-    public void Interact()
+    public void Interact(IPlayerReceiver.InputType interactInput)
     {
         if (closestInteractable != null)
         {
@@ -345,13 +345,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// El jugador posee todas las armas, pero solo tiene una activa en cada momento
     /// </summary>
     /// <param name="weaponType">Tipo de arma a la que cambia el jugador</param>
-    public void ChangeWeapon(IPlayerReceiver.WeaponType weaponType)
+    public void ChangeEquippedObject(IPlayerReceiver.PickupType weaponType)
     {
         currentWeapon.Drop();
 
         foreach (AWeapon weapon in weaponList)
         {
-            if (weaponType == weapon.weaponType)
+            if (weaponType == weapon.pickupType)
             {
                 weapon.gameObject.SetActive(true);
                 currentWeapon = weapon;

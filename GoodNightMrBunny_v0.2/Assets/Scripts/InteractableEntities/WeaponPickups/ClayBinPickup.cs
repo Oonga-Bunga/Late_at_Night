@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flashlight : AWeapon
+public class SlingshotPickup : AWeaponPickup
 {
     void Start()
     {
-        weaponType = IPlayerReceiver.WeaponType.Flashlight;
+        weaponType = IPlayerReceiver.PickupType.ClayBalls;
     }
 }

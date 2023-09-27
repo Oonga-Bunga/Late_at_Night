@@ -75,6 +75,11 @@ public class InputManager : MonoBehaviour
         {
             commands["run"].Execute(IPlayerReceiver.InputType.Hold);
         }
+
+        if (Interact.ReadValue<float>() == 1f)
+        {
+            commands["interact"].Execute(IPlayerReceiver.InputType.Hold);
+        }
     }
 
     /// <summary>
@@ -130,7 +135,11 @@ public class InputManager : MonoBehaviour
 
         Interact.started += context =>
         {
-            commands["interact"].Execute();
+            commands["interact"].Execute(IPlayerReceiver.InputType.Down);
+        };
+        Interact.canceled += context =>
+        {
+            commands["interact"].Execute(IPlayerReceiver.InputType.Up);
         };
         Interact.Enable();
 

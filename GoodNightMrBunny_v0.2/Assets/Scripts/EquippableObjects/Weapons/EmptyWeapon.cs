@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlingshotPickup : AWeaponPickup
+public class EmptyWeapon : AWeapon
 {
     void Start()
     {
-        weaponType = IPlayerReceiver.WeaponType.Slingshot;
+        pickupType = IPlayerReceiver.PickupType.Empty;
     }
 }

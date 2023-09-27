@@ -8,11 +8,11 @@ public class InteractCommand : ACommand
 
     public override void Execute()
     {
-        Client.Interact();
+        Client.Interact(IPlayerReceiver.InputType.Down);
     }
 
     public override void Execute(object data)
     {
-        Client.Interact();
+        Client.Interact((IPlayerReceiver.InputType)data);
     }
 }

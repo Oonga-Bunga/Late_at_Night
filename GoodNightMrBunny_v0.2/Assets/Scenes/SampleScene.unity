@@ -596,9 +596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc63aa89981dbd344906beafd8f424c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
+  objectPrefab: {fileID: 0}
   baseDamage: 0
-  weaponPickupPrefab: {fileID: 7547812807105234605, guid: 40658e78aa9748e4dbd756bf28b5711b, type: 3}
+  pickupType: 0
 --- !u!23 &161473818
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 210844200}
   - component: {fileID: 210844199}
   m_Layer: 0
-  m_Name: Sligshot
+  m_Name: ClayBalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -695,9 +695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8e8497e36ad854ca991e76336721d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 2
+  objectPrefab: {fileID: 0}
   baseDamage: 0
-  weaponPickupPrefab: {fileID: 394075583176256871, guid: 52f448f72bcc2f648b527d33c71e3207, type: 3}
+  pickupType: 0
 --- !u!23 &210844200
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1171,7 +1171,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29250
+  m_Name: pb_Mesh56770
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1871,7 +1871,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29464
+  m_Name: pb_Mesh57056
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2847,9 +2847,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da51e7bb623c1143baf2aa1d558152c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  objectPrefab: {fileID: 0}
   baseDamage: 0
-  weaponPickupPrefab: {fileID: 0}
+  pickupType: 0
 --- !u!114 &1024943263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,9 +2862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da51e7bb623c1143baf2aa1d558152c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  objectPrefab: {fileID: 0}
   baseDamage: 0
-  weaponPickupPrefab: {fileID: 0}
+  pickupType: 0
 --- !u!1 &1030839791
 GameObject:
   m_ObjectHideFlags: 0
@@ -3731,7 +3731,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29284
+  m_Name: pb_Mesh56804
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3971,7 +3971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1414116328}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: EquippedObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3992,6 +3992,7 @@ Transform:
   - {fileID: 1024943259}
   - {fileID: 161473816}
   - {fileID: 210844198}
+  - {fileID: 2001473810}
   m_Father: {fileID: 1610661612}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5556,6 +5557,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2001473809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001473810}
+  m_Layer: 0
+  m_Name: ClayBin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2001473810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001473809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1414116328}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &2067911559
 LightingSettings:

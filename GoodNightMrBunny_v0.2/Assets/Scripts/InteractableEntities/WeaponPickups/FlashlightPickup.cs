@@ -6,6 +6,6 @@ public class FlashlightPickup : AWeaponPickup
 {
     void Start()
     {
-        weaponType = IPlayerReceiver.WeaponType.Flashlight;
+        weaponType = IPlayerReceiver.PickupType.Flashlight;
     }
 }
