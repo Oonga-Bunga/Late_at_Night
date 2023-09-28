@@ -9,14 +9,14 @@ public class ClayBinPickup : AInteractable
         interactType = IInteractable.InteractType.PressAndHold;
     }
 
-    public override void InteractedPressAction()
+    protected override void InteractedPressAction()
     {
-        player.ChangeEquippedObject(IPlayerReceiver.EquippableObjectType.ClayBalls);
+        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true);
     }
 
-    public override void InteractedHoldAction()
+    protected override void InteractedHoldAction()
     {
-        player.ChangeEquippedObject(IPlayerReceiver.EquippableObjectType.ClayBin);
+        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBin, true);
         Destroy(gameObject);
     }
 }

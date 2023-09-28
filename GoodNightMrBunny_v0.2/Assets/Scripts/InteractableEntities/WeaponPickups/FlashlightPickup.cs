@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FlashlightPickup : AInteractable
 {
+    private float currentCharge = 100f;
+
     private void Start()
     {
         interactType = IInteractable.InteractType.Press;
     }
 
-    public override void InteractedPressAction()
+    protected override void InteractedPressAction()
     {
-        player.ChangeEquippedObject(IPlayerReceiver.EquippableObjectType.Flashlight);
+        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, true, currentCharge);
         Destroy(gameObject);
     }
 }

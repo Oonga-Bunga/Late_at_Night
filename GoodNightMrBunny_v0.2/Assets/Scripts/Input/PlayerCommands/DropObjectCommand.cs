@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class DropWeaponCommand : ACommand
+public class DropObjectCommand : ACommand
 {
-    public DropWeaponCommand(IPlayerReceiver client) : base(client)
+    public DropObjectCommand(IPlayerReceiver client) : base(client)
     {
     }
 

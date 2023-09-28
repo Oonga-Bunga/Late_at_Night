@@ -43,12 +43,12 @@ public class InputManager : MonoBehaviour
 
     #region Input Actions
 
-    public InputAction Move;
-    public InputAction Run;
-    public InputAction Jump;
-    public InputAction Use;
-    public InputAction Interact;
-    public InputAction DropWeapon;
+    [SerializeField] private InputAction Move;
+    [SerializeField] private InputAction Run;
+    [SerializeField] private InputAction Jump;
+    [SerializeField] private InputAction Use;
+    [SerializeField] private InputAction Interact;
+    [SerializeField] private InputAction DropWeapon;
 
     private Dictionary<string, ICommand> commands;
 
@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
     {
         if (Use.ReadValue<float>() == 1f)
         {
-            commands["attack"].Execute(IPlayerReceiver.InputType.Hold);
+            commands["use"].Execute(IPlayerReceiver.InputType.Hold);
         }
 
         if (Run.ReadValue<float>() == 1f)
@@ -91,9 +91,9 @@ public class InputManager : MonoBehaviour
                 { "move", new MoveCommand(player) },
                 { "run", new RunCommand(player) },
                 { "jump", new JumpCommand(player) },
-                { "attack", new AttackCommand(player) },
+                { "use", new UseHeldObjectCommand(player) },
                 { "interact", new InteractCommand(player) },
-                { "dropWeapon", new DropWeaponCommand(player) }
+                { "drop", new DropObjectCommand(player) }
             };
 
         Move.Enable();
@@ -120,11 +120,11 @@ public class InputManager : MonoBehaviour
 
         Use.started += context =>
         {
-            commands["attack"].Execute(IPlayerReceiver.InputType.Down);
+            commands["use"].Execute(IPlayerReceiver.InputType.Down);
         };
         Use.canceled += context =>
         {
-            commands["attack"].Execute(IPlayerReceiver.InputType.Up);
+            commands["use"].Execute(IPlayerReceiver.InputType.Up);
         };
         Use.Enable();
 
@@ -140,7 +140,7 @@ public class InputManager : MonoBehaviour
 
         DropWeapon.started += context =>
         {
-            commands["dropWeapon"].Execute();
+            commands["drop"].Execute();
         };
         DropWeapon.Enable();
     }

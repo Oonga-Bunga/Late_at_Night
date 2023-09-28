@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AEquippableObject : MonoBehaviour, IEquippableObject
+public class AHoldableObject : MonoBehaviour, IHoldableObject
 {
     protected PlayerController player;
     [SerializeField] protected GameObject droppedObject;
     protected float dropDistance = 3f;
     [SerializeField] protected float sphereRaycastRadius = 0.5f;
     [SerializeField] protected float minimumDistanceFromCollision = 0.5f;
-    [SerializeField] public IPlayerReceiver.EquippableObjectType pickupType;
+    [SerializeField] public IPlayerReceiver.HoldableObjectType pickupType;
 
     public virtual void Awake()
     {
@@ -21,9 +21,9 @@ public class AEquippableObject : MonoBehaviour, IEquippableObject
 
     }
 
-    public virtual void Drop()
+    public virtual void Drop(bool dropPrefab)
     {
-        if (droppedObject != null)
+        if (droppedObject != null && dropPrefab)
         {
             Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * dropDistance;
             Vector3 dropDirection = Camera.main.transform.forward;
@@ -39,5 +39,10 @@ public class AEquippableObject : MonoBehaviour, IEquippableObject
         }
         
         gameObject.SetActive(false);
+    }
+
+    public virtual void Initialize(float value)
+    {
+        
     }
 }

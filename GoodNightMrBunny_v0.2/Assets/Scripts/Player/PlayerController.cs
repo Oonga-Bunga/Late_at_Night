@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
@@ -12,31 +13,31 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Speed")]
 
-    private float maxCurrentSpeed = 7.0f; // Velocidad máxima del jugador en cada momento
-    [SerializeField] private float maxWalkingSpeed = 7.0f; // Velocidad m�xima al caminar
-    [SerializeField] private float maxRunningSpeed = 14.0f; // Velocidad m�xima al correr
+    private float maxCurrentSpeed; // Velocidad máxima del jugador en cada momento
+    [SerializeField] private float maxWalkingSpeed; // Velocidad m�xima al caminar
+    [SerializeField] private float maxRunningSpeed; // Velocidad m�xima al correr
 
     [Header("Stamina")]
 
-    private float currentStamina = 100.0f; // Energia del jugador que consume para correr
-    [SerializeField] private float maxStamina = 100.0f; // Máxima energia del jugador
-    [SerializeField] private float staminaRecoveryRate = 10.0f; // Ratio de recuperación de energia
-    [SerializeField] private float staminaComsumptionRate = 20.0f; // Ratio de recuperación de energia
-    [SerializeField] [Range(0.0f, 1.0f)] private float minimumStaminaForRunning = 0.2f; // Porcentaje de energía mínimo para empezar a correr
-    private bool isRunning = false; // Si el jugador está corriendo o no
+    private float currentStamina; // Energia del jugador que consume para correr
+    [SerializeField] private float maxStamina; // Máxima energia del jugador
+    [SerializeField] private float staminaRecoveryRate; // Ratio de recuperación de energia
+    [SerializeField] private float staminaComsumptionRate; // Ratio de recuperación de energia
+    [SerializeField][Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
+    private bool isRunning; // Si el jugador está corriendo o no
     public EventHandler<float> staminaChanged; //Se invoca si cmabia el valor de la energía del jugador
 
     [Header("Acceleration")]
 
-    [SerializeField] private float acceleration = 8f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
-    [SerializeField] private float decceleration = 24f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
-    [SerializeField] [Range(0.0f, 1.0f)] private float airAccelerationModifier = 0.25f; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
-    [SerializeField] private float velPower = 0.97f; // Ni idea de para que sirve, pero aqu� est�, no quitar
+    [SerializeField] private float acceleration; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
+    [SerializeField] private float decceleration; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
+    [SerializeField][Range(0.0f, 1.0f)] private float airAccelerationModifier; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
+    [SerializeField] private float velPower; // Ni idea de para que sirve, pero aqu� est�, no quitar
 
     [Header("Friction")]
 
-    [SerializeField] private float groundFrictionAmount = 0.44f; // Fricci�n en el suelo
-    [SerializeField] private float airFrictionAmount = 0.22f; // Fricci�n en el aire
+    [SerializeField] private float groundFrictionAmount; // Fricci�n en el suelo
+    [SerializeField] private float airFrictionAmount; // Fricci�n en el aire
 
     #endregion
 
@@ -44,22 +45,22 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Jump")]
 
-    [SerializeField] private float jumpForce = 1000.0f; // Fuerza de salto
-    [SerializeField] [Range(0.0f, 1.0f)] private float jumpCutMultiplier = 0.4f; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
+    [SerializeField] private float jumpForce; // Fuerza de salto
+    [SerializeField][Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
     // haya pasado m�s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
     private float lastGroundedTime;
-    [SerializeField] private float jumpCoyoteTime = 0.15f;
+    [SerializeField] private float jumpCoyoteTime;
 
     // Este temporizador junto a su valor por defecto definen el buffer de salto, que permite al jugador saltar si se ha
     // presionado la tecla correspondiente en los �ltimos x segundos (x = jumpBufferTime), es decir, mientras el valor de
     // lastJumpTime sea mayor que 0
     private float lastJumpTime;
-    [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private float jumpBufferTime;
 
     private float localGravityScale; // Factor por el que la gravedad afecta al objeto en cada momento, empieza como 1
-    [SerializeField] private float fallGravityMultiplier = 1.0f; // Factor por el que aumenta la gravedad al caer
+    [SerializeField] private float fallGravityMultiplier; // Factor por el que aumenta la gravedad al caer
 
     #endregion
 
@@ -68,22 +69,22 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [Header("Checks")]
 
     [SerializeField] private BoxCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo IsPlayerGrounded
-    [SerializeField] private float maxGroundCheckDistance = 0.1f; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
+    [SerializeField] private float maxGroundCheckDistance; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
     [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
     private AInteractable closestInteractable; // Almacena el objeto interactuable m�s cercano al jugador en todo momento
-    [SerializeField] private float interactionDistance = 3f; // Distancia m�xima para interactuar con un objeto
+    [SerializeField] private float interactionDistance; // Distancia m�xima para interactuar con un objeto
     [SerializeField] private LayerMask interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
 
     #endregion
 
     #region Other
 
-    private Rigidbody rb;
-    private Transform cameraTransform;
+    private Rigidbody rb; // Referencia al rigidbody del jugador
+    private Transform cameraTransform; // Referencia a la cámara principal
 
-    private AEquippableObject currentEquippedObject;
-    [SerializeField] private List<AEquippableObject> equippableObjectList;
+    private AHoldableObject currentHeldObject; // Objeto que lleva encima en cada momento
+    [SerializeField] private List<AHoldableObject> holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
 
     private PauseManager pauseManager;
 
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         lastJumpTime = 0;
         localGravityScale = 1f;
 
-        currentEquippedObject = GetComponentInChildren<EmptyWeapon>();
+        currentHeldObject = GetComponentInChildren<EmptyWeapon>();
         pauseManager = FindObjectOfType<PauseManager>();
     }
 
@@ -127,7 +128,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// Temporizadores, salto, gravedad e interactuables
     /// </summary>
-    void Update()
+    private void Update()
     {
         // Actualizar los temporizadores
 
@@ -345,13 +346,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo UseEquippedObject del objeto que posee el
+    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo UseHeldObject del objeto que posee el
     /// jugador en ese momento
     /// </summary>
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
-    public void UseEquippedObject(IPlayerReceiver.InputType useInput)
+    public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
-        currentEquippedObject.Use(useInput);
+        currentHeldObject.Use(useInput);
     }
 
     /// <summary>
@@ -362,40 +363,45 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (closestInteractable != null)
         {
-            Debug.Log(interactInput);
             closestInteractable.Interacted(interactInput);
         }
     }
 
     /// <summary>
-    /// El jugador suelta en el suelo el objeto que tiene equipado, y pasa a tener equipado el objeto que recive como
+    /// El jugador suelta en el suelo el objeto que llevaba encima, y pasa a llevar el objeto que recive como
     /// par�metro
     /// El jugador posee todos los objetos, pero solo tiene uno activo en cada momento
     /// </summary>
     /// <param name="objectType">Tipo de objeto al que cambia el jugador</param>
-    public void ChangeEquippedObject(IPlayerReceiver.EquippableObjectType objectType)
+    public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
-        currentEquippedObject.Drop();
+        currentHeldObject.Drop(dropPrefab);
 
-        foreach (AEquippableObject equippableObject in equippableObjectList)
+        foreach (AHoldableObject holdableObject in holdableObjectList)
         {
-            if (objectType == equippableObject.pickupType)
+            if (objectType == holdableObject.pickupType)
             {
-                equippableObject.gameObject.SetActive(true);
-                currentEquippedObject = equippableObject;
+                holdableObject.gameObject.SetActive(true);
+                currentHeldObject = holdableObject;
+
+                if (initializationValue < 0)
+                {
+                    currentHeldObject.Initialize(initializationValue);
+                }
+
                 return;
             }
         }
     }
 
     /// <summary>
-    /// Es similar al m�todo ChangeEquippedObject, la �nica diferencia es que el objeto al que cambia el jugador es el vac�o
+    /// Es similar al m�todo ChangeHeldObject, la �nica diferencia es que el objeto al que cambia el jugador es el vac�o
     /// </summary>
     public void DropObject()
     {
-        currentEquippedObject.Drop();
-        equippableObjectList[0].gameObject.SetActive(true);
-        currentEquippedObject = equippableObjectList[0];
+        currentHeldObject.Drop(true);
+        holdableObjectList[0].gameObject.SetActive(true);
+        currentHeldObject = holdableObjectList[0];
     }
 
     #endregion
@@ -472,6 +478,16 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public float GetMaxStamina()
     {
         return maxStamina;
+    }
+
+    #endregion
+
+    #region Getters and Setters
+
+    public AHoldableObject CurrentHeldObject
+    {
+        get { return currentHeldObject; }
+        set { currentHeldObject = value; }
     }
 
     #endregion

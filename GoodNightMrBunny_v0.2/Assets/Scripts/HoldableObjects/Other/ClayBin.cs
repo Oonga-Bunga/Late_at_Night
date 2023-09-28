@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flashlight : AWeapon
+public class ClayBin :AHoldableObject
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.EquippableObjectType.Flashlight;
+        pickupType = IPlayerReceiver.HoldableObjectType.ClayBin;
     }
 }

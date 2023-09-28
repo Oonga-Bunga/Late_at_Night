@@ -8,9 +8,9 @@ public interface IPlayerReceiver
         Up
     }
 
-    public enum EquippableObjectType
+    public enum HoldableObjectType
     {
-        Empty,
+        None,
         Flashlight,
         ClayBalls,
         ClayBin
@@ -19,8 +19,8 @@ public interface IPlayerReceiver
     public void Move(Vector2 direction);
     public void Run(InputType runInput);
     public void Jump(InputType jumpInput);
-    public void UseEquippedObject(InputType useImput);
+    public void UseHeldObject(InputType useImput);
     public void Interact(InputType interactInput);
-    public void ChangeEquippedObject(EquippableObjectType pickupType);
+    public void ChangeHeldObject(HoldableObjectType objectType, bool dropPrefab, float initializationValue);
     public void DropObject();
 }

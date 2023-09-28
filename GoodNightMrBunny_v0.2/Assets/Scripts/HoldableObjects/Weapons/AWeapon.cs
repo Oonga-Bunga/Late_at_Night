@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AWeapon : AEquippableObject
+public class AWeapon : AHoldableObject
 {
     [SerializeField] private float baseDamage = 2f;
 

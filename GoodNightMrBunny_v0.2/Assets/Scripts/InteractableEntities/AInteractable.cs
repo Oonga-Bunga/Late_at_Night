@@ -26,7 +26,7 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     #region Initialization
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
@@ -90,7 +90,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// Si el tipo de interacción es press ejecuta InteractedPressAction inmediatamente, si es cualquier otro
     /// isBeingInteracted pasa a ser true para registrar que el jugador está interactuando con el objeto
     /// </summary>
-    public virtual void InteractedDown()
+    protected virtual void InteractedDown()
     {
         if (canBeInteracted)
         {
@@ -110,7 +110,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// Además, si el tipo de interacción es press and hold y se ha levantado el botón antes de que pase cierto
     /// tiempo se ejecuta InteractedPressAction
     /// </summary>
-    public virtual void InteractedUp()
+    protected virtual void InteractedUp()
     {
         if (interactType == IInteractable.InteractType.PressAndHold && currentHoldTime < pressBuffer && isBeingInteracted)
         {
@@ -133,7 +133,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// <summary>
     /// Acción que se ejecuta tras un press del jugador
     /// </summary>
-    public virtual void InteractedPressAction()
+    protected virtual void InteractedPressAction()
     {
         
     }
@@ -141,7 +141,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// <summary>
     /// Acción que se ejecuta tras un hold del jugador durante cierto tiempo
     /// </summary>
-    public virtual void InteractedHoldAction()
+    protected virtual void InteractedHoldAction()
     {
 
     }
@@ -173,18 +173,18 @@ public class AInteractable : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Activa el outline
+    /// Activa el canvas
     /// </summary>
     public virtual void EnableCanvas()
     {
-        if (!promptCanvas.enabled)
+        if (!promptCanvas.enabled && canBeInteracted)
         {
             promptCanvas.enabled = true;
         }
     }
 
     /// <summary>
-    /// Desactiva el outline
+    /// Desactiva el canvas
     /// </summary>
     public virtual void DisableCanvas()
     {

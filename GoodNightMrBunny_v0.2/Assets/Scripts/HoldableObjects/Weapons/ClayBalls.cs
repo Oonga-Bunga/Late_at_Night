@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyWeapon : AWeapon
+public class ClayBalls : AWeapon
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.EquippableObjectType.Empty;
+        pickupType = IPlayerReceiver.HoldableObjectType.ClayBalls;
     }
 }
