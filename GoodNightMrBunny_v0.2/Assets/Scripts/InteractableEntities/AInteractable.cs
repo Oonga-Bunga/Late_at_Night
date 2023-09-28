@@ -8,7 +8,7 @@ public class AInteractable : MonoBehaviour, IInteractable
 {
     #region Attributes
 
-    [SerializeField] protected IInteractable.InteractType interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
+    protected IInteractable.InteractType interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
 
     // El siguiente grupo de atributos solo sirve para AInteractable de tipo Hold o PressAndHold
     protected float currentHoldTime = 0; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
@@ -19,6 +19,8 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected bool canBeInteracted = true; // Si el objeto puede ser interactuado
     protected PlayerController player; // Referencia al jugador
     protected Outline outline; // Referencia al outline
+    [SerializeField] protected Image radialBar;
+    [SerializeField] protected Canvas promptCanvas;
 
     #endregion
 
@@ -28,6 +30,8 @@ public class AInteractable : MonoBehaviour, IInteractable
     {
         player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
+        promptCanvas.enabled = false;
+        radialBar.fillAmount = currentHoldTime / holdDuration;
     }
 
     #endregion
@@ -46,9 +50,19 @@ public class AInteractable : MonoBehaviour, IInteractable
             
             if (currentHoldTime >= holdDuration)
             {
+                isBeingInteracted = false;
                 currentHoldTime = 0;
                 InteractedHoldAction();
             }
+        }
+
+        if (currentHoldTime < pressBuffer)
+        {
+            radialBar.fillAmount = 0;
+        }
+        else
+        {
+            radialBar.fillAmount = currentHoldTime / holdDuration;
         }
     }
 
@@ -98,13 +112,13 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public virtual void InteractedUp()
     {
-        isBeingInteracted = false;
-        currentHoldTime = 0;
-
-        if (interactType == IInteractable.InteractType.PressAndHold && currentHoldTime < pressBuffer)
+        if (interactType == IInteractable.InteractType.PressAndHold && currentHoldTime < pressBuffer && isBeingInteracted)
         {
             InteractedPressAction();
         }
+
+        isBeingInteracted = false;
+        currentHoldTime = 0;
     }
 
     /// <summary>
@@ -141,7 +155,10 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public virtual void EnableOutline()
     {
-        outline.enabled = true;
+        if (!outline.enabled)
+        {
+            outline.enabled = true;
+        }
     }
 
     /// <summary>
@@ -149,7 +166,32 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public virtual void DisableOutline()
     {
-        outline.enabled = false;
+        if (outline.enabled)
+        {
+            outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Activa el outline
+    /// </summary>
+    public virtual void EnableCanvas()
+    {
+        if (!promptCanvas.enabled)
+        {
+            promptCanvas.enabled = true;
+        }
+    }
+
+    /// <summary>
+    /// Desactiva el outline
+    /// </summary>
+    public virtual void DisableCanvas()
+    {
+        if (promptCanvas.enabled)
+        {
+            promptCanvas.enabled = false;
+        }
     }
 
     #endregion

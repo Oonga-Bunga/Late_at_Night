@@ -362,6 +362,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (closestInteractable != null)
         {
+            Debug.Log(interactInput);
             closestInteractable.Interacted(interactInput);
         }
     }
@@ -439,7 +440,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         if (closestInteractable != null)
         {
             closestInteractable.DisableOutline();
-            
+            closestInteractable.DisableCanvas();
+
             if (closestInteractable != bestInteractable)
             {
                 closestInteractable.PlayerExitedRange();
@@ -448,6 +450,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         if (bestInteractable != null)
         {
             bestInteractable.EnableOutline();
+            bestInteractable.EnableCanvas();
         }
 
         return bestInteractable;

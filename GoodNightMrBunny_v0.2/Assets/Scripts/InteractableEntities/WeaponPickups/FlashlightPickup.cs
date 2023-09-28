@@ -12,5 +12,6 @@ public class FlashlightPickup : AInteractable
     public override void InteractedPressAction()
     {
         player.ChangeEquippedObject(IPlayerReceiver.EquippableObjectType.Flashlight);
+        Destroy(gameObject);
     }
 }
