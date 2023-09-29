@@ -9,7 +9,7 @@ public class Flashlight : AWeapon
 
     void Start()
     {
-        pickupType = IPlayerReceiver.HoldableObjectType.Flashlight;
+        holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
     }
 
     public override void Initialize(float charge)

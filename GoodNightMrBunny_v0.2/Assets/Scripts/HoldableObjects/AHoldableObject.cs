@@ -6,10 +6,7 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 {
     protected PlayerController player;
     [SerializeField] protected GameObject droppedObject;
-    protected float dropDistance = 3f;
-    [SerializeField] protected float sphereRaycastRadius = 0.5f;
-    [SerializeField] protected float minimumDistanceFromCollision = 0.5f;
-    [SerializeField] public IPlayerReceiver.HoldableObjectType pickupType;
+    [SerializeField] public IPlayerReceiver.HoldableObjectType holdableObjectType;
 
     public virtual void Awake()
     {
@@ -21,7 +18,7 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 
     }
 
-    public virtual void Drop(bool dropPrefab)
+    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
     {
         if (droppedObject != null && dropPrefab)
         {
@@ -30,12 +27,12 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 
             RaycastHit hitInfo;
 
-            if (Physics.SphereCast(player.transform.position, sphereRaycastRadius, dropDirection, out hitInfo, dropDistance))
+            if (Physics.SphereCast(player.transform.position, sphereRaycastRadius, dropDirection, out hitInfo, dropDistance, groundLayer))
             {
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
-            Instantiate(droppedObject, dropPosition, Quaternion.identity);
+            Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
         }
         
         gameObject.SetActive(false);

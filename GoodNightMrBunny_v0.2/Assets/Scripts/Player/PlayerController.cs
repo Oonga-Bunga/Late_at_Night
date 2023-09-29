@@ -13,14 +13,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Speed")]
 
-    private float maxCurrentSpeed; // Velocidad máxima del jugador en cada momento
     [SerializeField] private float maxWalkingSpeed; // Velocidad m�xima al caminar
     [SerializeField] private float maxRunningSpeed; // Velocidad m�xima al correr
+    private float maxCurrentSpeed; // Velocidad máxima del jugador en cada momento
 
     [Header("Stamina")]
 
-    private float currentStamina; // Energia del jugador que consume para correr
     [SerializeField] private float maxStamina; // Máxima energia del jugador
+    private float currentStamina; // Energia del jugador que consume para correr
     [SerializeField] private float staminaRecoveryRate; // Ratio de recuperación de energia
     [SerializeField] private float staminaComsumptionRate; // Ratio de recuperación de energia
     [SerializeField][Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
@@ -75,16 +75,29 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private AInteractable closestInteractable; // Almacena el objeto interactuable m�s cercano al jugador en todo momento
     [SerializeField] private float interactionDistance; // Distancia m�xima para interactuar con un objeto
     [SerializeField] private LayerMask interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
+    public EventHandler<bool> interactableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
+
+    #endregion
+
+    #region Dropping
+
+    [Header("Dropping")]
+
+    [SerializeField] private float dropDistance = 3f;
+    [SerializeField] private float sphereRaycastRadius = 0.5f;
+    [SerializeField] private float minimumDistanceFromCollision = 0.5f;
 
     #endregion
 
     #region Other
 
+    [Header("Other")]
+
+    [SerializeField] private List<AHoldableObject> holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
+    private AHoldableObject currentHeldObject; // Objeto que lleva encima en cada momento
+
     private Rigidbody rb; // Referencia al rigidbody del jugador
     private Transform cameraTransform; // Referencia a la cámara principal
-
-    private AHoldableObject currentHeldObject; // Objeto que lleva encima en cada momento
-    [SerializeField] private List<AHoldableObject> holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
 
     private PauseManager pauseManager;
 
@@ -169,13 +182,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             else
             {
                 currentStamina = Mathf.Max(currentStamina - staminaComsumptionRate * Time.deltaTime, 0);
-                staminaChanged.Invoke(this, currentStamina);
+                staminaChanged?.Invoke(this, currentStamina);
             }
         }
         else
         {
             currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
-            staminaChanged.Invoke(this, currentStamina);
+            staminaChanged?.Invoke(this, currentStamina);
         }
 
         // Actualizamos el valor de closestInteractable para que sea el del IInteractable m�s cercano
@@ -375,11 +388,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="objectType">Tipo de objeto al que cambia el jugador</param>
     public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
-        currentHeldObject.Drop(dropPrefab);
+        currentHeldObject.Drop(dropPrefab, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
 
         foreach (AHoldableObject holdableObject in holdableObjectList)
         {
-            if (objectType == holdableObject.pickupType)
+            if (objectType == holdableObject.holdableObjectType)
             {
                 holdableObject.gameObject.SetActive(true);
                 currentHeldObject = holdableObject;
@@ -399,7 +412,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void DropObject()
     {
-        currentHeldObject.Drop(true);
+        currentHeldObject.Drop(true, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
         holdableObjectList[0].gameObject.SetActive(true);
         currentHeldObject = holdableObjectList[0];
     }
@@ -430,7 +443,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         foreach (Collider collider in hitColliders)
         {
-            AInteractable interactable = collider.GetComponent<AInteractable>();
+            AInteractable interactable = collider.transform.parent.GetComponent<AInteractable>();
             if (interactable != null)
             {
                 float distance = Vector3.Distance(interactable.transform.position, transform.position);
@@ -457,6 +470,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         {
             bestInteractable.EnableOutline();
             bestInteractable.EnableCanvas();
+            interactableChanged?.Invoke(this, true);
+        }
+        else
+        {
+            interactableChanged?.Invoke(this, false);
         }
 
         return bestInteractable;

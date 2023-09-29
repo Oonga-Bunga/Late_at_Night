@@ -6,6 +6,6 @@ public class ClayBalls : AWeapon
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.HoldableObjectType.ClayBalls;
+        holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
     }
 }

@@ -48,9 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedObject: {fileID: 0}
-  sphereRaycastRadius: 0.5
-  minimumDistanceFromCollision: 0.5
-  pickupType: 0
+  holdableObjectType: 0
   baseDamage: 0
 --- !u!23 &2053541543662166924
 MeshRenderer:
@@ -115,9 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedObject: {fileID: 0}
-  sphereRaycastRadius: 0.5
-  minimumDistanceFromCollision: 0.5
-  pickupType: 0
+  holdableObjectType: 0
   baseDamage: 0
 --- !u!1 &2212645206444721369
 GameObject:
@@ -328,9 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedObject: {fileID: 0}
-  sphereRaycastRadius: 0.5
-  minimumDistanceFromCollision: 0.5
-  pickupType: 2
+  holdableObjectType: 2
   baseDamage: 5
 --- !u!1 &5563167309567042532
 GameObject:
@@ -491,6 +485,9 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
+  dropDistance: 3.5
+  sphereRaycastRadius: 0.3
+  minimumDistanceFromCollision: 0.3
   holdableObjectList:
   - {fileID: 2048207479167378135}
   - {fileID: 3739991193882976171}
@@ -696,9 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedObject: {fileID: 7547812807105234605, guid: 40658e78aa9748e4dbd756bf28b5711b, type: 3}
-  sphereRaycastRadius: 0.5
-  minimumDistanceFromCollision: 0.5
-  pickupType: 3
+  holdableObjectType: 3
 --- !u!1 &8787492493344424813
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,8 +791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedObject: {fileID: 4037434694975463464, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
-  sphereRaycastRadius: 0.5
-  minimumDistanceFromCollision: 0.5
-  pickupType: 1
+  holdableObjectType: 1
   baseDamage: 10
   maxCharge: 0

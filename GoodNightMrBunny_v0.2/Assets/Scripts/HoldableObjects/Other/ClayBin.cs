@@ -6,6 +6,6 @@ public class ClayBin :AHoldableObject
 {
     void Start()
     {
-        pickupType = IPlayerReceiver.HoldableObjectType.ClayBin;
+        holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBin;
     }
 }
