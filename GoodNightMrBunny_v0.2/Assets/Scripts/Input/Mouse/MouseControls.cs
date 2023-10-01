@@ -40,19 +40,8 @@ public partial class @MouseControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""bbf15d04-6116-4aea-a722-ad6a620aec9c"",
+                    ""id"": ""957c7861-e6f8-447b-b032-f44f393ba14a"",
                     ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b45eccc7-2c89-4beb-bf73-f7c20b356ed6"",
-                    ""path"": ""<Touchscreen>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

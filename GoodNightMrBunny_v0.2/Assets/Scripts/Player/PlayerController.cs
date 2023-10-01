@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [SerializeField] private float staminaRecoveryRate; // Ratio de recuperación de energia
     [SerializeField] private float staminaComsumptionRate; // Ratio de recuperación de energia
     [SerializeField][Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
+    private bool isPressingRunButton; // Si el jugador está corriendo o no
     private bool isRunning; // Si el jugador está corriendo o no
     public EventHandler<float> staminaChanged; //Se invoca si cmabia el valor de la energía del jugador
 
@@ -171,12 +172,25 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             localGravityScale = 1f;
         }
 
+        if (isPressingRunButton && !isRunning && IsPlayerGrounded())
+        {
+            if ((currentStamina / maxStamina) > minimumStaminaForRunning)
+            {
+                isRunning = true;
+            }
+        }
+        else if (!isPressingRunButton)
+        {
+            isRunning = false;
+        }
+
         // Modificamos la energia dependiendo de si el jugador está corriendo o no
         if (isRunning)
         {
+            maxCurrentSpeed = maxRunningSpeed;
+
             if (currentStamina == 0)
             {
-                maxCurrentSpeed = maxWalkingSpeed;
                 isRunning = false;
             }
             else
@@ -187,6 +201,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
         else
         {
+            maxCurrentSpeed = maxWalkingSpeed;
             currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
             staminaChanged?.Invoke(this, currentStamina);
         }
@@ -294,11 +309,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void RunDown()
     {
-        if ((currentStamina / maxStamina) > minimumStaminaForRunning)
-        {
-            maxCurrentSpeed = maxRunningSpeed;
-            isRunning = true;
-        }
+        isPressingRunButton = true;
     }
 
     /// <summary>
@@ -306,8 +317,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void RunUp()
     {
-        maxCurrentSpeed = maxWalkingSpeed;
-        isRunning = false;
+        isPressingRunButton = false;
     }
 
     /// <summary>

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,17 @@ public class InputManager : MonoBehaviour
             SetPlayer(player);
         }
     }
+
+    [SerializeField] private InputAction Move;
+    [SerializeField] private InputAction Run;
+    [SerializeField] private InputAction Jump;
+    [SerializeField] private InputAction Use;
+    [SerializeField] private InputAction Interact;
+    [SerializeField] private InputAction DropWeapon;
+
+    [SerializeField] private Joystick moveJoystick;
+
+    private Dictionary<string, ICommand> commands;
 
     /// <summary>
     /// No se esplicar esto sinceramente, pero algo hace
@@ -43,22 +55,25 @@ public class InputManager : MonoBehaviour
 
     #region Input Actions
 
-    [SerializeField] private InputAction Move;
-    [SerializeField] private InputAction Run;
-    [SerializeField] private InputAction Jump;
-    [SerializeField] private InputAction Use;
-    [SerializeField] private InputAction Interact;
-    [SerializeField] private InputAction DropWeapon;
-
-    private Dictionary<string, ICommand> commands;
-
     /// <summary>
     /// Constantemente leemos el input WASD y hacemos que el jugador se mueva acorde a este 
     /// </summary>
     private void FixedUpdate()
     {
-        Vector2 value = Move.ReadValue<Vector2>();
-        commands["move"].Execute(value);
+        if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            //Móvil
+            float x = moveJoystick.Horizontal;
+            float z = moveJoystick.Vertical;
+            Vector2 joy = new Vector2(x, z);
+            commands["move"].Execute(joy);
+        }
+        else if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            //PC
+            Vector2 value = Move.ReadValue<Vector2>();
+            commands["move"].Execute(value);
+        }
     }
 
     /// <summary>
