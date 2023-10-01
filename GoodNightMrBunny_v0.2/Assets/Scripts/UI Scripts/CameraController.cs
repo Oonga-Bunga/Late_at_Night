@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            lookFunction = HandleMobileInput;
+            lookFunction = HandleMobileInput; // Debería ser PC, está así provisionalmente para provarlo con unity remote
         }
     }
 
