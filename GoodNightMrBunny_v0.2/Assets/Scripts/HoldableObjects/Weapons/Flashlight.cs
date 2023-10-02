@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flashlight : AWeapon
 {
     private float currentCharge;
-    [SerializeField] private float maxCharge;
+    static public float maxCharge;
 
     void Start()
     {

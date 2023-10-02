@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class ClayBalls : AWeapon
 {
+    private float currentBallNumber;
+    static public float maxBallNumber;
+
     void Start()
     {
         holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
+    }
+
+    public override void Initialize(float ballNumber)
+    {
+        currentBallNumber = Mathf.Min(ballNumber, maxBallNumber);
     }
 }

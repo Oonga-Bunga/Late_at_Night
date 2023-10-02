@@ -11,7 +11,7 @@ public class ClayBinPickup : AInteractable
 
     protected override void InteractedPressAction()
     {
-        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true);
+        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true, ClayBalls.maxBallNumber);
     }
 
     protected override void InteractedHoldAction()

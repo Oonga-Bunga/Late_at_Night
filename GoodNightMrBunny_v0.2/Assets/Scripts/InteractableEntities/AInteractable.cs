@@ -19,8 +19,8 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected bool canBeInteracted = true; // Si el objeto puede ser interactuado
     protected PlayerController player; // Referencia al jugador
     protected Outline outline; // Referencia al outline
-    [SerializeField] protected Image radialBar;
-    [SerializeField] protected Canvas promptCanvas;
+    protected Image radialBar; // Referencia a la barra radial del button prompt
+    protected Canvas promptCanvas; // Referencia al canvas del button prompt
 
     #endregion
 
@@ -30,6 +30,9 @@ public class AInteractable : MonoBehaviour, IInteractable
     {
         player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
+
+        promptCanvas = transform.GetChild(0).gameObject.GetComponentInChildren<Canvas>();
+        radialBar = promptCanvas.gameObject.GetComponentInChildren<Image>();
         promptCanvas.enabled = false;
         radialBar.fillAmount = currentHoldTime / holdDuration;
     }
@@ -41,6 +44,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// <summary>
     /// Si el objeto está siendo interactuado se incrementa el temporizador currentHoldTime, y si supera cierto tiempo 
     /// se ejecuta InteractedHoldAction
+    /// También actualiza barra radial
     /// </summary>
     protected virtual void Update()
     {

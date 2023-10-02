@@ -6,7 +6,6 @@ public class FlashlightRechargeStation : AInteractable
 {
     private bool hasFlashlight;
     private float currentCharge;
-    [SerializeField] private float maxCharge;
     [SerializeField] private float rechargeRate;
 
     private void Start()
@@ -17,9 +16,9 @@ public class FlashlightRechargeStation : AInteractable
 
     private void Update()
     {
-        if (hasFlashlight && currentCharge != maxCharge)
+        if (hasFlashlight && currentCharge != Flashlight.maxCharge)
         {
-            currentCharge = Mathf.Min(currentCharge + rechargeRate * Time.deltaTime, maxCharge);
+            currentCharge = Mathf.Min(currentCharge + rechargeRate * Time.deltaTime, Flashlight.maxCharge);
         }
     }
 
