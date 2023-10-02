@@ -14,6 +14,6 @@ public class Flashlight : AWeapon
 
     public override void Initialize(float charge)
     {
-        currentCharge = Mathf.Min(charge, maxCharge);
+        currentCharge = charge;
     }
 }

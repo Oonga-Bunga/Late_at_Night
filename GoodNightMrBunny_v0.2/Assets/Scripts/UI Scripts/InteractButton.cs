@@ -6,23 +6,24 @@ using UnityEngine.UI;
 public class InteractButton : MonoBehaviour
 {
     private PlayerController player;
-    private Button interactButton;
+    private GameObject interactButton;
 
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
         player.interactableChanged += ShowButton;
+        interactButton = transform.GetChild(0).gameObject;
     }
 
     private void ShowButton(object sender, bool interactable)
     {
         if (interactable)
         {
-            interactButton.gameObject.SetActive(true);
+            interactButton.SetActive(true);
         }
         else
         {
-            interactButton.gameObject.SetActive(false);
+            interactButton.SetActive(false);
         }
     }
 }

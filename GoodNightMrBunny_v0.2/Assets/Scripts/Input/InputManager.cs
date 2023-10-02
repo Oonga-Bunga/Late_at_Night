@@ -28,8 +28,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputAction Interact;
     [SerializeField] private InputAction DropWeapon;
 
-    [SerializeField] private Joystick moveJoystick;
-
     private Dictionary<string, ICommand> commands;
 
     /// <summary>
@@ -60,20 +58,8 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if (SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            //Móvil
-            float x = moveJoystick.Horizontal;
-            float z = moveJoystick.Vertical;
-            Vector2 joy = new Vector2(x, z);
-            commands["move"].Execute(joy);
-        }
-        else if (SystemInfo.deviceType == DeviceType.Desktop)
-        {
-            //PC
-            Vector2 value = Move.ReadValue<Vector2>();
-            commands["move"].Execute(value);
-        }
+        Vector2 value = Move.ReadValue<Vector2>();
+        commands["move"].Execute(value);
     }
 
     /// <summary>

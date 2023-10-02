@@ -35,12 +35,14 @@ public class CameraController : MonoBehaviour
     {
         if (Application.isMobilePlatform)
         {
-            lookFunction = HandleMobileInput;
+            lookFunction = HandlePCInput;
         }
         else
         {
-            lookFunction = HandleMobileInput; // Debería ser PC, está así provisionalmente para provarlo con unity remote
+            lookFunction = HandlePCInput;
         }
+        
+        mouseDeltaAction.Enable();
     }
 
     private void Update()
@@ -52,12 +54,11 @@ public class CameraController : MonoBehaviour
     {
         Vector2 delta = mouseDeltaAction.ReadValue<Vector2>();
         rotation.x += delta.x * sensitivityX;
-        rotation.y += delta.y * sensitivityY;   
+        rotation.y += delta.y * sensitivityY;
         rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
-        var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
-        var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
-        transform.localRotation = xQuat * yQuat; //Quaternions seem to rotate more consistently than EulerAngles. Sensitivity seemed to change slightly at certain degrees using Euler. transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0);
+        var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
     }
 
     private void HandleMobileInput()
@@ -72,13 +73,12 @@ public class CameraController : MonoBehaviour
                 if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                 {
                     Vector2 delta = touch.deltaPosition;
-                    rotation.x += delta.x * sensitivityX * 0.1f;
-                    rotation.y += delta.y * sensitivityY * 0.1f;
+                    rotation.x += delta.x * sensitivityX;
+                    rotation.y += delta.y * sensitivityY;
                     rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
-                    var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
-                    var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
-                    transform.localRotation = xQuat * yQuat; //Quaternions seem to rotate more consistently than EulerAngles. Sensitivity seemed to change slightly at certain degrees using Euler. transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0);
+                    var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
                 }
                 else
                 {

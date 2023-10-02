@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [SerializeField] private float jumpForce; // Fuerza de salto
     [SerializeField][Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
+    private bool isPlayerGrounded;
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
     // haya pasado m�s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
@@ -140,16 +141,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Temporizadores, salto, gravedad e interactuables
+    /// Temporizadores, salto, gravedad, correr e interactuables
     /// </summary>
     private void Update()
     {
+        // Comprobar si el jugador está en el suelo
+
+        isPlayerGrounded = IsPlayerGrounded();
+
         // Actualizar los temporizadores
 
         lastGroundedTime -= Time.deltaTime;
         lastJumpTime -= Time.deltaTime;
 
-        if (IsPlayerGrounded())
+        if (isPlayerGrounded)
         {
             lastGroundedTime = jumpCoyoteTime;
         }
@@ -172,7 +177,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             localGravityScale = 1f;
         }
 
-        if (isPressingRunButton && !isRunning && IsPlayerGrounded())
+        // Cambiar el modo de movimiento a correr si se cumplen las condiciones
+
+        if (isPressingRunButton && !isRunning && isPlayerGrounded)
         {
             if ((currentStamina / maxStamina) > minimumStaminaForRunning)
             {
@@ -184,7 +191,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             isRunning = false;
         }
 
-        // Modificamos la energia dependiendo de si el jugador está corriendo o no
+        // Modificar la energia dependiendo de si el jugador está corriendo o no, y si se acaba parar de correr
+
         if (isRunning)
         {
             maxCurrentSpeed = maxRunningSpeed;
@@ -202,11 +210,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         else
         {
             maxCurrentSpeed = maxWalkingSpeed;
-            currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
-            staminaChanged?.Invoke(this, currentStamina);
+            if (isPlayerGrounded)
+            {
+                currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
+                staminaChanged?.Invoke(this, currentStamina);
+            }
         }
 
-        // Actualizamos el valor de closestInteractable para que sea el del IInteractable m�s cercano
+        // Actualizar el valor de closestInteractable para que sea el del IInteractable m�s cercano
 
         closestInteractable = GetClosestInteractable();
     }
@@ -218,7 +229,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// Mueve al jugador horizontalmente en la direcci�n recibida, limita la velocidad y a�ade fricci�n
     /// </summary>
-    /// <param name="direction">Direcci�n de movimiento recibida a partir del input WASD</param>
+    /// <param name="direction">Direcci�n de movimiento recibida a partir del input del jugador</param>
     public void Move(Vector2 direction)
     {
         if (pauseManager.isPaused) return;
@@ -239,7 +250,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         float accelRate = (targetSpeed.magnitude > 0.01f) ? acceleration : decceleration;
 
-        if (!IsPlayerGrounded())
+        if (!isPlayerGrounded)
         {
             accelRate *= airAccelerationModifier;
         }
@@ -254,7 +265,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (horizontalSpeed.magnitude > maxCurrentSpeed)
         {
-            if (!IsPlayerGrounded() && horizontalSpeed.magnitude >= maxRunningSpeed)
+            if (!isPlayerGrounded && horizontalSpeed.magnitude >= maxRunningSpeed)
             {
                 float adjustment = maxRunningSpeed / horizontalSpeed.magnitude;
 
@@ -272,7 +283,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (move.magnitude < 0.01f)
         {
-            if (IsPlayerGrounded())
+            if (isPlayerGrounded)
             {
                 float amount = Mathf.Min(horizontalSpeed.magnitude, groundFrictionAmount);
 
@@ -290,11 +301,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// Se ejecuta cuando el jugador presiona la tecla de correr, y llama a un método u otro dependiendo del input
     /// </summary>
-    /// <param name="jumpInput"></param>
-    public void Run(IPlayerReceiver.InputType jumpInput)
+    /// <param name="runInput">Tipo de input, Down o Up</param>
+    public void Run(IPlayerReceiver.InputType runInput)
     {
         if (pauseManager.isPaused) return;
-        if (jumpInput != IPlayerReceiver.InputType.Up)
+        if (runInput != IPlayerReceiver.InputType.Up)
         {
             RunDown();
         }
@@ -350,7 +361,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void JumpUp()
     {
-        if (rb.velocity.y > 0 && !IsPlayerGrounded())
+        if (rb.velocity.y > 0 && !isPlayerGrounded)
         {
             rb.AddForce(Vector3.down * rb.velocity.y * (1 - jumpCutMultiplier), ForceMode.Impulse);
         }
@@ -396,6 +407,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// El jugador posee todos los objetos, pero solo tiene uno activo en cada momento
     /// </summary>
     /// <param name="objectType">Tipo de objeto al que cambia el jugador</param>
+    /// <param name="dropPrefab">Si al cambiar de objeto se instancia el prefab del pickup del anterior</param>
+    /// <param name="initializationValue">Valor con el que se inicia el arma, como la carga de la linterna</param>
     public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
         currentHeldObject.Drop(dropPrefab, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
@@ -407,7 +420,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                 holdableObject.gameObject.SetActive(true);
                 currentHeldObject = holdableObject;
 
-                if (initializationValue < 0)
+                if (!(initializationValue < 0))
                 {
                     currentHeldObject.Initialize(initializationValue);
                 }
@@ -466,6 +479,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             }
         }
 
+        // Si el objeto anterior no es nulo se desactiva su canvas y outline, y si es distinto al nuevo se le informa
+        // que ya no está en el rango del jugador
+
         if (closestInteractable != null)
         {
             closestInteractable.DisableOutline();
@@ -476,6 +492,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                 closestInteractable.PlayerExitedRange();
             }
         }
+
+        // Si el nuevo objeto no es nulo se activa su canvas y outline
+
         if (bestInteractable != null)
         {
             bestInteractable.EnableOutline();
