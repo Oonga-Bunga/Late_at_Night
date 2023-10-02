@@ -8,6 +8,7 @@ public class ScrollListGenerator : MonoBehaviour
 {
     public Button buttonPrefab; // Asigna el botón prefab en el Inspector
     public RectTransform content; // Asigna el objeto de contenido en el Inspector
+    public MenuManager menuManager;
     
     public  void Start()
     {
@@ -19,6 +20,8 @@ public class ScrollListGenerator : MonoBehaviour
 
             // Configura el texto del botón con el número
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
+            
+            newButton.onClick.AddListener(()=>menuManager.selectAgeButton());
         }
     }
 }

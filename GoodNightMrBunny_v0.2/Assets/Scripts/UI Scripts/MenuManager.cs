@@ -13,15 +13,22 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
+    [SerializeField] private Canvas loginMenu;
+    [SerializeField] private GameObject loginButtons;
+    [SerializeField] private GameObject loginAgeScrollList;
+    
     private int currentTabIndex = 0;
+    private bool ageScrollListOpen = false;
     #endregion
 
     #region Methods
 
     private void Start()
     {
-        mainMenu.enabled = true;
+        loginMenu.enabled = true;
+        mainMenu.enabled = false;
         optionsMenu.enabled = false;
+        loginAgeScrollList.SetActive(false);
 
         HidePanels();
         ShowTab(currentTabIndex);
@@ -61,6 +68,7 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.enabled = true;
         optionsMenu.enabled = false;
+        loginMenu.enabled = false;
     }
     
     /// <summary>
@@ -96,6 +104,25 @@ public class MenuManager : MonoBehaviour
     public void openTwitterURL()
     {
         Application.OpenURL("https://twitter.com/OongaBungaGames");
+    }
+
+    /// <summary>
+    /// Activa o desactiva el ScrollList para seleccionar la edad
+    /// </summary>
+    public void selectAgeButton()
+    {
+        if (ageScrollListOpen)
+        {
+            ageScrollListOpen = !ageScrollListOpen;
+            loginAgeScrollList.SetActive(false);
+            loginButtons.SetActive(true);
+        }
+        else
+        {
+            ageScrollListOpen = !ageScrollListOpen;
+            loginAgeScrollList.SetActive(true);
+            loginButtons.SetActive(false);
+        }
     }
 
     #endregion
