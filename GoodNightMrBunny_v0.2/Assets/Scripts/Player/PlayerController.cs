@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Checks")]
 
-    [SerializeField] private BoxCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo IsPlayerGrounded
+    [SerializeField] private CapsuleCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo IsPlayerGrounded
     [SerializeField] private float maxGroundCheckDistance; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
     [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
@@ -210,11 +210,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         else
         {
             maxCurrentSpeed = maxWalkingSpeed;
-            if (isPlayerGrounded)
-            {
-                currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
-                staminaChanged?.Invoke(this, currentStamina);
-            }
+            currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
+            staminaChanged?.Invoke(this, currentStamina);
         }
 
         // Actualizar el valor de closestInteractable para que sea el del IInteractable m�s cercano
@@ -450,7 +447,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <returns>true o false</returns>
     private bool IsPlayerGrounded()
     {
-        return Physics.BoxCast(groundCheck.gameObject.transform.position, groundCheck.size / 2, Vector3.down, transform.rotation, maxGroundCheckDistance, groundLayer);
+        return Physics.CapsuleCast(groundCheck.transform.position, groundCheck.transform.position, groundCheck.radius, Vector3.down, maxGroundCheckDistance, groundLayer);
     }
 
     /// <summary>
@@ -515,7 +512,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(groundCheck.gameObject.transform.position - transform.up * maxGroundCheckDistance, groundCheck.size);
+        //Gizmos.DrawCube(groundCheck.gameObject.transform.position, groundCheck.size);
+        //Gizmos.DrawCube(groundCheck.gameObject.transform.position - transform.up * maxGroundCheckDistance, groundCheck.size);
     }
 
     /// <summary>
