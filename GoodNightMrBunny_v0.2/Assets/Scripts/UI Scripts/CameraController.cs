@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
         rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
 
         var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 30f);
     }
 
     private void HandleMobileInput()
