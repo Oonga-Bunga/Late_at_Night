@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,10 +7,16 @@ using UnityEngine.UI;
 
 public class ScrollListGenerator : MonoBehaviour
 {
-    public Button buttonPrefab; // Asigna el botón prefab en el Inspector
-    public RectTransform content; // Asigna el objeto de contenido en el Inspector
+    public Button buttonPrefab;
+    public RectTransform content; 
     public MenuManager menuManager;
-    
+    private UserData userData;
+
+    private void Awake()
+    {
+        userData = FindObjectOfType<UserData>();
+    }
+
     public  void Start()
     {
         //Crea los botones del Scroll List para seleccionar la edad del jugador
@@ -21,6 +28,7 @@ public class ScrollListGenerator : MonoBehaviour
             // Configura el texto del botón con el número
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
             
+            newButton.onClick.AddListener(()=>userData.setAge(int.Parse(newButton.GetComponentInChildren<TextMeshProUGUI>().text)));
             newButton.onClick.AddListener(()=>menuManager.selectAgeButton());
         }
     }
