@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [SerializeField][Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
     private bool isPressingRunButton; // Si el jugador está corriendo o no
     private bool isRunning; // Si el jugador está corriendo o no
-    public EventHandler<float> staminaChanged; //Se invoca si cmabia el valor de la energía del jugador
+    public EventHandler<float> StaminaChanged; //Se invoca si cmabia el valor de la energía del jugador
 
     [Header("Acceleration")]
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private AInteractable closestInteractable; // Almacena el objeto interactuable m�s cercano al jugador en todo momento
     [SerializeField] private float interactionDistance; // Distancia m�xima para interactuar con un objeto
     [SerializeField] private LayerMask interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
-    public EventHandler<bool> interactableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
+    public EventHandler<bool> InteractableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
 
     #endregion
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [Header("Other")]
 
     [SerializeField] private List<AHoldableObject> holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
-    private AHoldableObject currentHeldObject; // Objeto que lleva encima en cada momento
+    private AHoldableObject currentHeldObject; // Object que lleva encima en cada momento
 
     private Rigidbody rb; // Referencia al rigidbody del jugador
     private Transform cameraTransform; // Referencia a la cámara principal
@@ -204,14 +204,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             else
             {
                 currentStamina = Mathf.Max(currentStamina - staminaComsumptionRate * Time.deltaTime, 0);
-                staminaChanged?.Invoke(this, currentStamina);
+                StaminaChanged?.Invoke(this, currentStamina);
             }
         }
         else
         {
             maxCurrentSpeed = maxWalkingSpeed;
             currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
-            staminaChanged?.Invoke(this, currentStamina);
+            StaminaChanged?.Invoke(this, currentStamina);
         }
 
         // Actualizar el valor de closestInteractable para que sea el del IInteractable m�s cercano
@@ -496,11 +496,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         {
             bestInteractable.EnableOutline();
             bestInteractable.EnableCanvas();
-            interactableChanged?.Invoke(this, true);
+            InteractableChanged?.Invoke(this, true);
         }
         else
         {
-            interactableChanged?.Invoke(this, false);
+            InteractableChanged?.Invoke(this, false);
         }
 
         return bestInteractable;
@@ -532,7 +532,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public AHoldableObject CurrentHeldObject
     {
         get { return currentHeldObject; }
-        set { currentHeldObject = value; }
     }
 
     #endregion

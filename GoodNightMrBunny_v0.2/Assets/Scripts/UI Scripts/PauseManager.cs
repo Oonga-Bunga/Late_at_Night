@@ -32,13 +32,13 @@ public class PauseManager : MonoBehaviour
     {
         if (isPaused)
         {
-            camera.enabled = false;
+            //camera.enabled = false;
             pauseText.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
         else
         {
-            camera.enabled = true;
+            //camera.enabled = true;
             pauseText.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }

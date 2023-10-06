@@ -33,6 +33,7 @@ public class FlashlightRechargeStation : AInteractable
         }
         else if (player.CurrentHeldObject.holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
         {
+            currentCharge = ((Flashlight)player.CurrentHeldObject).CurrentCharge;
             player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
             hasFlashlight = true;
         }

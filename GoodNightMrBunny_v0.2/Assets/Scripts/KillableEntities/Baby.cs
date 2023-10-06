@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Baby : MonoBehaviour
+public class Baby : AKillableEntity
 {
+    public Baby(float health) : base(health)
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {

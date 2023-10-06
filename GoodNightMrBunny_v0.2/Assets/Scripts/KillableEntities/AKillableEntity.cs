@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     protected float currentHealth;
     protected bool dead;
     protected Collider hitbox;
+    public EventHandler<float> HealthChanged;
 
     #endregion
 
@@ -50,6 +52,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         if (isDamage)
         {
             currentHealth = Mathf.Max(currentHealth - value, 0);
+            HealthChanged?.Invoke(this, currentHealth);
             if (currentHealth == 0)
             {
                 Die();
@@ -58,6 +61,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         else
         {
             currentHealth = Mathf.Min(currentHealth + value, maxHealth);
+            HealthChanged?.Invoke(this, currentHealth);
         }
     }
 
