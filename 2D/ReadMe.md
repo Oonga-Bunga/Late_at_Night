@@ -17,7 +17,7 @@
 
 ---
 ## Instrucciones para el uso de la carpeta
-En la carpeta de **ilustraciones** finalizadas solo se subirán aquella ilustraciones e imágenes finalizadas que sean para el uso publicitario, portadas, escenas,etc.
+En la carpeta de **ilustraciones** finalizadas solo se subirán aquella ilustraciones e imágenes finalizadas que sean para el uso publicitario, portadas, escenas,etc.  
 
 
 En la carpeta de **bocetos** se subirán los bocetos de aquellos elementos no acabados, como pueden ser ideas de personajes, distintos tipos de elementos del escenario no definitivos ni delineados, ideas para realizar el GUI, etc. Cada uno es su subcarpeta correspondiente.
