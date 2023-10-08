@@ -6,7 +6,7 @@ Oonga Bunga es una empresa de videojuegos de miedo con sede en Madrid, España. 
 
 ## Equipo
 
-Nuestro equipo está formado por 6 personas apasionadas por los videojuegos de miedo. Tenemos una amplia experiencia en el desarrollo de juegos y estamos constantemente buscando nuevas formas de asustar a nuestros jugadores.
+Nuestro equipo está formado por 7 personas apasionadas por los videojuegos de miedo. Tenemos una amplia experiencia en el desarrollo de juegos y estamos constantemente buscando nuevas formas de asustar a nuestros jugadores.
 
 ## Contacto
 
