@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClayBalls : AWeapon
 {
     private float currentBallNumber;
-    static public float maxBallNumber;
+    static public int maxBallNumber = 6;
 
     void Start()
     {
