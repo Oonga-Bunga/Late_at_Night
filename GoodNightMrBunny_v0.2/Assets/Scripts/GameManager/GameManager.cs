@@ -29,6 +29,7 @@ public class Data
 
 public class GameManager : MonoBehaviour
 {
+
     // Interruptores
     private int totalSwitches;
     private int currentActivatedSwitches;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     // Tiempo de supervivencia
     [SerializeField] private float maxTime;
     private float currentTime;
-    public EventHandler<float> timer;
+    public EventHandler<float> TimerEvent;
 
     // Spawn de enemigos
     private List<AMonster> enemyList;
@@ -55,12 +56,14 @@ public class GameManager : MonoBehaviour
 
     // Otros
     private bool inGame;
+    private PauseManager pauseManager;
 
     void Start()
     {
         currentTime = maxTime;
         currentActivatedSwitches = 0;
         totalSwitches = 0;
+        pauseManager = FindObjectOfType<PauseManager>();
 
         // Create switches
 
@@ -72,10 +75,10 @@ public class GameManager : MonoBehaviour
 
         // Create baby?
 
-        FindObjectOfType<Baby>().HealthChanged += BabyDied;
+        //FindObjectOfType<Baby>().HealthChanged += BabyDied;
 
         // Create objects
-
+        
         LoadPrefabs();
 
         string jsonString = jsonFile.text;
@@ -86,8 +89,15 @@ public class GameManager : MonoBehaviour
             Vector3 position = new Vector3(prop.Position.X, prop.Position.Y, prop.Position.Z);
             Vector3 rotation = new Vector3(prop.Rotation.X, prop.Rotation.Y, prop.Rotation.Z);
 
-            GameObject propPrefab = propDictionary[prop.ID];
-            Instantiate(propPrefab, position, Quaternion.Euler(rotation));
+            if (propDictionary.ContainsKey(prop.ID))
+            {
+                GameObject propPrefab = propDictionary[prop.ID];
+                Instantiate(propPrefab, position, Quaternion.Euler(rotation));
+            }
+            else
+            {
+                Debug.Log("No hay prefab");
+            }
         }
 
         foreach (Object obj in datos.Objects)
@@ -95,11 +105,20 @@ public class GameManager : MonoBehaviour
             Vector3 position = new Vector3(obj.Position.X, obj.Position.Y, obj.Position.Z);
             Vector3 rotation = new Vector3(obj.Rotation.X, obj.Rotation.Y, obj.Rotation.Z);
 
-            GameObject objPrefab = propDictionary[obj.ID];
-            Instantiate(objPrefab, position, Quaternion.Euler(rotation));
+            if (objectDictionary.ContainsKey(obj.ID))
+            {
+                GameObject objPrefab = objectDictionary[obj.ID];
+                Instantiate(objPrefab, position, Quaternion.Euler(rotation));
+            }
+            else
+            {
+                Debug.Log("No hay prefab");
+            }
         }
 
         // Enemies?
+
+        // Activar cámara de jugador
 
         inGame = true;
     }
@@ -119,10 +138,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (pauseManager.isPaused) return;
+
         if (inGame)
         {
             currentTime -= Time.deltaTime;
-            timer?.Invoke(this, currentTime);
+            TimerEvent?.Invoke(this, currentTime);
 
             if (currentTime < 0)
             {

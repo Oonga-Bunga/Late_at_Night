@@ -6,8 +6,8 @@ using static IInteractable;
 
 public class Switch : AInteractable
 {
-    private bool isOn;
-    public EventHandler<bool> TurnedOnOrOff;
+    private bool isOn; // Si el interruptor está o no encendido
+    public EventHandler<bool> TurnedOnOrOff; // Evento que notifica
 
     private void Start()
     {

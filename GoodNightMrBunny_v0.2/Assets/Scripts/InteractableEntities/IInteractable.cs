@@ -11,6 +11,6 @@ public interface IInteractable
 
     public void Interacted(IPlayerReceiver.InputType interactInput);
     public void PlayerExitedRange();
-    public void EnableOutline();
-    public void DisableOutline();
+    public void EnableOutlineAndCanvas();
+    public void DisableOutlineAndCanvas();
 }

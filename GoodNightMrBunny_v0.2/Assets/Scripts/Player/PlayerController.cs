@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [SerializeField] private float jumpForce; // Fuerza de salto
     [SerializeField][Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
-    private bool isPlayerGrounded;
+    private bool isPlayerGrounded; // Si el jugador está en el suelo o no
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
     // haya pasado m�s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
@@ -107,6 +107,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     #endregion
 
+    #region Getters and Setters
+
+    public AHoldableObject CurrentHeldObject
+    {
+        get { return currentHeldObject; }
+    }
+
+    public float MaxStamina
+    {
+        get { return maxStamina; }
+    }
+
+    #endregion
+
     #region Initialization
 
     private void Start()
@@ -137,6 +151,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void FixedUpdate()
     {
+        if (pauseManager.isPaused) return;
+
         rb.AddForce(Physics.gravity * localGravityScale);
     }
 
@@ -145,6 +161,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void Update()
     {
+        if (pauseManager.isPaused) return;
+
         // Comprobar si el jugador está en el suelo
 
         isPlayerGrounded = IsPlayerGrounded();
@@ -230,6 +248,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Move(Vector2 direction)
     {
         if (pauseManager.isPaused) return;
+
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
@@ -240,11 +259,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         // C�lculo de la velocidad necesaria
 
         Vector2 horizontalSpeed = new Vector2(rb.velocity.x, rb.velocity.z);
-
         Vector2 targetSpeed = new Vector2(move.x, move.z) * maxCurrentSpeed;
-
         Vector2 speedDif = targetSpeed - horizontalSpeed;
-
         float accelRate = (targetSpeed.magnitude > 0.01f) ? acceleration : decceleration;
 
         if (!isPlayerGrounded)
@@ -302,30 +318,15 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Run(IPlayerReceiver.InputType runInput)
     {
         if (pauseManager.isPaused) return;
+
         if (runInput != IPlayerReceiver.InputType.Up)
         {
-            RunDown();
+            isPressingRunButton = true;
         }
         else
         {
-            RunUp();
+            isPressingRunButton = false;
         }
-    }
-
-    /// <summary>
-    /// Si el jugador tiene suficiente energía inicia la carrera
-    /// </summary>
-    private void RunDown()
-    {
-        isPressingRunButton = true;
-    }
-
-    /// <summary>
-    /// Hace que el jugador deje de correr
-    /// </summary>
-    private void RunUp()
-    {
-        isPressingRunButton = false;
     }
 
     /// <summary>
@@ -335,35 +336,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
         if (pauseManager.isPaused) return;
+
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
-            JumpDown();
+            lastJumpTime = jumpBufferTime;
         }
         else
         {
-            JumpUp();
+            if (rb.velocity.y > 0 && !isPlayerGrounded)
+            {
+                rb.AddForce(Vector3.down * rb.velocity.y * (1 - jumpCutMultiplier), ForceMode.Impulse);
+            }
+
+            lastJumpTime = 0;
         }
-    }
-
-    /// <summary>
-    /// Registramos el momento en el que el jugador ha querido saltar
-    /// </summary>
-    private void JumpDown()
-    {
-        lastJumpTime = jumpBufferTime;
-    }
-
-    /// <summary>
-    /// Si el jugador est� saltando y deja de pulsar la tecla de salto este se acorta
-    /// </summary>
-    private void JumpUp()
-    {
-        if (rb.velocity.y > 0 && !isPlayerGrounded)
-        {
-            rb.AddForce(Vector3.down * rb.velocity.y * (1 - jumpCutMultiplier), ForceMode.Impulse);
-        }
-
-        lastJumpTime = 0;
     }
 
     /// <summary>
@@ -383,6 +369,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
     public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
+        if (pauseManager.isPaused) return;
+
         currentHeldObject.Use(useInput);
     }
 
@@ -392,6 +380,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
+        if (pauseManager.isPaused) return;
+
         if (closestInteractable != null)
         {
             closestInteractable.Interacted(interactInput);
@@ -430,8 +420,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// Es similar al m�todo ChangeHeldObject, la �nica diferencia es que el objeto al que cambia el jugador es el vac�o
     /// </summary>
-    public void DropObject()
+    public void DropHeldObject()
     {
+        if (pauseManager.isPaused) return;
+
         currentHeldObject.Drop(true, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
         holdableObjectList[0].gameObject.SetActive(true);
         currentHeldObject = holdableObjectList[0];
@@ -481,8 +473,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (closestInteractable != null)
         {
-            closestInteractable.DisableOutline();
-            closestInteractable.DisableCanvas();
+            closestInteractable.DisableOutlineAndCanvas();
 
             if (closestInteractable != bestInteractable)
             {
@@ -494,8 +485,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (bestInteractable != null)
         {
-            bestInteractable.EnableOutline();
-            bestInteractable.EnableCanvas();
+            bestInteractable.EnableOutlineAndCanvas();
             InteractableChanged?.Invoke(this, true);
         }
         else
@@ -504,34 +494,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
 
         return bestInteractable;
-    }
-
-    /// <summary>
-    /// Dibuja el area final del BoxCast usado para detectar el suelo
-    /// </summary>
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        //Gizmos.DrawCube(groundCheck.gameObject.transform.position, groundCheck.size);
-        //Gizmos.DrawCube(groundCheck.gameObject.transform.position - transform.up * maxGroundCheckDistance, groundCheck.size);
-    }
-
-    /// <summary>
-    /// Devuelve la energía máxima del jugador
-    /// </summary>
-    /// <returns></returns>
-    public float GetMaxStamina()
-    {
-        return maxStamina;
-    }
-
-    #endregion
-
-    #region Getters and Setters
-
-    public AHoldableObject CurrentHeldObject
-    {
-        get { return currentHeldObject; }
     }
 
     #endregion

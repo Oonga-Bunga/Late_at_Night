@@ -23,13 +23,15 @@ public class CameraController : MonoBehaviour
     [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
     [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
 
-    [SerializeField] private InputAction mouseDeltaAction;
+    [SerializeField] private InputActionReference mouseDeltaAction;
     private List<int> bannedTouches = new List<int>();
 
     Vector2 rotation = Vector2.zero;
 
     public delegate void Look(); //Delegate with the firing function of the gun that depends on the GunObject
     public Look lookFunction; //Firing function
+
+    private PauseManager pauseManager;
 
     private void Awake()
     {
@@ -42,17 +44,21 @@ public class CameraController : MonoBehaviour
             lookFunction = HandlePCInput;
         }
         
-        mouseDeltaAction.Enable();
+        mouseDeltaAction.action.Enable();
+
+        pauseManager = FindAnyObjectByType<PauseManager>();
     }
 
     private void Update()
     {
+        if (pauseManager.isPaused) return;
+
         lookFunction();
     }
 
     private void HandlePCInput()
     {
-        Vector2 delta = mouseDeltaAction.ReadValue<Vector2>();
+        Vector2 delta = mouseDeltaAction.action.ReadValue<Vector2>();
         rotation.x += delta.x * sensitivityX;
         rotation.y += delta.y * sensitivityY;
         rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);

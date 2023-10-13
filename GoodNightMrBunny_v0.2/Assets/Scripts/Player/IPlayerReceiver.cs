@@ -22,5 +22,5 @@ public interface IPlayerReceiver
     public void UseHeldObject(InputType useImput);
     public void Interact(InputType interactInput);
     public void ChangeHeldObject(HoldableObjectType objectType, bool dropPrefab, float initializationValue);
-    public void DropObject();
+    public void DropHeldObject();
 }

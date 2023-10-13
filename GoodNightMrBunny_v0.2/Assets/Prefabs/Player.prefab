@@ -872,34 +872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9e6488bf9106d44a432b04eb3fdefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 8
-  sensitivityY: 4
+  sensitivityX: 2
+  sensitivityY: 1
   yRotationLimit: 90
-  mouseDeltaAction:
-    m_Name: Mouse Delta
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 35c0465b-217c-4e1b-899b-15689be765a1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 1fa030e4-0a13-4bb9-a1c2-5b721a587222
-      m_Path: <Mouse>/delta
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Mouse Delta
-      m_Flags: 0
-    - m_Name: 
-      m_Id: ca06338b-6ec0-4536-a30b-3359334aa376
-      m_Path: <Gamepad>/rightStick
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Mouse Delta
-      m_Flags: 0
-    m_Flags: 0
+  mouseDeltaAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
 --- !u!114 &5418330541399530496
 MonoBehaviour:
   m_ObjectHideFlags: 0

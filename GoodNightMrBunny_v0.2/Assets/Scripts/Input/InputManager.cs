@@ -21,13 +21,12 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private InputAction Move;
-    [SerializeField] private InputAction Run;
-    [SerializeField] private InputAction Jump;
-    [SerializeField] private InputAction Use;
-    [SerializeField] private InputAction Interact;
-    [SerializeField] private InputAction DropWeapon;
-
+    [SerializeField] private InputActionReference Move;
+    [SerializeField] private InputActionReference Run;
+    [SerializeField] private InputActionReference Jump;
+    [SerializeField] private InputActionReference Use;
+    [SerializeField] private InputActionReference Drop;
+    [SerializeField] private InputActionReference Interact;
     private Dictionary<string, ICommand> commands;
 
     /// <summary>
@@ -58,7 +57,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Vector2 value = Move.ReadValue<Vector2>();
+        Vector2 value = Move.action.ReadValue<Vector2>();
         commands["move"].Execute(value);
     }
 
@@ -67,12 +66,12 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Use.ReadValue<float>() == 1f)
+        if (Use.action.ReadValue<float>() == 1f)
         {
             commands["use"].Execute(IPlayerReceiver.InputType.Hold);
         }
 
-        if (Run.ReadValue<float>() == 1f)
+        if (Run.action.ReadValue<float>() == 1f)
         {
             commands["run"].Execute(IPlayerReceiver.InputType.Hold);
         }
@@ -97,53 +96,53 @@ public class InputManager : MonoBehaviour
                 { "drop", new DropObjectCommand(player) }
             };
 
-        Move.Enable();
+        Move.action.Enable();
 
-        Run.started += context =>
+        Run.action.started += context =>
         {
             commands["run"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Run.canceled += context =>
+        Run.action.canceled += context =>
         {
             commands["run"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Run.Enable();
+        Run.action.Enable();
 
-        Jump.started += context =>
+        Jump.action.started += context =>
         {
             commands["jump"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Jump.canceled += context =>
+        Jump.action.canceled += context =>
         {
             commands["jump"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Jump.Enable();
+        Jump.action.Enable();
 
-        Use.started += context =>
+        Use.action.started += context =>
         {
             commands["use"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Use.canceled += context =>
+        Use.action.canceled += context =>
         {
             commands["use"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Use.Enable();
+        Use.action.Enable();
 
-        Interact.started += context =>
-        {
-            commands["interact"].Execute(IPlayerReceiver.InputType.Down);
-        };
-        Interact.canceled += context =>
-        {
-            commands["interact"].Execute(IPlayerReceiver.InputType.Up);
-        };
-        Interact.Enable();
-
-        DropWeapon.started += context =>
+        Drop.action.started += context =>
         {
             commands["drop"].Execute();
         };
-        DropWeapon.Enable();
+        Drop.action.Enable();
+
+        Interact.action.started += context =>
+        {
+            commands["interact"].Execute(IPlayerReceiver.InputType.Down);
+        };
+        Interact.action.canceled += context =>
+        {
+            commands["interact"].Execute(IPlayerReceiver.InputType.Up);
+        };
+        Interact.action.Enable();
     }
 
     #endregion

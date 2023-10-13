@@ -13,6 +13,7 @@ public class FlashlightRechargeStation : AInteractable
     {
         interactType = IInteractable.InteractType.Press;
         hasFlashlight = false;
+        currentCharge = 0f;
         rechargeAmount = Flashlight.maxCharge * rechargeRate;
     }
 

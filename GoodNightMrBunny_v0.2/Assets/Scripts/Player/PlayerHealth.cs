@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerHealth : AKillableEntity
 {
-    public EventHandler<float> HealthChanged;
-
     public PlayerHealth(float health) : base(health)
     {
     }
@@ -20,7 +18,6 @@ public class PlayerHealth : AKillableEntity
     public void ChangePlayerHealth(float value, bool IsDamage)
     {
         ChangeHealth(value, IsDamage);
-        HealthChanged?.Invoke(this, currentHealth);
     }
 
     public void PlayerDie()

@@ -11,16 +11,19 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected IInteractable.InteractType interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
 
     // El siguiente grupo de atributos solo sirve para AInteractable de tipo Hold o PressAndHold
-    protected float currentHoldTime = 0; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
-    [SerializeField] protected float holdDuration = 3f; // Tiempo que debe presionarse el botón de interactuar para llevar a cabo la acción de este objeto
-    [SerializeField] protected float pressBuffer = 0.2f; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
-    protected bool isBeingInteracted = false; // Si el objeto está siendo interactuado por el jugador
+    protected float currentHoldTime; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
+    [SerializeField] protected float holdDuration; // Tiempo que debe presionarse el botón de interactuar para llevar a cabo la acción de este objeto
+    [SerializeField] protected float pressBuffer; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
+    protected bool isBeingInteracted; // Si el objeto está siendo interactuado por el jugador
     
-    protected bool canBeInteracted = true; // Si el objeto puede ser interactuado
+    protected bool canBeInteracted; // Si el objeto puede ser interactuado
+
     protected PlayerController player; // Referencia al jugador
     protected Outline outline; // Referencia al outline
-    protected Image radialBar; // Referencia a la barra radial del button prompt
     protected Canvas promptCanvas; // Referencia al canvas del button prompt
+    protected Image radialBar; // Referencia a la barra radial del button prompt
+
+    protected PauseManager pauseManager;
 
     #endregion
 
@@ -28,9 +31,12 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     protected virtual void Awake()
     {
+        currentHoldTime = 0f;
+        isBeingInteracted = false;
+        canBeInteracted = true;
+
         player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
-
         promptCanvas = transform.GetChild(0).gameObject.GetComponentInChildren<Canvas>();
         radialBar = promptCanvas.gameObject.GetComponentInChildren<Image>();
         promptCanvas.enabled = false;
@@ -82,47 +88,32 @@ public class AInteractable : MonoBehaviour, IInteractable
     {
         if (interactInput == IPlayerReceiver.InputType.Down)
         {
-            InteractedDown();
+            // Si el objeto es de tipo Press ejecuta InteractedPressAction, sino isBeingInteracted pasa a ser true
+
+            if (canBeInteracted)
+            {
+                if (!(interactType == IInteractable.InteractType.Press))
+                {
+                    isBeingInteracted = true;
+                }
+                else
+                {
+                    InteractedPressAction();
+                }
+            }
         }
         else
         {
-            InteractedUp();
-        }
-    }
+            // Si el objeto es de tipo PressAndHold y la duración de la pulsación ha sido muy corta se ejecuta InteractedPressAction
 
-    /// <summary>
-    /// Si el tipo de interacción es press ejecuta InteractedPressAction inmediatamente, si es cualquier otro
-    /// isBeingInteracted pasa a ser true para registrar que el jugador está interactuando con el objeto
-    /// </summary>
-    protected virtual void InteractedDown()
-    {
-        if (canBeInteracted)
-        {
-            if (!(interactType == IInteractable.InteractType.Press))
-            {
-                isBeingInteracted = true;
-            }
-            else
+            if (interactType == IInteractable.InteractType.PressAndHold && currentHoldTime < pressBuffer && isBeingInteracted)
             {
                 InteractedPressAction();
             }
-        }
-    }
 
-    /// <summary>
-    /// El objeto deja de estar siendo interactuado y se resetea el temporizador currentHoldTime.
-    /// Además, si el tipo de interacción es press and hold y se ha levantado el botón antes de que pase cierto
-    /// tiempo se ejecuta InteractedPressAction
-    /// </summary>
-    protected virtual void InteractedUp()
-    {
-        if (interactType == IInteractable.InteractType.PressAndHold && currentHoldTime < pressBuffer && isBeingInteracted)
-        {
-            InteractedPressAction();
+            isBeingInteracted = false;
+            currentHoldTime = 0;
         }
-
-        isBeingInteracted = false;
-        currentHoldTime = 0;
     }
 
     /// <summary>
@@ -155,32 +146,14 @@ public class AInteractable : MonoBehaviour, IInteractable
     #region Utility Methods
 
     /// <summary>
-    /// Activa el outline
+    /// Activa el ouline y el canvas
     /// </summary>
-    public virtual void EnableOutline()
+    public virtual void EnableOutlineAndCanvas()
     {
         if (!outline.enabled)
         {
             outline.enabled = true;
         }
-    }
-
-    /// <summary>
-    /// Desactiva el outline
-    /// </summary>
-    public virtual void DisableOutline()
-    {
-        if (outline.enabled)
-        {
-            outline.enabled = false;
-        }
-    }
-
-    /// <summary>
-    /// Activa el canvas
-    /// </summary>
-    public virtual void EnableCanvas()
-    {
         if (!promptCanvas.enabled && canBeInteracted)
         {
             promptCanvas.enabled = true;
@@ -188,10 +161,14 @@ public class AInteractable : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Desactiva el canvas
+    /// Desactiva outline y el canvas
     /// </summary>
-    public virtual void DisableCanvas()
+    public virtual void DisableOutlineAndCanvas()
     {
+        if (outline.enabled)
+        {
+            outline.enabled = false;
+        }
         if (promptCanvas.enabled)
         {
             promptCanvas.enabled = false;

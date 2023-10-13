@@ -8,11 +8,11 @@ public class DropObjectCommand : ACommand
 
     public override void Execute()
     {
-        Client.DropObject();
+        Client.DropHeldObject();
     }
 
     public override void Execute(object data)
     {
-        Client.DropObject();
+        Client.DropHeldObject();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flashlight : AWeapon
 {
     private float currentCharge;
-    static public float maxCharge;
+    static public float maxCharge = 100f;
 
     public float CurrentCharge
     {
@@ -15,6 +15,7 @@ public class Flashlight : AWeapon
     void Start()
     {
         holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
+        currentCharge = maxCharge;
     }
 
     public override void Initialize(float charge)
