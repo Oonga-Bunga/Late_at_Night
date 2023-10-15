@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 public class Shadow : AKillableEntity
 {
     /// <summary>
-    /// Constructor del monstruo Jellyfish
+    /// Constructor del monstruo Shadow
     /// </summary>
     /// <param name="health">Vida inicial</param>
     /// <param name="speed">Velocidad</param>
