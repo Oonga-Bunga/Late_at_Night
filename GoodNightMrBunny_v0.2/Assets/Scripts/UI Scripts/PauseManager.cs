@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    public bool isPaused = true;
+    public bool isPaused = false;
     public TextMeshProUGUI pauseText;
 
     private void Start()
     {
-        pauseText.gameObject.SetActive(true);
+        pauseText.gameObject.SetActive(false);
     }
 
     private void Update()
