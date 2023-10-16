@@ -10,7 +10,7 @@ public class Flashlight : AWeapon
 {
     #region Atributtes
     
-    private float currentCharge;
+    public float currentCharge;
     static public float maxCharge = 100f;
     public float lanternDamage = 5f;
     public float range = 20f;
@@ -24,6 +24,7 @@ public class Flashlight : AWeapon
     {
         get { return currentCharge; }
     }
+
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class Flashlight : AWeapon
     /// </summary>
     public void ActiveLantern()
     {
+        if (currentCharge < 0) return;
         lightActive = !lightActive;
         lanternLight.enabled = lightActive;
     }
@@ -64,26 +66,63 @@ public class Flashlight : AWeapon
     /// </summary>
     private void FixedUpdate()
     {
-        if (lightActive)
+        if (!lightActive) return;
         {
-            // Lanzar un rayo desde la posición de la linterna en la dirección de la linterna.
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, range))
+            HitEnemy();
+            if(currentCharge > 0)
             {
-                // Verificar si el objeto golpeado está en la capa "Enemy".
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                currentCharge -= Time.fixedDeltaTime*10;
+            }
+            else
+            {
+                lightActive = false;
+                lanternLight.enabled = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Implementación del detectar al enemigo y hacerle daño mediante su TakeHit()
+    /// </summary>
+    private void HitEnemy()
+    {
+        // Lanzar un rayo desde la posición de la linterna en la dirección de la linterna.
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, range))
+        {
+            // Verificar si el objeto golpeado está en la capa "Enemy".
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                //Obtener el componente del script de enemigo.
+                AMonster enemy = hit.collider.GetComponent<AMonster>();
+                if (enemy != null)
                 {
-                    //Obtener el componente del script de enemigo.
-                    AMonster enemy = hit.collider.GetComponent<AMonster>();
-                    if (enemy != null)
-                    {
-                        enemy.TakeHit(lanternDamage);
-                    }
+                    enemy.TakeHit(lanternDamage);
                 }
             }
         }
+    }
+
+    public override void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
+    {
+        if (droppedObject != null && dropPrefab)
+        {
+            Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * dropDistance;
+            Vector3 dropDirection = Camera.main.transform.forward;
+
+            RaycastHit hitInfo;
+
+            if (Physics.SphereCast(player.transform.position, sphereRaycastRadius, dropDirection, out hitInfo, dropDistance, groundLayer))
+            {
+                dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
+            }
+
+            Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+        }
+
+        gameObject.SetActive(false);
     }
 
     #endregion
