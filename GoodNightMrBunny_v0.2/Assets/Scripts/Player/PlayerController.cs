@@ -103,6 +103,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     private PauseManager pauseManager;
 
+    private IPlayerReceiver mount;
+
     #endregion
 
     #endregion
@@ -427,6 +429,22 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         currentHeldObject.Drop(true, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
         holdableObjectList[0].gameObject.SetActive(true);
         currentHeldObject = holdableObjectList[0];
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void AssignMount(IPlayerReceiver mount)
+    {
+        this.mount = mount;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DisMount()
+    {
+        this.mount = null;
     }
 
     #endregion

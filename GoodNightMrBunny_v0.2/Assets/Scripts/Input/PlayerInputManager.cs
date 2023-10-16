@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     #region InputManager, PlayerController and Awake
 
-    private static InputManager instance;
-    public static InputManager Instance => instance;
+    private static PlayerInputManager instance;
+    public static PlayerInputManager Instance => instance;
 
     [SerializeField] private PlayerController player;
     public PlayerController Player
