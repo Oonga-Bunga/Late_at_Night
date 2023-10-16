@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
@@ -9,55 +10,52 @@ using Random = UnityEngine.Random;
 public class Flashlight : AWeapon
 {
     #region Atributtes
-    
+
     public float currentCharge;
     static public float maxCharge = 100f;
-    public float lanternDamage = 5f;
+    public float flashlightDamage = 5f;
     public float range = 20f;
-    public Light lanternLight;
-    public bool lightActive = false;
+    public Light spotlight;
+    public bool lightOn = false;
 
     #endregion
     
     #region Methods
-    public float CurrentCharge
-    {
+    public float CurrentCharge {
         get { return currentCharge; }
     }
-
 
     void Start()
     {
         holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
         currentCharge = maxCharge;
-        lightActive = false;
-        lanternLight.enabled = false;
+        lightOn = false;
+        spotlight.enabled = false;
     }
 
     public override void Initialize(float charge)
     {
-        currentCharge = charge;
+        //currentCharge = charge;
     }
 
     /// <summary>
-    /// Activa o desactiva la luz de la linterna
-    /// </summary>
-    public void ActiveLantern()
-    {
-        if (currentCharge < 0) return;
-        lightActive = !lightActive;
-        lanternLight.enabled = lightActive;
-    }
-
-    /// <summary>
-    /// Llama a la función Active Lantern cuando se ejecuta la accion AttackInput
+    /// Mientras mantiene presionado enciende la luz de la linterna, al soltar, se apaga
     /// </summary>
     /// <param name="attackInput"></param>
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
-        if (attackInput == IPlayerReceiver.InputType.Down)
+        if (currentCharge < 0) return;
+        
+        if (attackInput == IPlayerReceiver.InputType.Hold)
         {
-            ActiveLantern();
+            lightOn = true;
+            spotlight.enabled = true;
+        }
+
+        if (attackInput == IPlayerReceiver.InputType.Up)
+        {
+            lightOn = false;
+            spotlight.enabled = false;
         }
     }
 
@@ -66,19 +64,19 @@ public class Flashlight : AWeapon
     /// </summary>
     private void FixedUpdate()
     {
-        if (!lightActive) return;
+        if (!lightOn) return;
+        
+        HitEnemy();
+        if(currentCharge > 0)
         {
-            HitEnemy();
-            if(currentCharge > 0)
-            {
-                currentCharge -= Time.fixedDeltaTime*10;
-            }
-            else
-            {
-                lightActive = false;
-                lanternLight.enabled = false;
-            }
+            currentCharge -= Time.fixedDeltaTime*10;
         }
+        else
+        {
+            lightOn = false;
+            spotlight.enabled = false;
+        }
+        
     }
 
     /// <summary>
@@ -99,7 +97,7 @@ public class Flashlight : AWeapon
                 AMonster enemy = hit.collider.GetComponent<AMonster>();
                 if (enemy != null)
                 {
-                    enemy.TakeHit(lanternDamage);
+                    enemy.TakeHit(flashlightDamage);
                 }
             }
         }
@@ -119,6 +117,7 @@ public class Flashlight : AWeapon
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
+            droppedObject.GetComponent<WeaponAmmunition>().setCurrentAmmunition(currentCharge);
             Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
         }
 

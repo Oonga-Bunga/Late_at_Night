@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 7574240209079896873}
   - component: {fileID: 3455791190405797296}
   - component: {fileID: 3407424766639367850}
+  - component: {fileID: 8643869536746024777}
   - component: {fileID: 6463400791846346273}
   m_Layer: 6
   m_Name: FlashlightPickup
@@ -814,6 +815,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdDuration: 3
   pressBuffer: 0.2
+--- !u!114 &8643869536746024777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037434694975463464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5489a900dfeb09e4780d6c5b16f09a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAmmunition: 0
 --- !u!54 &6463400791846346273
 Rigidbody:
   m_ObjectHideFlags: 0
