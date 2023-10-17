@@ -33,6 +33,7 @@ public class Flashlight : AWeapon
         currentCharge = maxCharge;
         lightOn = false;
         spotlight.enabled = false;
+        flashlightDamage = baseDamage;
     }
 
     public override void Initialize(float charge)

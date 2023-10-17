@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AWeapon : AHoldableObject
 {
-    [SerializeField] private float baseDamage = 2f;
+    [SerializeField] protected float baseDamage = 2f;
 
     // Start is called before the first frame update
     void Start()
