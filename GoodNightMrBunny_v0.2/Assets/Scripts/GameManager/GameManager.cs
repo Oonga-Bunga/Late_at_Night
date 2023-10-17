@@ -78,41 +78,44 @@ public class GameManager : MonoBehaviour
         //FindObjectOfType<Baby>().HealthChanged += BabyDied;
 
         // Create objects
-        
+
         LoadPrefabs();
 
-        string jsonString = jsonFile.text;
-        Data datos = JsonUtility.FromJson<Data>(jsonString);
-
-        foreach (Object prop in datos.Props)
+        if (jsonFile != null)
         {
-            Vector3 position = new Vector3(prop.Position.X, prop.Position.Y, prop.Position.Z);
-            Vector3 rotation = new Vector3(prop.Rotation.X, prop.Rotation.Y, prop.Rotation.Z);
+            string jsonString = jsonFile.text;
+            Data datos = JsonUtility.FromJson<Data>(jsonString);
 
-            if (propDictionary.ContainsKey(prop.ID))
+            foreach (Object prop in datos.Props)
             {
-                GameObject propPrefab = propDictionary[prop.ID];
-                Instantiate(propPrefab, position, Quaternion.Euler(rotation));
-            }
-            else
-            {
-                Debug.Log("No hay prefab");
-            }
-        }
+                Vector3 position = new Vector3(prop.Position.X, prop.Position.Y, prop.Position.Z);
+                Vector3 rotation = new Vector3(prop.Rotation.X, prop.Rotation.Y, prop.Rotation.Z);
 
-        foreach (Object obj in datos.Objects)
-        {
-            Vector3 position = new Vector3(obj.Position.X, obj.Position.Y, obj.Position.Z);
-            Vector3 rotation = new Vector3(obj.Rotation.X, obj.Rotation.Y, obj.Rotation.Z);
-
-            if (objectDictionary.ContainsKey(obj.ID))
-            {
-                GameObject objPrefab = objectDictionary[obj.ID];
-                Instantiate(objPrefab, position, Quaternion.Euler(rotation));
+                if (propDictionary.ContainsKey(prop.ID))
+                {
+                    GameObject propPrefab = propDictionary[prop.ID];
+                    Instantiate(propPrefab, position, Quaternion.Euler(rotation));
+                }
+                else
+                {
+                    Debug.Log("No hay prefab");
+                }
             }
-            else
+
+            foreach (Object obj in datos.Objects)
             {
-                Debug.Log("No hay prefab");
+                Vector3 position = new Vector3(obj.Position.X, obj.Position.Y, obj.Position.Z);
+                Vector3 rotation = new Vector3(obj.Rotation.X, obj.Rotation.Y, obj.Rotation.Z);
+
+                if (objectDictionary.ContainsKey(obj.ID))
+                {
+                    GameObject objPrefab = objectDictionary[obj.ID];
+                    Instantiate(objPrefab, position, Quaternion.Euler(rotation));
+                }
+                else
+                {
+                    Debug.Log("No hay prefab");
+                }
             }
         }
 
