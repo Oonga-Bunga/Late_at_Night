@@ -35,7 +35,7 @@ public class Flashlight : AWeapon
 
     public override void Initialize(float charge)
     {
-        //currentCharge = charge;
+        currentCharge = charge;
     }
 
     /// <summary>
@@ -117,8 +117,7 @@ public class Flashlight : AWeapon
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
-            droppedObject.GetComponent<WeaponAmmunition>().setCurrentAmmunition(currentCharge);
-            Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            GameObject f = Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
         }
 
         gameObject.SetActive(false);
