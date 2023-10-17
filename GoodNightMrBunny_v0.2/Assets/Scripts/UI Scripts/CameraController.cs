@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
     public Look lookFunction; //Firing function
 
     private PauseManager pauseManager;
+    private bool isLookEnabled;
 
     private void Awake()
     {
@@ -47,11 +48,12 @@ public class CameraController : MonoBehaviour
         mouseDeltaAction.action.Enable();
 
         pauseManager = FindAnyObjectByType<PauseManager>();
+        isLookEnabled = true;
     }
 
     private void Update()
     {
-        if (pauseManager.isPaused) return;
+        if (pauseManager.isPaused || !isLookEnabled) return;
 
         lookFunction();
     }
@@ -99,5 +101,15 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EnableLook()
+    {
+        isLookEnabled = true;
+    }
+
+    public void DisableLook()
+    {
+        isLookEnabled = false;
     }
 }

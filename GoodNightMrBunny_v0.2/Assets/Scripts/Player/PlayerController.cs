@@ -251,6 +251,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (pauseManager.isPaused) return;
 
+        if (mount != null) mount.Move(direction);
+
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
@@ -321,6 +323,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (pauseManager.isPaused) return;
 
+        if (mount != null) mount.Run(runInput);
+
         if (runInput != IPlayerReceiver.InputType.Up)
         {
             isPressingRunButton = true;
@@ -338,6 +342,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
         if (pauseManager.isPaused) return;
+
+        if (mount != null) mount.Jump(jumpInput);
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
@@ -373,6 +379,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (pauseManager.isPaused) return;
 
+        if (mount != null) mount.UseHeldObject(useInput);
+
         currentHeldObject.Use(useInput);
     }
 
@@ -383,6 +391,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
         if (pauseManager.isPaused) return;
+
+        if (mount != null) mount.Interact(interactInput);
 
         if (closestInteractable != null)
         {
@@ -426,6 +436,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (pauseManager.isPaused) return;
 
+        if (mount != null) mount.DropHeldObject();
+
         currentHeldObject.Drop(true, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
         holdableObjectList[0].gameObject.SetActive(true);
         currentHeldObject = holdableObjectList[0];
@@ -434,9 +446,15 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// 
     /// </summary>
-    public void AssignMount(IPlayerReceiver mount)
+    public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
         this.mount = mount;
+        cameraTransform.gameObject.GetComponent<CameraController>().DisableLook(); //Impide mover la cámara con el ratón
+        transform.parent = mountingPoint.transform;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        cameraTransform.localRotation = Quaternion.identity; //Quiero que la cámara siempre mire al frente
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 
     /// <summary>
@@ -445,7 +463,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void DisMount()
     {
         this.mount = null;
+        transform.rotation = Quaternion.identity;
+        cameraTransform.rotation = Quaternion.Euler(0f, cameraTransform.rotation.eulerAngles.y, cameraTransform.rotation.eulerAngles.z);
+        transform.parent = null;
+        cameraTransform.gameObject.GetComponent<CameraController>().EnableLook();
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        JumpAction();
     }
+
 
     #endregion
 
