@@ -70,6 +70,8 @@ public class Flashlight : AWeapon
         if (!lightOn) return;
         
         HitEnemy();
+        
+        //Descarga de la linterna
         if(currentCharge > 0)
         {
             currentCharge -= Time.fixedDeltaTime*dischargeMultiplier;
@@ -78,6 +80,12 @@ public class Flashlight : AWeapon
         {
             lightOn = false;
             spotlight.enabled = false;
+        }
+
+        //Parpadeo de la linterna
+        if (currentCharge < 8)
+        {
+            spotlight.intensity = (int)currentCharge % 2 == 0 ? 1f : 0f;
         }
         
     }
@@ -106,6 +114,9 @@ public class Flashlight : AWeapon
         }
     }
 
+    /// <summary>
+    /// Método para droppear la linterna, le atribuye el currentCharge a la instancia que suelta
+    /// </summary>
     public override void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
     {
         if (droppedObject != null && dropPrefab)
