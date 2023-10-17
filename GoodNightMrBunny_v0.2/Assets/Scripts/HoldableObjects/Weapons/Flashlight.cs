@@ -14,6 +14,8 @@ public class Flashlight : AWeapon
     public float currentCharge;
     static public float maxCharge = 100f;
     public float flashlightDamage = 5f;
+    //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
+    public float dischargeMultiplier = 5f; 
     public float range = 20f;
     public Light spotlight;
     public bool lightOn = false;
@@ -60,7 +62,7 @@ public class Flashlight : AWeapon
     }
 
     /// <summary>
-    /// Mientras la linterna esté activa
+    /// Mientras la linterna esté activa, lanza ataque si encuentra a enemigo y se descarga con el uso
     /// </summary>
     private void FixedUpdate()
     {
@@ -69,7 +71,7 @@ public class Flashlight : AWeapon
         HitEnemy();
         if(currentCharge > 0)
         {
-            currentCharge -= Time.fixedDeltaTime*10;
+            currentCharge -= Time.fixedDeltaTime*dischargeMultiplier;
         }
         else
         {
@@ -117,7 +119,8 @@ public class Flashlight : AWeapon
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
-            GameObject f = Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            GameObject dropInstance = Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            dropInstance.GetComponent<FlashlightPickup>().Initialize(currentCharge);
         }
 
         gameObject.SetActive(false);
