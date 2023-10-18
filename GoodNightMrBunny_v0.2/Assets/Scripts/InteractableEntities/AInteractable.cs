@@ -25,6 +25,11 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     protected PauseManager pauseManager;
 
+    public bool CanBeInteracted
+    {
+        get { return canBeInteracted; }
+    }
+
     #endregion
 
     #region Initialization

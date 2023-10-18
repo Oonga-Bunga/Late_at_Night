@@ -498,7 +498,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         foreach (Collider collider in hitColliders)
         {
-            AInteractable interactable = collider.transform.parent.GetComponent<AInteractable>();
+            AInteractable interactable = FindParentWithComponent<AInteractable>(collider.gameObject.transform);
+
             if (interactable != null)
             {
                 float distance = Vector3.Distance(interactable.transform.position, transform.position);
@@ -528,7 +529,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (bestInteractable != null)
         {
-            bestInteractable.EnableOutlineAndCanvas();
+            if (bestInteractable.CanBeInteracted)
+            {
+                bestInteractable.EnableOutlineAndCanvas();
+            }
+            
             InteractableChanged?.Invoke(this, true);
         }
         else
@@ -537,6 +542,34 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
 
         return bestInteractable;
+    }
+
+    /// <summary>
+    /// Dado un objeto, devuelve el componente del primer padre de la jerarquía que posea dicho componente
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="childTransform"></param>
+    /// <returns></returns>
+    public T FindParentWithComponent<T>(Transform childTransform) where T : Component
+    {
+        Transform parent = childTransform.parent;
+
+        // Mientras haya un padre
+        while (parent != null)
+        {
+            // Si el padre tiene el componente que estamos buscando, devuélvelo
+            T component = parent.GetComponent<T>();
+            if (component != null)
+            {
+                return component;
+            }
+
+            // Si no tiene el componente, sigue buscando en el padre del padre
+            parent = parent.parent;
+        }
+
+        // Si no se encontró el componente en ningún padre, devuelve null
+        return null;
     }
 
     #endregion

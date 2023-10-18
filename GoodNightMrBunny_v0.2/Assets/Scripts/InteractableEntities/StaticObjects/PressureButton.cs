@@ -6,17 +6,12 @@ public class PressureButton : MonoBehaviour
 {
     [SerializeField] private RocketPlatform rocketPlatform;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-        
+        // Comprueba si la colisión es con el jugador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            rocketPlatform.LaunchRocket();
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }

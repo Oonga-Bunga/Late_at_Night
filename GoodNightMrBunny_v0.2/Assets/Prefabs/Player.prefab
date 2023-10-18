@@ -515,6 +515,8 @@ MonoBehaviour:
   droppedObject: {fileID: 0}
   holdableObjectType: 2
   baseDamage: 5
+  clayBallPrefab: {fileID: 0}
+  shotForce: 20
 --- !u!1 &5563167309567042532
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +530,7 @@ GameObject:
   - component: {fileID: 6725079709704487466}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -611,7 +613,7 @@ GameObject:
   - component: {fileID: 1982695389781785635}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1107,3 +1109,9 @@ MonoBehaviour:
   droppedObject: {fileID: 4037434694975463464, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
   holdableObjectType: 1
   baseDamage: 10
+  currentCharge: 0
+  flashlightDamage: 5
+  dischargeMultiplier: 5
+  rangeDamage: 40
+  spotlight: {fileID: 0}
+  lightOn: 0
