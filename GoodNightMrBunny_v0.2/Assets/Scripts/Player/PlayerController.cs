@@ -160,11 +160,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void Update()
     {
-        if (closestInteractable != null)
-        {
-            Debug.Log(closestInteractable.gameObject.name);
-        }
-
         if (pauseManager.isPaused) return;
 
         // Comprobar si el jugador está en el suelo
