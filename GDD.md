@@ -1,13 +1,13 @@
-﻿|![](/URJCLogo.png)|<p>Grado en diseño y desarrollo de Videojuegos</p><p>Asignatura X</p>|![](/URJCLogo.png)|
+﻿|![](/Documentacion/URJCLogo.png)|<p>Grado en diseño y desarrollo de Videojuegos</p><p>Asignatura X</p>|![](/URJCLogo.png)|
 | :- | :- | -: |
 
-![](/URJCLogo.png)
+![](/Documentacion/URJCLogo.png)
 
 Juegos en Web y Redes Sociales- Grupo C
 
 
 
-![](/OongaBungaLogo.png)
+![](/Documentacion/OongaBungaLogo.png)
 
 
 
@@ -160,18 +160,18 @@ El estilo artístico es un estilo simplista estilizado a mano, con un aire alegr
 *Referencias artísticas*:
 
 |![It Takes Two
-](/ItTakesTwoRef1.jpeg)![It Takes Two for Nintendo Switch - Nintendo Official Site](/ItTakesTwoRef1.jpeg)|||
+](/Documentacion/ItTakesTwoRef1.jpeg)![It Takes Two for Nintendo Switch - Nintendo Official Site](/Documentacion/ItTakesTwoRef1.jpeg)|||
 | :-: | :- | :- |
 |<a name="img1"></a>[Ref 1](#ref1)|||
 |![imagen diseñada por Christoffer Sjöström
-https://www.artstation.com/artwork/oYOJq](/ZeldaRef.jpeg)<a name="img2"></a>[Ref 2](#ref2)|![Imagen diseñada por Richie Bassett.
-https://www.artstation.com/artwork/6azkyw](/SceneRef.jpeg)<a name="img3"></a>[Ref 3](#ref3)|<p>![imagen creada por Hakan Aytac
-https://www.artstation.com/artwork/5XdE1w](/SceneRef2.jpeg)</p><p><a name="img4"></a>[Ref 4](#ref4)</p>|
+https://www.artstation.com/artwork/oYOJq](/Documentacion/ZeldaRef.jpeg)<a name="img2"></a>[Ref 2](#ref2)|![Imagen diseñada por Richie Bassett.
+https://www.artstation.com/artwork/6azkyw](/Documentacion/SceneRef.jpeg)<a name="img3"></a>[Ref 3](#ref3)|<p>![imagen creada por Hakan Aytac
+https://www.artstation.com/artwork/5XdE1w](/Documentacion/SceneRef2.jpeg)</p><p><a name="img4"></a>[Ref 4](#ref4)</p>|
 
 *Referencias del ambiente*:
 
 
-|![Five Nights at Freddy´s': Tráiler español de la película - Aullidos.com](/FNAFRef.jpeg)<a name="img5"></a>[Ref 5](#ref5)|![SONG OF HORROR COMPLETE EDITION en Steam](/SonOfHorrorRef.jpeg)<a name="img6"></a>[Ref 6](#ref6)|
+|![Five Nights at Freddy´s': Tráiler español de la película - Aullidos.com](/Documentacion/FNAFRef.jpeg)<a name="img5"></a>[Ref 5](#ref5)|![/Documentacion/SONG OF HORROR COMPLETE EDITION en Steam](/SonOfHorrorRef.jpeg)<a name="img6"></a>[Ref 6](#ref6)|
 | :-: | :-: |
 ## <a name="_toc1175683772"></a><a name="_toc1160216879"></a><a name="_toc2012679311"></a>**1.8. Alcance**
 En cuanto al alcance de nuestro proyecto, "Good Night Mr. Bunny" se lanzarán una serie de niveles iniciales en una versión primeriza del juego de forma gratuita, y posteriormente una versión final de pago que ofrecerán una experiencia completa. La versión final estará sujeta a actualizaciones que recibirá de forma gratuita.
@@ -224,7 +224,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 Una vez que se muestra la última página, la cámara se acerca a la última ilustración, que representa la pantalla durante el juego, y entra en la imagen, iniciando oficialmente el nivel.
 
-|![Imagen](/DrawingStyleRef.jpeg)|<a name="img7"></a>[Img 7](#ref7)|
+|![Imagen](/Documentacion/DrawingStyleRef.jpeg)|<a name="img7"></a>[Img 7](#ref7)|
 | :- | :- |
 # <a name="_toc828811925"></a><a name="_toc7628429"></a><a name="_toc177702803"></a>**3. Mecánicas del Juego**
 En los siguientes apartados se describen diversas las mecánicas que existen en el proyecto. Incluyendo las mecánicas del Jugador, de los diversos enemigos, de las armas y de los niveles.
@@ -233,42 +233,42 @@ Los movimientos principales del jugador son los siguientes:
 
 - **Desplazamiento:** a través de teclado, y palanca de control en móvil. El jugador se mueve en un entorno 3D en todas las direcciones posibles. En ordenador las teclas serán W A S D, y en móvil/dispositivo portátil será con un Joystick Izquierdo.
 
-|![](/MovementeBoc.jpeg)|
+|![] (/Documentacion/MovementeBoc.jpeg)|
 | :- |
 |Boceto Conejo Caminando|
 
 - **Correr:** pulsando/manteniendo una tecla hará que el movimiento del jugador se acelere. Esta aceleración será temporal y necesitará recargarse (estamina). 
   Utilizará el Shift en ordenador y en dispositivos móviles será una tecla a la derecha (*sujeto a cambios*)
 
-|![](/MovementBoc2.jpeg)|
+|![](/Documentacion/MovementBoc2.jpeg)|
 | :- |
 |Boceto Conejo corriendo|
 
 - **Saltar:** el jugador podrá realizar saltos para llegar a lugares elevados. 
   En PC se usará la Barra Espaciadora y en dispositivos móviles será otro botón al lado derecho de la pantalla.
 
-|![](/MovementBoc3.jpeg)|
+|![](/Documentacion/MovementBoc3.jpeg)|
 | :- |
 |Boceto conejo saltando|
 
 - **Interactuar con objetos:** a través de una tecla, el jugador puede coger o activar objetos. 
   En el PC será Clic Derecho del ratón. En dispositivos móviles será un botón que solo aparece cuando se puede interactuar con el objeto.
 
-|![](/MovementBoc4.jpeg)|
+|![](/Documentacion/MovementBoc4.jpeg)|
 | :- |
 |Boceto interacción con elementos del escenario|
 
 - **Apuntar/disparar:** En dispositivos móviles, esta mecánica está implementada mediante un joystick, el cual se encuentra a la derecha de la pantalla, con el que, al mantenerlo pulsado, permitirá atacar al objetivo, a la vez que permite ligeramente el movimiento de la pantalla para apuntar al enemigo. En PC el giro de cámara se realiza con el Puntero del Ratón, y el ataque se realiza con el Botón Izquierdo del Ratón.
 
-|![](/MovementBoc5.jpeg)|
+|![](/Documentacion/MovementBoc5.jpeg)|
 | :- |
 |Boceto Conejo apuntando|
 
 La cámara en el juego será en primera persona, permitiendo ver las extremidades del personaje parcialmente, pues estará limitada a ciertos ángulos. 
 
-|![ref1](/ControlesEsquema.png)|<p>Controles del jugador con teclado y ratón</p><p><a name="img8"></a>[Img 8](#ref8)</p>|
+|![ref1](/Documentacion/ControlesEsquema.png)|<p>Controles del jugador con teclado y ratón</p><p><a name="img8"></a>[Img 8](#ref8)</p>|
 | :-: | :-: |
-|![](/ControlesEsquema2.png)|<p>Controles del jugador con móvil</p><p><a name="img9"></a>[Img 9](#ref9)</p>|
+|![](/Documentacion/ControlesEsquema2.png)|<p>Controles del jugador con móvil</p><p><a name="img9"></a>[Img 9](#ref9)</p>|
 
 ## <a name="_toc826857768"></a>**3.2. Mecánicas de Armas**
 - **Escapar y Esconderse:** 
@@ -290,7 +290,7 @@ La luz de la linterna empezará a parpadear a medida que vaya bajando la baterí
 Luz In Game
 
 Luz como se veria en la vida real
-![](/LinternaMec1.png)
+![](/Documentacion/LinternaMec1.png)
 
 - **Cubo de Plastilina:** 
 
@@ -355,7 +355,7 @@ Para atacar al niño ha de hallarse justo encima de este.
 Desaparece tras ser golpeado una vez por un cohete o acumular gran cantidad de daño con otras armas.
 # <a name="_toc1804154198"></a><a name="_toc1055988358"></a><a name="_toc1883111045"></a>**4. Estados del Juego**
 
-![](/EstadosDelJuegoRef.png)
+![](/Documentacion/EstadosDelJuegoRef.png)
 
 El juego se distribuye en los siguientes estados:
 
@@ -374,37 +374,37 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 # <a name="_toc1017628324"></a><a name="_toc1766648702"></a><a name="_toc333886849"></a>**5. Interfaz**
 **Controles dispositivos móviles:**
 
-![](/ControlesEsquema2.png)
+![](/Documentacion/ControlesEsquema2.png)
 [Img 8](#ref8)
 
 **Controles teclado:**
 
-![ref4](/ControlesEsquema.png)
+![ref4](/Documentacion/ControlesEsquema.png)
 [Img 9](#ref9)
 
 **Menú inicial (Concept básico, sujeto a cambios):**
 
-![](/InterfazTitulo.png)
+![](/Documentacion/InterfazTitulo.png)
 
 **Menú ajustes**
 
-![](/InterfazAjustes1.png)
+![](/Documentacion/InterfazAjustes1.png)
 
-![](/InterfazAjustes2.png)
+![](/Documentacion/InterfazAjustes2.png)
 
-![](/InterfazAjustes3.png)
+![](/Documentacion/InterfazAjustes3.png)
 
-![](/InterfazAjustes4.png)
+![](/Documentacion/InterfazAjustes4.png)
 
 **In game**
 
 |![](/InterfazInGame1.png)|<p>Pantalla general</p><p></p>|
 | :- | :-: |
-|![](/InterfazInGame2.png)|<p>Coger objetos</p><p></p>|
-|![](/InterfazInGame3.png)|<p>Sprint (solo aparece cuando se corre)</p><p></p>|
+|![](/Documentacion/InterfazInGame2.png)|<p>Coger objetos</p><p></p>|
+|![](/Documentacion/InterfazInGame3.png)|<p>Sprint (solo aparece cuando se corre)</p><p></p>|
 **Créditos**
 
-![](/InterfazCreditos.png)
+![](/Documentacion/InterfazCreditos.png)
 # <a name="_toc2047301626"></a><a name="_toc1617721293"></a><a name="_toc1599193190"></a>**6. Niveles** 
 Este juego se compone de varios Escenarios, y cada escenario consta de varios niveles.
 
@@ -412,7 +412,7 @@ El primer Escenario sería el nivel introductorio, el cual se desarrolla en la h
 En el escenario habrá repartidos elementos grandes por los que el jugador puede subirse y tener una mejor panorámica del escenario. También habrá objetos medianos y pequeños que entorpecerán su camino y objetos medianos que servirán para esconderse de algunos enemigos. Los objetos interactivos (interruptores) aparecerán de manera aleatoria entre una serie de puntos estratégicos establecidos. Las armas se encuentran repartidas por el escenario de manera fija, es decir, siempre aparecen en el mismo sitio dependiendo de la disposición de los objetos del escenario. 
 Para que tenga variabilidad y no sea siempre el mismo escenario, habrá variaciones de este mismo, de este modo se aumenta la variabilidad del juego. 
 
-![](/Niveles1Mapa.jpeg)![](/Niveles1Mapa2.jpeg)![](Niveles1Mapa3.jpeg)
+![](/Documentacion/Niveles1Mapa.jpeg)![](/Niveles1Mapa2.jpeg)![](Niveles1Mapa3.jpeg)
 
 El siguiente nivel se desarrolla en el salón de la casa, siguiendo la misma mecánica de supervivencia anteriormente descrita. El nivel será un poco más grande que el anterior, implementando nuevos modelos que el jugador podrá usar para visionar el campo de visión, esconderse e interactuar.  Seguirá la misma mecánica de los Interruptores repartidos aleatoriamente entre una serie de puntos establecidos y las armas aparecerán siempre en el mismo sitio dependiendo de la disposición de los elementos del escenario.
 
@@ -435,7 +435,7 @@ Nivel final
 
 Escenario X+1/Stage X+1
 
-![](/EsquemaProgresoDelJuego.png)
+![](/Documentacion/EsquemaProgresoDelJuego.png)
 # <a name="_toc227637051"></a><a name="_toc81940192"></a><a name="_toc977677325"></a>**8. Personajes**
 ## <a name="_toc756159978"></a>**8.1. Mr. Bunny**
 El jugador encarnará a un peluche con forma de conejo, el cual tendrá la misión de proteger a su dueño de los diversos monstruos que lo amenazan.
@@ -449,7 +449,7 @@ Los enemigos son una representación de los miedos de un niño, como pueden ser 
 
 Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño. El aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.  
 
-![](/Enemigo1.png)
+![](/Documentacion/Enemigo1.png)
 
 \*Añadir descripciones, objetivos, mostrar imagen, etc.
 
