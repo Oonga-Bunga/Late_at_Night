@@ -1,4 +1,4 @@
-﻿|![](Aspose.Words.50e33a12-fb26-42cc-8a91-5a584cf8cc6d.001.png)|<p>Grado en diseño y desarrollo de Videojuegos</p><p>Asignatura X</p>|![](Aspose.Words.50e33a12-fb26-42cc-8a91-5a584cf8cc6d.002.png)|
+﻿|![](URJCLogo2.png)|<p>Grado en diseño y desarrollo de Videojuegos</p><p>Asignatura X</p>|![](URJCLogo2.png)|
 | :- | :- | -: |
 
 ![](Aspose.Words.50e33a12-fb26-42cc-8a91-5a584cf8cc6d.003.png)
