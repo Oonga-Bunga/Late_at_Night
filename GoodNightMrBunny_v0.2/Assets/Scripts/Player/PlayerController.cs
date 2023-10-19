@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private AHoldableObject _currentHeldObject; // Object que lleva encima en cada momento
 
     private Rigidbody _rb; // Referencia al rigidbody del jugador
-    private Transform _cameraTransform; // Referencia a la cámara principal
+    private Transform _cameraHolder; // Referencia a la cámara principal
 
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
 
-        _cameraTransform = Camera.main.transform;
+        _cameraHolder = Camera.main.transform.parent;
 
         _maxCurrentSpeed = _maxWalkingSpeed;
 
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
-        move = _cameraTransform.forward * move.z + _cameraTransform.right * move.x;
+        move = _cameraHolder.forward * move.z + _cameraHolder.right * move.x;
         move.y = 0f;
         move = move.normalized;
 
@@ -457,11 +457,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
         this._mount = mount;
-        _cameraTransform.gameObject.GetComponent<CameraController>().DisableLook(); //Impide mover la cámara con el ratón
         transform.parent = mountingPoint.transform;
+        _cameraHolder.GetComponent<CameraController>().PlayerMounting();
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        _cameraTransform.localRotation = Quaternion.identity; //Quiero que la cámara siempre mire al frente
+
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 
@@ -472,10 +472,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void DisMount()
     {
         this._mount = null;
-        transform.rotation = Quaternion.identity;
-        _cameraTransform.rotation = Quaternion.Euler(0f, _cameraTransform.rotation.eulerAngles.y, _cameraTransform.rotation.eulerAngles.z);
         transform.parent = null;
-        _cameraTransform.gameObject.GetComponent<CameraController>().EnableLook();
+        transform.rotation = Quaternion.identity;
+        _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
+
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         JumpAction();
     }
@@ -513,7 +513,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
         else if (hitColliders.Length == 1)
         {
-            AInteractable interactable = FindParentWithComponent<AInteractable>(hitColliders[0].gameObject.transform);
+            AInteractable interactable = hitColliders[0].gameObject.GetComponent<InteractableOutlineHolder>().Interactable;
 
             if (interactable != null)
             {
@@ -521,7 +521,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             }
         }
 
-        // Si el objeto anterior no es nulo se desactiva su canvas y outline, y si es distinto al nuevo se le informa
+        // Si el objeto anterior no es nulo se desactiva su canvas y _outline, y si es distinto al nuevo se le informa
         // que ya no está en el rango del jugador
 
         if (_closestInteractable != null && _closestInteractable != bestInteractable)
@@ -530,7 +530,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             _closestInteractable.PlayerExitedRange();
         }
 
-        // Si el nuevo objeto no es nulo se activa su canvas y outline
+        // Si el nuevo objeto no es nulo se activa su canvas y _outline
 
         if (bestInteractable != null && bestInteractable != _closestInteractable)
         {
@@ -559,8 +559,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         AInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
 
-        Vector3 playerPosition = _cameraTransform.position;
-        Vector3 lineOfSightDirection = _cameraTransform.forward;
+        Vector3 playerPosition = _cameraHolder.position;
+        Vector3 lineOfSightDirection = _cameraHolder.forward;
 
         foreach (Collider obj in hitColliders)
         {
@@ -570,7 +570,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
             if (distanceToLineOfSight < closestDistance)
             {
-                AInteractable interactable = FindParentWithComponent<AInteractable>(obj.gameObject.transform);
+                AInteractable interactable = obj.gameObject.GetComponent<InteractableOutlineHolder>().Interactable;
 
                 // Si el objeto está más cerca de la línea de visión que el objeto más cercano actual
                 if (interactable != null)
@@ -598,34 +598,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         t = Mathf.Clamp01(t);
         Vector3 closestPoint = lineStart + t * lineDirection;
         return closestPoint;
-    }
-
-    /// <summary>
-    /// Dado un objeto, devuelve el componente del primer padre de la jerarquía que posea dicho componente
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="childTransform"></param>
-    /// <returns></returns>
-    public T FindParentWithComponent<T>(Transform childTransform) where T : Component
-    {
-        Transform parent = childTransform.parent;
-
-        // Mientras haya un padre
-        while (parent != null)
-        {
-            // Si el padre tiene el componente que estamos buscando, devuélvelo
-            T component = parent.GetComponent<T>();
-            if (component != null)
-            {
-                return component;
-            }
-
-            // Si no tiene el componente, sigue buscando en el padre del padre
-            parent = parent.parent;
-        }
-
-        // Si no se encontró el componente en ningún padre, devuelve null
-        return null;
     }
 
     #endregion

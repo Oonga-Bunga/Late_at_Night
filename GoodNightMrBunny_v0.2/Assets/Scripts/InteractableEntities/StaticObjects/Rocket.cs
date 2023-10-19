@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] private float blastRadius = 5f;
-    [SerializeField] private float speed = 5f; // Velocidad de movimiento hacia arriba
-    [SerializeField] private GameObject explosionPrefab; // Prefab del efecto de explosión
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float _blastRadius = 5f;
+    [SerializeField] private float _speed = 5f; // Velocidad de movimiento hacia arriba
+    [SerializeField] private GameObject _explosionPrefab = null; // Prefab del efecto de explosión
+    [SerializeField] private LayerMask _groundLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +20,12 @@ public class Rocket : MonoBehaviour
     void Update()
     {
         // Mueve el objeto hacia arriba a una velocidad constante
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector3.up * _speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((groundLayer.value & (1 << collision.gameObject.layer)) > 0) 
+        if ((_groundLayer.value & (1 << collision.gameObject.layer)) > 0) 
         {
             Explode();
         }
@@ -34,7 +34,7 @@ public class Rocket : MonoBehaviour
     void Explode()
     {
         // Crea el efecto de explosión en la posición del objeto
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
 
         // Destruye el objeto actual
         Destroy(gameObject);

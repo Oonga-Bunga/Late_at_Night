@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Switch interruptor in FindObjectsOfType<Switch>())
         {
-            interruptor.TurnedOnOrOff += SwitchChangedState;
+            interruptor.OnTurnedOnOrOff += SwitchChangedState;
             totalSwitches++;
         }
 

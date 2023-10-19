@@ -6,36 +6,43 @@ public class FlashlightRechargeStation : AInteractable
 {
     [Header("Flashlight Recharge Station Settings")]
 
-    [SerializeField][Range(0.0f, 1.0f)] private float rechargeRate;
-    private bool hasFlashlight = true;
-    private float currentCharge = 0f;
-    private float rechargeAmount;
+    [SerializeField, Range(0.0f, 1.0f)] private float _rechargeRate; // Velocidad de recarga
+    private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
+    private float _currentCharge = 0f; // Carga actual de la linterna que posee
+    private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
 
     private void Start()
     {
-        rechargeAmount = Flashlight.maxCharge * rechargeRate;
+        _rechargeAmount = Flashlight.maxCharge * _rechargeRate;
     }
 
+    /// <summary>
+    /// Si tiene una linterna que no está cargada del todo le va sumando carga con el tiempo
+    /// </summary>
     private void Update()
     {
-        if (hasFlashlight && currentCharge != Flashlight.maxCharge)
+        if (_hasFlashlight && _currentCharge != Flashlight.maxCharge)
         {
-            currentCharge = Mathf.Min(currentCharge + rechargeAmount * Time.deltaTime, Flashlight.maxCharge);
+            _currentCharge = Mathf.Min(_currentCharge + _rechargeAmount * Time.deltaTime, Flashlight.maxCharge);
         }
     }
 
+    /// <summary>
+    /// Si la estación de recarga tiene una linterna se la da al jugador, que dropea lo que tuviese equipado, 
+    /// en caso contrario si el jugador tiene una linterna esta pasa a estar en la estación de recarga
+    /// </summary>
     protected override void InteractedPressAction()
     {
-        if (hasFlashlight)
+        if (_hasFlashlight)
         {
-            player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, true, currentCharge);
-            hasFlashlight = false;
+            _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, true, _currentCharge);
+            _hasFlashlight = false;
         }
-        else if (player.CurrentHeldObject.holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
+        else if (_player.CurrentHeldObject.holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
         {
-            currentCharge = ((Flashlight)player.CurrentHeldObject).CurrentCharge;
-            player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
-            hasFlashlight = true;
+            _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
+            _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
+            _hasFlashlight = true;
         }
     }
 }

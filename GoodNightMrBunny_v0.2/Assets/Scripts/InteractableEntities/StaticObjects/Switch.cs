@@ -6,8 +6,8 @@ using static IInteractable;
 
 public class Switch : AInteractable
 {
-    private bool isOn = false; // Si el interruptor está o no encendido
-    public EventHandler<bool> TurnedOnOrOff; // Evento que notifica
+    private bool _isOn = false; // Si el interruptor está o no encendido
+    public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
 
     private void Start()
     {
@@ -21,15 +21,15 @@ public class Switch : AInteractable
 
     private void TurnOn()
     {
-        isOn = true;
-        TurnedOnOrOff.Invoke(this, isOn);
-        canBeInteracted = false;
+        _isOn = true;
+        OnTurnedOnOrOff.Invoke(this, _isOn);
+        _canBeInteracted = false;
     }
 
     private void TurnOff()
     {
-        isOn = false;
-        TurnedOnOrOff.Invoke(this, isOn);
-        canBeInteracted = true;
+        _isOn = false;
+        OnTurnedOnOrOff.Invoke(this, _isOn);
+        _canBeInteracted = true;
     }
 }

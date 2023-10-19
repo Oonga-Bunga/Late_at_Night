@@ -11,12 +11,12 @@ public class ClayBinPickup : AInteractable
 
     protected override void InteractedPressAction()
     {
-        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true, ClayBalls.maxBallNumber);
+        _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true, ClayBalls.maxBallNumber);
     }
 
     protected override void InteractedHoldAction()
     {
-        player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBin, true);
+        _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBin, true);
         Destroy(gameObject);
     }
 }

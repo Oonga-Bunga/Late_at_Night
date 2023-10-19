@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PressureButton : MonoBehaviour
 {
-    [SerializeField] private RocketPlatform rocketPlatform;
+    [SerializeField] private RocketPlatform _rocketPlatform = null;
 
     void OnCollisionEnter(Collision collision)
     {
         // Comprueba si la colisión es con el jugador
         if (collision.gameObject.CompareTag("Player"))
         {
-            rocketPlatform.LaunchRocket();
+            _rocketPlatform.LaunchRocket();
         }
     }
 }

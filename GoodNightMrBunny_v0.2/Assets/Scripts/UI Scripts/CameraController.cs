@@ -109,18 +109,20 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Activa el movimiento de la cámara
+    /// Impide que el jugador pueda mover la cámara y resetea la posición de esta
     /// </summary>
-    public void EnableLook()
+    public void PlayerMounting()
     {
-        _isLookEnabled = true;
+        _isLookEnabled = false;
+        transform.localRotation = Quaternion.identity;
     }
 
     /// <summary>
-    /// Desactiva el movimiento de la cámara
+    /// Permite al jugador volver a mover la cámara, y la rota para que esté mirando al frente
     /// </summary>
-    public void DisableLook()
+    public void PlayerDismounting()
     {
-        _isLookEnabled = false;
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+        _isLookEnabled = true;
     }
 }

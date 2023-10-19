@@ -114,7 +114,7 @@ public class Flashlight : AWeapon
     }
 
     /// <summary>
-    /// Método para droppear la linterna, le atribuye el currentCharge a la instancia que suelta
+    /// Método para droppear la linterna, le atribuye el _currentCharge a la instancia que suelta
     /// </summary>
     public override void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
     {

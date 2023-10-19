@@ -31,7 +31,6 @@ public class HeadBob : MonoBehaviour
     private void LateUpdate()
     {
         _cameraHolder.position = _defaultCameraPos.position;
-        _cameraHolder.position = _defaultCameraPos.localPosition + _cameraHolder.position;
 
         if (!_enabled) return;
 
@@ -72,7 +71,7 @@ public class HeadBob : MonoBehaviour
     {
         if (_camera.localPosition == _startPos) return;
 
-        _camera.localPosition = Vector3.Lerp(_camera.localPosition, _startPos, 1 * Time.deltaTime);
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, Vector3.zero, 1 * Time.deltaTime);
     }
 
     private Vector3 FocusTarget()
