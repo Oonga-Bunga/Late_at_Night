@@ -6,10 +6,11 @@ public class ClayBalls : AWeapon
 {
     #region Attributes
     
-    private float currentBallNumber;
+    private int currentBallNumber;
     static public int maxBallNumber = 6;
-    public GameObject clayBallPrefab;
-    public float shotForce = 20f;
+    [SerializeField]private UpdateUIClayAmmo uiClayAmmo;
+    [SerializeField]private GameObject clayBallPrefab;
+    [SerializeField]private float shotForce = 20f;
     
     #endregion
 
@@ -22,7 +23,10 @@ public class ClayBalls : AWeapon
 
     public override void Initialize(float ballNumber)
     {
-        currentBallNumber = Mathf.Min(ballNumber, maxBallNumber);
+        uiClayAmmo.gameObject.SetActive(true);
+        currentBallNumber = Mathf.Min((int)ballNumber, maxBallNumber);
+        uiClayAmmo.setMaxBallNumber(maxBallNumber);
+        uiClayAmmo.UpdateClayText(currentBallNumber);
     }
 
     /// <summary>
@@ -52,13 +56,20 @@ public class ClayBalls : AWeapon
 
         if (rb != null)
         {
-// Calcula la direccion de lanzamiento.
+            // Calcula la direccion de lanzamiento.
             Vector3 direccionDeLanzamiento = transform.forward;
 
             // Aplica una fuerza al Rigidbody para lanzar la esfera.
             rb.AddForce(direccionDeLanzamiento * shotForce, ForceMode.Impulse);
             
             currentBallNumber -= 1;
+            if (currentBallNumber == 0)
+            {
+                uiClayAmmo.gameObject.SetActive(false);
+                this.gameObject.SetActive(false);
+                return;
+            }
+            uiClayAmmo.UpdateClayText(currentBallNumber);
         }
     }
     
