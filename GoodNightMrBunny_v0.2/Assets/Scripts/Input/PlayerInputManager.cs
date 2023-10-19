@@ -7,48 +7,48 @@ public class PlayerInputManager : MonoBehaviour
 {
     #region InputManager, PlayerController and Awake
 
-    private static PlayerInputManager instance;
-    public static PlayerInputManager Instance => instance;
+    private static PlayerInputManager _instance;
+    public static PlayerInputManager Instance => _instance;
 
     [Header("Player")]
 
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerController _player;
     public PlayerController Player
     {
-        get => player;
+        get => _player;
         set
         {
-            player = value;
-            SetPlayer(player);
+            _player = value;
+            SetPlayer(_player);
         }
     }
 
     [Header("Input Actions")]
 
-    [SerializeField] private InputActionReference Move;
-    [SerializeField] private InputActionReference Run;
-    [SerializeField] private InputActionReference Jump;
-    [SerializeField] private InputActionReference Use;
-    [SerializeField] private InputActionReference Drop;
-    [SerializeField] private InputActionReference Interact;
-    private Dictionary<string, ICommand> commands;
+    [SerializeField] private InputActionReference _move;
+    [SerializeField] private InputActionReference _run;
+    [SerializeField] private InputActionReference _jump;
+    [SerializeField] private InputActionReference _use;
+    [SerializeField] private InputActionReference _drop;
+    [SerializeField] private InputActionReference _interact;
+    private Dictionary<string, ICommand> _commands;
 
     /// <summary>
     /// No se esplicar esto sinceramente, pero algo hace
     /// </summary>
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
-        if (player)
+        if (_player)
         {
-            SetPlayer(player);
+            SetPlayer(_player);
         }
     }
 
@@ -61,8 +61,8 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Vector2 value = Move.action.ReadValue<Vector2>();
-        commands["move"].Execute(value);
+        Vector2 value = _move.action.ReadValue<Vector2>();
+        _commands["move"].Execute(value);
     }
 
     /// <summary>
@@ -70,14 +70,14 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Use.action.ReadValue<float>() == 1f)
+        if (_use.action.ReadValue<float>() == 1f)
         {
-            commands["use"].Execute(IPlayerReceiver.InputType.Hold);
+            _commands["use"].Execute(IPlayerReceiver.InputType.Hold);
         }
 
-        if (Run.action.ReadValue<float>() == 1f)
+        if (_run.action.ReadValue<float>() == 1f)
         {
-            commands["run"].Execute(IPlayerReceiver.InputType.Hold);
+            _commands["run"].Execute(IPlayerReceiver.InputType.Hold);
         }
     }
 
@@ -85,13 +85,13 @@ public class PlayerInputManager : MonoBehaviour
     /// Lo que hacemos aquí es llenar el diccionario con parejas acción-comando, después para cada input action
     /// le asignamos la acción correspondiente a eventos de presionar y/o soltar el botón correspondiente a la
     /// acción 
-    /// En el caso de Move no hace falta porque en el FixedUpdate se usa su valor para llamar al Execute
+    /// En el caso de _move no hace falta porque en el FixedUpdate se usa su valor para llamar al Execute
     /// de "move"
     /// </summary>
     /// <param name="player">Referencia al script PlayerController del jugador</param>
     public void SetPlayer(PlayerController player)
     {
-        commands = new Dictionary<string, ICommand> {
+        _commands = new Dictionary<string, ICommand> {
                 { "move", new MoveCommand(player) },
                 { "run", new RunCommand(player) },
                 { "jump", new JumpCommand(player) },
@@ -100,53 +100,53 @@ public class PlayerInputManager : MonoBehaviour
                 { "drop", new DropObjectCommand(player) }
             };
 
-        Move.action.Enable();
+        _move.action.Enable();
 
-        Run.action.started += context =>
+        _run.action.started += context =>
         {
-            commands["run"].Execute(IPlayerReceiver.InputType.Down);
+            _commands["run"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Run.action.canceled += context =>
+        _run.action.canceled += context =>
         {
-            commands["run"].Execute(IPlayerReceiver.InputType.Up);
+            _commands["run"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Run.action.Enable();
+        _run.action.Enable();
 
-        Jump.action.started += context =>
+        _jump.action.started += context =>
         {
-            commands["jump"].Execute(IPlayerReceiver.InputType.Down);
+            _commands["jump"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Jump.action.canceled += context =>
+        _jump.action.canceled += context =>
         {
-            commands["jump"].Execute(IPlayerReceiver.InputType.Up);
+            _commands["jump"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Jump.action.Enable();
+        _jump.action.Enable();
 
-        Use.action.started += context =>
+        _use.action.started += context =>
         {
-            commands["use"].Execute(IPlayerReceiver.InputType.Down);
+            _commands["use"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Use.action.canceled += context =>
+        _use.action.canceled += context =>
         {
-            commands["use"].Execute(IPlayerReceiver.InputType.Up);
+            _commands["use"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Use.action.Enable();
+        _use.action.Enable();
 
-        Drop.action.started += context =>
+        _drop.action.started += context =>
         {
-            commands["drop"].Execute();
+            _commands["drop"].Execute();
         };
-        Drop.action.Enable();
+        _drop.action.Enable();
 
-        Interact.action.started += context =>
+        _interact.action.started += context =>
         {
-            commands["interact"].Execute(IPlayerReceiver.InputType.Down);
+            _commands["interact"].Execute(IPlayerReceiver.InputType.Down);
         };
-        Interact.action.canceled += context =>
+        _interact.action.canceled += context =>
         {
-            commands["interact"].Execute(IPlayerReceiver.InputType.Up);
+            _commands["interact"].Execute(IPlayerReceiver.InputType.Up);
         };
-        Interact.action.Enable();
+        _interact.action.Enable();
     }
 
     #endregion

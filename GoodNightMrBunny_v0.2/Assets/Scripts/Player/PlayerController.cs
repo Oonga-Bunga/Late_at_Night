@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private float currentStamina; // Energia del jugador que consume para correr
     [SerializeField] private float staminaRecoveryRate; // Ratio de recuperación de energia
     [SerializeField] private float staminaComsumptionRate; // Ratio de recuperación de energia
-    [SerializeField][Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
+    [SerializeField, Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
     private bool isPressingRunButton; // Si el jugador está corriendo o no
     private bool isRunning; // Si el jugador está corriendo o no
     public EventHandler<float> StaminaChanged; //Se invoca si cmabia el valor de la energía del jugador
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [SerializeField] private float acceleration; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
     [SerializeField] private float decceleration; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
-    [SerializeField][Range(0.0f, 1.0f)] private float airAccelerationModifier; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
+    [SerializeField, Range(0.0f, 1.0f)] private float airAccelerationModifier; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
     [SerializeField] private float velPower; // Ni idea de para que sirve, pero aqu� est�, no quitar
 
     [Header("Friction")]
@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     #region Jump
 
-    [Header("Jump")]
+    [Header("_jump")]
 
     [SerializeField] private float jumpForce; // Fuerza de salto
-    [SerializeField][Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
+    [SerializeField, Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
     private bool isPlayerGrounded; // Si el jugador está en el suelo o no
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Checks")]
 
-    [SerializeField] private CapsuleCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo IsPlayerGrounded
+    [SerializeField] private CapsuleCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo CheckPlayerGrounded
     [SerializeField] private float maxGroundCheckDistance; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
     [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
@@ -122,6 +122,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         get { return maxStamina; }
     }
 
+    public bool IsPlayerGrounded
+    {
+        get { return isPlayerGrounded; }
+    }
+
     #endregion
 
     #region Initialization
@@ -164,7 +169,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         // Comprobar si el jugador está en el suelo
 
-        isPlayerGrounded = IsPlayerGrounded();
+        isPlayerGrounded = CheckPlayerGrounded();
 
         // Actualizar los temporizadores
 
@@ -477,7 +482,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// Devuelve true si el jugador est� tocando el suelo, usando un BoxCast
     /// </summary>
     /// <returns>true o false</returns>
-    private bool IsPlayerGrounded()
+    private bool CheckPlayerGrounded()
     {
         return Physics.CapsuleCast(groundCheck.transform.position, groundCheck.transform.position, groundCheck.radius, Vector3.down, maxGroundCheckDistance, groundLayer);
     }
@@ -537,9 +542,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         return bestInteractable;
     }
-
-    public Transform player; // El transform del jugador
-    public List<GameObject> objectsToCheck; // Lista de GameObjects a comprobar
 
     AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
     {

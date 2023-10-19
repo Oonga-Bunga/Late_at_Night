@@ -304,6 +304,55 @@ MonoBehaviour:
   droppedObject: {fileID: 0}
   holdableObjectType: 0
   baseDamage: 0
+--- !u!1 &2179388969060524579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275943555333814918}
+  - component: {fileID: 8444721616776857248}
+  m_Layer: 0
+  m_Name: CamHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &275943555333814918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179388969060524579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1457369042830505180}
+  m_Father: {fileID: 7168037717824258609}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8444721616776857248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179388969060524579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9e6488bf9106d44a432b04eb3fdefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivityX: 2
+  sensitivityY: 1
+  yRotationLimit: 90
+  mouseDeltaAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
 --- !u!1 &2212645206444721369
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +660,7 @@ GameObject:
   - component: {fileID: 7168037717824258609}
   - component: {fileID: 3442203424905464880}
   - component: {fileID: 1982695389781785635}
+  - component: {fileID: 32374981119890449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -634,8 +684,8 @@ Transform:
   - {fileID: 793222078781225398}
   - {fileID: 6489383685619584872}
   - {fileID: 7017701221403941248}
-  - {fileID: 1457369042830505180}
   - {fileID: 7317247853539603855}
+  - {fileID: 275943555333814918}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -712,6 +762,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &32374981119890449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696606436722763393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c36b1109fd6eb4fa1addea0d6ca9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabled: 1
+  amplitude: 0.01
+  frequency: 15
+  camera: {fileID: 1457369042830505180}
+  cameraHolder: {fileID: 275943555333814918}
 --- !u!1 &5846613368354875601
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +845,6 @@ GameObject:
   - component: {fileID: 1457369042830505180}
   - component: {fileID: 5017539275617650899}
   - component: {fileID: 4704261025719324251}
-  - component: {fileID: 4816402814095626254}
   - component: {fileID: 5418330541399530496}
   m_Layer: 0
   m_Name: Main Camera
@@ -800,7 +866,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8015043867982349013}
-  m_Father: {fileID: 7168037717824258609}
+  m_Father: {fileID: 275943555333814918}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5017539275617650899
@@ -862,22 +928,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6771734668452290186}
   m_Enabled: 1
---- !u!114 &4816402814095626254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771734668452290186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c9e6488bf9106d44a432b04eb3fdefd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivityX: 2
-  sensitivityY: 1
-  yRotationLimit: 90
-  mouseDeltaAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
 --- !u!114 &5418330541399530496
 MonoBehaviour:
   m_ObjectHideFlags: 0
