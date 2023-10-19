@@ -10,14 +10,14 @@ public class Flashlight : AWeapon
 {
     #region Atributtes
 
-    public float currentCharge;
     static public float maxCharge = 100f;
-    public float flashlightDamage = 5f;
+    [SerializeField]private float flashlightDamage = 5f;
     //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
-    public float dischargeMultiplier = 5f; 
-    public float rangeDamage = 40f;
-    public Light spotlight;
-    public bool lightOn = false;
+    [SerializeField]private float dischargeMultiplier = 5f; 
+    [SerializeField]private float rangeDamage = 40f;
+    [SerializeField]private Light spotlight;
+    [SerializeField]private bool lightOn = false;
+    [SerializeField]private float currentCharge;
 
     #endregion
     
@@ -30,13 +30,13 @@ public class Flashlight : AWeapon
     {
         holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
         currentCharge = maxCharge;
-        lightOn = false;
-        spotlight.enabled = false;
         flashlightDamage = baseDamage;
     }
 
     public override void Initialize(float charge)
     {
+        lightOn = false;
+        spotlight.enabled = false;
         currentCharge = charge;
     }
 
