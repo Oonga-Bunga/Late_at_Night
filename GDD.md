@@ -159,19 +159,15 @@ El estilo artístico es un estilo simplista estilizado a mano, con un aire alegr
 
 *Referencias artísticas*:
 
-|![It Takes Two
-](/Documentacion/ItTakesTwoRef1.jpeg)![It Takes Two for Nintendo Switch - Nintendo Official Site](/Documentacion/ItTakesTwoRef1.jpeg)|||
+|![It Takes Two](/Documentacion/ItTakesTwoRef1.jpeg) ![It Takes Two for Nintendo Switch - Nintendo Official Site](/Documentacion/ItTakesTwoRef2.jpeg)|||
 | :-: | :- | :- |
 |<a name="img1"></a>[Ref 1](#ref1)|||
-|![imagen diseñada por Christoffer Sjöström
-https://www.artstation.com/artwork/oYOJq](/Documentacion/ZeldaRef.jpeg)<a name="img2"></a>[Ref 2](#ref2)|![Imagen diseñada por Richie Bassett.
-https://www.artstation.com/artwork/6azkyw](/Documentacion/SceneRef.jpeg)<a name="img3"></a>[Ref 3](#ref3)|<p>![imagen creada por Hakan Aytac
-https://www.artstation.com/artwork/5XdE1w](/Documentacion/SceneRef2.jpeg)</p><p><a name="img4"></a>[Ref 4](#ref4)</p>|
+|![imagen diseñada por Christoffer Sjöströmhttps://www.artstation.com/artwork/oYOJq](/Documentacion/ZeldaRef.jpeg)<a name="img2"></a>[Ref 2](#ref2)|![Imagen diseñada por Richie Bassett.https://www.artstation.com/artwork/6azkyw](/Documentacion/SceneRef.jpeg)<a name="img3"></a>[Ref 3](#ref3)|<p>![imagen creada por Hakan Aytachttps://www.artstation.com/artwork/5XdE1w](/Documentacion/SceneRef2.jpeg)</p><p><a name="img4"></a>[Ref 4](#ref4)</p>|
 
 *Referencias del ambiente*:
 
 
-|![Five Nights at Freddy´s': Tráiler español de la película - Aullidos.com](/Documentacion/FNAFRef.jpeg)<a name="img5"></a>[Ref 5](#ref5)|![/Documentacion/SONG OF HORROR COMPLETE EDITION en Steam](/SonOfHorrorRef.jpeg)<a name="img6"></a>[Ref 6](#ref6)|
+|![Five Nights at Freddy´s': Tráiler español de la película - Aullidos.com](/Documentacion/FNAFRef.jpeg)<a name="img5"></a>[Ref 5](#ref5)|![SONG OF HORROR COMPLETE EDITION en Steam](/Documentacion/SonOfHorrorRef.jpeg)<a name="img6"></a>[Ref 6](#ref6)|
 | :-: | :-: |
 ## <a name="_toc1175683772"></a><a name="_toc1160216879"></a><a name="_toc2012679311"></a>**1.8. Alcance**
 En cuanto al alcance de nuestro proyecto, "Good Night Mr. Bunny" se lanzarán una serie de niveles iniciales en una versión primeriza del juego de forma gratuita, y posteriormente una versión final de pago que ofrecerán una experiencia completa. La versión final estará sujeta a actualizaciones que recibirá de forma gratuita.
@@ -233,7 +229,7 @@ Los movimientos principales del jugador son los siguientes:
 
 - **Desplazamiento:** a través de teclado, y palanca de control en móvil. El jugador se mueve en un entorno 3D en todas las direcciones posibles. En ordenador las teclas serán W A S D, y en móvil/dispositivo portátil será con un Joystick Izquierdo.
 
-|![] (/Documentacion/MovementeBoc.jpeg)|
+|![](/Documentacion/MovementeBoc.jpeg)|
 | :- |
 |Boceto Conejo Caminando|
 
@@ -402,6 +398,7 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 | :- | :-: |
 |![](/Documentacion/InterfazInGame2.png)|<p>Coger objetos</p><p></p>|
 |![](/Documentacion/InterfazInGame3.png)|<p>Sprint (solo aparece cuando se corre)</p><p></p>|
+
 **Créditos**
 
 ![](/Documentacion/InterfazCreditos.png)
@@ -412,7 +409,7 @@ El primer Escenario sería el nivel introductorio, el cual se desarrolla en la h
 En el escenario habrá repartidos elementos grandes por los que el jugador puede subirse y tener una mejor panorámica del escenario. También habrá objetos medianos y pequeños que entorpecerán su camino y objetos medianos que servirán para esconderse de algunos enemigos. Los objetos interactivos (interruptores) aparecerán de manera aleatoria entre una serie de puntos estratégicos establecidos. Las armas se encuentran repartidas por el escenario de manera fija, es decir, siempre aparecen en el mismo sitio dependiendo de la disposición de los objetos del escenario. 
 Para que tenga variabilidad y no sea siempre el mismo escenario, habrá variaciones de este mismo, de este modo se aumenta la variabilidad del juego. 
 
-![](/Documentacion/Niveles1Mapa.jpeg)![](/Niveles1Mapa2.jpeg)![](Niveles1Mapa3.jpeg)
+![](/Documentacion/Niveles1Mapa.jpeg)![](/Documentacion/Niveles1Mapa2.jpeg)![](/Documentacion/Niveles1Mapa3.jpeg)
 
 El siguiente nivel se desarrolla en el salón de la casa, siguiendo la misma mecánica de supervivencia anteriormente descrita. El nivel será un poco más grande que el anterior, implementando nuevos modelos que el jugador podrá usar para visionar el campo de visión, esconderse e interactuar.  Seguirá la misma mecánica de los Interruptores repartidos aleatoriamente entre una serie de puntos establecidos y las armas aparecerán siempre en el mismo sitio dependiendo de la disposición de los elementos del escenario.
 
@@ -425,15 +422,6 @@ El siguiente escenario funcionará de una manera similar, teniendo que superar v
 
 Para aumentar la dificultad de los niveles de manera progresiva, se actualizará la cantidad de enemigos que pueden aparecer en el escenario, aumentando en cada nivel. En el cambio de escenarios, al ser este más grande, el jugador tendrá que cubrir más terreno y gestionar mejor el uso de las armas y aprender a moverse por los nuevos escenarios, lo que suma un plus de dificultad.
 
-Escenario X/Stage X
-
-Nivel 1
-
-Nivel X
-
-Nivel final
-
-Escenario X+1/Stage X+1
 
 ![](/Documentacion/EsquemaProgresoDelJuego.png)
 # <a name="_toc227637051"></a><a name="_toc81940192"></a><a name="_toc977677325"></a>**8. Personajes**
