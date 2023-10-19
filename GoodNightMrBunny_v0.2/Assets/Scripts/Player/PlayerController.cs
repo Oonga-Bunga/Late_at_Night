@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using static UnityEngine.Rendering.DebugUI;
+using System.Drawing;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
@@ -159,6 +160,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void Update()
     {
+        if (closestInteractable != null)
+        {
+            Debug.Log(closestInteractable.gameObject.name);
+        }
+
         if (pauseManager.isPaused) return;
 
         // Comprobar si el jugador está en el suelo
@@ -488,42 +494,39 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private AInteractable GetClosestInteractable()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionDistance, interactableLayer);
-
         AInteractable bestInteractable = null;
-        float closestDistance = Mathf.Infinity;
 
-        foreach (Collider collider in hitColliders)
+        if (hitColliders.Length > 1)
         {
-            AInteractable interactable = FindParentWithComponent<AInteractable>(collider.gameObject.transform);
+            AInteractable interactable = GetClosestInteractableToLineOfSight(hitColliders);
 
             if (interactable != null)
             {
-                float distance = Vector3.Distance(interactable.transform.position, transform.position);
+                bestInteractable = interactable;
+            }
+        }
+        else if (hitColliders.Length == 1)
+        {
+            AInteractable interactable = FindParentWithComponent<AInteractable>(hitColliders[0].gameObject.transform);
 
-                if (distance < closestDistance)
-                {
-                    bestInteractable = interactable;
-                    closestDistance = distance;
-                }
+            if (interactable != null)
+            {
+                bestInteractable = interactable;
             }
         }
 
         // Si el objeto anterior no es nulo se desactiva su canvas y outline, y si es distinto al nuevo se le informa
         // que ya no está en el rango del jugador
 
-        if (closestInteractable != null)
+        if (closestInteractable != null && closestInteractable != bestInteractable)
         {
             closestInteractable.DisableOutlineAndCanvas();
-
-            if (closestInteractable != bestInteractable)
-            {
-                closestInteractable.PlayerExitedRange();
-            }
+            closestInteractable.PlayerExitedRange();
         }
 
         // Si el nuevo objeto no es nulo se activa su canvas y outline
 
-        if (bestInteractable != null)
+        if (bestInteractable != null && bestInteractable != closestInteractable)
         {
             if (bestInteractable.CanBeInteracted)
             {
@@ -538,6 +541,48 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
 
         return bestInteractable;
+    }
+
+    public Transform player; // El transform del jugador
+    public List<GameObject> objectsToCheck; // Lista de GameObjects a comprobar
+
+    AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
+    {
+        AInteractable closestInteractable = null;
+        float closestDistance = Mathf.Infinity;
+
+        Vector3 playerPosition = cameraTransform.position;
+        Vector3 lineOfSightDirection = cameraTransform.forward;
+
+        foreach (Collider obj in hitColliders)
+        {
+            Vector3 objectPosition = obj.gameObject.transform.position;
+            Vector3 toObject = GetClosestPointOnLine(playerPosition, playerPosition + (lineOfSightDirection * interactionDistance), objectPosition) - objectPosition;
+            float distanceToLineOfSight = toObject.magnitude;
+
+            if (distanceToLineOfSight < closestDistance)
+            {
+                AInteractable interactable = FindParentWithComponent<AInteractable>(obj.gameObject.transform);
+
+                // Si el objeto está más cerca de la línea de visión que el objeto más cercano actual
+                if (interactable != null)
+                {
+                    closestDistance = distanceToLineOfSight;
+                    closestInteractable = interactable;
+                }
+            }
+        }
+
+        return closestInteractable;
+    }
+
+    private Vector3 GetClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
+    {
+        Vector3 lineDirection = lineEnd - lineStart;
+        float t = Vector3.Dot(point - lineStart, lineDirection) / Vector3.Dot(lineDirection, lineDirection);
+        t = Mathf.Clamp01(t);
+        Vector3 closestPoint = lineStart + t * lineDirection;
+        return closestPoint;
     }
 
     /// <summary>
