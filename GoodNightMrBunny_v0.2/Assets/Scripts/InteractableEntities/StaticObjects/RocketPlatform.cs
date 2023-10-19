@@ -5,115 +5,135 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(LineRenderer))]
 public class RocketPlatform : AInteractable, IPlayerReceiver
 {
-    public enum RocketState
+    #region Attributes
+
+    public enum RocketPlatformState
     {
         Ready,
         Mounted,
-        RotatingBack,
-        MovingBack,
-        MovingFoward,
-        RotatingFoward
+        RotatingDown,
+        MovingDown,
+        MovingUp,
+        RotatingUp
     }
 
-    private float rocketCooldown;
-    private LineRenderer lineRenderer;
-    private bool hasFinishedRotating;
-    private bool hasFinishedMoving;
-    private RocketState state;
-    [SerializeField] private Animator armAnimator;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] GameObject rotationPointX;
-    [SerializeField] GameObject rotationPointY;
-    [SerializeField] GameObject rocket;
-    [SerializeField] GameObject mountingPoint;
-    [SerializeField] GameObject rocketPrefab;
-    [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
+    private RocketPlatformState state;
 
-    private float initialRotation;
+    [Header("Rocket Platform Settings")]
+
+    [SerializeField] private float cooldown;
+    [SerializeField] private float rotationSpeed;
+
+    [Header("Rocket Platform References")]
+
+    [SerializeField] private GameObject rotationPoint;
+    [SerializeField] private GameObject lowerArm;
+    private Animator lowerArmAnimator;
+    [SerializeField] private GameObject mountingPoint;
+    [SerializeField] private GameObject rocketPlatformModel;
+    [SerializeField] private GameObject rocketPrefab;
+    [SerializeField] private LayerMask groundLayer;
+
+    private LineRenderer lineRenderer;
+
+    #endregion
+
+    #region Initialization
 
     private void Start()
     {
-        state = RocketState.Ready;
-        canBeInteracted = true;
+        state = RocketPlatformState.Ready;
+        lowerArmAnimator = lowerArm.GetComponent<Animator>();
         lineRenderer = GetComponent<LineRenderer>();
-        initialRotation = 0f;
     }
+
+    #endregion
+
+    #region Update
 
     private void Update()
     {
         switch (state)
         {
-            case RocketState.Mounted:
+            case RocketPlatformState.Mounted:
                 RaycastHit hit;
                 Vector3 impactPoint;
 
-                if (Physics.Raycast(rocket.transform.position, rocket.transform.up, out hit, 100000f))
+                if (Physics.Raycast(rocketPlatformModel.transform.position, rocketPlatformModel.transform.up, out hit, 100000f))
                 {
                     impactPoint = hit.point;
-                    ShowLaser(rocket.transform.position, impactPoint);
+                    ShowLaser(rocketPlatformModel.transform.position, impactPoint);
                 }
                 else
                 {
-                    impactPoint = rocket.transform.position + rocket.transform.forward * 100000f;
-                    ShowLaser(rocket.transform.position, impactPoint);
+                    impactPoint = rocketPlatformModel.transform.position + rocketPlatformModel.transform.forward * 100000f;
+                    ShowLaser(rocketPlatformModel.transform.position, impactPoint);
                 }
                 break;
-            case RocketState.RotatingBack:
-                Vector3 targetEulerAngles = new Vector3(0f, 180f, 0f);
-                Quaternion targetRotation = Quaternion.Euler(targetEulerAngles);
+            case RocketPlatformState.RotatingDown:
+                Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
 
                 // Calcula el ángulo entre los ángulos de inicio y destino
-                float angleDifference = Quaternion.Angle(rotationPointX.transform.rotation, targetRotation);
+                float angleDifference = Quaternion.Angle(rotationPoint.transform.rotation, targetRotation);
 
                 // Calcula una velocidad basada en la diferencia angular
                 float adjustedSpeed = 100f / angleDifference;
 
                 // Aplica el Slerp con la velocidad ajustada
-                rotationPointX.transform.rotation = Quaternion.Slerp(rotationPointX.transform.rotation, targetRotation, Time.deltaTime * adjustedSpeed);
+                rotationPoint.transform.rotation = Quaternion.Slerp(rotationPoint.transform.rotation, targetRotation, Time.deltaTime * adjustedSpeed);
                 
-                if (rotationPointX.transform.rotation.eulerAngles.x == 0f && rotationPointX.transform.rotation.eulerAngles.y == 180f) // Si la diferencia es pequeña, consideramos que la interpolación ha terminado
+                if (rotationPoint.transform.rotation.eulerAngles.x == 0f && rotationPoint.transform.rotation.eulerAngles.y == 180f) // Si la diferencia es pequeña, consideramos que la interpolación ha terminado
                 {
-                    state = RocketState.MovingBack; // Cambiar el estado cuando la interpolación termine
-                    armAnimator.SetTrigger("MoveDown");
+                    state = RocketPlatformState.MovingDown; // Cambiar el estado cuando la interpolación termine
+                    lowerArmAnimator.SetTrigger("MoveDown");
                 }
                 break;
-            case RocketState.MovingBack:
-                if (HasAnimationFinished("MovementAnimation"))
+            case RocketPlatformState.MovingDown:
+                if (HasAnimationFinished("MoveDown"))
                 {
-                    rotationPointY.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-                    rotationPointX.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-                    rocket.SetActive(true);
-                    state = RocketState.MovingFoward;
-                    armAnimator.SetTrigger("MoveUp");
+                    lowerArm.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                    rotationPoint.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                    state = RocketPlatformState.MovingUp;
+                    Invoke("RechargeRocket", cooldown);
                 }
                 break;
-            case RocketState.MovingFoward:
-                if (HasAnimationFinished("MovementAnimation 0"))
+            case RocketPlatformState.MovingUp:
+                if (HasAnimationFinished("MoveUp"))
                 {
-                    state = RocketState.RotatingFoward;
-                    armAnimator.SetTrigger("Static");
+                    state = RocketPlatformState.RotatingUp;
+                    lowerArmAnimator.SetTrigger("Static");
                 }
                 break;
-            case RocketState.RotatingFoward:
-                float finalSpeed2 = ((60f - rotationPointX.transform.rotation.eulerAngles.x) / 100f);
-                float newXRotationFoward = Mathf.Lerp(rotationPointX.transform.rotation.eulerAngles.x, 60f, 0.5f * (Time.deltaTime / finalSpeed2));
-                rotationPointX.transform.rotation = Quaternion.Euler(newXRotationFoward, rotationPointX.transform.rotation.eulerAngles.y, rotationPointX.transform.rotation.eulerAngles.z);
+            case RocketPlatformState.RotatingUp:
+                float finalSpeed2 = ((60f - rotationPoint.transform.rotation.eulerAngles.x) / 100f);
+                float newXRotationFoward = Mathf.Lerp(rotationPoint.transform.rotation.eulerAngles.x, 60f, 0.5f * (Time.deltaTime / finalSpeed2));
+                rotationPoint.transform.rotation = Quaternion.Euler(newXRotationFoward, rotationPoint.transform.rotation.eulerAngles.y, rotationPoint.transform.rotation.eulerAngles.z);
 
                 if (Mathf.Abs(newXRotationFoward - 60f) < 0.01f) // Si la diferencia es pequeña, consideramos que la interpolación ha terminado
                 {
-                    state = RocketState.Ready; // Cambiar el estado cuando la interpolación termine
+                    state = RocketPlatformState.Ready; // Cambiar el estado cuando la interpolación termine
                     canBeInteracted = true;
                 }
                 break;
         }
     }
 
-    bool HasAnimationFinished(string animationName)
+    #endregion
+
+    #region Rocket Methods
+
+    private void RechargeRocket()
+    {
+        rocketPlatformModel.SetActive(true);
+        lowerArmAnimator.SetTrigger("MoveUp");
+    }
+
+    private bool HasAnimationFinished(string animationName)
     {
         // Obtiene el estado actual de la animación en la capa 0
-        AnimatorStateInfo stateInfo = armAnimator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = lowerArmAnimator.GetCurrentAnimatorStateInfo(0);
 
-        // Comprueba si el nombre de la animación actual coincide con el nombre de la animación que estamos buscando
+        // Comprueba si el nombre de la animación actual coincide con el nombre de la animación que estamos buscando y si esta ha terminado
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1f;
     }
 
@@ -128,37 +148,32 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     public void LaunchRocket()
     {
-        if (state != RocketState.Ready) { return; }
+        if (state != RocketPlatformState.Ready) { return; }
 
-        initialRotation = rotationPointX.transform.rotation.eulerAngles.x;
         canBeInteracted = false;
-        state = RocketState.RotatingBack;
-        Instantiate(rocketPrefab, rocket.transform.position, rocket.transform.rotation);
-        rocket.SetActive(false);
-
-
-
-        //activar el cohete cuando el brazo se haya replegado
-        //rocket.SetActive(true);
-
-        //salir de la base con el cohete y ponerse en posición
-        //permitir que el jugador interactue
+        state = RocketPlatformState.RotatingDown;
+        Instantiate(rocketPrefab, rocketPlatformModel.transform.position, rocketPlatformModel.transform.rotation);
+        rocketPlatformModel.SetActive(false);
     }
 
     protected override void InteractedPressAction()
     {
         player.AssignMount(this, mountingPoint);
-        state = RocketState.Mounted;
+        state = RocketPlatformState.Mounted;
         canBeInteracted = false;
         DisableOutlineAndCanvas();
         lineRenderer.enabled = true;
     }
 
+    #endregion
+
+    #region Player Actions
+
     public void Move(Vector2 direction)
     {
         // Obt�n la rotaci�n actual del punto de rotaci�n como cuaterni�n
-        Quaternion currentRotationX = rotationPointX.transform.rotation;
-        Quaternion currentRotationY = rotationPointY.transform.rotation;
+        Quaternion currentRotationX = rotationPoint.transform.rotation;
+        Quaternion currentRotationY = lowerArm.transform.rotation;
 
         // Calcula la rotaci�n adicional en el eje X
         Quaternion xRotation = Quaternion.AngleAxis(-direction.y * Time.deltaTime * rotationSpeed, Vector3.right);
@@ -169,10 +184,10 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         Quaternion newRotationY = currentRotationY * yRotation;
 
         // Asigna la nueva rotaci�n al punto de rotaci�n
-        rotationPointX.transform.rotation = newRotationX;
-        rotationPointY.transform.rotation = newRotationY;
+        rotationPoint.transform.rotation = newRotationX;
+        lowerArm.transform.rotation = newRotationY;
 
-        Vector3 suputamadre = rotationPointX.transform.rotation.eulerAngles;
+        Vector3 suputamadre = rotationPoint.transform.rotation.eulerAngles;
 
         if (suputamadre.z == 180f && suputamadre.x < 60)
         {
@@ -183,7 +198,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
             suputamadre.x = 0;
         }
 
-        rotationPointX.transform.rotation = Quaternion.Euler(suputamadre);
+        rotationPoint.transform.rotation = Quaternion.Euler(suputamadre);
     }
 
     public void Run(IPlayerReceiver.InputType runInput)
@@ -196,7 +211,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
             player.DisMount();
-            state = RocketState.Ready;
+            state = RocketPlatformState.Ready;
             canBeInteracted = true;
             lineRenderer.enabled = false;
         }
@@ -221,4 +236,6 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     {
 
     }
+
+    #endregion
 }

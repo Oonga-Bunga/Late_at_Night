@@ -10,6 +10,8 @@ public class PlayerInputManager : MonoBehaviour
     private static PlayerInputManager instance;
     public static PlayerInputManager Instance => instance;
 
+    [Header("Player")]
+
     [SerializeField] private PlayerController player;
     public PlayerController Player
     {
@@ -20,6 +22,8 @@ public class PlayerInputManager : MonoBehaviour
             SetPlayer(player);
         }
     }
+
+    [Header("Input Actions")]
 
     [SerializeField] private InputActionReference Move;
     [SerializeField] private InputActionReference Run;

@@ -52,16 +52,16 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
     // haya pasado m�s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
-    private float lastGroundedTime;
+    private float lastGroundedTime = 0f;
     [SerializeField] private float jumpCoyoteTime;
 
     // Este temporizador junto a su valor por defecto definen el buffer de salto, que permite al jugador saltar si se ha
     // presionado la tecla correspondiente en los �ltimos x segundos (x = jumpBufferTime), es decir, mientras el valor de
     // lastJumpTime sea mayor que 0
-    private float lastJumpTime;
+    private float lastJumpTime = 0f;
     [SerializeField] private float jumpBufferTime;
 
-    private float localGravityScale; // Factor por el que la gravedad afecta al objeto en cada momento, empieza como 1
+    private float localGravityScale = 1f; // Factor por el que la gravedad afecta al objeto en cada momento, empieza como 1
     [SerializeField] private float fallGravityMultiplier; // Factor por el que aumenta la gravedad al caer
 
     #endregion
@@ -135,10 +135,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         maxCurrentSpeed = maxWalkingSpeed;
 
         currentStamina = maxStamina;
-
-        lastGroundedTime = 0;
-        lastJumpTime = 0;
-        localGravityScale = 1f;
 
         currentHeldObject = GetComponentInChildren<EmptyWeapon>();
         pauseManager = FindObjectOfType<PauseManager>();

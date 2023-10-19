@@ -6,7 +6,7 @@ public class ClayBinPickup : AInteractable
 {
     private void Start()
     {
-        interactType = IInteractable.InteractType.PressAndHold;
+
     }
 
     protected override void InteractedPressAction()

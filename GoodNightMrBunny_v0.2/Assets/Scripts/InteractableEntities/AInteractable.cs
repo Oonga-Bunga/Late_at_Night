@@ -8,15 +8,17 @@ public class AInteractable : MonoBehaviour, IInteractable
 {
     #region Attributes
 
-    protected IInteractable.InteractType interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
+    [Header("AInteractable Settings")]
+
+    [SerializeField] protected IInteractable.InteractType interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
 
     // El siguiente grupo de atributos solo sirve para AInteractable de tipo Hold o PressAndHold
-    protected float currentHoldTime; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
+    protected float currentHoldTime = 0f; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
     [SerializeField] protected float holdDuration; // Tiempo que debe presionarse el botón de interactuar para llevar a cabo la acción de este objeto
     [SerializeField] protected float pressBuffer; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
-    protected bool isBeingInteracted; // Si el objeto está siendo interactuado por el jugador
+    protected bool isBeingInteracted = false; // Si el objeto está siendo interactuado por el jugador
     
-    protected bool canBeInteracted; // Si el objeto puede ser interactuado
+    protected bool canBeInteracted = true; // Si el objeto puede ser interactuado
 
     protected PlayerController player; // Referencia al jugador
     protected Outline outline; // Referencia al outline
@@ -36,10 +38,6 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     protected virtual void Awake()
     {
-        currentHoldTime = 0f;
-        isBeingInteracted = false;
-        canBeInteracted = true;
-
         player = FindObjectOfType<PlayerController>();
         outline = GetComponent<Outline>();
         promptCanvas = transform.GetChild(0).gameObject.GetComponentInChildren<Canvas>();

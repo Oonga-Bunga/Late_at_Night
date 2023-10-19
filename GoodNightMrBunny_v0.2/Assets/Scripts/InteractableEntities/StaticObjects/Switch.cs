@@ -6,13 +6,12 @@ using static IInteractable;
 
 public class Switch : AInteractable
 {
-    private bool isOn; // Si el interruptor está o no encendido
+    private bool isOn = false; // Si el interruptor está o no encendido
     public EventHandler<bool> TurnedOnOrOff; // Evento que notifica
 
     private void Start()
     {
-        interactType = IInteractable.InteractType.Hold;
-        isOn = false;
+
     }
 
     protected override void InteractedHoldAction()
@@ -20,14 +19,14 @@ public class Switch : AInteractable
         TurnOn();
     }
 
-    protected void TurnOn()
+    private void TurnOn()
     {
         isOn = true;
         TurnedOnOrOff.Invoke(this, isOn);
         canBeInteracted = false;
     }
 
-    protected void TurnOff()
+    private void TurnOff()
     {
         isOn = false;
         TurnedOnOrOff.Invoke(this, isOn);

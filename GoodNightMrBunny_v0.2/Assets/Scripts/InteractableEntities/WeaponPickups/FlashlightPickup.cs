@@ -8,7 +8,7 @@ public class FlashlightPickup : AInteractable
 
     private void Start()
     {
-        interactType = IInteractable.InteractType.Press;
+
     }
 
     protected override void InteractedPressAction()

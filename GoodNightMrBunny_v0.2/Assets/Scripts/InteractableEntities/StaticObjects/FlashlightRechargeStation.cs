@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class FlashlightRechargeStation : AInteractable
 {
-    private bool hasFlashlight;
-    private float currentCharge;
+    [Header("Flashlight Recharge Station Settings")]
+
     [SerializeField][Range(0.0f, 1.0f)] private float rechargeRate;
+    private bool hasFlashlight = true;
+    private float currentCharge = 0f;
     private float rechargeAmount;
 
     private void Start()
     {
-        interactType = IInteractable.InteractType.Press;
-        hasFlashlight = false;
-        currentCharge = 0f;
         rechargeAmount = Flashlight.maxCharge * rechargeRate;
     }
 
