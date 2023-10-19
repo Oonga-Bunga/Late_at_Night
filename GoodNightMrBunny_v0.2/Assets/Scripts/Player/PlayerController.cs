@@ -14,56 +14,56 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Speed")]
 
-    [SerializeField] private float maxWalkingSpeed; // Velocidad m�xima al caminar
-    [SerializeField] private float maxRunningSpeed; // Velocidad m�xima al correr
-    private float maxCurrentSpeed; // Velocidad máxima del jugador en cada momento
+    [SerializeField] private float _maxWalkingSpeed = 7.0f; // Velocidad m�xima al caminar
+    [SerializeField] private float _maxRunningSpeed = 14.0f; // Velocidad m�xima al correr
+    private float _maxCurrentSpeed; // Velocidad máxima del jugador en cada momento
 
     [Header("Stamina")]
 
-    [SerializeField] private float maxStamina; // Máxima energia del jugador
-    private float currentStamina; // Energia del jugador que consume para correr
-    [SerializeField] private float staminaRecoveryRate; // Ratio de recuperación de energia
-    [SerializeField] private float staminaComsumptionRate; // Ratio de recuperación de energia
-    [SerializeField, Range(0.0f, 1.0f)] private float minimumStaminaForRunning; // Porcentaje de energía mínimo para empezar a correr
-    private bool isPressingRunButton; // Si el jugador está corriendo o no
-    private bool isRunning; // Si el jugador está corriendo o no
-    public EventHandler<float> StaminaChanged; //Se invoca si cmabia el valor de la energía del jugador
+    [SerializeField] private float _maxStamina = 100f; // Máxima energia del jugador
+    private float _currentStamina; // Energia del jugador que consume para correr
+    [SerializeField] private float _staminaRecoveryRate = 10f; // Ratio de recuperación de energia
+    [SerializeField] private float _staminaComsumptionRate = 20f; // Ratio de recuperación de energia
+    [SerializeField, Range(0.0f, 1.0f)] private float _minimumStaminaForRunning = 0.2f; // Porcentaje de energía mínimo para empezar a correr
+    private bool _isPressingRunButton = false; // Si el jugador está corriendo o no
+    private bool _isRunning = false; // Si el jugador está corriendo o no
+    public EventHandler<float> OnStaminaChanged; //Se invoca si cmabia el valor de la energía del jugador
 
     [Header("Acceleration")]
 
-    [SerializeField] private float acceleration; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
-    [SerializeField] private float decceleration; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
-    [SerializeField, Range(0.0f, 1.0f)] private float airAccelerationModifier; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
-    [SerializeField] private float velPower; // Ni idea de para que sirve, pero aqu� est�, no quitar
+    [SerializeField] private float _acceleration = 13f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
+    [SerializeField] private float _decceleration = 16f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
+    [SerializeField, Range(0.0f, 1.0f)] private float _airAccelerationModifier = 0.5f; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
+    [SerializeField] private float _velPower = 0.96f; // Ni idea de para que sirve, pero aqu� est�, no quitar
 
     [Header("Friction")]
 
-    [SerializeField] private float groundFrictionAmount; // Fricci�n en el suelo
-    [SerializeField] private float airFrictionAmount; // Fricci�n en el aire
+    [SerializeField] private float _groundFriction = 1.0f; // Fricci�n en el suelo
+    [SerializeField] private float _airFriction = 0.25f; // Fricci�n en el aire
 
     #endregion
 
     #region Jump
 
-    [Header("_jump")]
+    [Header("Jump")]
 
-    [SerializeField] private float jumpForce; // Fuerza de salto
-    [SerializeField, Range(0.0f, 1.0f)] private float jumpCutMultiplier; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
-    private bool isPlayerGrounded; // Si el jugador está en el suelo o no
+    [SerializeField] private float _jumpForce = 20f; // Fuerza de salto
+    [SerializeField, Range(0.0f, 1.0f)] private float _jumpCutMultiplier = 0.4f; // Fuerza que acorta el salto cuando se deja de presionar la tecla de saltar
+    private bool _isPlayerGrounded = false; // Si el jugador está en el suelo o no
 
     // Este temporizador junto a su valor por defecto definen el tiempo de coyote, que permite al jugador saltar mientras no
-    // haya pasado m�s de x tiempo (x = jumpCoyoteTime), es decir, mientras el valor de lastGroundedTime sea mayor que 0
-    private float lastGroundedTime = 0f;
-    [SerializeField] private float jumpCoyoteTime;
+    // haya pasado m�s de x tiempo (x = _jumpCoyoteTime), es decir, mientras el valor de _lastGroundedTime sea mayor que 0
+    private float _lastGroundedTime = 0f;
+    [SerializeField] private float _jumpCoyoteTime = 0.15f;
 
     // Este temporizador junto a su valor por defecto definen el buffer de salto, que permite al jugador saltar si se ha
-    // presionado la tecla correspondiente en los �ltimos x segundos (x = jumpBufferTime), es decir, mientras el valor de
-    // lastJumpTime sea mayor que 0
-    private float lastJumpTime = 0f;
-    [SerializeField] private float jumpBufferTime;
+    // presionado la tecla correspondiente en los �ltimos x segundos (x = _jumpBufferTime), es decir, mientras el valor de
+    // _lastJumpTime sea mayor que 0
+    private float _lastJumpTime = 0f;
+    [SerializeField] private float _jumpBufferTime = 0.1f;
 
-    private float localGravityScale = 1f; // Factor por el que la gravedad afecta al objeto en cada momento, empieza como 1
-    [SerializeField] private float fallGravityMultiplier; // Factor por el que aumenta la gravedad al caer
+    private float _localGravityScale = 1f; // Factor por el que la gravedad afecta al objeto en cada momento, empieza como 1
+    [SerializeField] private float _fallGravityMultiplier = 1.2f; // Factor por el que aumenta la gravedad al caer
 
     #endregion
 
@@ -71,14 +71,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Checks")]
 
-    [SerializeField] private CapsuleCollider groundCheck; // BoxCollider que se usa para realizar un BoxCast en el m�todo CheckPlayerGrounded
-    [SerializeField] private float maxGroundCheckDistance; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
-    [SerializeField] private LayerMask groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
+    [SerializeField] private CapsuleCollider _groundCheck = null; // BoxCollider que se usa para realizar un BoxCast en el m�todo CheckPlayerGrounded
+    [SerializeField] private float _maxGroundCheckDistance = 0.3f; // Distancia m�xima para el BoxCast / Distancia a la que el jugador detecta el suelo
+    [SerializeField] private LayerMask _groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
-    private AInteractable closestInteractable; // Almacena el objeto interactuable m�s cercano al jugador en todo momento
-    [SerializeField] private float interactionDistance; // Distancia m�xima para interactuar con un objeto
-    [SerializeField] private LayerMask interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
-    public EventHandler<bool> InteractableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
+    private AInteractable _closestInteractable = null; // Almacena el objeto interactuable m�s cercano al jugador en todo momento
+    [SerializeField] private float _interactionDistance = 3f; // Distancia m�xima para interactuar con un objeto
+    [SerializeField] private LayerMask _interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
+    public EventHandler<bool> OnInteractableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
 
     #endregion
 
@@ -86,9 +86,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Dropping")]
 
-    [SerializeField] private float dropDistance = 3f;
-    [SerializeField] private float sphereRaycastRadius = 0.5f;
-    [SerializeField] private float minimumDistanceFromCollision = 0.5f;
+    [SerializeField] private float _dropDistance = 3.5f; // Distancia a la cual el jugador suelta el objeto
+    [SerializeField] private float _sphereRaycastRadius = 0.3f; // Radio de la esfera que se usa para detectar si el lugar donde se suelta el objeto está obstruido
+    [SerializeField] private float _minimumDistanceFromCollision = 0.3f; // Distancia desde la obstrucción donde se dropea el objeto
 
     #endregion
 
@@ -96,15 +96,15 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Other")]
 
-    [SerializeField] private List<AHoldableObject> holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
-    private AHoldableObject currentHeldObject; // Object que lleva encima en cada momento
+    [SerializeField] private List<AHoldableObject> _holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
+    private AHoldableObject _currentHeldObject; // Object que lleva encima en cada momento
 
-    private Rigidbody rb; // Referencia al rigidbody del jugador
-    private Transform cameraTransform; // Referencia a la cámara principal
+    private Rigidbody _rb; // Referencia al rigidbody del jugador
+    private Transform _cameraTransform; // Referencia a la cámara principal
 
-    private PauseManager pauseManager;
+    private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
-    private IPlayerReceiver mount;
+    private IPlayerReceiver _mount = null; // Objeto en el que está montado el jugador, puede ser nulo
 
     #endregion
 
@@ -114,17 +114,22 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     public AHoldableObject CurrentHeldObject
     {
-        get { return currentHeldObject; }
+        get { return _currentHeldObject; }
     }
 
     public float MaxStamina
     {
-        get { return maxStamina; }
+        get { return _maxStamina; }
     }
 
     public bool IsPlayerGrounded
     {
-        get { return isPlayerGrounded; }
+        get { return _isPlayerGrounded; }
+    }
+
+    public float MaxCurrentSpeed
+    {
+        get { return _maxCurrentSpeed; }
     }
 
     #endregion
@@ -133,17 +138,17 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
+        _rb = GetComponent<Rigidbody>();
+        _rb.useGravity = false;
 
-        cameraTransform = Camera.main.transform;
+        _cameraTransform = Camera.main.transform;
 
-        maxCurrentSpeed = maxWalkingSpeed;
+        _maxCurrentSpeed = _maxWalkingSpeed;
 
-        currentStamina = maxStamina;
+        _currentStamina = _maxStamina;
 
-        currentHeldObject = GetComponentInChildren<EmptyWeapon>();
-        pauseManager = FindObjectOfType<PauseManager>();
+        _currentHeldObject = GetComponentInChildren<EmptyWeapon>();
+        _pauseManager = FindObjectOfType<PauseManager>();
     }
 
     #endregion
@@ -155,9 +160,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void FixedUpdate()
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        rb.AddForce(Physics.gravity * localGravityScale);
+        _rb.AddForce(Physics.gravity * _localGravityScale);
     }
 
     /// <summary>
@@ -165,80 +170,80 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void Update()
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
         // Comprobar si el jugador está en el suelo
 
-        isPlayerGrounded = CheckPlayerGrounded();
+        _isPlayerGrounded = CheckPlayerGrounded();
 
         // Actualizar los temporizadores
 
-        lastGroundedTime -= Time.deltaTime;
-        lastJumpTime -= Time.deltaTime;
+        _lastGroundedTime -= Time.deltaTime;
+        _lastJumpTime -= Time.deltaTime;
 
-        if (isPlayerGrounded)
+        if (_isPlayerGrounded)
         {
-            lastGroundedTime = jumpCoyoteTime;
+            _lastGroundedTime = _jumpCoyoteTime;
         }
 
         // Saltar si se cumplen las condiciones
 
-        if (lastGroundedTime > 0 && lastJumpTime > 0)
+        if (_lastGroundedTime > 0 && _lastJumpTime > 0)
         {
             JumpAction();
         }
 
         // Aumentar la gravedad si el jugador est� cayendo
 
-        if (rb.velocity.y < 0)
+        if (_rb.velocity.y < 0)
         {
-            localGravityScale = fallGravityMultiplier;
+            _localGravityScale = _fallGravityMultiplier;
         }
         else
         {
-            localGravityScale = 1f;
+            _localGravityScale = 1f;
         }
 
         // Cambiar el modo de movimiento a correr si se cumplen las condiciones
 
-        if (isPressingRunButton && !isRunning && isPlayerGrounded)
+        if (_isPressingRunButton && !_isRunning && _isPlayerGrounded)
         {
-            if ((currentStamina / maxStamina) > minimumStaminaForRunning)
+            if ((_currentStamina / _maxStamina) > _minimumStaminaForRunning)
             {
-                isRunning = true;
+                _isRunning = true;
             }
         }
-        else if (!isPressingRunButton)
+        else if (!_isPressingRunButton)
         {
-            isRunning = false;
+            _isRunning = false;
         }
 
         // Modificar la energia dependiendo de si el jugador está corriendo o no, y si se acaba parar de correr
 
-        if (isRunning)
+        if (_isRunning)
         {
-            maxCurrentSpeed = maxRunningSpeed;
+            _maxCurrentSpeed = _maxRunningSpeed;
 
-            if (currentStamina == 0)
+            if (_currentStamina == 0)
             {
-                isRunning = false;
+                _isRunning = false;
             }
             else
             {
-                currentStamina = Mathf.Max(currentStamina - staminaComsumptionRate * Time.deltaTime, 0);
-                StaminaChanged?.Invoke(this, currentStamina);
+                _currentStamina = Mathf.Max(_currentStamina - _staminaComsumptionRate * Time.deltaTime, 0);
+                OnStaminaChanged?.Invoke(this, _currentStamina);
             }
         }
         else
         {
-            maxCurrentSpeed = maxWalkingSpeed;
-            currentStamina = Mathf.Min(currentStamina + staminaRecoveryRate * Time.deltaTime, maxStamina);
-            StaminaChanged?.Invoke(this, currentStamina);
+            _maxCurrentSpeed = _maxWalkingSpeed;
+            _currentStamina = Mathf.Min(_currentStamina + _staminaRecoveryRate * Time.deltaTime, _maxStamina);
+            OnStaminaChanged?.Invoke(this, _currentStamina);
         }
 
-        // Actualizar el valor de closestInteractable para que sea el del IInteractable m�s cercano
+        // Actualizar el valor de _closestInteractable para que sea el del IInteractable m�s cercano
 
-        closestInteractable = GetClosestInteractable();
+        _closestInteractable = GetClosestInteractable();
     }
 
     #endregion
@@ -251,50 +256,50 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="direction">Direcci�n de movimiento recibida a partir del input del jugador</param>
     public void Move(Vector2 direction)
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.Move(direction);
+        if (_mount != null) _mount.Move(direction);
 
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+        move = _cameraTransform.forward * move.z + _cameraTransform.right * move.x;
         move.y = 0f;
         move = move.normalized;
 
         // C�lculo de la velocidad necesaria
 
-        Vector2 horizontalSpeed = new Vector2(rb.velocity.x, rb.velocity.z);
-        Vector2 targetSpeed = new Vector2(move.x, move.z) * maxCurrentSpeed;
+        Vector2 horizontalSpeed = new Vector2(_rb.velocity.x, _rb.velocity.z);
+        Vector2 targetSpeed = new Vector2(move.x, move.z) * _maxCurrentSpeed;
         Vector2 speedDif = targetSpeed - horizontalSpeed;
-        float accelRate = (targetSpeed.magnitude > 0.01f) ? acceleration : decceleration;
+        float accelRate = (targetSpeed.magnitude > 0.01f) ? _acceleration : _decceleration;
 
-        if (!isPlayerGrounded)
+        if (!_isPlayerGrounded)
         {
-            accelRate *= airAccelerationModifier;
+            accelRate *= _airAccelerationModifier;
         }
 
-        float movement = Mathf.Pow(speedDif.magnitude * accelRate, velPower);
+        float movement = Mathf.Pow(speedDif.magnitude * accelRate, _velPower);
 
         // Aplicaci�n del movimiento mediante una fuerza
 
-        rb.AddForce(move * movement);
+        _rb.AddForce(move * movement);
 
         // Limitaci�n de velocidad
 
-        if (horizontalSpeed.magnitude > maxCurrentSpeed)
+        if (horizontalSpeed.magnitude > _maxCurrentSpeed)
         {
-            if (!isPlayerGrounded && horizontalSpeed.magnitude >= maxRunningSpeed)
+            if (!_isPlayerGrounded && horizontalSpeed.magnitude >= _maxRunningSpeed)
             {
-                float adjustment = maxRunningSpeed / horizontalSpeed.magnitude;
+                float adjustment = _maxRunningSpeed / horizontalSpeed.magnitude;
 
-                rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
+                _rb.velocity = new Vector3(_rb.velocity.x * adjustment, _rb.velocity.y, _rb.velocity.z * adjustment);
             }
             else
             {
-                float adjustment = maxCurrentSpeed / horizontalSpeed.magnitude;
+                float adjustment = _maxCurrentSpeed / horizontalSpeed.magnitude;
 
-                rb.velocity = new Vector3(rb.velocity.x * adjustment, rb.velocity.y, rb.velocity.z * adjustment);
+                _rb.velocity = new Vector3(_rb.velocity.x * adjustment, _rb.velocity.y, _rb.velocity.z * adjustment);
             }
         }
 
@@ -302,17 +307,17 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (move.magnitude < 0.01f)
         {
-            if (isPlayerGrounded)
+            if (_isPlayerGrounded)
             {
-                float amount = Mathf.Min(horizontalSpeed.magnitude, groundFrictionAmount);
+                float amount = Mathf.Min(horizontalSpeed.magnitude, _groundFriction);
 
-                rb.AddForce(new Vector3(horizontalSpeed.normalized.x, 0, horizontalSpeed.normalized.y) * -amount, ForceMode.Impulse);
+                _rb.AddForce(new Vector3(horizontalSpeed.normalized.x, 0, horizontalSpeed.normalized.y) * -amount, ForceMode.Impulse);
             }
             else
             {
-                float amount = Mathf.Min(horizontalSpeed.magnitude, airFrictionAmount);
+                float amount = Mathf.Min(horizontalSpeed.magnitude, _airFriction);
 
-                rb.AddForce(new Vector3(horizontalSpeed.normalized.x, 0, horizontalSpeed.normalized.y) * -amount, ForceMode.Impulse);
+                _rb.AddForce(new Vector3(horizontalSpeed.normalized.x, 0, horizontalSpeed.normalized.y) * -amount, ForceMode.Impulse);
             }
         }
     }
@@ -323,17 +328,17 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="runInput">Tipo de input, Down o Up</param>
     public void Run(IPlayerReceiver.InputType runInput)
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.Run(runInput);
+        if (_mount != null) _mount.Run(runInput);
 
         if (runInput != IPlayerReceiver.InputType.Up)
         {
-            isPressingRunButton = true;
+            _isPressingRunButton = true;
         }
         else
         {
-            isPressingRunButton = false;
+            _isPressingRunButton = false;
         }
     }
 
@@ -343,22 +348,22 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="jumpInput">Tipo de input, Down o Up</param>
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.Jump(jumpInput);
+        if (_mount != null) _mount.Jump(jumpInput);
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
-            lastJumpTime = jumpBufferTime;
+            _lastJumpTime = _jumpBufferTime;
         }
         else
         {
-            if (rb.velocity.y > 0 && !isPlayerGrounded)
+            if (_rb.velocity.y > 0 && !_isPlayerGrounded)
             {
-                rb.AddForce(Vector3.down * rb.velocity.y * (1 - jumpCutMultiplier), ForceMode.Impulse);
+                _rb.AddForce(Vector3.down * _rb.velocity.y * (1 - _jumpCutMultiplier), ForceMode.Impulse);
             }
 
-            lastJumpTime = 0;
+            _lastJumpTime = 0;
         }
     }
 
@@ -367,9 +372,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void JumpAction()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        lastGroundedTime = 0;
-        lastJumpTime = 0;
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _lastGroundedTime = 0;
+        _lastJumpTime = 0;
     }
 
     /// <summary>
@@ -379,26 +384,26 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
     public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.UseHeldObject(useInput);
+        if (_mount != null) _mount.UseHeldObject(useInput);
 
-        currentHeldObject.Use(useInput);
+        _currentHeldObject.Use(useInput);
     }
 
     /// <summary>
     /// Se ejecuta cuando el jugador presiona la tecla de interactuar, y ejecuta el m�todo interacted de
-    /// closestInteractable
+    /// _closestInteractable
     /// </summary>
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.Interact(interactInput);
+        if (_mount != null) _mount.Interact(interactInput);
 
-        if (closestInteractable != null)
+        if (_closestInteractable != null)
         {
-            closestInteractable.Interacted(interactInput);
+            _closestInteractable.Interacted(interactInput);
         }
     }
 
@@ -412,18 +417,18 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="initializationValue">Valor con el que se inicia el arma, como la carga de la linterna</param>
     public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
-        currentHeldObject.Drop(dropPrefab, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
+        _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
 
-        foreach (AHoldableObject holdableObject in holdableObjectList)
+        foreach (AHoldableObject holdableObject in _holdableObjectList)
         {
             if (objectType == holdableObject.holdableObjectType)
             {
                 holdableObject.gameObject.SetActive(true);
-                currentHeldObject = holdableObject;
+                _currentHeldObject = holdableObject;
 
                 if (!(initializationValue < 0))
                 {
-                    currentHeldObject.Initialize(initializationValue);
+                    _currentHeldObject.Initialize(initializationValue);
                 }
 
                 return;
@@ -436,43 +441,44 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void DropHeldObject()
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (mount != null) mount.DropHeldObject();
+        if (_mount != null) _mount.DropHeldObject();
 
-        currentHeldObject.Drop(true, dropDistance, sphereRaycastRadius, minimumDistanceFromCollision, groundLayer);
-        holdableObjectList[0].gameObject.SetActive(true);
-        currentHeldObject = holdableObjectList[0];
+        _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
+        _holdableObjectList[0].gameObject.SetActive(true);
+        _currentHeldObject = _holdableObjectList[0];
     }
 
     /// <summary>
-    /// 
+    /// Asigna al jugador el objeto sobre el que está montado, y es llamado por dicho objeto
+    /// Los controles del jugador pasarán a ser procesados por la montura, y su movimiento queda anclado a esta
     /// </summary>
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
-        this.mount = mount;
-        cameraTransform.gameObject.GetComponent<CameraController>().DisableLook(); //Impide mover la cámara con el ratón
+        this._mount = mount;
+        _cameraTransform.gameObject.GetComponent<CameraController>().DisableLook(); //Impide mover la cámara con el ratón
         transform.parent = mountingPoint.transform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        cameraTransform.localRotation = Quaternion.identity; //Quiero que la cámara siempre mire al frente
+        _cameraTransform.localRotation = Quaternion.identity; //Quiero que la cámara siempre mire al frente
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 
     /// <summary>
-    /// 
+    /// Llamado por la montura del jugador cuando este se desmonta, deshace los cambios hechos en AssignMount
+    /// El jugador siempre ejecuta un salto al desmontarse
     /// </summary>
     public void DisMount()
     {
-        this.mount = null;
+        this._mount = null;
         transform.rotation = Quaternion.identity;
-        cameraTransform.rotation = Quaternion.Euler(0f, cameraTransform.rotation.eulerAngles.y, cameraTransform.rotation.eulerAngles.z);
+        _cameraTransform.rotation = Quaternion.Euler(0f, _cameraTransform.rotation.eulerAngles.y, _cameraTransform.rotation.eulerAngles.z);
         transform.parent = null;
-        cameraTransform.gameObject.GetComponent<CameraController>().EnableLook();
+        _cameraTransform.gameObject.GetComponent<CameraController>().EnableLook();
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         JumpAction();
     }
-
 
     #endregion
 
@@ -484,16 +490,16 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <returns>true o false</returns>
     private bool CheckPlayerGrounded()
     {
-        return Physics.CapsuleCast(groundCheck.transform.position, groundCheck.transform.position, groundCheck.radius, Vector3.down, maxGroundCheckDistance, groundLayer);
+        return Physics.CapsuleCast(_groundCheck.transform.position, _groundCheck.transform.position, _groundCheck.radius, Vector3.down, _maxGroundCheckDistance, _groundLayer);
     }
 
     /// <summary>
-    /// Devuelve el objeto interactuable m�s cercano al jugador
+    /// Devuelve el objeto interactuable m�s cercano al jugador, y si hay varios el que está más cerca de su punto de mira
     /// </summary>
     /// <returns></returns>
     private AInteractable GetClosestInteractable()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionDistance, interactableLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _interactionDistance, _interactableLayer);
         AInteractable bestInteractable = null;
 
         if (hitColliders.Length > 1)
@@ -518,43 +524,48 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         // Si el objeto anterior no es nulo se desactiva su canvas y outline, y si es distinto al nuevo se le informa
         // que ya no está en el rango del jugador
 
-        if (closestInteractable != null && closestInteractable != bestInteractable)
+        if (_closestInteractable != null && _closestInteractable != bestInteractable)
         {
-            closestInteractable.DisableOutlineAndCanvas();
-            closestInteractable.PlayerExitedRange();
+            _closestInteractable.DisableOutlineAndCanvas();
+            _closestInteractable.PlayerExitedRange();
         }
 
         // Si el nuevo objeto no es nulo se activa su canvas y outline
 
-        if (bestInteractable != null && bestInteractable != closestInteractable)
+        if (bestInteractable != null && bestInteractable != _closestInteractable)
         {
             if (bestInteractable.CanBeInteracted)
             {
                 bestInteractable.EnableOutlineAndCanvas();
             }
             
-            InteractableChanged?.Invoke(this, true);
+            OnInteractableChanged?.Invoke(this, true);
         }
         else
         {
-            InteractableChanged?.Invoke(this, false);
+            OnInteractableChanged?.Invoke(this, false);
         }
 
         return bestInteractable;
     }
 
+    /// <summary>
+    /// Devuelve el AIntactable del objeto interactivo más cercano a la linea de visión del jugador
+    /// </summary>
+    /// <param name="hitColliders"></param>
+    /// <returns></returns>
     AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
     {
         AInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
 
-        Vector3 playerPosition = cameraTransform.position;
-        Vector3 lineOfSightDirection = cameraTransform.forward;
+        Vector3 playerPosition = _cameraTransform.position;
+        Vector3 lineOfSightDirection = _cameraTransform.forward;
 
         foreach (Collider obj in hitColliders)
         {
             Vector3 objectPosition = obj.gameObject.transform.position;
-            Vector3 toObject = GetClosestPointOnLine(playerPosition, playerPosition + (lineOfSightDirection * interactionDistance), objectPosition) - objectPosition;
+            Vector3 toObject = GetClosestPointOnLine(playerPosition, playerPosition + (lineOfSightDirection * _interactionDistance), objectPosition) - objectPosition;
             float distanceToLineOfSight = toObject.magnitude;
 
             if (distanceToLineOfSight < closestDistance)
@@ -573,6 +584,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         return closestInteractable;
     }
 
+    /// <summary>
+    /// Devuelve el punto en una recta más cercano a otro punto, se usa en GetClosestInteractableToLineOfSight
+    /// </summary>
+    /// <param name="lineStart"></param>
+    /// <param name="lineEnd"></param>
+    /// <param name="point"></param>
+    /// <returns></returns>
     private Vector3 GetClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
     {
         Vector3 lineDirection = lineEnd - lineStart;

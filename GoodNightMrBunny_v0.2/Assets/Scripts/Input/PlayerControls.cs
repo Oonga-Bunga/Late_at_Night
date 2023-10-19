@@ -28,7 +28,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""77e6d8d5-3a32-4749-b3c1-a398cf571fc9"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""LookCallback"",
                     ""type"": ""PassThrough"",
                     ""id"": ""aa5b87eb-c3e6-419e-a531-444cb8c518a0"",
                     ""expectedControlType"": ""Vector2"",
@@ -99,7 +99,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""LookCallback"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -330,7 +330,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("LookCallback", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("_move", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("_run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("_jump", throwIfNotFound: true);

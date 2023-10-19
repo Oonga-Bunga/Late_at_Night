@@ -46,6 +46,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         if (_player)
         {
             SetPlayer(_player);
@@ -92,13 +93,13 @@ public class PlayerInputManager : MonoBehaviour
     public void SetPlayer(PlayerController player)
     {
         _commands = new Dictionary<string, ICommand> {
-                { "move", new MoveCommand(player) },
-                { "run", new RunCommand(player) },
-                { "jump", new JumpCommand(player) },
-                { "use", new UseHeldObjectCommand(player) },
-                { "interact", new InteractCommand(player) },
-                { "drop", new DropObjectCommand(player) }
-            };
+            { "move", new MoveCommand(player) },
+            { "run", new RunCommand(player) },
+            { "jump", new JumpCommand(player) },
+            { "use", new UseHeldObjectCommand(player) },
+            { "interact", new InteractCommand(player) },
+            { "drop", new DropObjectCommand(player) }
+        };
 
         _move.action.Enable();
 

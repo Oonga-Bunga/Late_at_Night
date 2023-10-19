@@ -4,52 +4,54 @@ using UnityEngine;
 
 public class HeadBob : MonoBehaviour
 {
-    [SerializeField] private bool enabled = true;
-    [SerializeField] private bool sidewaysBobToggle = true;
+    //Source: https://www.youtube.com/watch?v=5MbR2qJK8Tc
 
-    [SerializeField, Range(0, 0.1f)] private float amplitude = 0.015f;
-    [SerializeField, Range(0, 30f)] private float frequency = 10.0f;
+    [SerializeField] private bool _enabled = true;
+    [SerializeField] private bool _sidewaysBobToggle = true;
 
-    [SerializeField] private Transform camera = null;
-    [SerializeField] private Transform cameraHolder = null;
-    [SerializeField] private Transform defaultCameraPos = null;
+    [SerializeField, Range(0, 0.1f)] private float _amplitude = 0.015f;
+    [SerializeField, Range(0, 500f)] private float _frequency = 10.0f;
 
-    private float toggleSpeed = 1.0f;
-    private Vector3 startPos;
-    private PlayerController playerController;
-    private Rigidbody playerRb;
+    [SerializeField] private Transform _camera = null;
+    [SerializeField] private Transform _cameraHolder = null;
+    [SerializeField] private Transform _defaultCameraPos = null;
+
+    private float _toggleSpeed = 1.0f;
+    private Vector3 _startPos;
+    private PlayerController _playerController;
+    private Rigidbody _playerRb;
 
     private void Awake()
     {
-        playerController= GetComponent<PlayerController>();
-        playerRb = GetComponent<Rigidbody>();
-        startPos = defaultCameraPos.localPosition;
+        _playerController= GetComponent<PlayerController>();
+        _playerRb = GetComponent<Rigidbody>();
+        _startPos = _defaultCameraPos.localPosition;
     }
 
     private void LateUpdate()
     {
-        cameraHolder.position = defaultCameraPos.position;
-        cameraHolder.position = defaultCameraPos.localPosition + cameraHolder.position;
+        _cameraHolder.position = _defaultCameraPos.position;
+        _cameraHolder.position = _defaultCameraPos.localPosition + _cameraHolder.position;
 
-        if (!enabled) return;
+        if (!_enabled) return;
 
         CheckMotion();
-        camera.LookAt(FocusTarget());
+        _camera.LookAt(FocusTarget());
     }
 
     private void PlayMotion(Vector3 motion)
     {
-        camera.localPosition += motion;
+        _camera.localPosition += motion;
     }
 
     private void CheckMotion()
     {
-        float speed = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z).magnitude;
+        float speed = new Vector3(_playerRb.velocity.x, 0, _playerRb.velocity.z).magnitude;
 
         ResetPosition();
 
-        if (speed < toggleSpeed) return;
-        if (!playerController.IsPlayerGrounded) return;
+        if (speed < _toggleSpeed) return;
+        if (!_playerController.IsPlayerGrounded) return;
 
         PlayMotion(FootStepMotion());
     }
@@ -57,26 +59,26 @@ public class HeadBob : MonoBehaviour
     private Vector3 FootStepMotion()
     {
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * frequency) * amplitude;
+        pos.y += Mathf.Sin(Time.time * _frequency * _playerController.MaxCurrentSpeed) * _amplitude;
 
-        if (!sidewaysBobToggle) return pos;
+        if (!_sidewaysBobToggle) return pos;
 
-        pos.x += Mathf.Cos(Time.time * frequency / 2) * amplitude * 0.5f;
+        pos.x += Mathf.Cos(Time.time * (_frequency * _playerController.MaxCurrentSpeed) / 2) * _amplitude * 0.5f;
 
         return pos;
     }
 
     private void ResetPosition()
     {
-        if (camera.localPosition == startPos) return;
+        if (_camera.localPosition == _startPos) return;
 
-        camera.localPosition = Vector3.Lerp(camera.localPosition, startPos, 1 * Time.deltaTime);
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, _startPos, 1 * Time.deltaTime);
     }
 
     private Vector3 FocusTarget()
     {
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y + cameraHolder.localPosition.y, transform.position.z);
-        pos += cameraHolder.forward * 15.0f;
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + _cameraHolder.localPosition.y, transform.position.z);
+        pos += _cameraHolder.forward * 15.0f;
         return pos;
     }
 }

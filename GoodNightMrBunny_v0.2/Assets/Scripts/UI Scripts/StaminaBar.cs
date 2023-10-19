@@ -12,7 +12,7 @@ public class StaminaBar : MonoBehaviour
         PlayerController player = FindObjectOfType<PlayerController>();
         slider.maxValue = player.MaxStamina;
         slider.value = slider.maxValue;
-        player.StaminaChanged += UpdateBar;
+        player.OnStaminaChanged += UpdateBar;
     }
 
     private void UpdateBar(object sender, float value)

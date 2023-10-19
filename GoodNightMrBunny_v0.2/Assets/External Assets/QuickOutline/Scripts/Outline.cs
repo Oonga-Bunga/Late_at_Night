@@ -67,7 +67,7 @@ public class Outline : MonoBehaviour {
 
   [Header("Optional")]
 
-  [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
+  [SerializeField, Tooltip("Precompute _enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
   + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
   private bool precomputeOutline;
 
@@ -128,7 +128,7 @@ public class Outline : MonoBehaviour {
       bakeValues.Clear();
     }
 
-    // Generate smooth normals when baking is enabled
+    // Generate smooth normals when baking is _enabled
     if (precomputeOutline && bakeKeys.Count == 0) {
       Bake();
     }

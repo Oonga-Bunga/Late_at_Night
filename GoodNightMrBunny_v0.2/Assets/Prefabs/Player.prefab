@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8896458753299405621}
   - component: {fileID: 3561197715966236921}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Player Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3664345265469884240}
   - component: {fileID: 5174874227486545163}
   m_Layer: 0
-  m_Name: EmptyWeapon
+  m_Name: Empty Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 275943555333814918}
   - component: {fileID: 8444721616776857248}
   m_Layer: 0
-  m_Name: CamHolder
+  m_Name: Cam Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,10 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9e6488bf9106d44a432b04eb3fdefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 2
-  sensitivityY: 1
-  yRotationLimit: 90
-  mouseDeltaAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _sensitivityX: 2
+  _sensitivityY: 1
+  _yRotationLimit: 88
+  _mouseDeltaAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
 --- !u!1 &2212645206444721369
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793222078781225398}
   m_Layer: 0
-  m_Name: EyeLevel
+  m_Name: Eye Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2946119507166645949}
   m_Layer: 0
-  m_Name: EquippedObject
+  m_Name: Equipped Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 6489383685619584872}
   - component: {fileID: 1181034145893535782}
   m_Layer: 0
-  m_Name: RotationPivot
+  m_Name: Rotation Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 6466075991564977278}
   - component: {fileID: 3013253424465459687}
   m_Layer: 0
-  m_Name: ClayBalls
+  m_Name: Clay Balls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,36 +701,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bdf2f400d7c84459ecab72efce6dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWalkingSpeed: 7
-  maxRunningSpeed: 14
-  maxStamina: 100
-  staminaRecoveryRate: 10
-  staminaComsumptionRate: 20
-  minimumStaminaForRunning: 0.2
-  acceleration: 13
-  decceleration: 16
-  airAccelerationModifier: 0.5
-  velPower: 0.96
-  groundFrictionAmount: 1
-  airFrictionAmount: 0.25
-  jumpForce: 20
-  jumpCutMultiplier: 0.4
-  jumpCoyoteTime: 0.15
-  jumpBufferTime: 0.1
-  fallGravityMultiplier: 1.2
-  groundCheck: {fileID: 5206125954227781533}
-  maxGroundCheckDistance: 0.2
-  groundLayer:
+  _maxWalkingSpeed: 7
+  _maxRunningSpeed: 12
+  _maxStamina: 100
+  _staminaRecoveryRate: 10
+  _staminaComsumptionRate: 20
+  _minimumStaminaForRunning: 0.2
+  _acceleration: 13
+  _decceleration: 16
+  _airAccelerationModifier: 0.5
+  _velPower: 0.96
+  _groundFriction: 1
+  _airFriction: 0.25
+  _jumpForce: 20
+  _jumpCutMultiplier: 0.4
+  _jumpCoyoteTime: 0.15
+  _jumpBufferTime: 0.1
+  _fallGravityMultiplier: 1.2
+  _groundCheck: {fileID: 5206125954227781533}
+  _maxGroundCheckDistance: 0.3
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  interactionDistance: 3
-  interactableLayer:
+  _interactionDistance: 3
+  _interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  dropDistance: 3.5
-  sphereRaycastRadius: 0.3
-  minimumDistanceFromCollision: 0.3
-  holdableObjectList:
+  _dropDistance: 3.5
+  _sphereRaycastRadius: 0.3
+  _minimumDistanceFromCollision: 0.3
+  _holdableObjectList:
   - {fileID: 2048207479167378135}
   - {fileID: 3739991193882976171}
   - {fileID: 3013253424465459687}
@@ -774,11 +774,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c36b1109fd6eb4fa1addea0d6ca9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabled: 1
-  amplitude: 0.01
-  frequency: 15
-  camera: {fileID: 1457369042830505180}
-  cameraHolder: {fileID: 275943555333814918}
+  _enabled: 1
+  _sidewaysBobToggle: 1
+  _amplitude: 0.0075
+  _frequency: 2
+  _camera: {fileID: 1457369042830505180}
+  _cameraHolder: {fileID: 275943555333814918}
+  _defaultCameraPos: {fileID: 793222078781225398}
 --- !u!1 &5846613368354875601
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +792,7 @@ GameObject:
   - component: {fileID: 7017701221403941248}
   - component: {fileID: 5206125954227781533}
   m_Layer: 0
-  m_Name: GroundCheckPoint
+  m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,7 +977,7 @@ GameObject:
   - component: {fileID: 7630126367963801236}
   - component: {fileID: 8573245452187462797}
   m_Layer: 0
-  m_Name: ClayBin
+  m_Name: Clay Bin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

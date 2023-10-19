@@ -150,6 +150,82 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1742261917569017586, guid: 53e2ac93bc3316e4b9e7668714efd54e, type: 3}
+--- !u!1 &66883471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66883472}
+  - component: {fileID: 66883474}
+  - component: {fileID: 66883473}
+  m_Layer: 5
+  m_Name: Crosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &66883472
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66883471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1888615247}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &66883473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66883471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &66883474
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66883471}
+  m_CullTransparentMesh: 1
 --- !u!1 &136605082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,6 +1261,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 32374981119890449, guid: 5737b2fccbdf76e45bdc901ef82fec86, type: 3}
+      propertyPath: _amplitude
+      value: 0.0075
+      objectReference: {fileID: 0}
+    - target: {fileID: 32374981119890449, guid: 5737b2fccbdf76e45bdc901ef82fec86, type: 3}
+      propertyPath: _frequency
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5696606436722763393, guid: 5737b2fccbdf76e45bdc901ef82fec86, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1282,13 +1366,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfe59e1724605449979f09471ee7e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1079231919}
-  Move: {fileID: -2656619323754647521, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
-  Run: {fileID: 3221340512297687605, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
-  Jump: {fileID: 5764487987610752513, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
-  Use: {fileID: 5013444216586194238, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
-  Drop: {fileID: 9004987735689839981, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
-  Interact: {fileID: 5875160760304972240, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _player: {fileID: 1079231919}
+  _move: {fileID: -2656619323754647521, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _run: {fileID: 3221340512297687605, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _jump: {fileID: 5764487987610752513, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _use: {fileID: 5013444216586194238, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _drop: {fileID: 9004987735689839981, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _interact: {fileID: 5875160760304972240, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
 --- !u!4 &1164857298
 Transform:
   m_ObjectHideFlags: 0
@@ -2978,6 +3062,7 @@ RectTransform:
   - {fileID: 2139738536}
   - {fileID: 2028497122}
   - {fileID: 480664926}
+  - {fileID: 66883472}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

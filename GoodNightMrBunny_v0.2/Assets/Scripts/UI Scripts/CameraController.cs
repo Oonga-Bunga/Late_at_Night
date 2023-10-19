@@ -6,110 +6,121 @@ using System.Collections.Generic;
 
 public class CameraController : MonoBehaviour
 {
+    [Range(0.1f, 9f)][SerializeField] float _sensitivityX = 2f; // Sensibilidad en el eje X
+    [Range(0.1f, 9f)][SerializeField] float _sensitivityY = 1f; // Sensibilidad en el eje Y
+    [Range(0f, 90f)][SerializeField] float _yRotationLimit = 88f; // Limite de la rotación en el eje Y para que la cámara no haga flip
+    [SerializeField] private InputActionReference _mouseDeltaAction;
+
+    private List<int> _bannedTouches = new List<int>(); // Lista de toques en la pantalla tactil que no se usarán para mover la cámara
+    Vector2 rotation = Vector2.zero; // Rotación de la cámara
+
+    public delegate void LookCallback(); // Delegado para la función de comportamiento de la cámara
+    public LookCallback _lookFunction; // Función de comportamiento de la cámara, depende sel dispositivo
+
+    private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
+    private bool _isLookEnabled = true; // Si la cámara del jugador sigue el ratón/toque o no
+
     public float SensitivityX
     {
-        get { return sensitivityX; }
-        set { sensitivityX = value; }
+        get { return _sensitivityX; }
+        set { _sensitivityX = value; }
     }
 
     public float SensitivityY
     {
-        get { return sensitivityY; }
-        set { sensitivityY = value; }
+        get { return _sensitivityY; }
+        set { _sensitivityY = value; }
     }
-
-    [Range(0.1f, 9f)][SerializeField] float sensitivityX = 8f;
-    [Range(0.1f, 9f)][SerializeField] float sensitivityY = 4f;
-    [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
-    [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
-
-    [SerializeField] private InputActionReference mouseDeltaAction;
-    private List<int> bannedTouches = new List<int>();
-
-    Vector2 rotation = Vector2.zero;
-
-    public delegate void Look(); //Delegate with the firing function of the gun that depends on the GunObject
-    public Look lookFunction; //Firing function
-
-    private PauseManager pauseManager;
-    private bool isLookEnabled;
 
     private void Awake()
     {
         if (Application.isMobilePlatform)
         {
-            lookFunction = HandlePCInput;
+            _lookFunction = HandleMobileInput;
         }
         else
         {
-            lookFunction = HandlePCInput;
+            _lookFunction = HandlePCInput;
         }
         
-        mouseDeltaAction.action.Enable();
+        _mouseDeltaAction.action.Enable();
 
-        pauseManager = FindAnyObjectByType<PauseManager>();
-        isLookEnabled = true;
+        _pauseManager = FindAnyObjectByType<PauseManager>();
     }
 
+    /// <summary>
+    /// Si el juego no está pausado y isLookEnabled es true entonces se ejecuta lookFunction
+    /// </summary>
     private void Update()
     {
-        if (pauseManager.isPaused || !isLookEnabled) return;
+        if (_pauseManager.isPaused || !_isLookEnabled) return;
 
-        lookFunction();
+        _lookFunction();
     }
 
+    /// <summary>
+    /// Maneja el movimiento de la cámara usando el delta del ratón
+    /// </summary>
     private void HandlePCInput()
     {
-        Vector2 delta = mouseDeltaAction.action.ReadValue<Vector2>();
-        rotation.x += delta.x * sensitivityX;
-        rotation.y += delta.y * sensitivityY;
-        rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
+        Vector2 delta = _mouseDeltaAction.action.ReadValue<Vector2>();
+        rotation.x += delta.x * _sensitivityX;
+        rotation.y += delta.y * _sensitivityY;
+        rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
 
         var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 30f);
     }
 
+    /// <summary>
+    /// Maneja el movimiento de la cámara usando el delta del toque que no esté tocando un elemento de la interfaz
+    /// </summary>
     private void HandleMobileInput()
     {
         for (int i = 0; i < Input.touchCount; i++)
         {
             Touch touch = Input.GetTouch(i);
-            // Verifica si el objeto golpeado tiene la etiqueta deseada
-            // O si está en la capa deseada
-            if (!bannedTouches.Contains(touch.fingerId))
+
+            if (!_bannedTouches.Contains(touch.fingerId))
             {
                 if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                 {
                     Vector2 delta = touch.deltaPosition;
-                    rotation.x += delta.x * sensitivityX;
-                    rotation.y += delta.y * sensitivityY;
-                    rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
+                    rotation.x += delta.x * _sensitivityX;
+                    rotation.y += delta.y * _sensitivityY;
+                    rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
 
                     var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
                 }
                 else
                 {
-                    bannedTouches.Add(touch.fingerId);
+                    _bannedTouches.Add(touch.fingerId);
                 }
             }
             else
             {
                 if (touch.phase == UnityEngine.TouchPhase.Ended)
                 {
-                    bannedTouches.Remove(touch.fingerId);
+                    _bannedTouches.Remove(touch.fingerId);
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Activa el movimiento de la cámara
+    /// </summary>
     public void EnableLook()
     {
-        isLookEnabled = true;
+        _isLookEnabled = true;
     }
 
+    /// <summary>
+    /// Desactiva el movimiento de la cámara
+    /// </summary>
     public void DisableLook()
     {
-        isLookEnabled = false;
+        _isLookEnabled = false;
     }
 }
