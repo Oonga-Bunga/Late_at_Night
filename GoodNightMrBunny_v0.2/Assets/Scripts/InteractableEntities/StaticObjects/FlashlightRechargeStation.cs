@@ -10,9 +10,11 @@ public class FlashlightRechargeStation : AInteractable
     private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
     private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
+    [SerializeField] private GameObject _flashlightModel;
 
     private void Start()
     {
+        _flashlightModel.SetActive(_hasFlashlight);
         _rechargeAmount = Flashlight.maxCharge * _rechargeRate;
     }
 
@@ -33,16 +35,27 @@ public class FlashlightRechargeStation : AInteractable
     /// </summary>
     protected override void InteractedPressAction()
     {
-        if (_hasFlashlight)
+        if (_player.CurrentHeldObject.holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
+        {
+            if (_hasFlashlight)
+            {
+                _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
+                _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, false, _currentCharge);
+            }
+            else
+            {
+                _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
+                _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
+                _hasFlashlight = true;
+                _flashlightModel.SetActive(true);
+            }
+        }
+        else if (_hasFlashlight)
         {
             _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, true, _currentCharge);
+            _currentCharge = 0f;
             _hasFlashlight = false;
-        }
-        else if (_player.CurrentHeldObject.holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
-        {
-            _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
-            _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
-            _hasFlashlight = true;
+            _flashlightModel.SetActive(false);
         }
     }
 }

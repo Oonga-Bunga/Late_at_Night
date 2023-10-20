@@ -25,7 +25,7 @@ public class HeadBob : MonoBehaviour
     {
         _playerController= GetComponent<PlayerController>();
         _playerRb = GetComponent<Rigidbody>();
-        _startPos = _defaultCameraPos.localPosition;
+        _startPos = _camera.localPosition;
     }
 
     private void LateUpdate()
@@ -71,7 +71,7 @@ public class HeadBob : MonoBehaviour
     {
         if (_camera.localPosition == _startPos) return;
 
-        _camera.localPosition = Vector3.Lerp(_camera.localPosition, Vector3.zero, 1 * Time.deltaTime);
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, Vector3.zero, 30f * Time.deltaTime);
     }
 
     private Vector3 FocusTarget()
