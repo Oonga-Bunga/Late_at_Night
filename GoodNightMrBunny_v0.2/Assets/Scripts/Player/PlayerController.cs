@@ -8,6 +8,8 @@ using System.Drawing;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
+    
+
     #region Attributes
 
     #region Movement
@@ -599,6 +601,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         Vector3 closestPoint = lineStart + t * lineDirection;
         return closestPoint;
     }
-
+  
     #endregion
 }

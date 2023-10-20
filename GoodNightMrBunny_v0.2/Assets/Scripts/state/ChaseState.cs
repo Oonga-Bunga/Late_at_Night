@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class ChaseState : state
 {
+    public Flashlight flashlight;
+    
     public Transform Objetivo;
     public float Velocidad;
     public NavMeshAgent IA;

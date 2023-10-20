@@ -11,7 +11,7 @@ public class Flashlight : AWeapon
     #region Atributtes
 
     static public float maxCharge = 100f;
-    [SerializeField]private float flashlightDamage = 5f;
+    [SerializeField]private float flashlightDamage = 50f;
     //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
     [SerializeField]private float dischargeMultiplier = 5f; 
     [SerializeField]private float rangeDamage = 40f;
@@ -46,7 +46,7 @@ public class Flashlight : AWeapon
     /// <param name="attackInput"></param>
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
-        Debug.Log("se susa");
+        
         if (currentCharge < 0) return;
         
         if (attackInput == IPlayerReceiver.InputType.Hold)
@@ -98,16 +98,18 @@ public class Flashlight : AWeapon
         // Lanzar un rayo desde la posición de la linterna en la dirección de la linterna.
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rangeDamage))
+        
+        if (Physics.Raycast(ray, out hit, rangeDamage, LayerMask.GetMask("Enemy"))) // Filtra por la capa "Enemy"
         {
             // Verificar si el objeto golpeado está en la capa "Enemy".
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                //Obtener el componente del script de enemigo.
+                Debug.Log("daño enemigo");
+                // Obtener el componente del script del enemigo.
                 AMonster enemy = hit.collider.GetComponent<AMonster>();
                 if (enemy != null)
                 {
+                    Debug.Log("daño enemigo");
                     enemy.TakeHit(flashlightDamage);
                 }
             }

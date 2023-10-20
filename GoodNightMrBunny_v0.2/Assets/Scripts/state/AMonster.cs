@@ -16,9 +16,9 @@ public class AMonster : MonoBehaviour
     {
         if (currentHealth > 0)
         {
+            // Reducir la salud actual del enemigo en función del daño proporcionado.
             currentHealth -= Mathf.RoundToInt(damage);
-            Debug.Log("Enemy Hit! Current Health: " + currentHealth);
-
+            Debug.Log("recibiendo daño");
             if (currentHealth <= 0)
             {
                 Die();
@@ -28,6 +28,8 @@ public class AMonster : MonoBehaviour
 
     private void Die()
     {
+        // Implementa lo que sucede cuando el enemigo muere, como reproducir una animación de muerte o desactivar el objeto.
+        // Por ejemplo, puedes desactivar el objeto en lugar de destruirlo.
         gameObject.SetActive(false);
     }
 }
