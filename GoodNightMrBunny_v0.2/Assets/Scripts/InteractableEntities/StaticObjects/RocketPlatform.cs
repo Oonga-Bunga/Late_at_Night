@@ -45,6 +45,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         _state = RocketPlatformState.Ready;
         _lowerArmAnimator = _lowerArm.GetComponent<Animator>();
         _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.enabled = false;
     }
 
     #endregion
