@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464bb3cdde7fc72448bb00ed2a498096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketPlatform: {fileID: 8540891112126837222}
+  _rocketPlatform: {fileID: 8540891112126837222}
 --- !u!1 &2286542518860496530
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8429239216235603429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -713,18 +713,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae2373f056b81f40a81febf3613359d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactType: 0
-  holdDuration: 0
-  pressBuffer: 0
-  outlineHolder: {fileID: 8555154764282405744}
-  cooldown: 5
-  rotationSpeed: 20
-  rotationPoint: {fileID: 4651136274596131989}
-  lowerArm: {fileID: 3422050351632158073}
-  mountingPoint: {fileID: 2286542518860496530}
-  rocketPlatformModel: {fileID: 8555154764282405744}
-  rocketPrefab: {fileID: 868036485337339681, guid: 3e6ed665ed0d31d49a02639df2ce8626, type: 3}
-  groundLayer:
+  _interactType: 0
+  _holdDuration: 0
+  _pressBuffer: 0
+  _outlineHolder: {fileID: 8555154764282405744}
+  _cooldown: 5
+  _rotationSpeed: 30
+  _rotationPoint: {fileID: 4651136274596131989}
+  _lowerArm: {fileID: 3422050351632158073}
+  _mountingPoint: {fileID: 2286542518860496530}
+  _rocketPlatformModel: {fileID: 8555154764282405744}
+  _rocketPrefab: {fileID: 868036485337339681, guid: 3e6ed665ed0d31d49a02639df2ce8626, type: 3}
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 8
 --- !u!1 &8555154764282405744
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99f4fe62bb738f479c6f86c188de825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 8540891112126837222}
+  _interactable: {fileID: 8540891112126837222}
 --- !u!1001 &8725426479629541234
 PrefabInstance:
   m_ObjectHideFlags: 0

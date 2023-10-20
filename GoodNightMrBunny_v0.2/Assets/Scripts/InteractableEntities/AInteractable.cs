@@ -43,7 +43,7 @@ public class AInteractable : MonoBehaviour, IInteractable
         _promptCanvas = transform.GetChild(0).gameObject.GetComponentInChildren<Canvas>();
         _radialBar = _promptCanvas.gameObject.GetComponentInChildren<Image>();
         _promptCanvas.enabled = false;
-        _radialBar.fillAmount = _currentHoldTime / _holdDuration;
+        _radialBar.fillAmount = 0f;
     }
 
     #endregion
