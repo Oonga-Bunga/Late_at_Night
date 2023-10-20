@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8813760057741934773}
   - component: {fileID: 3330883093515463672}
   - component: {fileID: 859096776667380585}
+  - component: {fileID: 3493886526366765999}
   m_Layer: 6
   m_Name: ClayBinModel
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 80299319323009980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4715533528484084235}
@@ -52,7 +53,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -691,6 +692,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactable: {fileID: 3879708865922388819}
+--- !u!65 &3493886526366765999
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80299319323009980}
+  m_Material: {fileID: 13400000, guid: a7af2b1c5a54886459ebb4ff45b99df6, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.79567134, y: 1.8915696, z: 0.8223229}
+  m_Center: {x: 0.0044419765, y: 0.94886136, z: -0.000000029802322}
 --- !u!1 &7547812807105234605
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +915,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
       propertyPath: m_LocalScale.x
-      value: 625
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
       propertyPath: m_LocalPosition.x
@@ -901,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.385
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
       propertyPath: m_LocalPosition.z
