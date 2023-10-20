@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class IdleState : state
 {
+    public Flashlight flashlight;
+
+
     public int vida;
     public int damage;
 
@@ -29,20 +32,8 @@ public class IdleState : state
     }
     
     
-   }
-
-   /*public OnTriggerEnter(Collider other){
-        if (other.tag=="Objetivo"){
-            return Atackstate;
-        }
-        if (other.tag=="Player"){
-            //Player.GetComponent<datos>().vida -=damage;
-            Debug.Log("enemigo");
-        }
-
-    }*/
-
-    
+   }   
+   
    void Update()
 {
     IA.speed = Velocidad;
@@ -54,7 +45,7 @@ public class IdleState : state
     }
     else
     {
-        Debug.Log("Vida: " + vida);
+        //Debug.Log("Vida: " + vida);
     }
 }
 }

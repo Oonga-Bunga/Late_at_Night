@@ -46,6 +46,7 @@ public class Flashlight : AWeapon
     /// <param name="attackInput"></param>
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
+        Debug.Log("se susa");
         if (currentCharge < 0) return;
         
         if (attackInput == IPlayerReceiver.InputType.Hold)
