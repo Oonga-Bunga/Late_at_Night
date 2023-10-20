@@ -43,8 +43,10 @@ public class GameManager : MonoBehaviour
     public EventHandler<float> TimerEvent;
 
     // Spawn de enemigos
-    private List<AMonster> enemyList;
-    private float spawnRate;
+    [SerializeField]  private List<GameObject> enemyList;
+    [SerializeField]  private float spawnRate;
+    private float enemySpawnCooldown = 0f;
+    [SerializeField] private Transform enemySpawnPoint;
 
     // Spawn de props y objetos
     public GameObject[] propPrefabs;
@@ -144,6 +146,14 @@ public class GameManager : MonoBehaviour
 
         if (inGame)
         {
+            enemySpawnCooldown += Time.deltaTime;
+
+            if (enemySpawnCooldown >= spawnRate)
+            {
+                enemySpawnCooldown = 0f;
+                Instantiate(enemyList[0], enemySpawnPoint.position, Quaternion.identity);
+            }
+
             currentTime -= Time.deltaTime;
             TimerEvent?.Invoke(this, currentTime);
 
