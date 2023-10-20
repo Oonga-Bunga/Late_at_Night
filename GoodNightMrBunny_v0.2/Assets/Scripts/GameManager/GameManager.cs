@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     private int currentActivatedSwitches;
     private List<float[,]> possibleSwitchLocationList = new List<float[,]>();
     [SerializeField] private TextMeshProUGUI upperText;
+    [SerializeField] private TextMeshProUGUI winLoseText;
 
     // Tiempo de supervivencia
     [SerializeField] private float maxTime;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         currentActivatedSwitches = 0;
         totalSwitches = 0;
         pauseManager = FindObjectOfType<PauseManager>();
+        winLoseText.gameObject.SetActive(false);
 
         // Create switches
 
@@ -185,13 +187,15 @@ public class GameManager : MonoBehaviour
     private void PlayerWon()
     {
         inGame = false;
-        Debug.Log("win");
+        winLoseText.text = "You won!";
+        winLoseText.gameObject.SetActive(true);
     }
 
     private void PlayerLost()
     {
         inGame = false;
-        Debug.Log("lose");
+        winLoseText.text = "You lost...";
+        winLoseText.gameObject.SetActive(true);
     }
 
     private void StartCatEvent()
