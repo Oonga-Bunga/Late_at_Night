@@ -15,15 +15,8 @@ public class InteractButton : MonoBehaviour
         interactButton = transform.GetChild(0).gameObject;
     }
 
-    private void ShowButton(object sender, bool interactable)
+    private void ShowButton(object sender, bool isInteractableInRange)
     {
-        if (interactable)
-        {
-            interactButton.SetActive(true);
-        }
-        else
-        {
-            interactButton.SetActive(false);
-        }
+        interactButton.SetActive(isInteractableInRange);
     }
 }

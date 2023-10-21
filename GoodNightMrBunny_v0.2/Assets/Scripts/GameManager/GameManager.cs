@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     private List<float[,]> possibleSwitchLocationList = new List<float[,]>();
     [SerializeField] private TextMeshProUGUI upperText;
     [SerializeField] private TextMeshProUGUI winLoseText;
+    [SerializeField] private GameObject mobileControls;
 
     // Tiempo de supervivencia
     [SerializeField] private float maxTime;
@@ -63,6 +64,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (Application.isMobilePlatform)
+        {
+            mobileControls.SetActive(true);
+        }
+        else
+        {
+            mobileControls.SetActive(true);
+        }
+
         currentTime = maxTime;
         currentActivatedSwitches = 0;
         totalSwitches = 0;

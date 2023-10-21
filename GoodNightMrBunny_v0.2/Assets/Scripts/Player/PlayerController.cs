@@ -511,6 +511,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             if (interactable != null)
             {
                 bestInteractable = interactable;
+                OnInteractableChanged?.Invoke(this, true);
+
+                if (bestInteractable.CanBeInteracted && bestInteractable != _closestInteractable)
+                {
+                    bestInteractable.EnableOutlineAndCanvas();
+                }
             }
         }
         else if (hitColliders.Length == 1)
@@ -520,6 +526,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             if (interactable != null)
             {
                 bestInteractable = interactable;
+                OnInteractableChanged?.Invoke(this, true);
+
+                if (bestInteractable.CanBeInteracted && bestInteractable != _closestInteractable)
+                {
+                    bestInteractable.EnableOutlineAndCanvas();
+                }
             }
         }
 
@@ -531,19 +543,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             _closestInteractable.DisableOutlineAndCanvas();
             _closestInteractable.PlayerExitedRange();
         }
-
-        // Si el nuevo objeto no es nulo se activa su canvas y _outline
-
-        if (bestInteractable != null && bestInteractable != _closestInteractable)
-        {
-            if (bestInteractable.CanBeInteracted)
-            {
-                bestInteractable.EnableOutlineAndCanvas();
-            }
-            
-            OnInteractableChanged?.Invoke(this, true);
-        }
-        else
+        
+        if (bestInteractable == null)
         {
             OnInteractableChanged?.Invoke(this, false);
         }
@@ -556,7 +557,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     /// <param name="hitColliders"></param>
     /// <returns></returns>
-    AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
+    private AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
     {
         AInteractable closestInteractable = null;
         float closestDistance = Mathf.Infinity;
