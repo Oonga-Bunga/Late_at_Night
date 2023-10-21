@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   flashlight: {fileID: 0}
+  vida: 1
   Objetivo: {fileID: 0}
   Velocidad: 3
   IA: {fileID: 6635620037972321220}
@@ -143,6 +144,7 @@ GameObject:
   - component: {fileID: 4770688591512038869}
   - component: {fileID: 760762717092338964}
   - component: {fileID: 5385190699372362155}
+  - component: {fileID: 1787872848125580714}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Enemy
@@ -239,6 +241,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1787872848125580714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429306327347038913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75457d1f319af644f8bbd0cb0a0b50df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &4997288261449284421
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6709887814629590331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: -0.45, z: 10.75}
+  m_LocalPosition: {x: 0.97, y: -0.28, z: 10.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -364,7 +379,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6709887814629590331}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75457d1f319af644f8bbd0cb0a0b50df, type: 3}
   m_Name: 

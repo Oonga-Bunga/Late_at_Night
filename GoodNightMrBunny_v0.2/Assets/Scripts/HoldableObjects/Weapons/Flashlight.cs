@@ -104,7 +104,7 @@ public class Flashlight : AWeapon
             // Verificar si el objeto golpeado está en la capa "Enemy".
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                Debug.Log("daño enemigo");
+                //Debug.Log("daño enemigo");
                 // Obtener el componente del script del enemigo.
                 AMonster enemy = hit.collider.GetComponent<AMonster>();
                 if (enemy != null)
