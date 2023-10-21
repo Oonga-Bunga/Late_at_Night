@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
     {
         if (Application.isMobilePlatform)
         {
-            _lookFunction = HandleMobileInput;
+            _lookFunction = HandlePCInput;
         }
         else
         {
