@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -672,6 +672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlashlightRechargeStation
       objectReference: {fileID: 0}
+    - target: {fileID: 4788600386640337827, guid: 1cfefcaa60a703b4198eae0078597d4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1220,6 +1224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RocketPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 8429239216235603429, guid: fe7b2cb6dd81ca44d880d02907a73334, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1659,6 +1667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClayBinPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 7547812807105234605, guid: 40658e78aa9748e4dbd756bf28b5711b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2042,6 +2054,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5690002980756074118, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 223
+      objectReference: {fileID: 0}
     - target: {fileID: 6381977018910182634, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: uiClayAmmo
       value: 
@@ -2158,6 +2174,10 @@ PrefabInstance:
     - target: {fileID: 4037434694975463464, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
       propertyPath: m_Name
       value: FlashlightPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4037434694975463464, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7574240209079896873, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
       propertyPath: m_RootOrder
@@ -2344,6 +2364,10 @@ PrefabInstance:
     - target: {fileID: 306609151177477229, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
       propertyPath: m_Name
       value: Switch
+      objectReference: {fileID: 0}
+    - target: {fileID: 306609151177477229, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3627499835088194635, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
       propertyPath: m_RootOrder
@@ -2560,6 +2584,11 @@ RectTransform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2567313342605843182, guid: 1cfefcaa60a703b4198eae0078597d4b, type: 3}
   m_PrefabInstance: {fileID: 680337470}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1005848125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1c3d24395b3835b44a233f529d2304c5, type: 3}
+  m_PrefabInstance: {fileID: 1074855462}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1025968929 stripped
 Transform:
@@ -3270,6 +3299,10 @@ PrefabInstance:
     - target: {fileID: 306609151177477229, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
       propertyPath: m_Name
       value: Switch
+      objectReference: {fileID: 0}
+    - target: {fileID: 306609151177477229, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3627499835088194635, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
       propertyPath: m_RootOrder
@@ -4521,6 +4554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Switch
       objectReference: {fileID: 0}
+    - target: {fileID: 306609151177477229, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3627499835088194635, guid: de1bc6384bf98e846bbe81022954096c, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4809,13 +4846,23 @@ MonoBehaviour:
   upperText: {fileID: 2139738538}
   winLoseText: {fileID: 84954255}
   mobileControls: {fileID: 1356433101}
+  blocking: {fileID: 1005848125}
   maxTime: 60
   enemyList:
-  - {fileID: 4406004526267868641, guid: 25a59d037b7de024fbe708a5057a2d16, type: 3}
-  spawnRate: 10000
+  - {fileID: 6709887814629590331, guid: 7209fb8ee0c20a74699525a348dafd46, type: 3}
+  spawnRate: 5
   enemySpawnPoint: {fileID: 674839971}
   propPrefabs:
-  - {fileID: 4856164596168775616, guid: 9747d7642f7490a4a85995778414f4be, type: 3}
+  - {fileID: 7523971231153658188, guid: 76d3c257cf8f39947bff4a5c8a91fe9a, type: 3}
+  - {fileID: 7292413099659291526, guid: 74b4b384ab0f77541bd0f3a46e8f9a2e, type: 3}
+  - {fileID: 8910641058547710665, guid: 9e40ec865b539fa49a62fb3f40dda40f, type: 3}
+  - {fileID: 295665284537110445, guid: 8d7e5402561816340864449a87b5d2d7, type: 3}
+  - {fileID: 2091774263553555858, guid: 4b8db5892d795c4479bf1eafa5b50f34, type: 3}
+  - {fileID: 6170109686040091766, guid: 12e70cf566ec26741bb5690ff2c9ea48, type: 3}
+  - {fileID: 1128046203153425449, guid: 11c3d80001c9e3e4bbcb2558fb835467, type: 3}
+  - {fileID: 5276504855811706507, guid: 30cc7cc3fc6cee243b9b5775580cd3b2, type: 3}
+  - {fileID: 7084845594959677004, guid: 91ca885d6d6b89b4e9c7b690899f3e78, type: 3}
+  - {fileID: 6332357628547629312, guid: 7f97debf064754d418f80a8fc825df8c, type: 3}
   objectPrefabs:
   - {fileID: 4037434694975463464, guid: 28119995a88120f48a6aa16f18579bf4, type: 3}
   - {fileID: 7547812807105234605, guid: 40658e78aa9748e4dbd756bf28b5711b, type: 3}
@@ -5077,6 +5124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puerta
       objectReference: {fileID: 0}
+    - target: {fileID: 6332357628547629312, guid: 7f97debf064754d418f80a8fc825df8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5155,6 +5206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pizarra
       objectReference: {fileID: 0}
+    - target: {fileID: 7084845594959677004, guid: 91ca885d6d6b89b4e9c7b690899f3e78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5176,6 +5231,10 @@ PrefabInstance:
     - target: {fileID: 1128046203153425449, guid: 11c3d80001c9e3e4bbcb2558fb835467, type: 3}
       propertyPath: m_Name
       value: Mesita
+      objectReference: {fileID: 0}
+    - target: {fileID: 1128046203153425449, guid: 11c3d80001c9e3e4bbcb2558fb835467, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2503162169373925703, guid: 11c3d80001c9e3e4bbcb2558fb835467, type: 3}
       propertyPath: m_RootOrder
@@ -5254,6 +5313,10 @@ PrefabInstance:
     - target: {fileID: 2091774263553555858, guid: 4b8db5892d795c4479bf1eafa5b50f34, type: 3}
       propertyPath: m_Name
       value: Castillo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091774263553555858, guid: 4b8db5892d795c4479bf1eafa5b50f34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020785247886670661, guid: 4b8db5892d795c4479bf1eafa5b50f34, type: 3}
       propertyPath: m_RootOrder
@@ -5389,6 +5452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arcon
       objectReference: {fileID: 0}
+    - target: {fileID: 7523971231153658188, guid: 76d3c257cf8f39947bff4a5c8a91fe9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5461,6 +5528,10 @@ PrefabInstance:
     - target: {fileID: 5276504855811706507, guid: 30cc7cc3fc6cee243b9b5775580cd3b2, type: 3}
       propertyPath: m_Name
       value: MesitaNoche
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276504855811706507, guid: 30cc7cc3fc6cee243b9b5775580cd3b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5540,6 +5611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caballito
       objectReference: {fileID: 0}
+    - target: {fileID: 8910641058547710665, guid: 9e40ec865b539fa49a62fb3f40dda40f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5617,6 +5692,10 @@ PrefabInstance:
     - target: {fileID: 7292413099659291526, guid: 74b4b384ab0f77541bd0f3a46e8f9a2e, type: 3}
       propertyPath: m_Name
       value: Armario
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292413099659291526, guid: 74b4b384ab0f77541bd0f3a46e8f9a2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
