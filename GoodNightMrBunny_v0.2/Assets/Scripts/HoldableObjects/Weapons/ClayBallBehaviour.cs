@@ -6,7 +6,7 @@ public class ClayBallBehaviour : MonoBehaviour
 {
     #region Attributes
     
-    public float baseDamage = 10f;
+    public float baseDamage = 20f;
     [SerializeField]private float lifeTime = 5f;
     [SerializeField]private float jumpForce = 30.0f;
     private bool canJump = false;
@@ -31,6 +31,7 @@ public class ClayBallBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //Hace enemigo al monstruo
+            Destroy(gameObject);
             collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage);
         }
         else if (collision.gameObject.CompareTag("Player") && canJump)
