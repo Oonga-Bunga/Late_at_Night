@@ -23,7 +23,7 @@ public class Switch : AInteractable
     private void TurnOn()
     {
         _isOn = true;
-        OnTurnedOnOrOff.Invoke(this, _isOn);
+        OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = false;
         _light.enabled = true;
     }
@@ -31,7 +31,7 @@ public class Switch : AInteractable
     private void TurnOff()
     {
         _isOn = false;
-        OnTurnedOnOrOff.Invoke(this, _isOn);
+        OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = true;
         _light.enabled = false;
     }

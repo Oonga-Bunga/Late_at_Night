@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            mobileControls.SetActive(true);
+            mobileControls.SetActive(false);
         }
 
         currentTime = maxTime;
@@ -81,12 +81,6 @@ public class GameManager : MonoBehaviour
         winLoseText.gameObject.SetActive(false);
 
         // Create switches
-
-        foreach (Switch interruptor in FindObjectsOfType<Switch>())
-        {
-            interruptor.OnTurnedOnOrOff += SwitchChangedState;
-            totalSwitches++;
-        }
 
         // Create baby?
 
@@ -140,6 +134,12 @@ public class GameManager : MonoBehaviour
         // Enemies?
 
         // Activar cámara de jugador
+
+        foreach (Switch interruptor in FindObjectsOfType<Switch>())
+        {
+            interruptor.OnTurnedOnOrOff += SwitchChangedState;
+            totalSwitches++;
+        }
 
         inGame = true;
     }
