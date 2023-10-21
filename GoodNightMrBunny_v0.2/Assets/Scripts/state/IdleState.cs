@@ -9,7 +9,7 @@ public class IdleState : state
     public PlayerController playerController;
     //referencia a la linterna
     public Flashlight flashlight;
-
+    public float vida = 1f;
     public Transform Objetivo;
     public float Velocidad;
     public NavMeshAgent IA;
@@ -29,14 +29,17 @@ public class IdleState : state
 
     public override state RunCurrentState()
     {
-        if (playerController.CurrentHeldObject != playerController.GetComponentInChildren<EmptyWeapon>())
+        if(vida == 0){
+            return ChaseState;
+        }
+        /*if (playerController.CurrentHeldObject.holdableObjectType != IPlayerReceiver.HoldableObjectType.Flashlight)
             {
                 Debug.Log("usa");
                 seguirenemigo();
                 return ChaseState;
             }
 
-            
+            */
         else
         {
             // Buscar el objeto más cercano en la capa "Baby"
