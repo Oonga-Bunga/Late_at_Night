@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upperText;
     [SerializeField] private TextMeshProUGUI winLoseText;
     [SerializeField] private GameObject mobileControls;
+    [SerializeField] private GameObject blocking;
 
     // Tiempo de supervivencia
     [SerializeField] private float maxTime;
@@ -106,7 +107,10 @@ public class GameManager : MonoBehaviour
             if (propDictionary.ContainsKey(prop.ID))
             {
                 GameObject propPrefab = propDictionary[prop.ID];
-                Instantiate(propPrefab, position, Quaternion.Euler(rotation));
+                GameObject propInstance = Instantiate(propPrefab, Vector3.zero, Quaternion.identity);
+                propInstance.transform.parent = blocking.transform;
+                propInstance.transform.localPosition = position;
+                propInstance.transform.localRotation = Quaternion.Euler(rotation);
             }
             else
             {
@@ -122,7 +126,10 @@ public class GameManager : MonoBehaviour
             if (objectDictionary.ContainsKey(obj.ID))
             {
                 GameObject objPrefab = objectDictionary[obj.ID];
-                Instantiate(objPrefab, position, Quaternion.Euler(rotation));
+                GameObject objInstance = Instantiate(objPrefab, Vector3.zero, Quaternion.identity);
+                objInstance.transform.parent = blocking.transform;
+                objInstance.transform.localPosition = position;
+                objInstance.transform.localRotation = Quaternion.Euler(rotation);
             }
             else
             {
