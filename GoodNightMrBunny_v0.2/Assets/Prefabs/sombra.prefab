@@ -122,15 +122,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb67e48b9efafe4eb0fc1a68b380ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   flashlight: {fileID: 0}
-  vida: 100
-  damage: 40
   Objetivo: {fileID: 0}
   Velocidad: 3
   IA: {fileID: 6635620037972321220}
   ChaseState: {fileID: 7402569416708922400}
   Atackstate: {fileID: 4322490101100311230}
   canseeplayer: 0
+  detectionRadius: 1000
 --- !u!1 &3429306327347038913
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlight: {fileID: 0}
   Objetivo: {fileID: 0}
-  Velocidad: 3
-  IA: {fileID: 6635620037972321220}
   Atackstate: {fileID: 0}
   isinattackrange: 0
 --- !u!1 &6709887814629590331
@@ -299,7 +297,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7491814023680301616}
   - component: {fileID: 6635620037972321220}
-  - component: {fileID: 878108069033059649}
   - component: {fileID: 1280869087611216626}
   - component: {fileID: 5533033093104641478}
   m_Layer: 7
@@ -323,7 +320,7 @@ Transform:
   m_Children:
   - {fileID: 7349428785519066631}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6635620037972321220
 NavMeshAgent:
@@ -347,24 +344,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &878108069033059649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709887814629590331}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd692bb4017f8a4189929c7d4d3edc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Objetivo: {fileID: 0}
-  Velocidad: 3
-  IA: {fileID: 6635620037972321220}
-  Anim: {fileID: 0}
-  AnimacionCaminar: 
-  AnimacionAtacar: 
 --- !u!114 &1280869087611216626
 MonoBehaviour:
   m_ObjectHideFlags: 0

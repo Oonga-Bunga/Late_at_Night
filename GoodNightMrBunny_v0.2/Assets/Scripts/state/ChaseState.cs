@@ -8,8 +8,8 @@ public class ChaseState : state
     public Flashlight flashlight;
     
     public Transform Objetivo;
-    public float Velocidad;
-    public NavMeshAgent IA;
+    //public float Velocidad;
+    //public NavMeshAgent IA;
 
     public Atackstate  Atackstate;
     public bool isinattackrange;
@@ -28,7 +28,6 @@ public class ChaseState : state
 
     void Update()
     {
-        IA.speed = Velocidad;
-        IA.SetDestination(Objetivo.position);
+        
     }
 }
