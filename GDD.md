@@ -87,9 +87,7 @@ El  juego  no  solo  ofrece  una  experiencia  de  horror  desafiante,  sino  qu
 
 "Good Night Mr. Bunny" presenta una serie de características clave que ofrecen a los jugadores una experiencia de juego única y emocionante:
 
-- **Arsenal de Defensa Variado:** Los jugadores tendrán a su disposición un variado arsenal, que incluye desde linternas para repeler monstruos hasta cohetes que explotan al chocarse con los enemigos. Estos recursos son esenciales para repeler a las criaturas y proteger al 
-
-niño de las pesadillas que lo acechan. ￿  **Monstruos  Aterradores:**  Los  jugadores  se  enfrentarán  a  una  variedad  de  monstruos horripilantes, cada uno con comportamientos y habilidades únicas, lo que añade un nivel de desafío constante al juego.
+- **Arsenal de Defensa Variado:** Los jugadores tendrán a su disposición un variado arsenal, que incluye desde linternas para repeler monstruos hasta cohetes que explotan al chocarse con los enemigos. Estos recursos son esenciales para repeler a las criaturas y proteger al niño de las pesadillas que lo acechan. ￿  **Monstruos  Aterradores:**  Los  jugadores  se  enfrentarán  a  una  variedad  de  monstruos horripilantes, cada uno con comportamientos y habilidades únicas, lo que añade un nivel de desafío constante al juego.
 
 - **Exploración y  Decisiones Estratégicas:**  Además de la acción intensa, el juego presenta elementos  de  exploración  y  toma  de  decisiones.  Los  jugadores  deberán  decidir  entre superar  el  nivel  mediante  la  búsqueda  de  interruptores  o  aguantar  en  el  tiempo solucionando desafíos estratégicos en las habitaciones para poner fin a las pesadillas y avanzar en la trama.
 - **Atmósfera  Inmersiva:**  El  apartado  artístico,  los  efectos  de  sonido  envolventes  y  la iluminación atmosférica contribuyen a una experiencia de juego inmersiva que sumerge a los jugadores en el oscuro y espeluznante mundo del juego, aumentando la sensación de tensión. 
@@ -256,11 +254,7 @@ En el PC será Clic Derecho del ratón. En dispositivos móviles será un botón
 
 *Imagen Explicativa de los controles para interactuar*
 
-- **Apuntar/disparar:**  En  dispositivos  móviles,  esta  mecánica  está  implementada mediante un joystick, el cual se encuentra a la derecha de la pantalla, con el que, al 
-
-mantenerlo pulsado, permitirá atacar al objetivo, a la vez que permite ligeramente 
-
-el movimiento de la pantalla para apuntar al enemigo. En PC el giro de cámara se realiza con el  Puntero del Ratón, y el ataque se realiza con el  Botón Izquierdo del Ratón. 
+- **Apuntar/disparar:**  En  dispositivos  móviles,  esta  mecánica  está  implementada mediante un joystick, el cual se encuentra a la derecha de la pantalla, con el que, al mantenerlo pulsado, permitirá atacar al objetivo, a la vez que permite ligeramente el movimiento de la pantalla para apuntar al enemigo. En PC el giro de cámara se realiza con el  Puntero del Ratón, y el ataque se realiza con el  Botón Izquierdo del Ratón. 
 
 ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.021.jpeg)
 
@@ -283,9 +277,7 @@ móvil
 
 Existen ciertos enemigos que perseguirán directamente al jugador cuando le localicen. En estos casos, el jugador tendrá que buscar escondites o evitar al enemigo para que no le atrape.  
 
-Las  opciones  para  esconderse  consisten  en  colocarse  en  lugares  inaccesibles  para  el enemigo, como sitios  elevados (muebles, encima de la cuna,  …), o esconderse dentro de lugares estrechos (cubos, casitas de juguete, …). O simplemente mantenerse fuera de la vista 
-
-del enemigo. 
+Las  opciones  para  esconderse  consisten  en  colocarse  en  lugares  inaccesibles  para  el enemigo, como sitios  elevados (muebles, encima de la cuna,  …), o esconderse dentro de lugares estrechos (cubos, casitas de juguete, …). O simplemente mantenerse fuera de la vista del enemigo. 
 
 Otro método es  usar elementos del escenario para  distraer al enemigo, eso se  puede conseguir recurriendo a las armas: lanzar el cohete en el suelo, enfocar la luz de la linterna en el suelo o las paredes, lanzar plastilina hacia diversos objetos, etc. 
 
@@ -391,9 +383,7 @@ Selecc: ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.033.png)
 
 Guardar ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.035.png)
 
-Pantalla 
-
-de juego 
+Pantalla de juego 
 
 El juego se distribuye en los siguientes estados:
 
@@ -476,9 +466,7 @@ Para  superar  la  etapa  o  nivel  el  jugador  deberá  sobrevivir  varias  no
 
 El siguiente escenario funcionará de una manera similar, teniendo que superar varias noches o niveles de manera sucesiva hasta llegar a la última noche. 
 
-Para aumentar la dificultad de los  niveles de manera progresiva, se  actualizará la cantidad de enemigos que  pueden aparecer en el escenario, aumentando en cada nivel.  En el cambio de escenarios, al ser este más grande, el jugador tendrá que cubrir más terreno y gestionar mejor el uso 
-
-de las armas y aprender a moverse por los nuevos escenarios, lo que suma un plus de dificultad.
+Para aumentar la dificultad de los  niveles de manera progresiva, se  actualizará la cantidad de enemigos que  pueden aparecer en el escenario, aumentando en cada nivel.  En el cambio de escenarios, al ser este más grande, el jugador tendrá que cubrir más terreno y gestionar mejor el uso de las armas y aprender a moverse por los nuevos escenarios, lo que suma un plus de dificultad.
 
 Escenario X/Stage X ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.053.png)![ref4]Nivel 1 ![ref5]
 
@@ -497,9 +485,7 @@ Los  enemigos  son  una  representación  de  los  miedos  de  un  niño,  como 
 
 1. **Sombra**
 
-Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  El 
-
-aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
+Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  El aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
 
 ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.057.png)
 
@@ -857,9 +843,7 @@ Por todas estas razones el juego “Good Night Mr. Bunny” cumple con las destr
 
 Se  ha  tenido  en  cuenta  para  realizar  una  mejor  experiencia  y  mejorar  de  cierto  modo  la concentración para fomentar el pensamiento computacional una serie de factores sobre el público joven y sus necesidades. Por un lado, tenemos en cuante que, al ser un público bastante joven, no todos podrán soportar leer textos largos o complejos, así que hemos decidido simplificar la cantidad de textos  que aparecen en el juego y simplificar su  contenido al máximo, aparte de contar con imágenes auto explicativas, sirviendo estos textos como apoyo de lo que sucede y nada más. En este tema, también hemos creado una interfaz simple y sencilla de entender que acoge todos los botones e información necesarios, y nada más, además de tener un toque artístico que simpatice con este público.    
 
-Por otra parte, se han establecido interacciones cortas que van aumentando de manera progresiva para que puedan adaptarse sin dificultad alguna. Esto se puede observar en el progreso de los niveles, en los que al principio no aparecerán muchos enemigos, intentando que el jugador utilice más la mecánica de los interruptores, y conforme se avance de niveles, aparecerán más enemigos, 
-
-- sus comportamientos serán más agresivos.    
+Por otra parte, se han establecido interacciones cortas que van aumentando de manera progresiva para que puedan adaptarse sin dificultad alguna. Esto se puede observar en el progreso de los niveles, en los que al principio no aparecerán muchos enemigos, intentando que el jugador utilice más la mecánica de los interruptores, y conforme se avance de niveles, aparecerán más enemigos, sus comportamientos serán más agresivos.    
 
 Al tratarse de un juego que puede dar miedo, podría darse la situación de que una persona se asuste y arroje el dispositivo móvil o algún objeto cercano. Para evitar esto, se establecen unos protocolos que avisan al jugador de la aparición de los enemigos en la zona (de este modo ya sabe de antemano que enemigos están en la zona, pues cada enemigo tiene un sonido diferente) y se ha evitado usar recursos como jumpscares que aumentan el riesgo de sustos innecesarios. Del mismo modo, se incluye una opción dentro del juego que permite aumentar la luminosidad de la pantalla, para que aquellas personas con miedo a la oscuridad o personas que no vean bien puedan subir el brillo y ver mejor, lo que permitirá también evitar sustos.    
 
@@ -1068,9 +1052,7 @@ Pero también tienen resultados y beneficios, como son el poder pasar tardes ent
 
 Para la realización del mapa de empatía de los padres se ha analizado de manera general lo que piensan  y  hacen  los  padres  con  hijos  comprendidos  entre  los  2  y  los  12  años. Como en el apartado anterior, primero contrastaremos que piensan y que dicen. Los padres disfrutan ver como sus hijos crecen y quieren darles las mejores oportunidades y experiencias que puedan. Un buen punto de partida es ir al parque a jugar con los niños, pues es un sitio seguro desde el que pueden monitorizar y ver como interactúan con otros niños. Por otro lado, también quieren que sus hijos aprendan y tengan nuevos hobbies, por lo que también les apuntarán a actividades extras como clases de arte, música o algún deporte, lo que permitirá también dar cierta “libertad” al niño, pero dentro de un ambiente controlado y vigilado. Dentro de casa también pueden surgir momentos en los que los padres no puedan estar y tengan que dejar a sus hijos con alguien más, como puede ser una cuidadora o un familiar, el cual se asegurará de que el niño haga lo que tiene que hacer. 
 
-Con respecto a lo que los padres oyen y ven, se ven criticados por otros padres de que el tiempo en familia a esas edades es muy importante y que pasar más tiempo con tus hijos es más importante que realizar horas extras, y aprovechar a ver series o películas en familia en casa es una buena idea. En general las madres (y también algunos padres) recurren mucho a los canales de televisión de cocina para innovar en el menú de la semana, encontrar recetas que permitan a los niños comer de todo y que no siempre sea lo mismo. En el ambiente escolar, los padres tienen que asistir a reuniones escolares de manera constante, lo que les permite conoce el desarrollo de sus hijos en las aulas, aunque  no  siempre  es  posible  que  ambos  puedan  acudir  ya  que  tienen  limitaciones  externas. Lo que más preocupa a los padres es el bienestar de sus hijos, si están cómodos con sus compañeros y amigos o si se han metido en algún problema con algún otro niño. El problema con esto es que las nuevas tecnologías están haciendo presencia en su vida y no terminan de adaptarse, haciendo que no puedan sentirse del todo seguros a la hora de manejar estas nuevas tecnologías. Lo mismo ocurre con los productos que están dispuestos a comprar, de manera física tienen una garantía que les da firmeza en su decisión de comprar o no, pero a la hora de comprar online no se sienten tan seguros de si el producto es de la calidad esperada o de si realmente llegará el pedido. Pero a pesar de todo esto, 
-
-priorizan la seguridad del hogar y de la familia. 
+Con respecto a lo que los padres oyen y ven, se ven criticados por otros padres de que el tiempo en familia a esas edades es muy importante y que pasar más tiempo con tus hijos es más importante que realizar horas extras, y aprovechar a ver series o películas en familia en casa es una buena idea. En general las madres (y también algunos padres) recurren mucho a los canales de televisión de cocina para innovar en el menú de la semana, encontrar recetas que permitan a los niños comer de todo y que no siempre sea lo mismo. En el ambiente escolar, los padres tienen que asistir a reuniones escolares de manera constante, lo que les permite conoce el desarrollo de sus hijos en las aulas, aunque  no  siempre  es  posible  que  ambos  puedan  acudir  ya  que  tienen  limitaciones  externas. Lo que más preocupa a los padres es el bienestar de sus hijos, si están cómodos con sus compañeros y amigos o si se han metido en algún problema con algún otro niño. El problema con esto es que las nuevas tecnologías están haciendo presencia en su vida y no terminan de adaptarse, haciendo que no puedan sentirse del todo seguros a la hora de manejar estas nuevas tecnologías. Lo mismo ocurre con los productos que están dispuestos a comprar, de manera física tienen una garantía que les da firmeza en su decisión de comprar o no, pero a la hora de comprar online no se sienten tan seguros de si el producto es de la calidad esperada o de si realmente llegará el pedido. Pero a pesar de todo esto, priorizan la seguridad del hogar y de la familia. 
 
 ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.108.jpeg)
 
@@ -1134,9 +1116,7 @@ Nuestra propuesta de valor se basa en las características únicas y destacadas 
 - **Juego completo de precio asequible con actualizaciones gratuitas:** Se brinda la oportunidad de adquirir el juego completo a un precio asequible, lo que significa que se obtiene acceso a todos  los  niveles  sin  costos  adicionales.  Además,  garantizamos  actualizaciones  gratuitas, asegurando que la experiencia de juego siga mejorando con el tiempo. 
 - **Fomenta el desarrollo del pensamiento computacional en niños:** Trabajamos en fomentar la resolución de problemas e identificación de problemas de los niños. Esto lo hacemos mediante un videojuego, de manera que sea una tarea poco costosa y divertida para el jugador. 
 - **Multiplataforma:** El juego puede ser jugado desde navegador web y en varias plataformas y dispositivos diferentes. 
-- **Explora  el  punto  de vista de  los miedos  que  puede tener  un  niño de  2  años:**  Esto  es interesante para el jugador, debido a que aporta una visión creativa y original a la esencia del 
-
-videojuego. 
+- **Explora  el  punto  de vista de  los miedos  que  puede tener  un  niño de  2  años:**  Esto  es interesante para el jugador, debido a que aporta una visión creativa y original a la esencia del videojuego. 
 
 Nuestra  empresa  trabaja  activamente  en  una  buena  relación  con  los  clientes,  puesto  que  son fundamentales  para  el  éxito  de  nuestra  empresa,  además  de  fidelizar  a  los  usuarios.  Para  ello, ofrecemos: 
 
@@ -1175,12 +1155,12 @@ En el apartado de fuente de ingresos, exploraremos cómo generamos ingresos como
 - **Venta de métricas y datos recopilados:** Consiste en la venta de información de métricas y resultados de tus propias partidas, de manera que puedas analizar tu progreso, puede ir desde venta a personas individuales hasta a organizaciones. 
 15. **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 
-CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D CHRISTIAN CAMPOS PAN  Programación 
-
-GONZALO GÓMEZ TEJEDOR  Programación y sonido NATALIA MARTÍNEZ CLEMENTE  3D y texturas 
-
-UMESH MOSTAJO SAEZ  2D, interfaces y texturas HECTOR MUÑOZ GÓMEZ  2D y Programación 
-
+CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
+CHRISTIAN CAMPOS PAN  Programación   
+GONZALO GÓMEZ TEJEDOR  Programación y sonido    
+NATALIA MARTÍNEZ CLEMENTE  3D y texturas    
+UMESH MOSTAJO SAEZ  2D, interfaces y texturas    
+HECTOR MUÑOZ GÓMEZ  2D y Programación    
 PAULA ROJO DE LA FUENTE  3D y diseño 
 
 16. **Anexos<a name="_page62_x69.00_y577.00"></a>** 
