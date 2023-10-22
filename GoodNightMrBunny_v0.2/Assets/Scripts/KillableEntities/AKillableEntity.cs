@@ -13,6 +13,11 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     protected Collider hitbox;
     public EventHandler<float> HealthChanged;
 
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+    }
+
     #endregion
 
     #region Constructor
