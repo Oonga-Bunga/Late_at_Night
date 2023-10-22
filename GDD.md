@@ -12,9 +12,6 @@ PAULA ROJO DE LA FUENTE
 NATALIA MARTÍNEZ CLEMENTE    
 HÉCTOR MUÑOZ GÓMEZ 
 
-Grado en diseño y desarrollo  ![ref1]![ref2]de Videojuegos  
-
-Juegos en Web y Redes Sociales 
 
 **Lista de actualizaciones** 
 
