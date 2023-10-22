@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void PressPlayButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("LevelScene");
     }
 
     /// <summary>
