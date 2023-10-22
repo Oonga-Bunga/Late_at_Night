@@ -129,26 +129,17 @@ El estilo visual desempeña un papel fundamental en la narrativa y la jugabilida
 
 <a name="_page6_x75.00_y557.00"></a>[Ref 1 ](#_page62_x75.00_y696.00)
 
-7 
-Grado en diseño y desarrollo  ![ref1]![ref2]de Videojuegos  
-
-Juegos en Web y Redes Sociales 
 
 ![](/Documentacion/ZeldaRef.jpeg)
 
 [Ref 2 ](#_page62_x75.00_y720.00)   
-*Referencias del ambiente*:* 
 
-![](/Documentacion/FNAFRef.jpeg) ![](/Documentacion/SongOfHorrorRef.jpeg)
+![](/Documentacion/SceneRef.jpeg) ![](/Documentacion/SceneRef2.jpeg)
 
 <a name="_page6_x75.00_y655.00"></a><a name="_page6_x243.00_y655.00"></a>[Ref 3 ](#_page63_x75.00_y104.00)<a name="_page6_x405.00_y654.00"></a> [Ref 4 ](#_page63_x75.00_y141.00)
 
-
-Grado en diseño y desarrollo  ![ref1]![ref2]de Videojuegos  
-
-Juegos en Web y Redes Sociales 
-
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.010.png) ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.011.png)
+*Referencias del ambiente*:*    
+![](/Documentacion/FNAFRef.jpeg) ![](/Documentacion/SonOfHorrorRef.jpeg)
 
 <a name="_page7_x69.00_y236.00"></a><a name="_page7_x75.00_y224.00"></a>[Ref 5 ](#_page63_x75.00_y178.00)<a name="_page7_x300.00_y224.00"></a> [Ref 6 ](#_page63_x75.00_y227.00)
 
@@ -184,7 +175,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *“Érase una vez, un pequeño niño que no podía dormir.       Unos terroríficos monstruos merodeaban por su habitación.”* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.012.jpeg)
+![](/Documentacion/Pagina1Cuento.png)
 
 *Imagen Escena 1 del libro inicial* 
 
@@ -194,7 +185,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *‘Por favor, haz que los monstruos se vayan,’ rogaba.”* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.013.jpeg)
+![](/Documentacion/Pagina2Cuento.png)
 
 *Imagen Escena 2 del libro inicial* 
 
@@ -202,7 +193,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *“De repente, una fugaz luz iluminó la habitación y el peluche cobró vida según los deseos del niño.”* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.014.jpeg)
+![](/Documentacion/Pagina3Cuento.png)
 
 *Imagen Escena 3 del libro inicial* 
 
@@ -212,13 +203,13 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *La noche tan solo estaba empezando...”* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.015.jpeg)
+![](/Documentacion/Pagina4Cuento.png)
 
 *Imagen Escena 4 del libro inicial* 
 
 Una vez que se muestra la última página, la cámara se acerca a la última ilustración, que representa la pantalla durante el juego, y entra en la imagen, iniciando oficialmente el nivel. 
 
-<a name="_page10_x303.00_y369.00"></a>[Img 7 ](#_page63_x75.00_y276.00)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.016.jpeg)
+<a name="_page10_x303.00_y369.00"></a>[Img 7 ](#_page63_x75.00_y276.00)![](/Documentacion/DrawingStyleRef.jpeg)
 
 3. **Mecánicas<a name="_page10_x69.00_y649.00"></a> del Juego** 
 
@@ -230,19 +221,19 @@ Los movimientos principales del jugador son los siguientes:
 
 - **Desplazamiento:** a través de teclado, y palanca de control en móvil. El jugador se mueve en un entorno 3D en todas las direcciones posibles. En ordenador las teclas serán W A S D, y en móvil/dispositivo portátil será con un Joystick Izquierdo. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.017.jpeg)
+![](/Documentacion/MovementeBoc.jpeg)
 
 *Imagen Explicativa de los controles para andar* 
 
 - **Correr:** pulsando/manteniendo una tecla hará que el movimiento del jugador  se acelere.  Esta  aceleración  será  temporal  y  necesitará  recargarse  (estamina).  Utilizará el Shift en ordenador y en dispositivos móviles será una tecla a la derecha (*sujeto a cambios*) 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.018.jpeg)
+![](/Documentacion/MovementBoc2.jpeg)
 
 *Imagen Explicativa de los controles para correr*
 
 - **Saltar:**  el  jugador  podrá  realizar  saltos  para  llegar  a  lugares  elevados. En PC se usará la Barra Espaciadora y en dispositivos móviles será otro botón al lado derecho de la pantalla.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.019.jpeg)
+![](/Documentacion/MovementBoc3.jpeg)
 
 *Imagen Explicativa de los controles para saltar*
 
@@ -250,23 +241,23 @@ Los movimientos principales del jugador son los siguientes:
 
 En el PC será Clic Derecho del ratón. En dispositivos móviles será un botón que solo aparece cuando se puede interactuar con el objeto.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.020.jpeg)
+![](/Documentacion/MovementBoc4.jpeg)
 
 *Imagen Explicativa de los controles para interactuar*
 
 - **Apuntar/disparar:**  En  dispositivos  móviles,  esta  mecánica  está  implementada mediante un joystick, el cual se encuentra a la derecha de la pantalla, con el que, al mantenerlo pulsado, permitirá atacar al objetivo, a la vez que permite ligeramente el movimiento de la pantalla para apuntar al enemigo. En PC el giro de cámara se realiza con el  Puntero del Ratón, y el ataque se realiza con el  Botón Izquierdo del Ratón. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.021.jpeg)
+![](/Documentacion/MovementBoc5.jpeg)
 
 *Imagen Explicativa de los controles para apuntar*
 
 La cámara en el juego será en primera persona, permitiendo ver las extremidades del personaje parcialmente, pues estará limitada a ciertos ángulos.  
 
-Controles del jugador con ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.022.jpeg)teclado y ratón 
+Controles del jugador con ![](/Documentacion/ControlesEsquema.png)teclado y ratón 
 
 <a name="_page13_x387.00_y448.00"></a>[Img 8 ](#_page63_x75.00_y337.00)
 
-Controles del jugador con ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.023.jpeg)
+Controles del jugador con ![](/Documentacion/ControlesEsquema2.png)
 
 móvil 
 
@@ -289,11 +280,10 @@ La linterna se quedará sin batería progresivamente, y el jugador tendrá que i
 
 La luz de la linterna empezará a parpadear a medida que vaya bajando la batería, siendo un indicativo de la cantidad de batería restante. Empezando con un simple parpadeo cuando llega a la mitad de la batería. Al llegar a un cuarto de batería, parpadea cuatro veces. A partir de  ese  punto,  la  luz  de  la  linterna  pierde  intensidad  y  se  pone  a  parpadear  con  más frecuencia, parpadeando sin parar en los últimos segundos de la batería. 
 
-Luz como se ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.024.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.025.png)veria en la vida real 
+![](/Documentacion/LinternaMec1.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.025.png)
 
-In  e![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.026.png)
+![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.026.png)   
 
-Luz  Gam
 
 - **Cubo de Plastilina:**  
 
@@ -361,29 +351,7 @@ Desaparece tras ser golpeado una vez por un cohete o acumular gran cantidad de d
 
 4. **Estados<a name="_page17_x69.00_y219.00"></a> del Juego** 
 
-Ajustes  Salir ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.027.png)![ref3]![ref3]
-
-Menú Principal ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.029.png)
-
-Seleccionar ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.030.png)
-
-Modo  ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.031.png)
-
-Pausa 
-
-Nueva partida ![ref3]
-
-Continuar ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.032.png)Partida? 
-
-Selecc: ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.033.png)
-
-` `dificultad - 
-
-¿nivel/escene?  Ajustes ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.034.png)InGame 
-
-Guardar ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.035.png)
-
-Pantalla de juego 
+![](/Documentacion/EstadosDelJuegoRef.png)
 
 El juego se distribuye en los siguientes estados:
 
@@ -402,41 +370,41 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 
 **Controles dispositivos móviles:** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.036.jpeg)
+![](/Documentacion/ControlesEsquema2.png)
 
 [Img 8 ](#_page63_x75.00_y337.00)
 
 **Controles teclado:** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.037.jpeg)
+![](/Documentacion/ControlesEsquema.png)
 
 [Img 9 ](#_page63_x75.00_y362.00)
 
 **Menú inicial (Concept básico, sujeto a cambios):**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.038.jpeg)
+![](/Documentacion/InterfazTitulo.png)
 
 **Menú ajustes** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.039.jpeg)
+![](/Documentacion/InterfazAjustes1.png)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.040.png)
+![](/Documentacion/InterfazAjustes2.png)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.041.png)
+![](/Documentacion/InterfazAjustes3.png)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.042.png)
+![](/Documentacion/InterfazAjustes4.png)
 
 **In game** 
 
-Pantalla ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.043.jpeg)general 
+Pantalla ![](/Documentacion/InterfazInGame1.png)general 
 
-Coger ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.044.jpeg)objetos 
+Coger ![](/Documentacion/InterfazInGame2.png)objetos 
 
-Sprint (solo ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.045.jpeg)aparece cuando se corre) 
+Sprint (solo ![](/Documentacion/InterfazInGame3.png)aparece cuando se corre) 
 
 **Créditos** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.046.jpeg)
+![](/Documentacion/InterfazCreditos.png)
 
 6. **Niveles<a name="_page22_x69.00_y103.00"></a>**  
 
@@ -446,15 +414,13 @@ El primer  Escenario sería el nivel introductorio, el cual se desarrolla en la 
 
 Para que tenga variabilidad y no sea siempre el mismo escenario, habrá variaciones de este mismo.  
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.047.jpeg)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.048.jpeg)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.049.jpeg)
+![](/Documentacion/Niveles1Mapa.jpeg)![](/Documentacion/Niveles1Mapa2.jpeg)![](/Documentacion/Niveles1Mapa3.jpeg)
 
 Recorridos del nivel: 
 
 Para realizar los recorridos se ha tenido en cuenta que la distribución de las armas esté de manera equilibrada a través del  escenario, obligando al jugador a llegar a lugares altos en algunos casos. También se ha intentado abarcar la mayor parte del espacio disponible para que esté obligado a investigar todo el escenario y encuentre los posibles escondites de este.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.050.jpeg)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.051.jpeg)
-
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.052.jpeg)
+![](/Documentacion/RecorridosNivel.png)
 
 El siguiente nivel se desarrolla en el salón de la casa, siguiendo la misma mecánica de supervivencia anteriormente descrita. El nivel será un poco más grande que el anterior, implementando nuevos modelos que el jugador podrá usar para  visionar el campo de visión, esconderse e interactuar.  Seguirá la misma mecánica de los Interruptores repartidos aleatoriamente entre una serie de puntos establecidos y las armas aparecerán siempre en el mismo sitio dependiendo de la disposición de los elementos del escenario. 
 
@@ -468,11 +434,7 @@ El siguiente escenario funcionará de una manera similar, teniendo que superar v
 
 Para aumentar la dificultad de los  niveles de manera progresiva, se  actualizará la cantidad de enemigos que  pueden aparecer en el escenario, aumentando en cada nivel.  En el cambio de escenarios, al ser este más grande, el jugador tendrá que cubrir más terreno y gestionar mejor el uso de las armas y aprender a moverse por los nuevos escenarios, lo que suma un plus de dificultad.
 
-Escenario X/Stage X ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.053.png)![ref4]Nivel 1 ![ref5]
-
-Nivel X ![ref5]
-
-Escenario X+1/Stage X+1 ![ref4]![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.056.png)Nivel final 
+![](/Documentacion/EsquemaProgresoDelJuego.png)
 
 8. **Personajes<a name="_page24_x69.00_y490.00"></a>** 
 1. **Mr.<a name="_page24_x69.00_y539.00"></a> Bunny** 
