@@ -105,9 +105,9 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// Abre la cuenta de twitter
     /// </summary>
-    public void openTwitterURL()
+    public void openUrl(string urlLink)
     {
-        Application.OpenURL("https://twitter.com/OongaBungaGames");
+        Application.OpenURL(urlLink);
     }
 
     /// <summary>
