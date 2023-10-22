@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [Range(0.1f, 9f)][SerializeField] float _sensitivityX = 2f; // Sensibilidad en el eje X
     [Range(0.1f, 9f)][SerializeField] float _sensitivityY = 1f; // Sensibilidad en el eje Y
     [Range(0f, 90f)][SerializeField] float _yRotationLimit = 88f; // Limite de la rotación en el eje Y para que la cámara no haga flip
+    [SerializeField] private InputActionReference _joystickValueAction;
     [SerializeField] private InputActionReference _mouseDeltaAction;
 
     private List<int> _bannedTouches = new List<int>(); // Lista de toques en la pantalla tactil que no se usarán para mover la cámara
@@ -36,7 +37,7 @@ public class CameraController : MonoBehaviour
     {
         if (Application.isMobilePlatform)
         {
-            _lookFunction = HandlePCInput;
+            _lookFunction = HandleMobileInput;
         }
         else
         {
@@ -44,6 +45,7 @@ public class CameraController : MonoBehaviour
         }
         
         _mouseDeltaAction.action.Enable();
+        _joystickValueAction.action.Enable();
 
         _pauseManager = FindAnyObjectByType<PauseManager>();
     }
@@ -106,6 +108,15 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+
+        Vector2 delta2 = _joystickValueAction.action.ReadValue<Vector2>();
+        Debug.Log(delta2);
+        rotation.x += delta2.x * _sensitivityX * 2f;
+        rotation.y += delta2.y * _sensitivityY * 2f;
+        rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
+
+        var targetRotation2 = Quaternion.Euler(-rotation.y, rotation.x, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation2, Time.deltaTime * 30f);
     }
 
     /// <summary>
