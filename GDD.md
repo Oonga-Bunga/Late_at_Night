@@ -127,7 +127,7 @@ El estilo visual desempeña un papel fundamental en la narrativa y la jugabilida
 
 *Referencias artísticas:* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.005.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.006.jpeg)
+![](/Documentacion/ItTakesTwoRef1.jpeg)![](/Documentacion/ItTakesTwoRef2.jpeg)
 
 <a name="_page6_x75.00_y557.00"></a>[Ref 1 ](#_page62_x75.00_y696.00)
 
@@ -136,11 +136,12 @@ Grado en diseño y desarrollo  ![ref1]![ref2]de Videojuegos
 
 Juegos en Web y Redes Sociales 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.007.png)
+![](/Documentacion/ZeldaRef.jpeg)
 
-[Ref 2 ](#_page62_x75.00_y720.00)*Referencias del ambiente*:* 
+[Ref 2 ](#_page62_x75.00_y720.00)   
+*Referencias del ambiente*:* 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.008.png) ![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.009.png)
+![](/Documentacion/FNAFRef.jpeg) ![](/Documentacion/SongOfHorrorRef.jpeg)
 
 <a name="_page6_x75.00_y655.00"></a><a name="_page6_x243.00_y655.00"></a>[Ref 3 ](#_page63_x75.00_y104.00)<a name="_page6_x405.00_y654.00"></a> [Ref 4 ](#_page63_x75.00_y141.00)
 
