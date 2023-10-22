@@ -77,6 +77,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     public virtual void Die()
     {
         Destroy(gameObject);
+        Debug.Log("muere");
     }
 
     #endregion
