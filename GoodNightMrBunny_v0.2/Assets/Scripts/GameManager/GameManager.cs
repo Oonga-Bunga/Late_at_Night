@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Object
@@ -216,6 +217,7 @@ public class GameManager : MonoBehaviour
         inGame = false;
         winLoseText.text = "You won!";
         winLoseText.gameObject.SetActive(true);
+        SceneManager.LoadScene("FinalScene");
     }
 
     private void PlayerLost()
@@ -223,6 +225,7 @@ public class GameManager : MonoBehaviour
         inGame = false;
         winLoseText.text = "You lost...";
         winLoseText.gameObject.SetActive(true);
+        SceneManager.LoadScene("FinalScene");
     }
 
     private void StartCatEvent()
