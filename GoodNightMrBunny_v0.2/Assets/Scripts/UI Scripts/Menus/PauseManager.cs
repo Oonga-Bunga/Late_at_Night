@@ -32,12 +32,16 @@ public class PauseManager : MonoBehaviour
         if (isPaused)
         {
             //_camera._enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             pauseText.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
         else
         {
             //_camera._enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             pauseText.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }

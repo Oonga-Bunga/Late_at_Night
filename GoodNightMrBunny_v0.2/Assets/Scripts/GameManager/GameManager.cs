@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            //Oculta el ratón durante el juego
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             mobileControls.SetActive(false);
         }
 

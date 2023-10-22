@@ -25,6 +25,10 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        //Se muestra el raton
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        //Se configuran las escenas
         loginMenu.enabled = true;
         mainMenu.enabled = false;
         optionsMenu.enabled = false;
