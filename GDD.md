@@ -458,7 +458,7 @@ Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mu
 
 Es el resultado de la fusión de gran cantidad de plancton debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
-![](/Documenta/EnemigoEsqueleto.png)
+![](/Documentacion/EnemigoEsqueleto.png)
 
 Imagen del enemigo Esqueleto 
 
@@ -468,7 +468,7 @@ Es una especie de insecto que trepa por el techo, con una boca dentada en la esp
 
 las fobias y prejuicios de los padres como es el miedo a los insectos.
 
-![](/Documenta/EnemigoKitestinger.png)
+![](/Documentacion/EnemigoKitestinger.png)
 
 Imagen del enemigo Kitenstinger
 
@@ -476,7 +476,7 @@ Imagen del enemigo Kitenstinger
 
 Es un gato de aspecto rechoncho, peludo y  de mal carácter perteneciente a la familia del niño. Es el archienemigo del conejo de peluche dado que este, debido a su curiosidad felina, intenta darle caza; por lo que es amenazador desde el punto de vista del jugador.
 
-![](/Documenta/EnemigoComandanteBlubs.png)
+![](/Documentacion/EnemigoComandanteBlubs.png)
 
 Imagen del enemigo Comandante Blubs
 
@@ -484,7 +484,7 @@ Imagen del enemigo Comandante Blubs
 
 El único personaje humano del juego es el niño de 2 años a quien tendrá que proteger el jugador. Solo  se ve su aspecto durante la cinemática inicial, durante el juego permanece completamente cubierto por una manta. 
 
-![](/Documenta/Niño.png)
+![](/Documentacion/Niño.png)
 
 Imagen del Niño 
 
@@ -493,7 +493,7 @@ Imagen del Niño
 
 Este es el arma básica del juego y puede dejarse apoyada en el suelo en cualquier momento. Esta arma inflige daño a los enemigos cuando los alcanza con el foco de la luz. Tiene más poder sobre las sombras. Para recargar la linterna, hay que colocarla en una plataforma de carga, las cuales están distribuidas por el mapa. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.062.png)
+![](/Documentacion/ItemLinterna.png)
 
 Imagen de la Linterna
 
@@ -501,7 +501,7 @@ Imagen de la Linterna
 
 La plastilina es un arma que consiste en lanzar bolas de plastilina a los enemigos, se obtiene y recarga  a  partir  de  un  cubo  de  plastilina.  Cuando  sueltas  este  objeto  la  munición  restante desaparece. Cuando las bolas impactan en el suelo se aplastan y se pueden usar de trampolín. Es más efectivo contra el plancton, al cual fulmina con un solo impacto. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.063.png)
+![](/Documentacion/ItemPlastilina.png)
 
 Imagen de la Plastilina
 
@@ -509,7 +509,7 @@ Imagen de la Plastilina
 
 El cohete se encuentra estático en una plataforma de disparo en el mapa. Para utilizarlo el jugador ha de ir hasta esta plataforma, apuntar el cohete al objetivo y accionar el interruptor de lanzamiento. Al cabo de un tiempo, la plataforma suministra un nuevo cohete. Derrota de un solo golpe al kitestinger. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.064.jpeg)
+![](/Documentacion/ItemCohete.png)
 
 Imagen del Cohete
 
@@ -517,7 +517,7 @@ Imagen del Cohete
 
 Son plataformas circulares donde se coloca la linterna para poder recargarla. Poseen un indicador que muestra mediante barras cuanta batería posee la linterna colocada en cada momento.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.065.png)
+![](/Documentacion/ItemPlataformaCargaLinterna.png)
 
 Imagen de la Plataforma de Carga
 
@@ -594,55 +594,55 @@ Para la realización de los elementos del escenario, nos hemos basado en objetos
 1. **Concept<a name="_page31_x69.00_y373.00"></a> art** 
 1. **Personajes**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.066.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.067.png)
+![](/Documentacion/ConceptArtMrBunny.png)
 
 <a name="_page31_x69.00_y402.00"></a>Imágenes del diseño de Mr. Bunny (jugador)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.068.jpeg)
+![](/Documentacion/ConceptArtSombra.png)
 
 Imagen de los diseños del enemigo sombra 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.069.jpeg)
+![](/Documentacion/ConceptArtSiluetasKitestinger.png)
 
 Imagen de las siluetas para el diseño del Kitestinger** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.070.jpeg)
+![](/Documentacion/ConceptArtVersionesKitestinger.png)
 
 Imagen de diferentes versiones del kitestinger
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.071.jpeg)
+![](/Documentacion/ConceptArtEstudioKitestinger.png)
 
 Imagen de estudio del diseño del Kitestinger 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.072.jpeg)
+![](/Documentacion/ConceptArtComandanteBlubs.png)
 
 Imagen de los diseños del Comandante Blubs
 
 2. **Escenario**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.073.jpeg)
+![](/Documentacion/ConceptArtEscenario.png)
 
 <a name="_page33_x69.00_y576.00"></a>Imagen de la visión general de la habitación 
 
 3. **Elementos**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.074.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.075.png)
+![](/Documentacion/ConceptArtLinterna.png)
 
 <a name="_page34_x69.00_y103.00"></a>Imágenes del diseño de la linterna 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.076.jpeg)
+![](/Documentacion/ConceptArtCohete.png)
 
 Imagen del diseño y color inicial del cohete
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.077.jpeg)
+![](/Documentacion/ConceptArtIdeaPlastilina.png)
 
 Imagen de la idea conceptual de la plastilina
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.078.jpeg)
+![](/Documentacion/ConceptArtPlastilina.png)
 
 Imagen del diseño y colores de la plastilina
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.079.jpeg)
+![](/Documentacion/ConceptArtTirachinas.png)
 
 Imagen del tirachinas (descartado)
 
@@ -658,61 +658,61 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
 
 <a name="_page36_x69.00_y564.00"></a>**Mr. Bunny:** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.080.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.081.png)
+![](/Documentacion/DiseñoFinalMrBunny.png)
 
 Imágenes del diseño definitivo del conejo
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.082.jpeg)
+![](/Documentacion/DiseñoFinalMrBunny3D.png)
 
 Render Mr. Bunny en 3DMax
 
 **Kitestinger** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.083.jpeg)
+![](/Documentacion/DiseñoFinalKitestinger.png)
 
 Imagen del diseño definitivo y las versiones de color del Kitestinger
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.084.jpeg)
+![](/Documentacion/TurnAroundKitestinger.png)
 
 **Comandante Blubs** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.085.jpeg)
+![](/Documentacion/EnemigoComandanteBlubs.png)
 
 Imagen del diseño final de Comandante Blubs
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.086.jpeg)
+![](/Documentacion/TurnAroundComandanteBlubs.png)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.087.jpeg)
+![](/Documentacion/DiseñoFinalComandanteBlubs3D.png)
 
 Imagen del modelo 3d de Comandante Blubs
 
 **Sombra** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.088.png)
+![](/Documentacion/EnemigoSombra.png)
 
 Imagen definitiva Sombra
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.089.jpeg)
+![](/Documentacion/TurnAroundSombra.png)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.090.jpeg)
+![](/Documentacion/DiseñoFinalSombra3D.png)
 
 Imagen del modelo 3d de la sombra
 
 2. **Escenarios**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.091.jpeg)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.092.jpeg)
+![](/Documentacion/DiseñoFinalEscenario.png)
 
 <a name="_page40_x69.00_y528.00"></a>Diseño final del escenario a color
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.093.jpeg)
+![](/Documentacion/DiseñoFinalHabitacion3Render3.png)
 
 Render Habitación 3 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.094.jpeg)
+![](/Documentacion/DiseñoFinalHabitacion13D.png)
 
 Modelado Habitación1 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.095.jpeg)
+![](/Documentacion/DiseñoFinalHabitacion33D.png)
 
 Modelado Habitación 3 
 
@@ -720,33 +720,33 @@ Modelado Habitación 3
 
 <a name="_page42_x69.00_y389.00"></a>**Linterna** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.096.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.097.png)
+![](/Documentacion/DiseñoFinalLinterna2D3D.png)
 
 Diseño final y modelo 3d de la linterna
 
 **Cargador Linterna** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.098.jpeg)
+![](/Documentacion/DiseñoFinalLinternaYCarga2D.png)
 
 Diseño final de la linterna y la base de carga (Turn-Around de ambos)
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.099.png)
+![](/Documentacion/DiseñoFinalCarga3D.png)
 
 Modelado de la base de carga de la linterna
 
 **Cohete** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.100.jpeg)
+![](/Documentacion/DiseñoFinalCohete2D.png)
 
 Diseño final del cohete  
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.101.jpeg)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.102.jpeg)
+![](/Documentacion/DiseñoFinalCohete3D.png)
 
 Modelado 3D del cohete
 
 **Plastilina** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.103.png)![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.104.jpeg)
+![](/Documentacion/DiseñoPlastilina2D3D.png)
 
 Diseño final y modelo 3d de la plastilina (dos versiones, bote abierto y cerrado)
 
