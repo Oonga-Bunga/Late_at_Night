@@ -130,6 +130,8 @@ MonoBehaviour:
   IA: {fileID: 6635620037972321220}
   ChaseState: {fileID: 7402569416708922400}
   Atackstate: {fileID: 4322490101100311230}
+  damageDistance: 15
+  damageAmount: 10
   canseeplayer: 0
   detectionRadius: 1000
 --- !u!1 &3429306327347038913
@@ -298,10 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccda102e187e95443b2f28555d21fc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashlight: {fileID: 0}
-  Objetivo: {fileID: 0}
-  Atackstate: {fileID: 0}
-  isinattackrange: 0
 --- !u!1 &6709887814629590331
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +377,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6709887814629590331}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75457d1f319af644f8bbd0cb0a0b50df, type: 3}
   m_Name: 

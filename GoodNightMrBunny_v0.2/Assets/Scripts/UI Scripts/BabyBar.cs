@@ -21,6 +21,7 @@ public class BabyBar : MonoBehaviour
         slider.maxValue = baby.MaxHealth;
         slider.value = slider.maxValue;
         baby.HealthChanged += UpdateBar;
+        babyFound = true;
     }
 
     private void UpdateBar(object sender, float value)

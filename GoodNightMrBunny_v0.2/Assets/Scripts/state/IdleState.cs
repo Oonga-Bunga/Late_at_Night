@@ -17,9 +17,13 @@ public class IdleState : state
     //estados del enemigo
     public ChaseState ChaseState;
     public Atackstate Atackstate;
-
+    public float damageDistance = 100.0f; // Distancia para hacer daño
+    public float damageAmount = 1.0f;  // Cantidad de daño
     public bool canseeplayer;
     public float detectionRadius = 10.0f; // Ajusta este valor al radio de detección
+
+    public float tiempo = 2f;
+    public float tiempoAtaque = 0f;
 
     public void seguirenemigo()
     {
@@ -29,6 +33,7 @@ public class IdleState : state
 
     public override state RunCurrentState()
     {
+
         if(vida == 0){
             return ChaseState;
         }
@@ -42,6 +47,7 @@ public class IdleState : state
             */
         else
         {
+            tiempoAtaque += Time.deltaTime;
             // Buscar el objeto más cercano en la capa "Baby"
             Collider[] babyObjects = Physics.OverlapSphere(transform.position, detectionRadius, LayerMask.GetMask("Baby"));
 
@@ -58,12 +64,28 @@ public class IdleState : state
                     {
                         closestBaby = babyObjects[i].transform;
                         closestDistance = distance;
+                        
                     }
                 }
 
                 // Establecer el objeto más cercano como objetivo
                 Objetivo = closestBaby;
                 seguirenemigo();
+                
+                // Verificar si el objetivo está lo suficientemente cerca para hacer daño
+                float distanceToTarget = Vector3.Distance(transform.position, Objetivo.position);
+                
+                if (distanceToTarget <= damageDistance && tiempoAtaque >=tiempo)
+                {
+                    // Llamar a la función TakeHit del objetivo para hacer daño
+                    if (Objetivo.TryGetComponent<AKillableEntity>(out var killableEntity))
+                    {
+                        tiempoAtaque = 0;
+                        killableEntity.TakeHit(damageAmount);
+                        
+                    }
+                }
+
                 return this;
             }
 
@@ -73,13 +95,7 @@ public class IdleState : state
 
     void Update()
     {
-        if (canseeplayer == true)
-        {
-            Debug.Log("0 vida");
-        }
-        else
-        {
-            // Debug.Log("Vida: " + vida);
-        }
+
+       
     }
 }

@@ -62,6 +62,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
             {
                 Die();
             }
+            
         }
         else
         {

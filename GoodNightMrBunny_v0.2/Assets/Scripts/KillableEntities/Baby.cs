@@ -14,6 +14,8 @@ public class Baby : AKillableEntity
     void Start()
     {
         
+        this.currentHealth = maxHealth;
+        this.hitbox = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -21,4 +23,5 @@ public class Baby : AKillableEntity
     {
         
     }
+    public override void Die(){}
 }

@@ -133,14 +133,14 @@ public class GameManager : MonoBehaviour
 
         // Enemies?
 
-        // Activar cámara de jugador
+        // Activar cï¿½mara de jugador
 
         foreach (Switch interruptor in FindObjectsOfType<Switch>())
         {
             interruptor.OnTurnedOnOrOff += SwitchChangedState;
             totalSwitches++;
         }
-
+        FindObjectOfType<Baby>().HealthChanged += BabyDied;
         inGame = true;
     }
 
