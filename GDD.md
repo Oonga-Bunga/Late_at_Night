@@ -779,7 +779,7 @@ A  continuación,  tenemos  una  tabla  con  los  distintos  Packs  de  texturas
 </table>
 Algunas texturas ya creadas:
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.105.jpeg)
+![](/Documentacion/TexturaParedNubes.png)
 
 Las paredes de la habitación están decoradas con  nubes sobre un fondo azul. Este diseño se encuentra en la parte superior de la pared.
 
@@ -995,7 +995,7 @@ Motivaciones para la compra:
 
 <a name="_page53_x69.00_y103.00"></a>**MAPA DE EMPATIA**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.106.jpeg)
+![](/Documentacion/MapaEmpatiaNiños.png)
 
 Para realizar el mapa de empatía de los niños, hemos puesto de manera generalista cómo actúan y piensan los niños pequeños. 
 
@@ -1007,21 +1007,21 @@ Tras este análisis, tenemos que entender cuáles son los esfuerzos y los miedos
 
 Pero también tienen resultados y beneficios, como son el poder pasar tardes enteras sin aburrirse con amigos o jugando en casa, lo que permite que compartan distintas aficiones entre todos y generen mejores recuerdos. También, al querer aprender de las cosas que no conocen, mejoran la capacidad de aprendizaje y aumentan el nivel de felicidad cuando ese aprendizaje no ha sido tan directo, sino que han tenido que mostrar un esfuerzo por realizarlo. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.107.jpeg)
+![](/Documentacion/MapaEmpatiaPadres.png)
 
 Para la realización del mapa de empatía de los padres se ha analizado de manera general lo que piensan  y  hacen  los  padres  con  hijos  comprendidos  entre  los  2  y  los  12  años. Como en el apartado anterior, primero contrastaremos que piensan y que dicen. Los padres disfrutan ver como sus hijos crecen y quieren darles las mejores oportunidades y experiencias que puedan. Un buen punto de partida es ir al parque a jugar con los niños, pues es un sitio seguro desde el que pueden monitorizar y ver como interactúan con otros niños. Por otro lado, también quieren que sus hijos aprendan y tengan nuevos hobbies, por lo que también les apuntarán a actividades extras como clases de arte, música o algún deporte, lo que permitirá también dar cierta “libertad” al niño, pero dentro de un ambiente controlado y vigilado. Dentro de casa también pueden surgir momentos en los que los padres no puedan estar y tengan que dejar a sus hijos con alguien más, como puede ser una cuidadora o un familiar, el cual se asegurará de que el niño haga lo que tiene que hacer. 
 
 Con respecto a lo que los padres oyen y ven, se ven criticados por otros padres de que el tiempo en familia a esas edades es muy importante y que pasar más tiempo con tus hijos es más importante que realizar horas extras, y aprovechar a ver series o películas en familia en casa es una buena idea. En general las madres (y también algunos padres) recurren mucho a los canales de televisión de cocina para innovar en el menú de la semana, encontrar recetas que permitan a los niños comer de todo y que no siempre sea lo mismo. En el ambiente escolar, los padres tienen que asistir a reuniones escolares de manera constante, lo que les permite conoce el desarrollo de sus hijos en las aulas, aunque  no  siempre  es  posible  que  ambos  puedan  acudir  ya  que  tienen  limitaciones  externas. Lo que más preocupa a los padres es el bienestar de sus hijos, si están cómodos con sus compañeros y amigos o si se han metido en algún problema con algún otro niño. El problema con esto es que las nuevas tecnologías están haciendo presencia en su vida y no terminan de adaptarse, haciendo que no puedan sentirse del todo seguros a la hora de manejar estas nuevas tecnologías. Lo mismo ocurre con los productos que están dispuestos a comprar, de manera física tienen una garantía que les da firmeza en su decisión de comprar o no, pero a la hora de comprar online no se sienten tan seguros de si el producto es de la calidad esperada o de si realmente llegará el pedido. Pero a pesar de todo esto, priorizan la seguridad del hogar y de la familia. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.108.jpeg)
+![](/Documentacion/MapaEmpatiaJovenes.png)
 
 El mapa de empatía de los jóvenes se ha realizado de manera general entra jóvenes de 13 a 18 años, recogiendo  sus  preocupaciones  y  sus  actividades  diarias. Contrastando lo que piensan con lo que dicen, los jóvenes tienen muchas preocupaciones de cara al futuro y para con su grupo social. ¿Qué estudiaré? ¿Será útil lo que estoy dando para el futuro? ¿Estoy solo? Estas son una serie de preocupaciones que se repite mucho entre jóvenes (más jóvenes adultos), pero también existen los pensamientos sobre la libertad, libertad de expresión, libertad de acción, libertad en la vida; en cualquier rango de edades, los jóvenes añoran tener su propia libertad e ir creciendo de manera independiente, sin necesidad de ataduras con los adultos. Pero esto no es todo, también se ha notado una creciente vertiente de estrés y presión tanto por parte de grupos sociales, como puede ser mantener las redes sociales activas, que otros aprueben mis decisiones, etc. Como la presión en casa con mantener los estudios y sacar las asignaturas, o ir aprendiendo como es vivir de manera independiente y que no todo sea que aparecen las cosas hechas. Por eso recurren a las compras online o con amigos, para demostrar su propia libertad. Tampoco dejan de lado la salud física, teniendo  siempre  a  un  círculo  de  amigos  cerca. Con respecto a lo que oyen y lo que ven, utilizan las redes sociales para hablar tanto con amigos cercanos como con amigos “on-line”. Utilizan cualquier medio que tengan a su disposición para poner en común sus gustos, tanto musicales, como artísticos o de moda. También comentan entre ellos que ‘Streamers’ están de moda para ver y comentar sus vídeos. Por desgracia, al no tener una cantidad infinita de dinero ni una fuente estable de ingresos, tienen que recurrir a estrategias para poder socializar, como puede ser, gestionar los ingresos que tienen para ir de compras o salir fuera, lo que les  limita  también  que  cosas  pueden  y  no  pueden  comprar  por  mucho  que  las  quieran. Parte de sus preocupaciones se resumen en no llegar a tener éxito en la vida y no ser reconocidos de manera generalizada, no llegar a poder encontrar un trabajo que les guste y puedan vivir de ello y mantener esa inestabilidad económica de la que parten en un futuro. Pero eso no evita que sus pensamientos se disocien en el carpe diem y se centren en su vida y vivirla como creen que quieren. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.109.jpeg)
+![](/Documentacion/MapaEmpatiaColegios.png)
 
 Para analizar el mapa de empatía comenzaremos comparando lo que piensan con lo que dicen. Por un lado, se crea una competencia entre distintas instituciones por conseguir un mayor rendimiento dentro  de  la  escuela  y  una  mejor  posición  dentro  del  consorcio  de  instituciones  educativas, consiguiendo mejores beneficios para la institución y mayor prestigio. Para conseguir esto, necesitará estar adaptándose a las nuevas tecnologías para no quedarse atrapados en métodos antiguos de educación y poder usar nuevos métodos que pueden mejorar el rendimiento de en las aulas. Además de centrarse en el apartado educativo, también se deben centrar en asegurar un entorno donde los alumnos se sientan cómodos y seguros, lo que permite que la enseñanza de los alumnos sea más eficiente y sencilla, de este modo enseñan valores como el respeto por los demás y la igualdad. Por otro lado, compararemos lo que oyen con lo que ven. Constantemente se encuentran restringidos por una serie de políticas que les exigen como deben realizar ciertos aspectos con respecto a la enseñanza, aunque tienen una cierta libertad en cómo llevarlo a cabo. En esta parte también entran las proposiciones de los docentes que pueden mejorar ciertos aspectos dentro del centro. Por otro lado, tienen que atender las demandas y preocupaciones de los padres que tienen a sus hijos inscritos en el centro. Para poder especificar cual es el rendimiento del alumno dentro de las aulas, como hemos  dicho  se  intentan  actualizar  utilizando  nuevas  tecnologías,  las  cuales  pueden  medir rendimiento del alumno, en que se centra más, que es lo que le falla, etc. Utilizarán distintos métodos que  midan  distintas  regiones  de  aprendizaje. Los miedos de las escuelas entran dentro de dos aspectos fundamentales, por un lado, miedo a la desaprobación de los padres respecto a los nuevos métodos de enseñanza, incluyendo los métodos lúdicos para enseñar. El otro apartado que tienen miedo de que no se cumpla es que las enseñanzas que se han dado no tengan un efecto duradero a largo plazo en los alumnos, repercutiendo en su futuro haciendo que más adelante tengan que reaprender lo aprendido. Por otro lado, sus objetivos se centran en la formación de individuos capaces que puedan integrar a personas en la sociedad. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.110.jpeg)
+![](/Documentacion/MapaEmpatiaStreamers.png)
 
 Para realizar el mapa de empatía de los streamers nos hemos basado en el comportamiento de un sector específico de generadores de contenido online.
 
@@ -1033,7 +1033,7 @@ Las principales preocupaciones de los streamers son no conseguir suficiente púb
 
 <a name="_page58_x69.00_y103.00"></a>**CAJA DE HERRAMIENTAS**
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.111.jpeg)
+![](/Documentacion/CajaHerramientas.png)
 
 Introducción: Esta Caja de Herramientas, proyecta la visión de negocio de nuestra empresa, Oonga Bunga, como una empresa de videojuegos indie dentro del mercado de la creación de videojuegos serios, que ayudan al desarrollo del pensamiento computacional; y sus relaciones con el entorno empresarial. 
 
@@ -1047,7 +1047,7 @@ También nos enfocamos en la venta de nuestro producto a personas individuales a
 
 <a name="_page59_x69.00_y103.00"></a>**BUSINESS MODEL CANVAS** 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.112.jpeg)
+![](/Documentacion/BusinessModelCanvas.png)
 
 Los socios clave de nuestra empresa desempeñan  un  papel fundamental en el éxito de nuestro proyecto. Estos socios incluyen: 
 
