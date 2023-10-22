@@ -446,7 +446,7 @@ Los  enemigos  son  una  representación  de  los  miedos  de  un  niño,  como 
 
 Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  El aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.057.png)
+![](/Documentacion/EnemigoSombra.png)
 
 Imagen del enemigo sombra
 
@@ -458,7 +458,7 @@ Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mu
 
 Es el resultado de la fusión de gran cantidad de plancton debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.058.png)
+![](/Documenta/EnemigoEsqueleto.png)
 
 Imagen del enemigo Esqueleto 
 
@@ -468,7 +468,7 @@ Es una especie de insecto que trepa por el techo, con una boca dentada en la esp
 
 las fobias y prejuicios de los padres como es el miedo a los insectos.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.059.jpeg)
+![](/Documenta/EnemigoKitestinger.png)
 
 Imagen del enemigo Kitenstinger
 
@@ -476,7 +476,7 @@ Imagen del enemigo Kitenstinger
 
 Es un gato de aspecto rechoncho, peludo y  de mal carácter perteneciente a la familia del niño. Es el archienemigo del conejo de peluche dado que este, debido a su curiosidad felina, intenta darle caza; por lo que es amenazador desde el punto de vista del jugador.
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.060.jpeg)
+![](/Documenta/EnemigoComandanteBlubs.png)
 
 Imagen del enemigo Comandante Blubs
 
@@ -484,7 +484,7 @@ Imagen del enemigo Comandante Blubs
 
 El único personaje humano del juego es el niño de 2 años a quien tendrá que proteger el jugador. Solo  se ve su aspecto durante la cinemática inicial, durante el juego permanece completamente cubierto por una manta. 
 
-![](Aspose.Words.a5fe180f-4df0-47af-a39b-5a9c7f6546e8.061.png)
+![](/Documenta/Niño.png)
 
 Imagen del Niño 
 
