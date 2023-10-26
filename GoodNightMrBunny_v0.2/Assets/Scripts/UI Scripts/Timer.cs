@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     {
         timerText = GetComponent<TextMeshProUGUI>();
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.TimerEvent += UpdateTimerDisplay;
+        gameManager.OnTimeChanged += UpdateTimerDisplay;
     }
 
     void Update()

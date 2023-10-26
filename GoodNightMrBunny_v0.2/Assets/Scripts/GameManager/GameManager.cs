@@ -1,20 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using Newtonsoft.Json;
 
 [System.Serializable]
-public class Object
-{
-    public string ID;
-    public Position Rotation;
-    public Position Position;
-}
-
-[System.Serializable]
-public class Position
+public class MyVector3
 {
     public float X;
     public float Y;
@@ -22,163 +15,243 @@ public class Position
 }
 
 [System.Serializable]
-public class Data
+public class Object
 {
-    public Object[] Props;
-    public Object[] Objects;
+    public string ID;
+    public MyVector3 Position;
+    public MyVector3 Rotation;
+    public MyVector3 Scale;
+}
+
+[System.Serializable]
+public class SceneData
+{
+    public List<Object> SceneObjects;
+    public List<MyVector3> SwitchNodes;
+    public List<MyVector3> CatNodes;
 }
 
 public class GameManager : MonoBehaviour
 {
+    #region Attributes
 
     // Interruptores
     private int totalSwitches;
     private int currentActivatedSwitches;
-    private List<float[,]> possibleSwitchLocationList = new List<float[,]>();
-    [SerializeField] private TextMeshProUGUI upperText;
-    [SerializeField] private TextMeshProUGUI winLoseText;
-    [SerializeField] private GameObject mobileControls;
-    [SerializeField] private GameObject blocking;
+    private List<Vector3> possibleSwitchLocationList = new List<Vector3>();
+
+    // UI
+    [Header("UI")]
+
+    [SerializeField] private TextMeshProUGUI _upperText;
+    [SerializeField] private TextMeshProUGUI _winLoseText;
+    [SerializeField] private GameObject _mobileControls;
+
+    // Json generation and loading
+    [Header("Json")]
+
+    [SerializeField] private TextAsset _jsonFile;
+
+    [SerializeField] private List<GameObject> _prefabsList;
+    private Dictionary<string, GameObject> _prefabDictionary = new Dictionary<string, GameObject>();
+    [SerializeField] private GameObject _sceneHolder;
+
+    [SerializeField] private bool _generateJson;
 
     // Tiempo de supervivencia
-    [SerializeField] private float maxTime;
-    private float currentTime;
-    public EventHandler<float> TimerEvent;
+    [Header("Time")]
+
+    [SerializeField] private float _maxTime = 60f;
+    private float _currentTime;
+    public EventHandler<float> OnTimeChanged;
 
     // Spawn de enemigos
-    [SerializeField]  private List<GameObject> enemyList;
-    [SerializeField]  private float spawnRate;
-    private float enemySpawnCooldown = 0f;
-    [SerializeField] private Transform enemySpawnPoint;
+    [Header("Enemies")]
 
-    // Spawn de props y objetos
-    public GameObject[] propPrefabs;
-    public GameObject[] objectPrefabs;
+    [SerializeField]  private List<GameObject> _enemyList;
+    [SerializeField]  private float _spawnRate = 15f;
+    private float _enemySpawnCooldown = 0f;
+    [SerializeField] private Transform _enemySpawnPoint;
 
-    private Dictionary<string, GameObject> propDictionary = new Dictionary<string, GameObject>();
-    private Dictionary<string, GameObject> objectDictionary = new Dictionary<string, GameObject>();
-
-    [SerializeField] private TextAsset jsonFile;
+    private List<Vector3> _catWanderingNodesList = new List<Vector3>();
 
     // Otros
-    private bool inGame;
-    private PauseManager pauseManager;
+    [Header("Other")]
+
+    [SerializeField] private PauseManager _pauseManager;
+    private bool _isInGame;
+
+    #endregion
+
+    #region Initialization
 
     void Start()
     {
+        if (_generateJson)
+        {
+            CreateJson();
+        }
+
         if (Application.isMobilePlatform)
         {
-            mobileControls.SetActive(true);
+            _mobileControls.SetActive(true);
         }
         else
         {
             //Oculta el ratón durante el juego
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            mobileControls.SetActive(false);
+            _mobileControls.SetActive(false);
         }
 
-        currentTime = maxTime;
+        _currentTime = _maxTime;
         currentActivatedSwitches = 0;
         totalSwitches = 0;
-        pauseManager = FindObjectOfType<PauseManager>();
-        winLoseText.gameObject.SetActive(false);
-
-        // Create switches
-
-        // Create baby?
-
-        //FindObjectOfType<Baby>().HealthChanged += BabyDied;
-
-        // Create objects
+        _winLoseText.gameObject.SetActive(false);
         
         LoadPrefabs();
-
-        string jsonString = jsonFile.text;
-        Data datos = JsonUtility.FromJson<Data>(jsonString);
-
-        foreach (Object prop in datos.Props)
-        {
-            Vector3 position = new Vector3(prop.Position.X, prop.Position.Y, prop.Position.Z);
-            Vector3 rotation = new Vector3(prop.Rotation.X, prop.Rotation.Y, prop.Rotation.Z);
-
-            if (propDictionary.ContainsKey(prop.ID))
-            {
-                GameObject propPrefab = propDictionary[prop.ID];
-                GameObject propInstance = Instantiate(propPrefab, Vector3.zero, Quaternion.identity);
-                propInstance.transform.parent = blocking.transform;
-                propInstance.transform.localPosition = position;
-                propInstance.transform.localRotation = Quaternion.Euler(rotation);
-            }
-            else
-            {
-                Debug.Log("No hay prefab");
-            }
-        }
-
-        foreach (Object obj in datos.Objects)
-        {
-            Vector3 position = new Vector3(obj.Position.X, obj.Position.Y, obj.Position.Z);
-            Vector3 rotation = new Vector3(obj.Rotation.X, obj.Rotation.Y, obj.Rotation.Z);
-
-            if (objectDictionary.ContainsKey(obj.ID))
-            {
-                GameObject objPrefab = objectDictionary[obj.ID];
-                GameObject objInstance = Instantiate(objPrefab, Vector3.zero, Quaternion.identity);
-                objInstance.transform.parent = blocking.transform;
-                objInstance.transform.localPosition = position;
-                objInstance.transform.localRotation = Quaternion.Euler(rotation);
-            }
-            else
-            {
-                Debug.Log("No hay prefab");
-            }
-        }
-
-        // Enemies?
-
-        // Activar c�mara de jugador
+        LoadSceneFromJson();
 
         foreach (Switch interruptor in FindObjectsOfType<Switch>())
         {
             interruptor.OnTurnedOnOrOff += SwitchChangedState;
             totalSwitches++;
         }
-        FindObjectOfType<Baby>().HealthChanged += BabyDied;
-        inGame = true;
+
+        Baby baby = FindObjectOfType<Baby>();
+
+        if (baby != null)
+        {
+            baby.HealthChanged += BabyDied;
+        }
+
+        _isInGame = true;
     }
 
     private void LoadPrefabs()
     {
-        foreach (var propPrefab in propPrefabs)
+        foreach (var propPrefab in _prefabsList)
         {
-            propDictionary[propPrefab.name] = propPrefab;
-        }
-
-        foreach (var objectPrefab in objectPrefabs)
-        {
-            objectDictionary[objectPrefab.name] = objectPrefab;
+            _prefabDictionary[propPrefab.name] = propPrefab;
         }
     }
 
+    private void LoadSceneFromJson()
+    {
+        string jsonString = _jsonFile.text;
+
+        SceneData sceneData = JsonUtility.FromJson<SceneData>(jsonString);
+        
+        // Ahora puedes acceder a los datos como objetos C#
+        foreach (var sceneObject in sceneData.SceneObjects)
+        {   
+            Vector3 position = new Vector3(sceneObject.Position.X, sceneObject.Position.Y, sceneObject.Position.Z);
+            Vector3 rotation = new Vector3(sceneObject.Rotation.X, sceneObject.Rotation.Y, sceneObject.Rotation.Z);
+            Vector3 scale = new Vector3(sceneObject.Scale.X, sceneObject.Scale.Y, sceneObject.Scale.Z);
+
+            if (_prefabDictionary.ContainsKey(sceneObject.ID))
+            {
+                GameObject sceneObjectPrefab = _prefabDictionary[sceneObject.ID];
+                GameObject sceneObjectInstance = Instantiate(sceneObjectPrefab, Vector3.zero, Quaternion.identity, _sceneHolder.transform);
+                sceneObjectInstance.transform.localPosition = position;
+                sceneObjectInstance.transform.localRotation = Quaternion.Euler(rotation);
+                sceneObjectInstance.transform.localScale = scale;
+            }
+            else
+            {
+                Debug.Log("No hay prefab");
+            }
+        }
+
+        foreach (var switchNode in sceneData.SwitchNodes)
+        {
+            possibleSwitchLocationList.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
+        }
+
+        foreach (var catNode in sceneData.CatNodes)
+        {
+            _catWanderingNodesList.Add(new Vector3(catNode.X, catNode.Y, catNode.Z));
+        }
+    }
+
+    private void CreateJson()
+    {
+        List<Object> sceneObjectList = new List<Object>();
+        List<MyVector3> switchNodeList = new List<MyVector3>();
+        List<MyVector3> catNodeList = new List<MyVector3>();
+
+        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag("SceneObject");
+        GameObject[] switchNodes = GameObject.FindGameObjectsWithTag("SwitchNode");
+        GameObject[] catNodes = GameObject.FindGameObjectsWithTag("CatNode");
+
+        foreach (GameObject sceneObject in sceneObjects)
+        {
+            Vector3 position = sceneObject.transform.localPosition;
+            Vector3 rotation = sceneObject.transform.localRotation.eulerAngles;
+            Vector3 scale = sceneObject.transform.localScale;
+            Object data = new Object
+            {
+                ID = sceneObject.name,
+                Position = new MyVector3 { X = position.x, Y = position.y, Z = position.z },
+                Rotation = new MyVector3 { X = rotation.x, Y = rotation.y, Z = rotation.z },
+                Scale = new MyVector3 { X = scale.x, Y = scale.y, Z = scale.z }
+            };
+            sceneObjectList.Add(data);
+        }
+
+        foreach (GameObject switchNode in switchNodes)
+        {
+            Vector3 position = switchNode.transform.localPosition;
+            MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
+            switchNodeList.Add(data);
+        }
+
+        foreach (GameObject catNode in catNodes)
+        {
+            Vector3 position = catNode.transform.localPosition;
+            MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
+            catNodeList.Add(data);
+        }
+
+        // Crear un objeto JSON que contiene las listas de props y objects
+        var sceneData = new
+        {
+            SceneObjects = sceneObjectList,
+            SwitchNodes = switchNodeList,
+            CatNodes = catNodeList
+        };
+
+        // Convertir el objeto JSON a una cadena JSON
+        string jsonData = JsonConvert.SerializeObject(sceneData, Newtonsoft.Json.Formatting.Indented);
+
+        // Guardar la cadena JSON en un archivo
+        File.WriteAllText(Application.dataPath + "/sceneData.json", jsonData);
+
+        Debug.Log("Datos de la escena guardados como JSON.");
+    }
+
+    #endregion
+
+    #region Update
+
     void Update()
     {
-        if (pauseManager.isPaused) return;
+        if (_pauseManager.isPaused) return;
 
-        if (inGame)
+        if (_isInGame)
         {
-            enemySpawnCooldown += Time.deltaTime;
+            _enemySpawnCooldown += Time.deltaTime;
 
-            if (enemySpawnCooldown >= spawnRate)
+            if (_enemySpawnCooldown >= _spawnRate)
             {
-                enemySpawnCooldown = 0f;
-                Instantiate(enemyList[0], enemySpawnPoint.position, Quaternion.identity);
+                _enemySpawnCooldown = 0f;
+                Instantiate(_enemyList[0], _enemySpawnPoint.position, Quaternion.identity);
             }
 
-            currentTime -= Time.deltaTime;
-            TimerEvent?.Invoke(this, currentTime);
+            _currentTime -= Time.deltaTime;
+            OnTimeChanged?.Invoke(this, _currentTime);
 
-            if (currentTime < 0)
+            if (_currentTime < 0)
             {
                 PlayerWon();
             }
@@ -188,6 +261,10 @@ public class GameManager : MonoBehaviour
             // detectar inicio juego
         }
     }
+
+    #endregion
+
+    #region Methods
 
     private void BabyDied(object sender, float babyHealth)
     {
@@ -202,8 +279,8 @@ public class GameManager : MonoBehaviour
         if (isOn)
         {
             currentActivatedSwitches++;
-            upperText.text = $"{currentActivatedSwitches}/{totalSwitches} interruptores";
-            upperText.GetComponent<Animator>().SetTrigger("ShowText");
+            _upperText.text = $"{currentActivatedSwitches}/{totalSwitches} interruptores";
+            _upperText.GetComponent<Animator>().SetTrigger("ShowText");
             if (currentActivatedSwitches == totalSwitches)
             {
                 PlayerWon();
@@ -212,22 +289,24 @@ public class GameManager : MonoBehaviour
         else
         {
             currentActivatedSwitches--;
+            _upperText.text = $"{currentActivatedSwitches}/{totalSwitches} interruptores";
+            _upperText.GetComponent<Animator>().SetTrigger("ShowText");
         }
     }
 
     private void PlayerWon()
     {
-        inGame = false;
-        winLoseText.text = "You won!";
-        winLoseText.gameObject.SetActive(true);
+        _isInGame = false;
+        _winLoseText.text = "You won!";
+        _winLoseText.gameObject.SetActive(true);
         SceneManager.LoadScene("FinalScene");
     }
 
     private void PlayerLost()
     {
-        inGame = false;
-        winLoseText.text = "You lost...";
-        winLoseText.gameObject.SetActive(true);
+        _isInGame = false;
+        _winLoseText.text = "You lost...";
+        _winLoseText.gameObject.SetActive(true);
         SceneManager.LoadScene("FinalScene");
     }
 
@@ -240,4 +319,6 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    #endregion
 }
