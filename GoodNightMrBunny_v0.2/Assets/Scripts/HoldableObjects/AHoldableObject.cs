@@ -18,7 +18,7 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 
     }
 
-    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
+    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer, float initializationValue)
     {
         if (droppedObject != null && dropPrefab)
         {
@@ -32,7 +32,8 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
-            Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            GameObject objectInstance = Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            objectInstance.GetComponent<AInteractable>().Initialize(initializationValue);
         }
         
         gameObject.SetActive(false);

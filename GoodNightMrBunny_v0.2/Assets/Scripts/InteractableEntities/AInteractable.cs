@@ -12,10 +12,10 @@ public class AInteractable : MonoBehaviour, IInteractable
     [SerializeField] protected IInteractable.InteractType _interactType = IInteractable.InteractType.Press; // Forma en la que se puede interactuar con este objeto, con algunos basta con presionar la tecla de interactuar, con otros hay que mantenerla pulsada y algunos tienen dos acciones distintas dependiendo de si solo se ha pulsado o si se ha mantenido
 
     // El siguiente grupo de atributos solo sirve para AInteractable de tipo Hold o PressAndHold
-    protected float _currentHoldTime = 0f; // Tiempo que lleva el jugador presionando el botón de interactuar con este objeto
-    [SerializeField] protected float _holdDuration; // Tiempo que debe presionarse el botón de interactuar para llevar a cabo la acción de este objeto
+    protected float _currentHoldTime = 0f; // Tiempo que lleva el jugador presionando el botï¿½n de interactuar con este objeto
+    [SerializeField] protected float _holdDuration; // Tiempo que debe presionarse el botï¿½n de interactuar para llevar a cabo la acciï¿½n de este objeto
     [SerializeField] protected float _pressBuffer; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
-    protected bool _isBeingInteracted = false; // Si el objeto está siendo interactuado por el jugador
+    protected bool _isBeingInteracted = false; // Si el objeto estï¿½ siendo interactuado por el jugador
     
     protected bool _canBeInteracted = true; // Si el objeto puede ser interactuado
 
@@ -51,9 +51,9 @@ public class AInteractable : MonoBehaviour, IInteractable
     #region Updates
 
     /// <summary>
-    /// Si el objeto está siendo interactuado se incrementa el temporizador _currentHoldTime, y si supera cierto tiempo 
+    /// Si el objeto estï¿½ siendo interactuado se incrementa el temporizador _currentHoldTime, y si supera cierto tiempo 
     /// se ejecuta InteractedHoldAction
-    /// También actualiza barra radial
+    /// Tambiï¿½n actualiza barra radial
     /// </summary>
     protected virtual void Update()
     {
@@ -84,7 +84,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     #region Interaction Methods
 
     /// <summary>
-    /// Llama a un método u otro dependiendo del input del jugador
+    /// Llama a un mï¿½todo u otro dependiendo del input del jugador
     /// </summary>
     /// <param name="interactInput"></param>
     public virtual void Interacted(IPlayerReceiver.InputType interactInput)
@@ -107,7 +107,7 @@ public class AInteractable : MonoBehaviour, IInteractable
         }
         else
         {
-            // Si el objeto es de tipo PressAndHold y la duración de la pulsación ha sido muy corta se ejecuta InteractedPressAction
+            // Si el objeto es de tipo PressAndHold y la duraciï¿½n de la pulsaciï¿½n ha sido muy corta se ejecuta InteractedPressAction
 
             if (_interactType == IInteractable.InteractType.PressAndHold && _currentHoldTime < _pressBuffer && _isBeingInteracted)
             {
@@ -120,7 +120,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Lo llama el jugador cuando sale fuera del rango de interactuación con este objeto o se ha acercado más a otro
+    /// Lo llama el jugador cuando sale fuera del rango de interactuaciï¿½n con este objeto o se ha acercado mï¿½s a otro
     /// </summary>
     public virtual void PlayerExitedRange()
     {
@@ -129,7 +129,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Acción que se ejecuta tras un press del jugador
+    /// Acciï¿½n que se ejecuta tras un press del jugador
     /// </summary>
     protected virtual void InteractedPressAction()
     {
@@ -137,11 +137,16 @@ public class AInteractable : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Acción que se ejecuta tras un hold del jugador durante cierto tiempo
+    /// Acciï¿½n que se ejecuta tras un hold del jugador durante cierto tiempo
     /// </summary>
     protected virtual void InteractedHoldAction()
     {
 
+    }
+    
+    public virtual void Initialize(float value)
+    {
+        
     }
 
     #endregion
