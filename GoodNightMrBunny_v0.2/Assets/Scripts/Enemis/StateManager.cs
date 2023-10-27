@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-  public state currentState;
+    [SerializeField] private state currentState;
+    [SerializeField] private AMonster enemy;
     void Update()
     {
         RunStateMachine();
     }
     private void RunStateMachine()
     {
-        state nextState = currentState?.RunCurrentState();
+        state nextState = currentState?.RunCurrentState(enemy);
         if(nextState != null)
         {
             SwitchToTheNextState(nextState);

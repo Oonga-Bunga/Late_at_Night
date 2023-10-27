@@ -6,12 +6,6 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
 
-public enum AttackSource
-{
-    Flashlight,
-    ClayBall,
-    Rocket
-}
 
 [System.Serializable]
 public class MyVector3
@@ -40,6 +34,12 @@ public class SceneData
 
 public class GameManager : MonoBehaviour
 {
+    public enum AttackSource
+    {
+        Flashlight,
+        ClayBall,
+        Rocket
+    }
     #region Attributes
 
     // Interruptores

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ChaseState : state
 {
-      public override state RunCurrentState()
+      public override state RunCurrentState(AMonster enemy)
    {
     Debug.Log("atacado");
     return this;

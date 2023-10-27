@@ -104,7 +104,7 @@ public class Flashlight : AHoldableObject
             if (enemy != null)
             {
                 Debug.Log("daño enemigo");
-                enemy.TakeHit(baseDamage);
+                enemy.TakeHit(baseDamage, GameManager.AttackSource.Flashlight);
             }
             
         }

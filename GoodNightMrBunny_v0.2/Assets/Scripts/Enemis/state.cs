@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class state : MonoBehaviour
 {
-    public abstract state RunCurrentState();
+    public abstract state RunCurrentState(AMonster enemy);
+    
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Atackstate : state
 {
-    public override state RunCurrentState()
+    public override state RunCurrentState(AMonster enemy)
    {
     Debug.Log("atacado");
     return this;

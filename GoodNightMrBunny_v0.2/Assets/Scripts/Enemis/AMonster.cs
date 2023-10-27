@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AMonster : MonoBehaviour
 {
-    public int maxHealth = 100;
+    [SerializeField] private int maxHealth = 100;
     private int currentHealth;
 
     private void Start()
@@ -12,7 +14,7 @@ public class AMonster : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeHit(float damage)
+    public void TakeHit(float damage,GameManager.AttackSource source)
     {
         if (currentHealth > 0)
         {
@@ -35,5 +37,9 @@ public class AMonster : MonoBehaviour
         
         Debug.Log("morision");
         //gameObject.Destroy(this);
+    }
+    public float CurrentHealth
+    {
+        get { return currentHealth; }
     }
 }
