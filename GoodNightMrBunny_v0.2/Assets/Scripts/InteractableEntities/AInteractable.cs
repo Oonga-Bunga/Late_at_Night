@@ -143,15 +143,10 @@ public class AInteractable : MonoBehaviour, IInteractable
     {
 
     }
-    
-    public virtual void Initialize(float value)
-    {
-        
-    }
 
     #endregion
 
-    #region Utility Methods
+    #region Other Methods
 
     /// <summary>
     /// Activa el ouline y el canvas
@@ -181,6 +176,11 @@ public class AInteractable : MonoBehaviour, IInteractable
         {
             _promptCanvas.enabled = false;
         }
+    }
+
+    public virtual void Initialize(float value)
+    {
+
     }
 
     #endregion

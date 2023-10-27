@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
 
+public enum AttackSource
+{
+    Flashlight,
+    ClayBall,
+    Rocket
+}
+
 [System.Serializable]
 public class MyVector3
 {
@@ -36,8 +43,8 @@ public class GameManager : MonoBehaviour
     #region Attributes
 
     // Interruptores
-    private int totalSwitches;
-    private int currentActivatedSwitches;
+    private int totalSwitches = 0;
+    private int currentActivatedSwitches = 0;
     private List<Vector3> possibleSwitchLocationList = new List<Vector3>();
 
     // UI
@@ -87,6 +94,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Inicialización de valores y estados
+
+        _currentTime = _maxTime;
+        _winLoseText.gameObject.SetActive(false);
+
         if (_generateJson)
         {
             CreateJson();
@@ -98,19 +110,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //Oculta el ratón durante el juego
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _mobileControls.SetActive(false);
         }
 
-        _currentTime = _maxTime;
-        currentActivatedSwitches = 0;
-        totalSwitches = 0;
-        _winLoseText.gameObject.SetActive(false);
+        // Generación de la escena
         
         LoadPrefabs();
         LoadSceneFromJson();
+
+        // Una vez generada hacer cosas con ciertos objetos
 
         foreach (Switch interruptor in FindObjectsOfType<Switch>())
         {
@@ -124,6 +134,8 @@ public class GameManager : MonoBehaviour
         {
             baby.HealthChanged += BabyDied;
         }
+
+        // Empezar nivel
 
         _isInGame = true;
     }
@@ -225,7 +237,7 @@ public class GameManager : MonoBehaviour
         string jsonData = JsonConvert.SerializeObject(sceneData, Newtonsoft.Json.Formatting.Indented);
 
         // Guardar la cadena JSON en un archivo
-        File.WriteAllText(Application.dataPath + "/sceneData.json", jsonData);
+        File.WriteAllText(Application.dataPath + "/Scripts/GameManager/LevelJsons/newSceneData.json", jsonData);
 
         Debug.Log("Datos de la escena guardados como JSON.");
     }
@@ -255,10 +267,6 @@ public class GameManager : MonoBehaviour
             {
                 PlayerWon();
             }
-        }
-        else
-        {
-            // detectar inicio juego
         }
     }
 
@@ -308,16 +316,6 @@ public class GameManager : MonoBehaviour
         _winLoseText.text = "You lost...";
         _winLoseText.gameObject.SetActive(true);
         SceneManager.LoadScene("FinalScene");
-    }
-
-    private void StartCatEvent()
-    {
-
-    }
-
-    private void EndCatEvent()
-    {
-
     }
 
     #endregion

@@ -11,12 +11,12 @@ public class Flashlight : AHoldableObject
     #region Atributtes
 
     static public float maxCharge = 100f;
-    [SerializeField]private float flashlightDamage = 50f;
+    [SerializeField] private float baseDamage = 5f;
     //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
-    [SerializeField]private float dischargeMultiplier = 5f; 
-    [SerializeField]private Light spotlight;
-    [SerializeField]private bool lightOn = false;
-    [SerializeField]private float currentCharge;
+    [SerializeField] private float dischargeMultiplier = 5f; 
+    [SerializeField] private Light spotlight;
+    [SerializeField] private bool lightOn = false;
+    [SerializeField] private float currentCharge;
 
     #endregion
     
@@ -27,9 +27,8 @@ public class Flashlight : AHoldableObject
 
     void Start()
     {
-        holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
+        _holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
         currentCharge = maxCharge;
-        flashlightDamage = 5;
     }
 
     public override void Initialize(float charge)
@@ -105,13 +104,16 @@ public class Flashlight : AHoldableObject
             if (enemy != null)
             {
                 Debug.Log("daño enemigo");
-                enemy.TakeHit(flashlightDamage);
+                enemy.TakeHit(baseDamage);
             }
             
         }
     }
 
-    
+    protected override void InitializeInstance(GameObject instance)
+    {
+        instance.GetComponent<AInteractable>().Initialize(currentCharge);
+    }
 
     #endregion
 }

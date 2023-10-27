@@ -37,7 +37,7 @@ public class IdleState : state
         if(vida == 0){
             return ChaseState;
         }
-        /*if (playerController.CurrentHeldObject.holdableObjectType != IPlayerReceiver.HoldableObjectType.Flashlight)
+        /*if (playerController.CurrentHeldObject._holdableObjectType != IPlayerReceiver.HoldableObjectType.Flashlight)
             {
                 Debug.Log("usa");
                 seguirenemigo();

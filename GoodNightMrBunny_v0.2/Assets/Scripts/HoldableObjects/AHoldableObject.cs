@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AHoldableObject : MonoBehaviour, IHoldableObject
 {
-    protected PlayerController player;
-    [SerializeField] protected GameObject droppedObject;
-    [SerializeField] public IPlayerReceiver.HoldableObjectType holdableObjectType;
+    protected PlayerController _player;
+    [SerializeField] protected GameObject _droppedObject;
+    [SerializeField] public IPlayerReceiver.HoldableObjectType _holdableObjectType;
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
+        _player = FindObjectOfType<PlayerController>();
     }
 
     public virtual void Use(IPlayerReceiver.InputType attackInput)
@@ -18,25 +18,30 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 
     }
 
-    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer, float initializationValue)
+    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
     {
-        if (droppedObject != null && dropPrefab)
+        if (_droppedObject != null && dropPrefab)
         {
             Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * dropDistance;
             Vector3 dropDirection = Camera.main.transform.forward;
 
             RaycastHit hitInfo;
 
-            if (Physics.SphereCast(player.transform.position, sphereRaycastRadius, dropDirection, out hitInfo, dropDistance, groundLayer))
+            if (Physics.SphereCast(_player.transform.position, sphereRaycastRadius, dropDirection, out hitInfo, dropDistance, groundLayer))
             {
                 dropPosition = hitInfo.point - (dropDirection * minimumDistanceFromCollision);
             }
 
-            GameObject objectInstance = Instantiate(droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
-            objectInstance.GetComponent<AInteractable>().Initialize(initializationValue);
+            GameObject objectInstance = Instantiate(_droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
+            InitializeInstance(objectInstance);
         }
         
         gameObject.SetActive(false);
+    }
+
+    protected virtual void InitializeInstance(GameObject instance)
+    {
+        
     }
 
     public virtual void Initialize(float value)

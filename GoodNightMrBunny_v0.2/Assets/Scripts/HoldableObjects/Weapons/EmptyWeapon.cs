@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyWeapon : AWeapon
+public class EmptyWeapon : AHoldableObject
 {
     void Start()
     {
-        holdableObjectType = IPlayerReceiver.HoldableObjectType.None;
+        _holdableObjectType = IPlayerReceiver.HoldableObjectType.None;
     }
 }

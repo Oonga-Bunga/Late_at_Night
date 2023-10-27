@@ -10,7 +10,16 @@ public class ClayBallBehaviour : MonoBehaviour
     [SerializeField]private float lifeTime = 5f;
     [SerializeField]private float jumpForce = 30.0f;
     private bool canJump = false;
-    
+
+    #endregion
+
+    #region Initialization
+
+    public void Initialize(Vector3 direction, float force)
+    {
+        GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
+    }
+
     #endregion
 
     #region Methods

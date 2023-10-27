@@ -8,8 +8,6 @@ using System.Drawing;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
-    
-
     #region Attributes
 
     #region Movement
@@ -419,11 +417,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="initializationValue">Valor con el que se inicia el arma, como la carga de la linterna</param>
     public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
-        _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer, 1f);
+        _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
 
         foreach (AHoldableObject holdableObject in _holdableObjectList)
         {
-            if (objectType == holdableObject.holdableObjectType)
+            if (objectType == holdableObject._holdableObjectType)
             {
                 holdableObject.gameObject.SetActive(true);
                 _currentHeldObject = holdableObject;
@@ -447,7 +445,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (_mount != null) _mount.DropHeldObject();
 
-        _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer, 1f);
+        _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);
         _currentHeldObject = _holdableObjectList[0];
     }

@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClayBalls : AWeapon
+public class ClayBalls : AHoldableObject
 {
     #region Attributes
     
     private int currentBallNumber;
     static public int maxBallNumber = 6;
-    [SerializeField]private UpdateUIClayAmmo uiClayAmmo;
-    [SerializeField]private GameObject clayBallPrefab;
-    [SerializeField]private float shotForce = 20f;
+    [SerializeField] private float baseDamage = 5f;
+    [SerializeField] private UpdateUIClayAmmo uiClayAmmo;
+    [SerializeField] private GameObject clayBallPrefab;
+    [SerializeField] private float shotForce = 20f;
     
     #endregion
 
     #region Methods
     void Start()
     {
-        holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
+        _holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
         clayBallPrefab.GetComponent<ClayBallBehaviour>().baseDamage = baseDamage;
     }
 
@@ -49,29 +50,19 @@ public class ClayBalls : AWeapon
     public void Shot()
     {
         if (currentBallNumber <= 0) return;
+
         GameObject clayBall = Instantiate(clayBallPrefab, this.transform.position, Quaternion.identity);
+        clayBall.GetComponent<ClayBallBehaviour>().Initialize(transform.forward, shotForce);
 
-        // Obtiene el Rigidbody de la nueva esfera.
-        Rigidbody rb = clayBall.GetComponent<Rigidbody>();
-
-        if (rb != null)
+        currentBallNumber -= 1;
+        if (currentBallNumber == 0)
         {
-            // Calcula la direccion de lanzamiento.
-            Vector3 direccionDeLanzamiento = transform.forward;
-
-            // Aplica una fuerza al Rigidbody para lanzar la esfera.
-            rb.AddForce(direccionDeLanzamiento * shotForce, ForceMode.Impulse);
-            
-            currentBallNumber -= 1;
-            if (currentBallNumber == 0)
-            {
-                uiClayAmmo.gameObject.SetActive(false);
-                this.gameObject.SetActive(false);
-                player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None,false);
-                return;
-            }
-            uiClayAmmo.UpdateClayText(currentBallNumber);
+            uiClayAmmo.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+            _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None,false);
+            return;
         }
+        uiClayAmmo.UpdateClayText(currentBallNumber);
     }
     
     #endregion
