@@ -14,13 +14,6 @@ public class ClayBallBehaviour : MonoBehaviour
     #endregion
 
     #region Methods
-    /// <summary>
-    /// Destruye las bolas de plastilina tras su tiempo de vida
-    /// </summary>
-    private void Start()
-    {
-        Destroy(gameObject, lifeTime);
-    }
 
     /// <summary>
     /// Método que controla el comportamiento de la plastilina al chochar. (Hacer daño/Trampolin/Aplastarse)
@@ -28,13 +21,13 @@ public class ClayBallBehaviour : MonoBehaviour
     /// <param name="collision">Objeto con el que colisiona</param>
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //Hace enemigo al monstruo
-            Destroy(gameObject);
             collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage);
+            Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Player") && canJump)
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && canJump)
         {
             //Si choca contra el jugador actua como un trampolin
             Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
@@ -53,6 +46,7 @@ public class ClayBallBehaviour : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y/2, transform.localScale.z);
             transform.position = new Vector3(transform.position.x, transform.position.y-transform.localScale.x/2, transform.position.z);
             canJump = true;
+            Destroy(gameObject, lifeTime);
         }
     }
     

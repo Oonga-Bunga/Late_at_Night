@@ -67,6 +67,7 @@ public class ClayBalls : AWeapon
             {
                 uiClayAmmo.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
+                player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None,false);
                 return;
             }
             uiClayAmmo.UpdateClayText(currentBallNumber);

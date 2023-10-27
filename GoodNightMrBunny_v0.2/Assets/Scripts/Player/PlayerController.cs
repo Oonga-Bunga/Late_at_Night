@@ -419,7 +419,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="initializationValue">Valor con el que se inicia el arma, como la carga de la linterna</param>
     public void ChangeHeldObject(IPlayerReceiver.HoldableObjectType objectType, bool dropPrefab, float initializationValue = -1)
     {
-        _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
+        _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer, 1f);
 
         foreach (AHoldableObject holdableObject in _holdableObjectList)
         {
@@ -447,7 +447,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         if (_mount != null) _mount.DropHeldObject();
 
-        _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
+        _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer, 1f);
         _holdableObjectList[0].gameObject.SetActive(true);
         _currentHeldObject = _holdableObjectList[0];
     }
