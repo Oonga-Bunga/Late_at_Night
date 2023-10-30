@@ -34,7 +34,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     [SerializeField] private GameObject _rocketPrefab = null;
     [SerializeField] private LayerMask _groundLayer;
 
-    private LineRenderer _lineRenderer;
+    [SerializeField] private MeshRenderer _laser;
 
     #endregion
 
@@ -44,8 +44,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     {
         _state = RocketPlatformState.Ready;
         _lowerArmAnimator = _lowerArm.GetComponent<Animator>();
-        _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.enabled = false;
+        _laser.enabled = false;
     }
 
     #endregion
@@ -57,7 +56,6 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         switch (_state)
         {
             case RocketPlatformState.Mounted:
-                ShowLaser();
                 break;
             case RocketPlatformState.RotatingDown:
                 Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
@@ -126,27 +124,6 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1f;
     }
 
-    private void ShowLaser()
-    {
-        RaycastHit hit;
-        Vector3 impactPoint;
-
-        if (Physics.Raycast(_rocketPlatformModel.transform.position, _rocketPlatformModel.transform.up, out hit, 100000f))
-        {
-            impactPoint = hit.point;
-        }
-        else
-        {
-            impactPoint = _rocketPlatformModel.transform.position + _rocketPlatformModel.transform.forward * 100000f;
-        }
-
-        _lineRenderer.startWidth = 0.5f;
-        _lineRenderer.endWidth = 0.5f;
-        _lineRenderer.positionCount = 2;
-        _lineRenderer.SetPosition(0, _rocketPlatformModel.transform.position);
-        _lineRenderer.SetPosition(1, impactPoint);
-    }
-
     private void LaunchRocket()
     {
         if (_state != RocketPlatformState.Ready) { return; }
@@ -163,7 +140,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         _state = RocketPlatformState.Mounted;
         _canBeInteracted = false;
         DisableOutlineAndCanvas();
-        _lineRenderer.enabled = true;
+        _laser.enabled = true;
     }
 
     #endregion
@@ -214,7 +191,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
             _player.DisMount();
             _state = RocketPlatformState.Ready;
             _canBeInteracted = true;
-            _lineRenderer.enabled = false;
+            _laser.enabled = false;
             LaunchRocket();
         }
     }
