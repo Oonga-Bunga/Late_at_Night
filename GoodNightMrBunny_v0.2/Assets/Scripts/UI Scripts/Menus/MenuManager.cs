@@ -128,6 +128,15 @@ public class MenuManager : MonoBehaviour
             loginButtons.SetActive(false);
         }
     }
+    
+    /// <summary>
+    /// Cambia el nivel de calidad del videojuego
+    /// </summary>
+    /// <param name="qualityIndex">Indice del nivel de calidad a cambiar</param>
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
 
     #endregion
     
