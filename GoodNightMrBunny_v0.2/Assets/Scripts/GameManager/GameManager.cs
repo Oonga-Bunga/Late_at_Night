@@ -165,9 +165,9 @@ public class GameManager : MonoBehaviour
             {
                 GameObject sceneObjectPrefab = _prefabDictionary[sceneObject.ID];
                 GameObject sceneObjectInstance = Instantiate(sceneObjectPrefab, Vector3.zero, Quaternion.identity, _sceneHolder.transform);
+                sceneObjectInstance.transform.localScale = scale;
                 sceneObjectInstance.transform.localPosition = position;
                 sceneObjectInstance.transform.localRotation = Quaternion.Euler(rotation);
-                sceneObjectInstance.transform.localScale = scale;
             }
             else
             {
