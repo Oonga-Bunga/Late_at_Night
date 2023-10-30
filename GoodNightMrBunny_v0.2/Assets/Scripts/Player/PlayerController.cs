@@ -132,6 +132,26 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         get { return _maxCurrentSpeed; }
     }
 
+    public float DropDistance
+    {
+        get { return _dropDistance; }
+    }
+
+    public LayerMask GroundLayer
+    {
+        get { return _groundLayer; }
+    }
+
+    public float SphereRaycastRadius
+    {
+        get { return _sphereRaycastRadius; }
+    }
+
+    public float MinimumDistanceFromCollision
+    {
+        get { return _minimumDistanceFromCollision; }
+    }
+
     #endregion
 
     #region Initialization
