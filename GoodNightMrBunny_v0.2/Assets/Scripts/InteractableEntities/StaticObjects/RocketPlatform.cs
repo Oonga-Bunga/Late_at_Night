@@ -147,7 +147,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         _lineRenderer.SetPosition(1, impactPoint);
     }
 
-    public void LaunchRocket()
+    private void LaunchRocket()
     {
         if (_state != RocketPlatformState.Ready) { return; }
 
@@ -215,6 +215,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
             _state = RocketPlatformState.Ready;
             _canBeInteracted = true;
             _lineRenderer.enabled = false;
+            LaunchRocket();
         }
     }
 

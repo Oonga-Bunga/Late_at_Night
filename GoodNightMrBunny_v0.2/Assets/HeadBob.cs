@@ -17,7 +17,6 @@ public class HeadBob : MonoBehaviour
     [SerializeField] private Transform _defaultCameraPos = null;
 
     private float _toggleSpeed = 1.0f;
-    private Vector3 _startPos;
     private PlayerController _playerController;
     private Rigidbody _playerRb;
 
@@ -25,7 +24,6 @@ public class HeadBob : MonoBehaviour
     {
         _playerController= GetComponent<PlayerController>();
         _playerRb = GetComponent<Rigidbody>();
-        _startPos = _camera.localPosition;
     }
 
     private void LateUpdate()
@@ -69,9 +67,9 @@ public class HeadBob : MonoBehaviour
 
     private void ResetPosition()
     {
-        if (_camera.localPosition == _startPos) return;
+        if (_camera.localPosition == Vector3.zero) return;
 
-        _camera.localPosition = Vector3.Lerp(_camera.localPosition, Vector3.zero, 30f * Time.deltaTime);
+        _camera.localPosition = Vector3.zero;
     }
 
     private Vector3 FocusTarget()

@@ -125,6 +125,7 @@ public class CameraController : MonoBehaviour
     {
         _isLookEnabled = false;
         transform.localRotation = Quaternion.identity;
+        rotation = new Vector2(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y);
     }
 
     /// <summary>
@@ -132,7 +133,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void PlayerDismounting()
     {
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         _isLookEnabled = true;
     }
 }
