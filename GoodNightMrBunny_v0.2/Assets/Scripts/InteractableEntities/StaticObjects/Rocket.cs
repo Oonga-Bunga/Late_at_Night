@@ -36,7 +36,9 @@ public class Rocket : MonoBehaviour
     void Explode()
     {
         // Crea el efecto de explosión en la posición del objeto
-        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        explosion.transform.localScale = Vector3.one * _blastRadius;
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, -_blastRadius, _enemyLayer);
         foreach (Collider collider in hitColliders)
         {
