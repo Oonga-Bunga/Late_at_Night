@@ -6,18 +6,19 @@ namespace EvilBunny
 {
     public class Spawn : State
     {
-        [SerializeField] private State ChaseState;
+        [SerializeField] private State chaseState;
         // Start is called before the first frame update
         public override State RunCurrentState(AMonster enemy)
         {
             GameObject babyObjects = GameObject.FindGameObjectsWithTag("Baby")[0];
             if ( babyObjects != null)
             {
-                ((EvilBunnyStateManager)statemanager).Baby = babyObjects;
-                return ChaseState;
+                ((EvilBunnyStateManager)stateManager).Baby = babyObjects;
+                return chaseState;
             }
-            return this;
+            ((EvilBunny)stateManager.Enemy).Objective = transform.position;
 
+            return this;
         }   
     }
 }

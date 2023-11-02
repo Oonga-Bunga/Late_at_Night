@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace EvilBunny
 {
-    public class ChaseState : EvilBunnyState
+    public class ChaseState : State
     {
-        [SerializeField] private State GoUnderBed;
-        [SerializeField] private State GoToSwitch;
+        [SerializeField] private State goUnderBed;
+        [SerializeField] private State goToSwitch;
 
         [SerializeField] private float timeswitch = 10f;
         private float time = 0f;
@@ -16,11 +16,11 @@ namespace EvilBunny
 
         public override State RunCurrentState(AMonster enemy)
         {
-            Vector3 babyPos = statemanager.Baby.transform.position;
+            Vector3 babyPos = ((EvilBunnyStateManager)stateManager).Baby.transform.position;
             float distanceToTarget = Vector3.Distance(transform.position, babyPos);
             if (distanceToTarget <= attackRadius)
             {
-                return GoUnderBed;
+                return goUnderBed;
             }
 
             time += Time.deltaTime;
@@ -62,11 +62,12 @@ namespace EvilBunny
                 }
                 if (bestSwitch != null)
                 {
-                    return GoToSwitch;
+                    ((EvilBunnyStateManager)stateManager).Baby = bestSwitch;
+                    return goToSwitch;
                 }
             }
 
-            ((EvilBunny)statemanager.Enemy).Objective = babyPos;
+            ((EvilBunny)stateManager.Enemy).Objective = babyPos;
             return this;
         }
     }

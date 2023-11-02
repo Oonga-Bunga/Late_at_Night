@@ -10,15 +10,30 @@ public class Switch : AInteractable
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     [SerializeField] private Light _light;
     private bool isBeingAttacked = false;
+    [SerializeField] private float health = 20f;
 
     public bool IsBeingAttacked
     {
         get { return isBeingAttacked; }
+        set { isBeingAttacked = value; }
+    }
+
+    public bool IsOn
+    {
+        get { return _isOn; }
     }
 
     private void Start()
     {
         _light.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            TurnOff();
+        }
     }
 
     protected override void InteractedHoldAction()

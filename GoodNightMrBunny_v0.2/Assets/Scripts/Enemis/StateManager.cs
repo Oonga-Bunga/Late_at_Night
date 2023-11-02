@@ -6,6 +6,7 @@ public class StateManager : MonoBehaviour
 {
     [SerializeField] protected State currentState;
     [SerializeField] protected AMonster enemy;
+    [SerializeField] protected Animator animatorController;
 
     public AMonster Enemy
     {
