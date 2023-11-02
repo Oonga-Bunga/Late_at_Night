@@ -493,7 +493,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         this._mount = null;
         transform.parent = null;
-        transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
         _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
