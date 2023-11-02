@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 7491814023680301616}
   - component: {fileID: 6635620037972321220}
   - component: {fileID: 2487820795318150333}
+  - component: {fileID: 8842540634840065842}
+  - component: {fileID: 6315099887140730547}
   m_Layer: 7
   m_Name: Evil Bunny
   m_TagString: Untagged
@@ -111,6 +113,35 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8842540634840065842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709887814629590331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78dc9026097793d4da27b0d688d60f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  Velocidad: 0
+  IA: {fileID: 6635620037972321220}
+--- !u!114 &6315099887140730547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709887814629590331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8271659edbebd04ba4a819352a615a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 0}
+  enemy: {fileID: 8842540634840065842}
 --- !u!1001 &4442771509699171038
 PrefabInstance:
   m_ObjectHideFlags: 0

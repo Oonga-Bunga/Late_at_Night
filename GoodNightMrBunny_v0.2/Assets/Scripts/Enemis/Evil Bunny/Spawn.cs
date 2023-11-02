@@ -13,7 +13,7 @@ namespace EvilBunny
             GameObject babyObjects = GameObject.FindGameObjectsWithTag("Baby")[0];
             if ( babyObjects != null)
             {
-                statemanager.
+                ((EvilBunnyStateManager)statemanager).Baby = babyObjects;
                 return ChaseState;
             }
             return this;

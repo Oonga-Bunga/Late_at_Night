@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    [SerializeField] private State currentState;
-    [SerializeField] private AMonster enemy;
+    [SerializeField] protected State currentState;
+    [SerializeField] protected AMonster enemy;
+
+    public AMonster Enemy
+    {
+        get { return enemy; }
+    }
+
     void Update()
     {
         RunStateMachine();
     }
-    private void RunStateMachine()
+    protected void RunStateMachine()
     {
         State nextState = currentState?.RunCurrentState(enemy);
         if(nextState != null)
@@ -18,7 +24,7 @@ public class StateManager : MonoBehaviour
             SwitchToTheNextState(nextState);
         }
     }
-    private void SwitchToTheNextState(State nextState)
+    protected void SwitchToTheNextState(State nextState)
     {
         currentState = nextState;
     }

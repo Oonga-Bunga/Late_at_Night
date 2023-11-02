@@ -16,7 +16,8 @@ namespace EvilBunny
 
         public override State RunCurrentState(AMonster enemy)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, statemanager.Baby.transform.position);
+            Vector3 babyPos = statemanager.Baby.transform.position;
+            float distanceToTarget = Vector3.Distance(transform.position, babyPos);
             if (distanceToTarget <= attackRadius)
             {
                 return GoUnderBed;
@@ -63,7 +64,10 @@ namespace EvilBunny
                 {
                     return GoToSwitch;
                 }
-            }           
+            }
+
+            ((EvilBunny)statemanager.Enemy).Objective = babyPos;
+            return this;
         }
     }
 }

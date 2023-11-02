@@ -2,13 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 namespace EvilBunny
 {
     public class EvilBunny : AMonster
     {
         [SerializeField] private float Velocidad;
         [SerializeField] private NavMeshAgent IA;
-        [SerializeField] private Transform Objetivo;
+        private Vector3 objective;
+
+        public Vector3 Objective
+        {
+            get { return objective; }
+            set { objective = value; }
+        }
+
+        private void Update()
+        {
+            FollowEnemy();
+        }
 
         public override void TakeHit(float damage, GameManager.AttackSource source)
         {
@@ -33,12 +45,11 @@ namespace EvilBunny
             Debug.Log("morision");
             //gameObject.Destroy(this);
         }
-        public void Seguirenemigo()
+        public void FollowEnemy()
         {
             IA.speed = Velocidad;
-            IA.SetDestination(Objetivo.position);
+            IA.SetDestination(objective);
         }
-
     }
 }
 

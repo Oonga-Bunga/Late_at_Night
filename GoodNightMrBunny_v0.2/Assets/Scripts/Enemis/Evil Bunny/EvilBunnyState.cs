@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace EvilBunny
 {
-    public abstract class EvilBunnyState : MonoBehaviour
+    public abstract class EvilBunnyState : State
     {
         [SerializeField] protected EvilBunnyStateManager statemanager;
-        public abstract State RunCurrentState(AMonster enemy);
 
     }
 }
