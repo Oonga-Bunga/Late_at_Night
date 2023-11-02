@@ -2,24 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+namespace EvilBunny
 {
-    [SerializeField] private State currentState;
-    [SerializeField] private AMonster enemy;
-    void Update()
+    public class EvilBunnyStateManager : MonoBehaviour
     {
-        RunStateMachine();
-    }
-    private void RunStateMachine()
-    {
-        State nextState = currentState?.RunCurrentState(enemy);
-        if(nextState != null)
+        [SerializeField] private State currentState;
+        [SerializeField] private AMonster enemy;
+        private GameObject baby;
+
+        public GameObject Baby
         {
-            SwitchToTheNextState(nextState);
+            get { return baby; }
+            set { baby = value;}
         }
-    }
-    private void SwitchToTheNextState(State nextState)
-    {
-        currentState = nextState;
+
+        void Update()
+        {
+            RunStateMachine();
+        }
+        private void RunStateMachine()
+        {
+            State nextState = currentState?.RunCurrentState(enemy);
+            if (nextState != null)
+            {
+                SwitchToTheNextState(nextState);
+            }
+        }
+        private void SwitchToTheNextState(State nextState)
+        {
+            currentState = nextState;
+        }
     }
 }

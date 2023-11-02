@@ -7,14 +7,24 @@ namespace EvilBunny
     {
         [SerializeField] private float timeswitch = 10f;
         private float time = 0f;
+        private bool hasTurnedOffSwitch = false;
+        [SerializeField] private float 
+
         public override State RunCurrentState(AMonster enemy)
         {
-            GameObject babyObjects = GameObject.FindGameObjectsWithTag("Baby")[0];
-            if (babyObjects != null)
+            time += Time.deltaTime;
+
+            if (time >= timeswitch)
             {
-                return ChaseState;
+                GameObject[] switches = GameObject.FindGameObjectsWithTag("Switch");
+                foreach (GameObject closeSwitch in switches)
+                {
+                    if (closeSwitch.gameObject.GetComponent<Switch>().IsBeingAttacked)
+                    {
+
+                    }
+                }
             }
-            return this;
 
         }
     }
