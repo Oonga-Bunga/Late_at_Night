@@ -7,14 +7,14 @@ using UnityEngine;
 public class AMonster : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
+    protected int currentHealth;
 
     private void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public void TakeHit(float damage,GameManager.AttackSource source)
+    public virtual void TakeHit(float damage,GameManager.AttackSource source)
     {
         if (currentHealth > 0)
         {
@@ -30,7 +30,7 @@ public class AMonster : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         Destroy(transform.parent.gameObject);
         //Destroy(this);
