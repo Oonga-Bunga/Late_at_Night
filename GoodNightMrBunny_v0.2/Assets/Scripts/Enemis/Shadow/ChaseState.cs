@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChaseState : state
+public class ChaseState : State
 {
-      public override state RunCurrentState(AMonster enemy)
+      public override State RunCurrentState(AMonster enemy)
    {
     Debug.Log("atacado");
     return this;

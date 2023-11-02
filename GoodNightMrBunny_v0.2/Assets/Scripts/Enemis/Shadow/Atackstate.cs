@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Atackstate : state
+public class Atackstate : State
 {
-    public override state RunCurrentState(AMonster enemy)
+    public override State RunCurrentState(AMonster enemy)
    {
     Debug.Log("atacado");
     return this;

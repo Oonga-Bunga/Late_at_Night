@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class state : MonoBehaviour
+public abstract class State : MonoBehaviour
 {
-    public abstract state RunCurrentState(AMonster enemy);
+    [SerializeField] protected StateManager statemanager;
+    public abstract State RunCurrentState(AMonster enemy);
     
 }

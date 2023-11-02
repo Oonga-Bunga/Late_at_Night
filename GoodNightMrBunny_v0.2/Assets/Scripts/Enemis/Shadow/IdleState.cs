@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class IdleState : state
+public class IdleState : State
 {
     //referencia a la linterna
     [SerializeField] private Transform Objetivo;
@@ -26,7 +26,7 @@ public class IdleState : state
         IA.SetDestination(Objetivo.position);
     }
 
-    public override state RunCurrentState(AMonster enemy)
+    public override State RunCurrentState(AMonster enemy)
     {
 
         if(enemy.CurrentHealth == 0){
