@@ -22,6 +22,6 @@ public class PlayerHealth : AKillableEntity
 
     public void PlayerDie()
     {
-        Die();
+        //Die();
     }
 }

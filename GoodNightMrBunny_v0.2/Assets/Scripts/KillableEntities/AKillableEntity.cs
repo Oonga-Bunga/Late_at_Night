@@ -80,12 +80,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         Debug.Log("muere");
     }
 
-    public virtual void Fuck()
-    {
-        Destroy(gameObject);
-        Debug.Log("muere");
-    }
-
     #endregion
 
 }

@@ -19,7 +19,7 @@ namespace EvilBunny
 
         private void Update()
         {
-            FollowEnemy();
+            //FollowEnemy();
         }
 
         public override void TakeHit(float damage, GameManager.AttackSource source)
@@ -44,11 +44,6 @@ namespace EvilBunny
 
             Debug.Log("morision");
             //gameObject.Destroy(this);
-        }
-        public void FollowEnemy()
-        {
-            IA.speed = Velocidad;
-            IA.SetDestination(objective);
         }
     }
 }

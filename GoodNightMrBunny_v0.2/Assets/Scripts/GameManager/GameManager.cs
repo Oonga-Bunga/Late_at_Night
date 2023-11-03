@@ -43,9 +43,11 @@ public class GameManager : MonoBehaviour
     #region Attributes
 
     // Interruptores
-    private int totalSwitches = 0;
-    private int currentActivatedSwitches = 0;
-    private List<Vector3> possibleSwitchLocationList = new List<Vector3>();
+    private int _totalSwitches = 0;
+    private int _currentActivatedSwitches = 0;
+    private List<Vector3> _possibleSwitchLocationList = new List<Vector3>();
+    private static List<Switch> _switchListInstance = new List<Switch>();
+    public static List<Switch> SwitchListInstance => _switchListInstance;
 
     // UI
     [Header("UI")]
@@ -122,11 +124,16 @@ public class GameManager : MonoBehaviour
 
         // Una vez generada hacer cosas con ciertos objetos
 
+        List<Switch> tempSwitchList = new List<Switch>();
+
         foreach (Switch interruptor in FindObjectsOfType<Switch>())
         {
             interruptor.OnTurnedOnOrOff += SwitchChangedState;
-            totalSwitches++;
+            _totalSwitches++;
+            tempSwitchList.Add(interruptor);
         }
+
+        _switchListInstance = tempSwitchList;
 
         Baby baby = FindObjectOfType<Baby>();
 
@@ -177,7 +184,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var switchNode in sceneData.SwitchNodes)
         {
-            possibleSwitchLocationList.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
+            _possibleSwitchLocationList.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
         }
 
         foreach (var catNode in sceneData.CatNodes)
@@ -286,18 +293,18 @@ public class GameManager : MonoBehaviour
     {
         if (isOn)
         {
-            currentActivatedSwitches++;
-            _upperText.text = $"{currentActivatedSwitches}/{totalSwitches} interruptores";
+            _currentActivatedSwitches++;
+            _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             _upperText.GetComponent<Animator>().SetTrigger("ShowText");
-            if (currentActivatedSwitches == totalSwitches)
+            if (_currentActivatedSwitches == _totalSwitches)
             {
                 PlayerWon();
             }
         }
         else
         {
-            currentActivatedSwitches--;
-            _upperText.text = $"{currentActivatedSwitches}/{totalSwitches} interruptores";
+            _currentActivatedSwitches--;
+            _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             _upperText.GetComponent<Animator>().SetTrigger("ShowText");
         }
     }
