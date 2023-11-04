@@ -24,8 +24,6 @@ public class AMonster : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Die();
-                
-                
             }
         }
     }

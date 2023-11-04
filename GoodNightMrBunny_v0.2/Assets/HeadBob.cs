@@ -44,7 +44,6 @@ public class HeadBob : MonoBehaviour
     private void CheckMotion()
     {
         float speed = new Vector3(_playerRb.velocity.x, 0, _playerRb.velocity.z).magnitude;
-        Debug.Log(speed);
 
         ResetPosition();
 

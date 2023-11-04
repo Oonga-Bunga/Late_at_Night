@@ -42,7 +42,7 @@ public class Rocket : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, -_blastRadius, _enemyLayer);
         foreach (Collider collider in hitColliders)
         {
-            collider.gameObject.GetComponent<AMonster>().TakeHit(_blastDamage, GameManager.AttackSource.Rocket);
+            collider.GetComponent<AMonster>().TakeHit(_blastDamage, GameManager.AttackSource.Rocket);
         }
 
         // Destruye el objeto actual

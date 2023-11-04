@@ -539,7 +539,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
         else if (hitColliders.Length == 1)
         {
-            AInteractable interactable = hitColliders[0].gameObject.GetComponent<InteractableOutlineHolder>().Interactable;
+            AInteractable interactable = hitColliders[0].GetComponent<InteractableOutlineHolder>().Interactable;
 
             if (interactable != null)
             {
@@ -591,7 +591,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
             if (distanceToLineOfSight < closestDistance)
             {
-                AInteractable interactable = obj.gameObject.GetComponent<InteractableOutlineHolder>().Interactable;
+                AInteractable interactable = obj.GetComponent<InteractableOutlineHolder>().Interactable;
 
                 // Si el objeto está más cerca de la línea de visión que el objeto más cercano actual
                 if (interactable != null)

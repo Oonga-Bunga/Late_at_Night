@@ -9,7 +9,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
 
     [SerializeField] protected float maxHealth;
     protected float currentHealth;
-    protected bool dead;
     protected Collider hitbox;
     public EventHandler<float> HealthChanged;
 
@@ -58,10 +57,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         {
             currentHealth = Mathf.Max(currentHealth - value, 0);
             HealthChanged?.Invoke(this, currentHealth);
-            if (currentHealth == 0)
-            {
-                Die();
-            }
             
         }
         else

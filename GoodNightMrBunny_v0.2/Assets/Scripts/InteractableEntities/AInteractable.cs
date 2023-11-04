@@ -39,9 +39,9 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected virtual void Awake()
     {
         _player = FindObjectOfType<PlayerController>();
-        _outline = _outlineHolder.gameObject.GetComponent<Outline>();
-        _promptCanvas = transform.GetChild(0).gameObject.GetComponentInChildren<Canvas>();
-        _radialBar = _promptCanvas.gameObject.GetComponentInChildren<Image>();
+        _outline = _outlineHolder.GetComponent<Outline>();
+        _promptCanvas = transform.GetChild(0).GetComponentInChildren<Canvas>();
+        _radialBar = _promptCanvas.GetComponentInChildren<Image>();
         _promptCanvas.enabled = false;
         _radialBar.fillAmount = 0f;
     }

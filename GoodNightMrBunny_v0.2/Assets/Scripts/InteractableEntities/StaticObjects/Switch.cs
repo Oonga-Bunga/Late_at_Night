@@ -18,6 +18,11 @@ public class Switch : AInteractable
         set { isBeingAttacked = value; }
     }
 
+    public void TakeHit()
+    {
+        health = Mathf.Max(0, health - 1);
+    }
+
     public bool IsOn
     {
         get { return _isOn; }

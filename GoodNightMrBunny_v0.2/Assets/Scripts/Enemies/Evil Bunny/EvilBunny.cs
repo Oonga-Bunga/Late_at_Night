@@ -7,21 +7,6 @@ namespace EvilBunny
 {
     public class EvilBunny : AMonster
     {
-        [SerializeField] private float Velocidad;
-        [SerializeField] private NavMeshAgent IA;
-        private Vector3 objective;
-
-        public Vector3 Objective
-        {
-            get { return objective; }
-            set { objective = value; }
-        }
-
-        private void Update()
-        {
-            //FollowEnemy();
-        }
-
         public override void TakeHit(float damage, GameManager.AttackSource source)
         {
             if (currentHealth > 0)
