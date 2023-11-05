@@ -100,11 +100,11 @@ public class Flashlight : AHoldableObject
         {
             //Debug.Log("daño enemigo");
             // Obtener el componente del script del enemigo.
-            AMonster enemy = hit.collider.GetComponent<AMonster>();
+            AKillableEntity enemy = hit.collider.GetComponent<AKillableEntity>();
             if (enemy != null)
             {
                 Debug.Log("daño enemigo");
-                enemy.TakeHit(baseDamage, GameManager.AttackSource.Flashlight);
+                enemy.TakeHit(baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);
             }
             
         }

@@ -7,14 +7,19 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
 {
     #region Attributes
 
-    [SerializeField] protected float maxHealth;
-    protected float currentHealth;
-    protected Collider hitbox;
+    [SerializeField] protected float _maxHealth;
+    protected float _currentHealth;
+    protected Collider _hitbox;
     public EventHandler<float> HealthChanged;
 
     public float MaxHealth
     {
-        get { return maxHealth; }
+        get { return _maxHealth; }
+    }
+
+    public float CurrentHealth
+    {
+        get { return _currentHealth; }
     }
 
     #endregion
@@ -27,9 +32,9 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// <param name="health">Vida máxima</param>
     public AKillableEntity(float health)
     {
-        this.maxHealth = health;
-        this.currentHealth = maxHealth;
-        this.hitbox = GetComponent<Collider>();
+        this._maxHealth = health;
+        this._currentHealth = _maxHealth;
+        this._hitbox = GetComponent<Collider>();
     }
 
     #endregion
@@ -40,13 +45,13 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// Este método se invocaría cada vez que este gameobject recibe un golpe
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeHit(float damage)
+    public virtual void TakeHit(float damage, IKillableEntity.AttackSource source)
     {
         ChangeHealth(damage, true);
     }
 
     /// <summary>
-    /// Resta el valor de Value a la currentHealth de la entidad si isDamage es true, y si es false lo suma.
+    /// Resta el valor de Value a la _currentHealth de la entidad si isDamage es true, y si es false lo suma.
     /// Si la entidad llega a 0 de vida muere.
     /// </summary>
     /// <param name="value">Daño o vida recibido</param>
@@ -55,24 +60,22 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     {
         if (isDamage)
         {
-            currentHealth = Mathf.Max(currentHealth - value, 0);
-            HealthChanged?.Invoke(this, currentHealth);
-            
+            _currentHealth = Mathf.Max(_currentHealth - value, 0);
+            HealthChanged?.Invoke(this, _currentHealth);
         }
         else
         {
-            currentHealth = Mathf.Min(currentHealth + value, maxHealth);
-            HealthChanged?.Invoke(this, currentHealth);
+            _currentHealth = Mathf.Min(_currentHealth + value, _maxHealth);
+            HealthChanged?.Invoke(this, _currentHealth);
         }
     }
 
     /// <summary>
-    /// Si currentHealth <= 0 destruye el objeto
+    /// Si _currentHealth <= 0 destruye el objeto
     /// </summary>
     public virtual void Die()
     {
         Destroy(gameObject);
-        Debug.Log("muere");
     }
 
     #endregion

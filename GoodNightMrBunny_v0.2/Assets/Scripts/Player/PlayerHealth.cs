@@ -12,7 +12,7 @@ public class PlayerHealth : AKillableEntity
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     public void ChangePlayerHealth(float value, bool IsDamage)

@@ -33,7 +33,7 @@ public class ClayBallBehaviour : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //Hace enemigo al monstruo
-            collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage,GameManager.AttackSource.ClayBall);
+            collision.gameObject.GetComponent<AKillableEntity>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
             Destroy(gameObject);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && canJump)

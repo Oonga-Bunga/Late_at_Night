@@ -34,12 +34,6 @@ public class SceneData
 
 public class GameManager : MonoBehaviour
 {
-    public enum AttackSource
-    {
-        Flashlight,
-        ClayBall,
-        Rocket
-    }
     #region Attributes
 
     // Interruptores
