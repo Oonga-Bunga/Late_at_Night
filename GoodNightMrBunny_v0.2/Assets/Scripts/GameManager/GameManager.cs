@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PauseManager _pauseManager;
     private bool _isInGame;
 
+    private static List<FlashlightRechargeStation> _rechargeStationListInstance = new List<FlashlightRechargeStation>();
+    public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
+
     #endregion
 
     #region Initialization
@@ -128,6 +131,15 @@ public class GameManager : MonoBehaviour
         }
 
         _switchListInstance = tempSwitchList;
+
+        List<FlashlightRechargeStation> tempRechargeStationList = new List<FlashlightRechargeStation>();
+
+        foreach (FlashlightRechargeStation rechargeStation in FindObjectsOfType<FlashlightRechargeStation>())
+        {
+            tempRechargeStationList.Add(rechargeStation);
+        }
+
+        _rechargeStationListInstance = tempRechargeStationList;
 
         Baby baby = FindObjectOfType<Baby>();
 

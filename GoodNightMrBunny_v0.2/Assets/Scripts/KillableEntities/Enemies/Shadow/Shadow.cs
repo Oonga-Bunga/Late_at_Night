@@ -9,11 +9,20 @@ namespace Shadow
     {
         [SerializeField] private float _speed = 5f;
         [SerializeField] private NavMeshAgent _agent;
+        private bool isAvoiding = false;
 
         public Shadow(float health) : base(health)
         {
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = _speed;
+        }
+
+        private void Update()
+        {
+            if (isAvoiding)
+            {
+                //steering avoidance
+            }
         }
 
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
