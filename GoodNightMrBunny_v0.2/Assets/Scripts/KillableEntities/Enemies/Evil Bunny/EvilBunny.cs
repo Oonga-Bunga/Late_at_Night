@@ -9,19 +9,14 @@ namespace EvilBunny
     {
         [SerializeField] private float _speed = 5f;
         [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private Animator _animator;
 
-        private void Awake()
+        protected override void Awake()
         {
-            _currentHealth = _maxHealth;
-            _hitbox = GetComponent<Collider>();
+            base.Awake();
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = _speed;
-        }
-
-        public EvilBunny(float health) : base(health)
-        {
-            _agent = GetComponent<NavMeshAgent>();
-            _agent.speed = _speed;
+            _animator = GetComponent<Animator>();
         }
 
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)

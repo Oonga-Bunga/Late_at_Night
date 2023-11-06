@@ -9,17 +9,22 @@ namespace Shadow
     {
         [SerializeField] private float _speed = 5f;
         [SerializeField] private NavMeshAgent _agent;
-        private bool isAvoiding = false;
+        [SerializeField] private Animator _animator;
+        private bool _isAvoiding = false;
+        private bool _isBeingLit = false;
+        private bool _isStunned = false;
 
-        public Shadow(float health) : base(health)
+        protected override void Awake()
         {
+            base.Awake();
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = _speed;
+            _animator = GetComponent<Animator>();
         }
 
         private void Update()
         {
-            if (isAvoiding)
+            if (_isAvoiding)
             {
                 //steering avoidance
             }
@@ -41,7 +46,7 @@ namespace Shadow
 
         public void Stunned()
         {
-
+            //play stunned animation
         }
     }
 }

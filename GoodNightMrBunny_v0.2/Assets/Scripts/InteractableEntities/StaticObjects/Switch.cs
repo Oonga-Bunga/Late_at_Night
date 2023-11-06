@@ -19,11 +19,6 @@ public class Switch : AInteractable
         set { _isBeingAttacked = value; }
     }
 
-    public void TakeHit()
-    {
-        _currenthealth = Mathf.Max(0, _currenthealth - 1);
-    }
-
     public bool IsOn
     {
         get { return _isOn; }
@@ -74,5 +69,10 @@ public class Switch : AInteractable
         OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = true;
         _light.enabled = false;
+    }
+
+    public void TakeHit()
+    {
+        _currenthealth = Mathf.Max(0, _currenthealth - 1);
     }
 }

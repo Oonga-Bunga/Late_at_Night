@@ -30,9 +30,8 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// Constructor de la clase abstracta
     /// </summary>
     /// <param name="health">Vida máxima</param>
-    public AKillableEntity(float health)
+    protected virtual void Awake()
     {
-        this._maxHealth = health;
         this._currentHealth = _maxHealth;
         this._hitbox = GetComponent<Collider>();
     }
