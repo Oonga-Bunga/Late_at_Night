@@ -52,6 +52,7 @@ MonoBehaviour:
   _pressBuffer: 0
   _outlineHolder: {fileID: 5320697659643514207}
   _light: {fileID: 6835968328071473044}
+  _maxHealth: 20
 --- !u!1 &1204104717327277985
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,8 +97,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0.3086195, a: 1}
-  m_Intensity: 100
-  m_Range: 2
+  m_Intensity: 10
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

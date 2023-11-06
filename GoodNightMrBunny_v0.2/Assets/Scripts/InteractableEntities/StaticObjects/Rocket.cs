@@ -27,7 +27,7 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((_groundLayer.value & (1 << collision.gameObject.layer)) > 0) 
+        if (((_groundLayer.value & (1 << collision.gameObject.layer)) > 0) || ((_enemyLayer.value & (1 << collision.gameObject.layer)) > 0)) 
         {
             Explode();
         }

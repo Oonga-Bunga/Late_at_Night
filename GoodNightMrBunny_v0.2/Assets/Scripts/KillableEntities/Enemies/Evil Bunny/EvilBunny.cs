@@ -10,6 +10,14 @@ namespace EvilBunny
         [SerializeField] private float _speed = 5f;
         [SerializeField] private NavMeshAgent _agent;
 
+        private void Awake()
+        {
+            _currentHealth = _maxHealth;
+            _hitbox = GetComponent<Collider>();
+            _agent = GetComponent<NavMeshAgent>();
+            _agent.speed = _speed;
+        }
+
         public EvilBunny(float health) : base(health)
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -28,6 +36,12 @@ namespace EvilBunny
                     ChangeHealth(MaxHealth, true);
                     break;
             }
+        }
+
+        public override void Die()
+        {
+            //generar partículas o algo, e incluso animación
+            Debug.Log("hice la morición");
         }
     }
 }
