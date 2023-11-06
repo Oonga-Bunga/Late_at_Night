@@ -35,8 +35,10 @@ public class Switch : AInteractable
         _currenthealth = _maxHealth;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (_currenthealth <= 0)
         {
             TurnOff();
@@ -47,7 +49,15 @@ public class Switch : AInteractable
 
     protected override void InteractedHoldAction()
     {
-        TurnOn();
+        if (_isOn)
+        {
+            TurnOff();
+        }
+        else
+        {
+            TurnOn();
+        }
+        
     }
 
     private void TurnOn()
