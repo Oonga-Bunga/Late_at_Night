@@ -9,18 +9,19 @@ public class Switch : AInteractable
     private bool _isOn = false; // Si el interruptor está o no encendido
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     [SerializeField] private Light _light;
-    private bool isBeingAttacked = false;
-    [SerializeField] private float health = 20f;
+    private bool _isBeingAttacked = false;
+    [SerializeField] private float _maxHealth = 20f;
+    private float _currenthealth = 20f;
 
     public bool IsBeingAttacked
     {
-        get { return isBeingAttacked; }
-        set { isBeingAttacked = value; }
+        get { return _isBeingAttacked; }
+        set { _isBeingAttacked = value; }
     }
 
     public void TakeHit()
     {
-        health = Mathf.Max(0, health - 1);
+        _currenthealth = Mathf.Max(0, _currenthealth - 1);
     }
 
     public bool IsOn
@@ -31,13 +32,16 @@ public class Switch : AInteractable
     private void Start()
     {
         _light.enabled = false;
+        _currenthealth = _maxHealth;
     }
 
     private void Update()
     {
-        if (health <= 0)
+        if (_currenthealth <= 0)
         {
             TurnOff();
+            _isBeingAttacked = false;
+            _currenthealth = _maxHealth;
         }
     }
 
