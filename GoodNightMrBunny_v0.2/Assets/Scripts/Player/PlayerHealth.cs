@@ -6,21 +6,17 @@ using UnityEngine.EventSystems;
 
 public class PlayerHealth : AKillableEntity
 {
-    public PlayerHealth(float health) : base(health)
+    protected override void Awake()
     {
+        base.Awake();
     }
 
-    private void Awake()
+    public override void ChangeHealth(float value, bool IsDamage)
     {
-        _currentHealth = _maxHealth;
+        base.ChangeHealth(value, IsDamage);
     }
 
-    public void ChangePlayerHealth(float value, bool IsDamage)
-    {
-        ChangeHealth(value, IsDamage);
-    }
-
-    public void PlayerDie()
+    public override void Die()
     {
         //Die();
     }

@@ -13,11 +13,6 @@ public class Baby : AKillableEntity
     [SerializeField] private int maxEvilBunnies;
     private int nEvilBunnies = 0;
 
-    public Baby(float health) : base(health)
-    {
-        
-    }
-
     // Start is called before the first frame update
     void Awake()
     {
