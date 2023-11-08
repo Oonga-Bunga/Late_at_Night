@@ -6,22 +6,34 @@ public class FlashlightRechargeStation : AInteractable
 {
     [Header("Flashlight Recharge Station Settings")]
 
-    [SerializeField, Range(0.0f, 1.0f)] private float _rechargeRate; // Velocidad de recarga
+    [SerializeField, Range(0.0f, 1.0f)] private float _rechargeRate = 0.1f; // Velocidad de recarga
+    [SerializeField, Range(0.0f, 1.0f)] private float _drainRate = 0.1f; // Velocidad de recarga
+    [SerializeField] private float _drainDuration = 10f; // Velocidad de recarga
     private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
     private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
+    private float _drainAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
     [SerializeField] private GameObject _flashlightModel;
     private bool _isBeingAttacked = false;
+    private bool _isTaken = false;
+    private bool _isDrained = false;
 
-    public bool IsBeingAttacked
+    public bool IsTaken
     {
-        get { return _isBeingAttacked; }
+        get { return _isTaken; }
+        set { _isTaken = value; }
+    }
+
+    public bool HasFlashlight
+    {
+        get { return _hasFlashlight; }
     }
 
     private void Start()
     {
         _flashlightModel.SetActive(_hasFlashlight);
         _rechargeAmount = Flashlight.maxCharge * _rechargeRate;
+        _drainAmount = Flashlight.maxCharge * _drainRate;
     }
 
     /// <summary>
@@ -29,9 +41,24 @@ public class FlashlightRechargeStation : AInteractable
     /// </summary>
     private void Update()
     {
-        if (_hasFlashlight && _currentCharge != Flashlight.maxCharge)
+        if (_isDrained) { return; }
+
+        if (_isBeingAttacked)
         {
-            _currentCharge = Mathf.Min(_currentCharge + _rechargeAmount * Time.deltaTime, Flashlight.maxCharge);
+            _currentCharge = Mathf.Max(_currentCharge - _drainAmount * Time.deltaTime, 0);
+
+            if (_currentCharge == 0f)
+            {
+                _isDrained = true;
+                Invoke("RecoverFromDrained", _drainDuration);
+            }
+        }
+        else
+        {
+            if (_hasFlashlight && _currentCharge != Flashlight.maxCharge)
+            {
+                _currentCharge = Mathf.Min(_currentCharge + _rechargeAmount * Time.deltaTime, Flashlight.maxCharge);
+            }
         }
     }
 
@@ -63,5 +90,21 @@ public class FlashlightRechargeStation : AInteractable
             _hasFlashlight = false;
             _flashlightModel.SetActive(false);
         }
+    }
+
+    public void BegginTheSucc()
+    {
+        _isBeingAttacked = true;
+        _canBeInteracted = false;
+    }
+
+    public void StopTheSucc()
+    {
+        _isBeingAttacked = false;
+    }
+
+    private void RecoverFromDrained()
+    {
+        _isDrained = false;
     }
 }
