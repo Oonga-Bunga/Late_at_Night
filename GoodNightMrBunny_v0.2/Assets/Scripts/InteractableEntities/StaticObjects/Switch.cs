@@ -12,11 +12,31 @@ public class Switch : AInteractable
     private bool _isBeingAttacked = false;
     [SerializeField] private float _maxHealth = 20f;
     private float _currenthealth = 20f;
+    private int _nBunnies = 0;
 
     public bool IsBeingAttacked
     {
         get { return _isBeingAttacked; }
-        set { _isBeingAttacked = value; }
+    }
+
+    public void OneMoreBunny()
+    {
+        if (_isBeingAttacked != true)
+        {
+            _isBeingAttacked = true;
+        }
+
+        _nBunnies++;
+    }
+
+    public void OneLessBunny()
+    {
+        _nBunnies--;
+
+        if (_nBunnies == 0)
+        { 
+            _isBeingAttacked = false; 
+        }
     }
 
     public bool IsOn

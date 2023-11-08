@@ -11,6 +11,12 @@ public class FlashlightRechargeStation : AInteractable
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
     private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
     [SerializeField] private GameObject _flashlightModel;
+    private bool _isBeingAttacked = false;
+
+    public bool IsBeingAttacked
+    {
+        get { return _isBeingAttacked; }
+    }
 
     private void Start()
     {
