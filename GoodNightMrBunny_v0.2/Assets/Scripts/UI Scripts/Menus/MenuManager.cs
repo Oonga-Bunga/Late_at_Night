@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     #region Attributes
-    public Button[] tabButtons;
-    public GameObject[] tabPanels;
+    [SerializeField] private Button[] tabButtons;
+    [SerializeField] private GameObject[] tabPanels;
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
@@ -17,8 +17,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject loginButtons;
     [SerializeField] private GameObject loginAgeScrollList;
     
-    private int currentTabIndex = 0;
-    private bool ageScrollListOpen = false;
+    private int _currentTabIndex = 0;
+    private bool _ageScrollListOpen = false;
     #endregion
 
     #region Methods
@@ -29,13 +29,13 @@ public class MenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         //Se configuran las escenas
-        loginMenu.enabled = true;
-        mainMenu.enabled = false;
-        optionsMenu.enabled = false;
+        loginMenu.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(false);
+        optionsMenu.gameObject.SetActive(false);
         loginAgeScrollList.SetActive(false);
 
         HidePanels();
-        ShowTab(currentTabIndex);
+        ShowTab(_currentTabIndex);
 
         // Asigna los métodos ShowTab a los eventos de click de los botones.
         for (int i = 0; i < tabButtons.Length; i++)
@@ -58,11 +58,11 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void OpenOptionsMenu()
     {
-        mainMenu.enabled = false;
-        currentTabIndex = 0;
+        mainMenu.gameObject.SetActive(false);
+        _currentTabIndex = 0;
         HidePanels();
         ShowTab(0);
-        optionsMenu.enabled = true;
+        optionsMenu.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -70,9 +70,9 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void OpenMainMenu()
     {
-        mainMenu.enabled = true;
-        optionsMenu.enabled = false;
-        loginMenu.enabled = false;
+        mainMenu.gameObject.SetActive(true);
+        optionsMenu.gameObject.SetActive(false);
+        loginMenu.gameObject.SetActive(false);
     }
     
     /// <summary>
@@ -82,13 +82,13 @@ public class MenuManager : MonoBehaviour
     public void ShowTab(int index)
     {
         // Desactiva el panel actual.
-        tabPanels[currentTabIndex].SetActive(false);
+        tabPanels[_currentTabIndex].SetActive(false);
 
         // Activa el nuevo panel.
         tabPanels[index].SetActive(true);
 
         // Actualiza el índice actual.
-        currentTabIndex = index;
+        _currentTabIndex = index;
     }
 
     /// <summary>
@@ -115,15 +115,15 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void selectAgeButton()
     {
-        if (ageScrollListOpen)
+        if (_ageScrollListOpen)
         {
-            ageScrollListOpen = !ageScrollListOpen;
+            _ageScrollListOpen = !_ageScrollListOpen;
             loginAgeScrollList.SetActive(false);
             loginButtons.SetActive(true);
         }
         else
         {
-            ageScrollListOpen = !ageScrollListOpen;
+            _ageScrollListOpen = !_ageScrollListOpen;
             loginAgeScrollList.SetActive(true);
             loginButtons.SetActive(false);
         }
