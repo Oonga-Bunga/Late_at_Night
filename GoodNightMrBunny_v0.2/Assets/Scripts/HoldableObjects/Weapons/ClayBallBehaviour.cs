@@ -9,7 +9,7 @@ public class ClayBallBehaviour : MonoBehaviour
     public float baseDamage = 20f;
     [SerializeField]private float lifeTime = 5f;
     [SerializeField]private float jumpForce = 30.0f;
-    private bool canJump = false;
+    private bool _canJump = false;
 
     #endregion
 
@@ -32,12 +32,12 @@ public class ClayBallBehaviour : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            //Hace enemigo al monstruo
             collision.gameObject.GetComponent<AKillableEntity>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && canJump)
+        else if (collision.gameObject.CompareTag("Player") && _canJump)
         {
+            Debug.Log("Trampolin");
             //Si choca contra el jugador actua como un trampolin
             Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             if (playerRigidbody != null)
@@ -53,8 +53,8 @@ public class ClayBallBehaviour : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeAll;
             transform.rotation = Quaternion.Euler(Vector3.zero);;
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y/2, transform.localScale.z);
-            transform.position = new Vector3(transform.position.x, transform.position.y-transform.localScale.x/2, transform.position.z);
-            canJump = true;
+            transform.position = new Vector3(transform.position.x, transform.position.y-transform.localScale.x/3, transform.position.z);
+            _canJump = true;
             Destroy(gameObject, lifeTime);
         }
     }
