@@ -144,12 +144,12 @@ Light:
   m_GameObject: {fileID: 2445695591398815538}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 1
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.62
-  m_Range: 81.8
-  m_SpotAngle: 26.5
+  m_Intensity: 1.38
+  m_Range: 80.3
+  m_SpotAngle: 49
   m_InnerSpotAngle: 1
   m_CookieSize: 3.13
   m_Shadows:
@@ -178,7 +178,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
+  m_Cookie: {fileID: 2800000, guid: c3347f0e0b438d143a2841b46677b7bf, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -367,7 +367,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 95
+    m_Bits: 479
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1065,7 +1065,7 @@ Transform:
   - {fileID: 4531434369350564370}
   - {fileID: 5384688677823252723}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7333337456494456720
 MonoBehaviour:
