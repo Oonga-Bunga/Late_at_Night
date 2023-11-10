@@ -7,11 +7,20 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
+    private static PauseManager _instance;
+
+    public static PauseManager Instance => _instance;
+
     public bool isPaused = false;
     public TextMeshProUGUI pauseText;
 
-    private void Start()
+    private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         pauseText.gameObject.SetActive(false);
     }
 

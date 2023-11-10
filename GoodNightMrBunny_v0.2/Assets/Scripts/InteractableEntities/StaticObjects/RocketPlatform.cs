@@ -40,8 +40,9 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     #region Initialization
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _state = RocketPlatformState.Ready;
         _lowerArmAnimator = _lowerArm.GetComponent<Animator>();
         _laser.enabled = false;
@@ -51,8 +52,10 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     #region Update
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         switch (_state)
         {
             case RocketPlatformState.Mounted:
@@ -211,7 +214,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     }
 
-    public void DropHeldObject()
+    public void DropHeldObject(float force = 0)
     {
 
     }

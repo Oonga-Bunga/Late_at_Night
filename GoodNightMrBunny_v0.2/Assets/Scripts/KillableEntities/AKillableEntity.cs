@@ -12,15 +12,9 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     protected Collider _hitbox;
     public EventHandler<float> HealthChanged;
 
-    public float MaxHealth
-    {
-        get { return _maxHealth; }
-    }
+    public float MaxHealth => _maxHealth;
 
-    public float CurrentHealth
-    {
-        get { return _currentHealth; }
-    }
+    public float CurrentHealth => _currentHealth;
 
     #endregion
 

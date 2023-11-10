@@ -12,8 +12,8 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Player")]
 
-    [SerializeField] private PlayerController _player;
-    public PlayerController Player
+    [SerializeField] private IPlayerReceiver _player;
+    public IPlayerReceiver Player
     {
         get => _player;
         set
@@ -47,7 +47,7 @@ public class PlayerInputManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (_player)
+        if (_player != null)
         {
             SetPlayer(_player);
         }
@@ -90,7 +90,7 @@ public class PlayerInputManager : MonoBehaviour
     /// de "move"
     /// </summary>
     /// <param name="player">Referencia al script PlayerController del jugador</param>
-    public void SetPlayer(PlayerController player)
+    public void SetPlayer(IPlayerReceiver player)
     {
         _commands = new Dictionary<string, ICommand> {
             { "move", new MoveCommand(player) },

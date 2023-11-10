@@ -14,10 +14,7 @@ public class Switch : AInteractable
     private float _currenthealth = 20f;
     private int _nBunnies = 0;
 
-    public bool IsBeingAttacked
-    {
-        get { return _isBeingAttacked; }
-    }
+    public bool IsBeingAttacked => _isBeingAttacked;
 
     public void OneMoreBunny()
     {

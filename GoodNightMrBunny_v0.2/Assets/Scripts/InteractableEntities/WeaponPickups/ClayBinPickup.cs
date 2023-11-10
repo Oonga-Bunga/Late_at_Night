@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class ClayBinPickup : AInteractable
 {
-    private void Start()
-    {
-
-    }
-
     protected override void InteractedPressAction()
     {
-        _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true, ClayBalls.maxBallNumber);
+        _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.ClayBalls, true, ClayBalls.Instance.MaxBallNumber);
     }
 
     protected override void InteractedHoldAction()

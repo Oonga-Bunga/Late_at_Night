@@ -5,10 +5,15 @@ using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using static UnityEngine.Rendering.DebugUI;
 using System.Drawing;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IPlayerReceiver
 {
     #region Attributes
+
+    private static PlayerController _instance; // Instancia del jugador, singleton
+
+    public static PlayerController Instance => _instance;
 
     #region Movement
 
@@ -20,10 +25,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Stamina")]
 
-    [SerializeField] private float _maxStamina = 100f; // Máxima energia del jugador
+    [SerializeField] private float _maxStamina = 100.0f; // Máxima energia del jugador
     private float _currentStamina; // Energia del jugador que consume para correr
-    [SerializeField] private float _staminaRecoveryRate = 10f; // Ratio de recuperación de energia
-    [SerializeField] private float _staminaComsumptionRate = 20f; // Ratio de recuperación de energia
+    [SerializeField] private float _staminaRecoveryRate = 10.0f; // Ratio de recuperación de energia
+    [SerializeField] private float _staminaComsumptionRate = 20.0f; // Ratio de recuperación de energia
     [SerializeField, Range(0.0f, 1.0f)] private float _minimumStaminaForRunning = 0.2f; // Porcentaje de energía mínimo para empezar a correr
     private bool _isPressingRunButton = false; // Si el jugador está corriendo o no
     private bool _isRunning = false; // Si el jugador está corriendo o no
@@ -31,8 +36,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     [Header("Acceleration")]
 
-    [SerializeField] private float _acceleration = 13f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
-    [SerializeField] private float _decceleration = 16f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
+    [SerializeField] private float _acceleration = 13.0f; // Fuerza de Aceleraci�n al recibir inputs de movimiento WASD en el suelo
+    [SerializeField] private float _decceleration = 16.0f; // Fuerza de deceleraci�n al no recibir inputs de movimiento WASD
     [SerializeField, Range(0.0f, 1.0f)] private float _airAccelerationModifier = 0.5f; // Modificación de la aceleración y deceleración cuando el jugador está en el aire
     [SerializeField] private float _velPower = 0.96f; // Ni idea de para que sirve, pero aqu� est�, no quitar
 
@@ -112,45 +117,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     #region Getters and Setters
 
-    public AHoldableObject CurrentHeldObject
-    {
-        get { return _currentHeldObject; }
-    }
+    public AHoldableObject CurrentHeldObject => _currentHeldObject;
 
-    public float MaxStamina
-    {
-        get { return _maxStamina; }
-    }
+    public float MaxStamina => _maxStamina;
 
-    public bool IsPlayerGrounded
-    {
-        get { return _isPlayerGrounded; }
-    }
+    public bool IsPlayerGrounded => _isPlayerGrounded;
 
-    public float MaxCurrentSpeed
-    {
-        get { return _maxCurrentSpeed; }
-    }
-
-    public float DropDistance
-    {
-        get { return _dropDistance; }
-    }
-
-    public LayerMask GroundLayer
-    {
-        get { return _groundLayer; }
-    }
-
-    public float SphereRaycastRadius
-    {
-        get { return _sphereRaycastRadius; }
-    }
-
-    public float MinimumDistanceFromCollision
-    {
-        get { return _minimumDistanceFromCollision; }
-    }
+    public float MaxCurrentSpeed => _maxCurrentSpeed;
 
     #endregion
 
@@ -158,17 +131,18 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     private void Start()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
-
         _cameraHolder = Camera.main.transform.parent;
-
         _maxCurrentSpeed = _maxWalkingSpeed;
-
         _currentStamina = _maxStamina;
-
         _currentHeldObject = GetComponentInChildren<EmptyWeapon>();
-        _pauseManager = FindObjectOfType<PauseManager>();
+        _pauseManager = PauseManager.Instance;
     }
 
     #endregion
@@ -278,8 +252,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         if (_pauseManager.isPaused) return;
 
-        if (_mount != null) _mount.Move(direction);
-
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
         Vector3 move = new Vector3(direction.x, 0, direction.y);
@@ -343,14 +315,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de correr, y llama a un método u otro dependiendo del input
+    /// Se ejecuta cuando el jugador presiona la tecla de correr, y guarda en una variable si la tecla está siendop pulsada o no
     /// </summary>
     /// <param name="runInput">Tipo de input, Down o Up</param>
     public void Run(IPlayerReceiver.InputType runInput)
     {
         if (_pauseManager.isPaused) return;
-
-        if (_mount != null) _mount.Run(runInput);
 
         if (runInput != IPlayerReceiver.InputType.Up)
         {
@@ -363,14 +333,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona o suelta la tecla de salto, y llama al m�todo correspondiente
+    /// Se ejecuta cuando el jugador presiona o suelta la tecla de salto, en el primer caso actualiza el
+    /// buffer de salto, y en el segundo se acorta el salto
     /// </summary>
     /// <param name="jumpInput">Tipo de input, Down o Up</param>
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
         if (_pauseManager.isPaused) return;
-
-        if (_mount != null) _mount.Jump(jumpInput);
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
@@ -398,15 +367,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo UseHeldObject del objeto que posee el
-    /// jugador en ese momento
+    /// Se ejecuta cuando el jugador presiona la tecla de ataque, llama al m�todo UseHeldObject del objeto 
+    /// que posee el jugador en ese momento
     /// </summary>
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
     public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
         if (_pauseManager.isPaused) return;
-
-        if (_mount != null) _mount.UseHeldObject(useInput);
 
         _currentHeldObject.Use(useInput);
     }
@@ -415,11 +382,10 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// Se ejecuta cuando el jugador presiona la tecla de interactuar, y ejecuta el m�todo interacted de
     /// _closestInteractable
     /// </summary>
+    /// <param name="interactInput">Tipo de input, Down, Hold o Up</param>
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
         if (_pauseManager.isPaused) return;
-
-        if (_mount != null) _mount.Interact(interactInput);
 
         if (_closestInteractable != null)
         {
@@ -429,8 +395,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     /// <summary>
     /// El jugador suelta en el suelo el objeto que llevaba encima, y pasa a llevar el objeto que recive como
-    /// par�metro
-    /// El jugador posee todos los objetos, pero solo tiene uno activo en cada momento
+    /// par�metro, que puede inicializarse con cierto valor
     /// </summary>
     /// <param name="objectType">Tipo de objeto al que cambia el jugador</param>
     /// <param name="dropPrefab">Si al cambiar de objeto se instancia el prefab del pickup del anterior</param>
@@ -439,31 +404,37 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
 
-        foreach (AHoldableObject holdableObject in _holdableObjectList)
+        AHoldableObject newHeldObject = GetComponentInChildren<EmptyWeapon>();
+
+        switch (objectType)
         {
-            if (objectType == holdableObject._holdableObjectType)
-            {
-                holdableObject.gameObject.SetActive(true);
-                _currentHeldObject = holdableObject;
+            case IPlayerReceiver.HoldableObjectType.Flashlight:
+                newHeldObject = GetComponentInChildren<Flashlight>();
+                break;
+            case IPlayerReceiver.HoldableObjectType.ClayBalls:
+                newHeldObject = GetComponentInChildren<ClayBalls>();
+                break;
+            case IPlayerReceiver.HoldableObjectType.ClayBin:
+                newHeldObject = GetComponentInChildren<ClayBin>();
+                break;
+        }
 
-                if (!(initializationValue < 0))
-                {
-                    _currentHeldObject.Initialize(initializationValue);
-                }
+        newHeldObject.gameObject.SetActive(true);
+        _currentHeldObject = newHeldObject;
 
-                return;
-            }
+        if (!(initializationValue < 0))
+        {
+            _currentHeldObject.Initialize(initializationValue);
         }
     }
 
     /// <summary>
     /// Es similar al m�todo ChangeHeldObject, la �nica diferencia es que el objeto al que cambia el jugador es el vac�o
     /// </summary>
-    public void DropHeldObject()
+    /// <param name="force">Fuerza con la que se suelta el objeto</param>
+    public void DropHeldObject(float force = 0)
     {
         if (_pauseManager.isPaused) return;
-
-        if (_mount != null) _mount.DropHeldObject();
 
         _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);
@@ -474,9 +445,12 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// Asigna al jugador el objeto sobre el que está montado, y es llamado por dicho objeto
     /// Los controles del jugador pasarán a ser procesados por la montura, y su movimiento queda anclado a esta
     /// </summary>
+    /// <param name="mount">Referencia al script del objeto que va a montar el jugador</param>
+    /// <param name="mountingPoint">Punto en el que el jugador se situa respecto a la montura</param>
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
         this._mount = mount;
+        PlayerInputManager.Instance.Player = mount;
         transform.parent = mountingPoint.transform;
         _cameraHolder.GetComponent<CameraController>().PlayerMounting();
         transform.localPosition = Vector3.zero;
@@ -492,6 +466,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void DisMount()
     {
         this._mount = null;
+        PlayerInputManager.Instance.Player = this;
         transform.parent = null;
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
         _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
@@ -571,9 +546,9 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     }
 
     /// <summary>
-    /// Devuelve el AIntactable del objeto interactivo más cercano a la linea de visión del jugador
+    /// Devuelve el AInteractable del objeto interactivo más cercano a la linea de visión del jugador
     /// </summary>
-    /// <param name="hitColliders"></param>
+    /// <param name="hitColliders">Array con los colliders de todos los objetos interactivos cercanos al jugador</param>
     /// <returns></returns>
     private AInteractable GetClosestInteractableToLineOfSight(Collider[] hitColliders)
     {

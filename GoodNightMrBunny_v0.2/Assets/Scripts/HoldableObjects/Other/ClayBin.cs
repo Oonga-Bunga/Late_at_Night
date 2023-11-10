@@ -5,28 +5,26 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class ClayBin : AHoldableObject
 {
+    private static ClayBin _instance;
+
+    public static ClayBin Instance => _instance;
+
     [SerializeField] private float _launchForce = 20f;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBin;
     }
 
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
-        _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
-
-        Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * _player.DropDistance;
-        Vector3 dropDirection = Camera.main.transform.forward;
-
-        RaycastHit hitInfo;
-
-        if (Physics.SphereCast(_player.transform.position, _player.SphereRaycastRadius, dropDirection, out hitInfo, _player.DropDistance, _player.GroundLayer))
-        {
-            dropPosition = hitInfo.point - (dropDirection * _player.MinimumDistanceFromCollision);
-        }
-
-        GameObject objectInstance = Instantiate(_droppedObject, dropPosition, Camera.main.transform.rotation * Quaternion.Euler(0f, 90f, 0f));
-        objectInstance.GetComponent<Rigidbody>().AddForce(dropDirection * _launchForce, ForceMode.Impulse);
+        _player.DropHeldObject(_launchForce);
     }
 }

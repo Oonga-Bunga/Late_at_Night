@@ -11,8 +11,8 @@ public class FlashlightRechargeStation : AInteractable
     [SerializeField] private float _drainDuration = 10f; // Velocidad de recarga
     private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
-    private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
-    private float _drainAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el maxCharge de la linterna
+    private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna
+    private float _drainAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna
     [SerializeField] private GameObject _flashlightModel;
     private bool _isBeingAttacked = false;
     private bool _isTaken = false;
@@ -24,23 +24,25 @@ public class FlashlightRechargeStation : AInteractable
         set { _isTaken = value; }
     }
 
-    public bool HasFlashlight
-    {
-        get { return _hasFlashlight; }
-    }
+    public bool HasFlashlight => _hasFlashlight;
 
-    private void Start()
+    public bool IsDrained => _isDrained;
+
+    protected override void Awake()
     {
+        base.Awake();
         _flashlightModel.SetActive(_hasFlashlight);
-        _rechargeAmount = Flashlight.maxCharge * _rechargeRate;
-        _drainAmount = Flashlight.maxCharge * _drainRate;
+        _rechargeAmount = Flashlight.Instance.MaxCharge * _rechargeRate;
+        _drainAmount = Flashlight.Instance.MaxCharge * _drainRate;
     }
 
     /// <summary>
     /// Si tiene una linterna que no está cargada del todo le va sumando carga con el tiempo
     /// </summary>
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (_isDrained) { return; }
 
         if (_isBeingAttacked)
@@ -55,9 +57,9 @@ public class FlashlightRechargeStation : AInteractable
         }
         else
         {
-            if (_hasFlashlight && _currentCharge != Flashlight.maxCharge)
+            if (_hasFlashlight && _currentCharge != Flashlight.Instance.MaxCharge)
             {
-                _currentCharge = Mathf.Min(_currentCharge + _rechargeAmount * Time.deltaTime, Flashlight.maxCharge);
+                _currentCharge = Mathf.Min(_currentCharge + _rechargeAmount * Time.deltaTime, Flashlight.Instance.MaxCharge);
             }
         }
     }

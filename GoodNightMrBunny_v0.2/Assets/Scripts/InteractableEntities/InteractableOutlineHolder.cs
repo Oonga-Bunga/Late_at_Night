@@ -7,8 +7,5 @@ public class InteractableOutlineHolder : MonoBehaviour
 {
     [SerializeField] private AInteractable _interactable = null;
 
-    public AInteractable Interactable
-    {
-        get { return _interactable; }
-    }
+    public AInteractable Interactable => _interactable;
 }

@@ -10,32 +10,48 @@ public class Flashlight : AHoldableObject
 {
     #region Atributtes
 
-    static public float maxCharge = 100f;
-    [SerializeField] private float baseDamage = 5f;
+    private static Flashlight _instance;
+
+    public static Flashlight Instance => _instance;
+
+    [SerializeField] private float _maxCharge = 100f;
+    [SerializeField] private float _baseDamage = 5f;
     //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
-    [SerializeField] private float dischargeMultiplier = 5f; 
-    [SerializeField] private Light spotlight;
-    [SerializeField] private bool lightOn = false;
-    [SerializeField] private float currentCharge;
+    [SerializeField] private float _dischargeMultiplier = 5f; 
+    [SerializeField] private Light _spotlight;
+    private bool _lightOn = false;
+    private float _currentCharge;
 
     #endregion
     
     #region Methods
     public float CurrentCharge {
-        get { return currentCharge; }
+        get { return _currentCharge; }
     }
 
-    void Start()
+    public float MaxCharge
     {
+        get { return _maxCharge; }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
-        currentCharge = maxCharge;
+        _currentCharge = _maxCharge;
     }
 
     public override void Initialize(float charge)
     {
-        lightOn = false;
-        spotlight.enabled = false;
-        currentCharge = charge;
+        _lightOn = false;
+        _spotlight.enabled = false;
+        _currentCharge = charge;
     }
 
     /// <summary>
@@ -44,19 +60,18 @@ public class Flashlight : AHoldableObject
     /// <param name="attackInput"></param>
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
-        
-        if (currentCharge < 0) return;
+        if (_currentCharge < 0) return;
         
         if (attackInput == IPlayerReceiver.InputType.Down)
         {
-            lightOn = true;
-            spotlight.enabled = true;
+            _lightOn = true;
+            _spotlight.enabled = true;
         }
 
         if (attackInput == IPlayerReceiver.InputType.Up)
         {
-            lightOn = false;
-            spotlight.enabled = false;
+            _lightOn = false;
+            _spotlight.enabled = false;
         }
     }
 
@@ -65,25 +80,25 @@ public class Flashlight : AHoldableObject
     /// </summary>
     private void Update()
     {
-        if (!lightOn) return;
+        if (!_lightOn) return;
         
         HitEnemy();
         
         //Descarga de la linterna
-        if(currentCharge > 0)
+        if(_currentCharge > 0)
         {
-            currentCharge -= Time.deltaTime*dischargeMultiplier;
+            _currentCharge -= Time.deltaTime * _dischargeMultiplier;
         }
         else
         {
-            lightOn = false;
-            spotlight.enabled = false;
+            _lightOn = false;
+            _spotlight.enabled = false;
         }
 
         //Parpadeo de la linterna
-        if (currentCharge < 8)
+        if (_currentCharge < 8)
         {
-            spotlight.intensity = (int)currentCharge % 2 == 0 ? 1f : 0f;
+            _spotlight.intensity = (int)_currentCharge % 2 == 0 ? 1f : 0f;
         }
     }
 
@@ -98,13 +113,12 @@ public class Flashlight : AHoldableObject
         
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy"))) // Filtra por la capa "Enemy"
         {
-            //Debug.Log("daño enemigo");
             // Obtener el componente del script del enemigo.
-            AKillableEntity enemy = hit.collider.GetComponent<AKillableEntity>();
+            AMonster enemy = hit.collider.GetComponent<AMonster>();
             if (enemy != null)
             {
-                Debug.Log("daño enemigo");
-                enemy.TakeHit(baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);
+                //Debug.Log("daño enemigo");
+                enemy.TakeHit(_baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);
             }
             
         }
@@ -112,7 +126,7 @@ public class Flashlight : AHoldableObject
 
     protected override void InitializeInstance(GameObject instance)
     {
-        instance.GetComponent<AInteractable>().Initialize(currentCharge);
+        instance.GetComponent<AInteractable>().Initialize(_currentCharge);
     }
 
     #endregion

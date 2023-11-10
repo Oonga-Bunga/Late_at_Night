@@ -5,22 +5,11 @@ using UnityEngine.AI;
 
 namespace Shadow
 {
-    public class Shadow : AKillableEntity
+    public class Shadow : AMonster
     {
-        [SerializeField] private float _speed = 5f;
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Animator _animator;
         private bool _isAvoiding = false;
         private bool _isBeingLit = false;
         private bool _isStunned = false;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            _agent = GetComponent<NavMeshAgent>();
-            _agent.speed = _speed;
-            _animator = GetComponent<Animator>();
-        }
 
         private void Update()
         {
@@ -44,9 +33,34 @@ namespace Shadow
             }
         }
 
+        public void PlayAttackAnimation()
+        {
+
+        }
+
+        public void PlaySuccAnimation()
+        {
+
+        }
+
         public void Stunned()
         {
             //play stunned animation
+        }
+
+        public void StartAvoiding()
+        {
+            _isAvoiding = true;
+        }
+
+        public void StopAvoiding()
+        {
+            _isAvoiding = false;
+        }
+
+        public override void Die()
+        {
+
         }
     }
 }

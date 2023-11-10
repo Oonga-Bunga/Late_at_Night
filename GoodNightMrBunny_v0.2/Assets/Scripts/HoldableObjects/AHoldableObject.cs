@@ -18,7 +18,7 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 
     }
 
-    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer)
+    public virtual void Drop(bool dropPrefab, float dropDistance, float sphereRaycastRadius, float minimumDistanceFromCollision, LayerMask groundLayer, float force = 0)
     {
         if (_droppedObject != null && dropPrefab)
         {

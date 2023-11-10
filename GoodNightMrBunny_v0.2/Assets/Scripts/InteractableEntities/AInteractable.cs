@@ -27,10 +27,7 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     protected PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
-    public bool CanBeInteracted
-    {
-        get { return _canBeInteracted; }
-    }
+    public bool CanBeInteracted => _canBeInteracted;
 
     #endregion
 

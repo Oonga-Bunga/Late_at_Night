@@ -14,12 +14,15 @@ public class Baby : AKillableEntity
     private int nEvilBunnies = 0;
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (_instance == null)
         {
             _instance = this;
         }
+
         this._currentHealth = _maxHealth;
         this._hitbox = GetComponent<Collider>();
     }

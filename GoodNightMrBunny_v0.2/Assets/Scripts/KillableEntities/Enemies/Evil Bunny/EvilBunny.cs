@@ -5,18 +5,25 @@ using UnityEngine.AI;
 
 namespace EvilBunny
 {
-    public class EvilBunny : AKillableEntity
+    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Animator))]
+    public class EvilBunny : AMonster
     {
-        [SerializeField] private float _speed = 5f;
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Animator _animator;
+        // Animator strings
+        private const string _animatorIsWalking = "IsWalking";
+        private const string _animatorJump = "Jump";
+        private const string _animatorAttack = "Attack";
+        private const string _animatorMerge = "Merge";
+        private const string _animatorDie = "Die";
 
-        protected override void Awake()
+        private void Start()
         {
-            base.Awake();
-            _agent = GetComponent<NavMeshAgent>();
-            _agent.speed = _speed;
-            _animator = GetComponent<Animator>();
+            //spawneo
+        }
+
+        private void Update()
+        {
+            _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude > 0.01f);
         }
 
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
@@ -35,8 +42,17 @@ namespace EvilBunny
 
         public override void Die()
         {
-            //generar partículas o algo, e incluso animación
-            Debug.Log("hice la morición");
+            _animator.SetTrigger(_animatorDie);
+        }
+
+        public void PlayAttackAnimation()
+        {
+            _animator.SetTrigger(_animatorAttack);
+        }
+
+        public void PlayMergeAnimation()
+        {
+            _animator.SetTrigger(_animatorMerge);
         }
     }
 }
