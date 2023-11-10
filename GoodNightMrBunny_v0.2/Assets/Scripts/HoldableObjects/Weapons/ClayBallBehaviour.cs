@@ -37,7 +37,6 @@ public class ClayBallBehaviour : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player") && _canJump)
         {
-            Debug.Log("Trampolin");
             //Si choca contra el jugador actua como un trampolin
             Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             if (playerRigidbody != null)

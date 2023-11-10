@@ -17,7 +17,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas loginMenu;
     [SerializeField] private GameObject loginButtons;
     [SerializeField] private GameObject loginAgeScrollList;
-    
+    [SerializeField] private AudioSource _clickSound;
+
+    private Button[] _buttons;
     private int _currentTabIndex = 0;
     private bool _ageScrollListOpen = false;
     #endregion
@@ -43,6 +45,13 @@ public class MenuManager : MonoBehaviour
         {
             int index = i;
             tabButtons[i].onClick.AddListener(() => ShowTab(index));
+        }
+
+        //Sonido de botones en la UI
+        _buttons = Resources.FindObjectsOfTypeAll<Button>();
+        foreach (var button in _buttons)
+        {
+            button.onClick.AddListener(()=>_clickSound.PlayOneShot(_clickSound.clip));
         }
     }
 
