@@ -32,12 +32,8 @@ public class ClayBallBehaviour : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-<<<<<<< Updated upstream
             collision.gameObject.GetComponent<AKillableEntity>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
-=======
-            //Hace enemigo al monstruo
-            collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
->>>>>>> Stashed changes
+
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Player") && _canJump)
