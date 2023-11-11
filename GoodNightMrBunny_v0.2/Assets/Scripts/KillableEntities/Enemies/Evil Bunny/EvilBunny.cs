@@ -6,7 +6,6 @@ using UnityEngine.AI;
 namespace EvilBunny
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(Animator))]
     public class EvilBunny : AMonster
     {
         // Animator strings
