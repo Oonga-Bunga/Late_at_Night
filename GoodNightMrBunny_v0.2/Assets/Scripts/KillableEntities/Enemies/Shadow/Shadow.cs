@@ -7,9 +7,13 @@ namespace Shadow
 {
     public class Shadow : AMonster
     {
+        [SerializeField] private float _fleeingSpeed = 10;
         private bool _isAvoiding = false;
         private bool _isBeingLit = false;
         private bool _isStunned = false;
+
+        public bool IsBeingLit => _isBeingLit;
+        public bool IsStunned => _isStunned;
 
         private void Update()
         {
@@ -51,16 +55,18 @@ namespace Shadow
         public void StartAvoiding()
         {
             _isAvoiding = true;
+            _agent.speed = _fleeingSpeed;
         }
 
         public void StopAvoiding()
         {
             _isAvoiding = false;
+            _agent.speed = _speed;
         }
 
         public override void Die()
         {
-
+            _hitbox.enabled = false;
         }
     }
 }

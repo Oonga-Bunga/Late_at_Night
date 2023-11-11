@@ -42,6 +42,7 @@ namespace EvilBunny
         public override void Die()
         {
             _animator.SetTrigger(_animatorDie);
+            _hitbox.enabled = false;
         }
 
         public void PlayAttackAnimation()
