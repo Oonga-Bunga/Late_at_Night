@@ -9,32 +9,8 @@ public class Switch : AInteractable
     private bool _isOn = false; // Si el interruptor está o no encendido
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     [SerializeField] private Light _light;
-    private bool _isBeingAttacked = false;
     [SerializeField] private float _maxHealth = 20f;
     private float _currenthealth = 20f;
-    private int _nBunnies = 0;
-
-    public bool IsBeingAttacked => _isBeingAttacked;
-
-    public void OneMoreBunny()
-    {
-        if (_isBeingAttacked != true)
-        {
-            _isBeingAttacked = true;
-        }
-
-        _nBunnies++;
-    }
-
-    public void OneLessBunny()
-    {
-        _nBunnies--;
-
-        if (_nBunnies == 0)
-        { 
-            _isBeingAttacked = false; 
-        }
-    }
 
     public bool IsOn
     {
@@ -54,7 +30,6 @@ public class Switch : AInteractable
         if (_currenthealth <= 0)
         {
             TurnOff();
-            _isBeingAttacked = false;
             _currenthealth = _maxHealth;
         }
     }

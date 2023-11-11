@@ -34,14 +34,16 @@ public class ClayBalls : AHoldableObject
 
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
         _clayBallPrefab.GetComponent<ClayBallBehaviour>().baseDamage = _baseDamage;
+
+        gameObject.SetActive(false);
     }
 
     public override void Initialize(float ballNumber)
     {
-        _uiClayAmmo.gameObject.SetActive(true);
+        //_uiClayAmmo.gameObject.SetActive(true);
         _currentBallNumber = Mathf.Min((int)ballNumber, _maxBallNumber);
-        _uiClayAmmo.setMaxBallNumber(_maxBallNumber);
-        _uiClayAmmo.UpdateClayText(_currentBallNumber);
+        //_uiClayAmmo.setMaxBallNumber(_maxBallNumber);
+        //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
 
     /// <summary>
@@ -71,13 +73,13 @@ public class ClayBalls : AHoldableObject
         _currentBallNumber -= 1;
         if (_currentBallNumber == 0)
         {
-            _uiClayAmmo.gameObject.SetActive(false);
+            //_uiClayAmmo.gameObject.SetActive(false);
             _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None,false);
             gameObject.SetActive(false);
             return;
         }
 
-        _uiClayAmmo.UpdateClayText(_currentBallNumber);
+        //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
     
     #endregion

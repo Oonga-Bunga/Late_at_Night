@@ -21,6 +21,8 @@ public class ClayBin : AHoldableObject
         }
 
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBin;
+
+        gameObject.SetActive(false);
     }
 
     public override void Use(IPlayerReceiver.InputType attackInput)

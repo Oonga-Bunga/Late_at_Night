@@ -45,6 +45,8 @@ public class Flashlight : AHoldableObject
 
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.Flashlight;
         _currentCharge = _maxCharge;
+
+        gameObject.SetActive(false);
     }
 
     public override void Initialize(float charge)
