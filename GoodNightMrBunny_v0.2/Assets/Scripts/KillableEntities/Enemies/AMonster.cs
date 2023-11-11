@@ -28,7 +28,7 @@ public abstract class AMonster : AKillableEntity
         base.Awake();
         _agent = GetComponent<NavMeshAgent>();
         _agent.speed = _speed;
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
     #endregion

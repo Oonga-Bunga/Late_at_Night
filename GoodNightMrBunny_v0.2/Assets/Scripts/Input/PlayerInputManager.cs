@@ -46,11 +46,6 @@ public class PlayerInputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (_player != null)
-        {
-            SetPlayer(_player);
-        }
     }
 
     #endregion

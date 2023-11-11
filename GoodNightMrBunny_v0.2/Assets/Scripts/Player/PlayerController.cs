@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         _currentStamina = _maxStamina;
         _currentHeldObject = GetComponentInChildren<EmptyWeapon>();
         _pauseManager = PauseManager.Instance;
+        PlayerInputManager.Instance.SetPlayer(this);
+
     }
 
     #endregion
@@ -450,7 +452,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
         this._mount = mount;
-        PlayerInputManager.Instance.Player = mount;
+        PlayerInputManager.Instance.SetPlayer(mount);
         transform.parent = mountingPoint.transform;
         _cameraHolder.GetComponent<CameraController>().PlayerMounting();
         transform.localPosition = Vector3.zero;
@@ -466,7 +468,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     public void DisMount()
     {
         this._mount = null;
-        PlayerInputManager.Instance.Player = this;
+        PlayerInputManager.Instance.SetPlayer(this);
         transform.parent = null;
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
         _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
