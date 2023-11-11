@@ -406,21 +406,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     {
         _currentHeldObject.Drop(dropPrefab, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
 
-        AHoldableObject newHeldObject = GetComponentInChildren<EmptyWeapon>();
+        AHoldableObject newHeldObject = _holdableObjectList[0];
 
         switch (objectType)
         {
             case IPlayerReceiver.HoldableObjectType.Flashlight:
-                newHeldObject = GetComponentInChildren<Flashlight>();
+                newHeldObject = _holdableObjectList[1];
                 break;
             case IPlayerReceiver.HoldableObjectType.ClayBalls:
-                newHeldObject = GetComponentInChildren<ClayBalls>();
+                newHeldObject = _holdableObjectList[2];
                 break;
             case IPlayerReceiver.HoldableObjectType.ClayBin:
-                newHeldObject = GetComponentInChildren<ClayBin>();
+                newHeldObject = _holdableObjectList[3];
                 break;
         }
-
         newHeldObject.gameObject.SetActive(true);
         _currentHeldObject = newHeldObject;
 

@@ -10,8 +10,8 @@ public abstract class AMonster : AKillableEntity
 
     [SerializeField] protected float _damage = 2f;
     [SerializeField] protected float _speed = 5f;
-    [SerializeField] protected NavMeshAgent _agent;
-    [SerializeField] protected Animator _animator;
+    protected NavMeshAgent _agent;
+    protected Animator _animator;
 
     public float Damage => _damage;
 
@@ -28,7 +28,7 @@ public abstract class AMonster : AKillableEntity
         base.Awake();
         _agent = GetComponent<NavMeshAgent>();
         _agent.speed = _speed;
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     #endregion
