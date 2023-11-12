@@ -175,7 +175,7 @@ PrefabInstance:
     - target: {fileID: -4532637767404612721, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8d4442f33d770144b8efbf584f559f76, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
       propertyPath: m_Name
       value: ModelosParedModularConBaldaIzdaV1
@@ -184,22 +184,27 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5904931382709030933, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6482323383639300775}
+      addedObject: {fileID: 3877458672745562972}
   m_SourcePrefab: {fileID: 100100000, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
---- !u!1 &2799276786943046905 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
+--- !u!4 &3283924317452955203 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
   m_PrefabInstance: {fileID: 3033296094004087208}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6482323383639300775
+--- !u!1 &8929205910217955773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5904931382709030933, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
+  m_PrefabInstance: {fileID: 3033296094004087208}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3877458672745562972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2799276786943046905}
+  m_GameObject: {fileID: 8929205910217955773}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0bce9d647e0fa243b1b9eb86ceee140, type: 3}
@@ -214,8 +219,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   raycastFadeSpeed: 10
---- !u!4 &3283924317452955203 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 300f010a54f3f6c409e9f0ffa9248a63, type: 3}
-  m_PrefabInstance: {fileID: 3033296094004087208}
-  m_PrefabAsset: {fileID: 0}
