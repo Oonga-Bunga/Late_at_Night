@@ -16,6 +16,7 @@ public class ClayBalls : AHoldableObject
     [SerializeField] private UpdateUIClayAmmo _uiClayAmmo;
     [SerializeField] private GameObject _clayBallPrefab;
     [SerializeField] private float _shotForce = 20f;
+    [SerializeField] private GameObject[] _handClayBalls;
     
     public int MaxBallNumber => _maxBallNumber;
 
@@ -42,6 +43,10 @@ public class ClayBalls : AHoldableObject
     {
         //_uiClayAmmo.gameObject.SetActive(true);
         _currentBallNumber = Mathf.Min((int)ballNumber, _maxBallNumber);
+        foreach (var ball in _handClayBalls)
+        {
+            ball.gameObject.SetActive(true);
+        }
         //_uiClayAmmo.setMaxBallNumber(_maxBallNumber);
         //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
@@ -79,6 +84,7 @@ public class ClayBalls : AHoldableObject
             return;
         }
 
+        _handClayBalls[_currentBallNumber-1].gameObject.SetActive(false);
         //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
     
