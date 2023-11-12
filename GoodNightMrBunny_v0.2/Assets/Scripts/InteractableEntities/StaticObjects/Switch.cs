@@ -17,8 +17,10 @@ public class Switch : AInteractable
         get { return _isOn; }
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _light.enabled = false;
         _currenthealth = _maxHealth;
     }

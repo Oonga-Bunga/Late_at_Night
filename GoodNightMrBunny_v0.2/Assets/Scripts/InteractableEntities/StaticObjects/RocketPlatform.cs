@@ -40,9 +40,9 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     #region Initialization
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         _state = RocketPlatformState.Ready;
         _lowerArmAnimator = _lowerArm.GetComponent<Animator>();
         _laser.enabled = false;

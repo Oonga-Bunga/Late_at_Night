@@ -9,14 +9,23 @@ namespace Shadow
     {
         [SerializeField] private float _fleeingSpeed = 10;
         private bool _isAvoiding = false;
-        private bool _isBeingLit = false;
-        private bool _isStunned = false;
+        [SerializeField] private float stunTime = 5;
 
-        public bool IsBeingLit => _isBeingLit;
-        public bool IsStunned => _isStunned;
+        private const string _animatorIsWalking = "IsWalking";
+        private const string _animatorIsFleeing = "IsFleeing";
+        private const string _animatorIsSucking = "IsSucking";
+        private const string _animatorIsStunned = "IsStunned";
+        private const string _animatorAttack = "Attack";
+        private const string _animatorDie = "Die";
+
+        public float Speed => _speed;
+
+        public float FleeingSpeed => _fleeingSpeed;
 
         private void Update()
         {
+            _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude > 0.01f);
+
             if (_isAvoiding)
             {
                 //steering avoidance
@@ -39,33 +48,33 @@ namespace Shadow
 
         public void PlayAttackAnimation()
         {
-
-        }
-
-        public void PlaySuccAnimation()
-        {
-
+            _animator.SetTrigger(_animatorAttack);
         }
 
         public void Stunned()
         {
-            //play stunned animation
+            _animator.SetBool(_animatorIsStunned, true);
+            Invoke("Recover", stunTime);
+        }
+
+        private void Recover()
+        {
+            _animator.SetBool(_animatorIsStunned, false);
         }
 
         public void StartAvoiding()
         {
             _isAvoiding = true;
-            _agent.speed = _fleeingSpeed;
         }
 
         public void StopAvoiding()
         {
             _isAvoiding = false;
-            _agent.speed = _speed;
         }
 
         public override void Die()
         {
+            _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
         }
     }

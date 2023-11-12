@@ -33,9 +33,9 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     #region Initialization
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
-        _player = FindObjectOfType<PlayerController>();
+        _player = PlayerController.Instance;
         _outline = _outlineHolder.GetComponent<Outline>();
         _promptCanvas = transform.GetChild(0).GetComponentInChildren<Canvas>();
         _radialBar = _promptCanvas.GetComponentInChildren<Image>();

@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     #region Initialization
 
-    private void Start()
+    private void Awake()
     {
         if (_instance == null)
         {
@@ -142,9 +142,8 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         _maxCurrentSpeed = _maxWalkingSpeed;
         _currentStamina = _maxStamina;
         _currentHeldObject = GetComponentInChildren<EmptyWeapon>();
-        _pauseManager = PauseManager.Instance;
-        PlayerInputManager.Instance.SetPlayer(this);
-
+        _pauseManager = FindObjectOfType<PauseManager>();
+        FindObjectOfType<PlayerInputManager>().SetPlayer(this);
     }
 
     #endregion
