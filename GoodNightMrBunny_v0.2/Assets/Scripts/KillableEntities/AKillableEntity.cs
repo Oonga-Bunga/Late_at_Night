@@ -26,8 +26,8 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// <param name="health">Vida máxima</param>
     protected virtual void Awake()
     {
-        this._currentHealth = _maxHealth;
-        this._hitbox = GetComponent<Collider>();
+        _currentHealth = _maxHealth;
+        _hitbox = GetComponent<Collider>();
     }
 
     #endregion

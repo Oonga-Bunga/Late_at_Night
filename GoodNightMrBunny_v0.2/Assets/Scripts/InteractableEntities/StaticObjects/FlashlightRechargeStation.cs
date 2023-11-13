@@ -104,6 +104,11 @@ public class FlashlightRechargeStation : AInteractable
     public void StopTheSucc()
     {
         _isBeingAttacked = false;
+
+        if (!_isDrained)
+        {
+            _canBeInteracted = true;
+        }
     }
 
     private void RecoverFromDrained()

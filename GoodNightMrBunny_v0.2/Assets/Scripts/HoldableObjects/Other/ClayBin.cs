@@ -32,6 +32,6 @@ public class ClayBin : AHoldableObject
 
     protected override void InitializeInstance(GameObject instance)
     {
-        instance.GetComponent<Rigidbody>().AddForce(Vector3.forward * _launchForce, ForceMode.Impulse);
+        instance.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * _launchForce, ForceMode.Impulse);
     }
 }

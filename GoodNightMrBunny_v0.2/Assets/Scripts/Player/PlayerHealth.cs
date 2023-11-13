@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerHealth : AMonster
+public class PlayerHealth : AKillableEntity
 {
     protected override void Awake()
     {

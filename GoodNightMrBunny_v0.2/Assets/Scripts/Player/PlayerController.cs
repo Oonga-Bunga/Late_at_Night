@@ -108,8 +108,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private Transform _cameraHolder; // Referencia a la cámara principal
 
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
-
-    private IPlayerReceiver _mount = null; // Objeto en el que está montado el jugador, puede ser nulo
+    private PlayerInputManager _inputManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
     #endregion
 
@@ -135,15 +134,25 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         {
             _instance = this;
         }
+        else
+        {
+            Destroy(this);
+        }
 
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
         _cameraHolder = Camera.main.transform.parent;
+
         _maxCurrentSpeed = _maxWalkingSpeed;
         _currentStamina = _maxStamina;
         _currentHeldObject = GetComponentInChildren<EmptyWeapon>();
-        _pauseManager = FindObjectOfType<PauseManager>();
-        FindObjectOfType<PlayerInputManager>().SetPlayer(this);
+    }
+
+    private void Start()
+    {
+        _pauseManager = PauseManager.Instance;
+        _inputManager = PlayerInputManager.Instance;
+        _inputManager.SetPlayer(this);
     }
 
     #endregion
@@ -199,20 +208,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
             _localGravityScale = 1f;
         }
 
-        // Cambiar el modo de movimiento a correr si se cumplen las condiciones
-
-        if (_isPressingRunButton && !_isRunning && _isPlayerGrounded)
-        {
-            if ((_currentStamina / _maxStamina) > _minimumStaminaForRunning)
-            {
-                _isRunning = true;
-            }
-        }
-        else if (!_isPressingRunButton)
-        {
-            _isRunning = false;
-        }
-
         // Modificar la energia dependiendo de si el jugador está corriendo o no, y si se acaba parar de correr
 
         if (_isRunning)
@@ -231,7 +226,11 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         }
         else
         {
-            _maxCurrentSpeed = _maxWalkingSpeed;
+            if (_isPlayerGrounded)
+            {
+                _maxCurrentSpeed = _maxWalkingSpeed;
+            }
+
             _currentStamina = Mathf.Min(_currentStamina + _staminaRecoveryRate * Time.deltaTime, _maxStamina);
             OnStaminaChanged?.Invoke(this, _currentStamina);
         }
@@ -318,18 +317,24 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <summary>
     /// Se ejecuta cuando el jugador presiona la tecla de correr, y guarda en una variable si la tecla está siendop pulsada o no
     /// </summary>
-    /// <param name="runInput">Tipo de input, Down o Up</param>
+    /// <param name="runInput">Tipo de input, Down, Hold o Up</param>
     public void Run(IPlayerReceiver.InputType runInput)
     {
         if (_pauseManager.isPaused) return;
 
         if (runInput != IPlayerReceiver.InputType.Up)
         {
-            _isPressingRunButton = true;
+            if (!_isRunning && _isPlayerGrounded)
+            {
+                if ((_currentStamina / _maxStamina) > _minimumStaminaForRunning)
+                {
+                    _isRunning = true;
+                }
+            }
         }
         else
         {
-            _isPressingRunButton = false;
+            _isRunning = false;
         }
     }
 
@@ -422,7 +427,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         newHeldObject.gameObject.SetActive(true);
         _currentHeldObject = newHeldObject;
 
-        if (!(initializationValue < 0))
+        if (initializationValue != -1)
         {
             _currentHeldObject.Initialize(initializationValue);
         }
@@ -449,12 +454,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="mountingPoint">Punto en el que el jugador se situa respecto a la montura</param>
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
-        this._mount = mount;
         PlayerInputManager.Instance.SetPlayer(mount);
+
         transform.parent = mountingPoint.transform;
-        _cameraHolder.GetComponent<CameraController>().PlayerMounting();
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        _cameraHolder.GetComponent<CameraController>().PlayerMounting();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
@@ -465,13 +471,15 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void DisMount()
     {
-        this._mount = null;
         PlayerInputManager.Instance.SetPlayer(this);
+
         transform.parent = null;
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
+
         _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
         JumpAction();
     }
 
@@ -521,7 +529,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                 bestInteractable = interactable;
                 OnInteractableChanged?.Invoke(this, true);
 
-                if (bestInteractable.CanBeInteracted && bestInteractable != _closestInteractable)
+                if (bestInteractable.CanBeInteracted)
                 {
                     bestInteractable.EnableOutlineAndCanvas();
                 }
@@ -531,10 +539,14 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         // Si el objeto anterior no es nulo se desactiva su canvas y _outline, y si es distinto al nuevo se le informa
         // que ya no está en el rango del jugador
 
-        if (_closestInteractable != null && _closestInteractable != bestInteractable)
+        if (_closestInteractable != null)
         {
             _closestInteractable.DisableOutlineAndCanvas();
-            _closestInteractable.PlayerExitedRange();
+            
+            if (_closestInteractable != bestInteractable)
+            {
+                _closestInteractable.PlayerExitedRange();
+            }
         }
         
         if (bestInteractable == null)
