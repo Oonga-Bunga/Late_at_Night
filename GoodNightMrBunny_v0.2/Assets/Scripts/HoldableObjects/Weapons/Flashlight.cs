@@ -82,7 +82,7 @@ public class Flashlight : AHoldableObject
     /// </summary>
     private void Update()
     {
-        if (!_lightOn) return;
+        if (!_lightOn || CurrentCharge <= 0f) return;
         
         HitEnemy();
         
@@ -112,7 +112,7 @@ public class Flashlight : AHoldableObject
         // Lanzar un rayo desde la posición de la linterna en la dirección de la linterna.
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        
+        /*
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy"))) // Filtra por la capa "Enemy"
         {
             // Obtener el componente del script del enemigo.
@@ -123,6 +123,17 @@ public class Flashlight : AHoldableObject
                 enemy.TakeHit(_baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);
             }
             
+        }*/
+        if (Physics.SphereCast(transform.position, 1f, transform.forward, out hit, 10000, LayerMask.GetMask("Enemy")))
+        {
+            Debug.Log("HACER DAÑO");
+            // Obtener el componente del script del enemigo.
+            AMonster enemy = hit.collider.GetComponent<AMonster>();
+            if (enemy != null)
+            {
+                Debug.Log("daño enemigo");
+                enemy.TakeHit(_baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);
+            }
         }
     }
 
