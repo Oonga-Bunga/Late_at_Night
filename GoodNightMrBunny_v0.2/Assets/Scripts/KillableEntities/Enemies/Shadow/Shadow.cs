@@ -12,6 +12,12 @@ namespace Shadow
         [SerializeField] private float _stunTime = 5;
         private float _fleeingTime = 0;
 
+        private Transform _target;
+        [SerializeField] private float _rayOffset = 2.5f;
+        [SerializeField] private float _obstacleDetectionDistance = 20;
+        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private float _rotationalDamp = 0.5f;
+
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorIsFleeing = "IsFleeing";
         private const string _animatorIsSucking = "IsSucking";
@@ -23,13 +29,36 @@ namespace Shadow
 
         public float FleeingSpeed => _fleeingSpeed;
 
+        public Transform Target
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _target = transform;
+        }
+
         private void Update()
         {
-            _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude > 0.01f);
+            if (_target != transform)
+            {
+                _animator.SetBool(_animatorIsWalking, true);
+                Pathfinding();
+                Move();
+            }
+            else
+            {
+                _animator.SetBool(_animatorIsWalking, false);
+                _rb.velocity = Vector3.zero;
+            }
 
             if (_isAvoiding)
             {
-                //steering avoidance
+                CalculateSteeringAvoidance();
             }
 
             if (_fleeingTime > 0)
@@ -89,6 +118,73 @@ namespace Shadow
         {
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
+        }
+
+        private void Turn()
+        {
+            Vector3 pos = _target.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(pos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationalDamp * Time.deltaTime);
+        }
+
+        private void Move()
+        {
+            if (_fleeingTime > 0)
+            {
+                _rb.velocity = transform.forward * _fleeingSpeed;
+            }
+            else
+            {
+                _rb.velocity = transform.forward * _speed;
+            }
+        }
+
+        private void Pathfinding()
+        {
+            RaycastHit hit;
+            Vector3 raycastOffset = Vector3.zero;
+
+            Vector3 left = transform.position - transform.right * _rayOffset;
+            Vector3 right = transform.position + transform.right * _rayOffset;
+            Vector3 up = transform.position + transform.up * _rayOffset * 2;
+            Vector3 down = transform.position - transform.up * _rayOffset * 2;
+
+            Debug.DrawRay(left, transform.forward * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(right, transform.forward * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(up, transform.forward * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(down, transform.forward * _obstacleDetectionDistance, Color.yellow);
+
+            if (Physics.Raycast(left, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            {
+                raycastOffset += Vector3.right;
+            }
+            else if (Physics.Raycast(right, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            {
+                raycastOffset -= Vector3.right;
+            }
+
+            if (Physics.Raycast(up, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            {
+                raycastOffset -= Vector3.up;
+            }
+            else if (Physics.Raycast(down, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            {
+                raycastOffset += Vector3.up;
+            }
+
+            if (raycastOffset != Vector3.zero)
+            {
+                transform.Rotate(raycastOffset * 10f * Time.deltaTime);
+            }
+            else
+            {
+                Turn();
+            }
+        }
+
+        private void CalculateSteeringAvoidance()
+        {
+
         }
     }
 }

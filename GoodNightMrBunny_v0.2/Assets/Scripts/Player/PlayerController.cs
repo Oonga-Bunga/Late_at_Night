@@ -533,20 +533,20 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
                 {
                     bestInteractable.EnableOutlineAndCanvas();
                 }
+                else
+                {
+                    bestInteractable.DisableOutlineAndCanvas();
+                }
             }
         }
 
         // Si el objeto anterior no es nulo se desactiva su canvas y _outline, y si es distinto al nuevo se le informa
         // que ya no está en el rango del jugador
 
-        if (_closestInteractable != null)
+        if (_closestInteractable != null && _closestInteractable != bestInteractable)
         {
             _closestInteractable.DisableOutlineAndCanvas();
-            
-            if (_closestInteractable != bestInteractable)
-            {
-                _closestInteractable.PlayerExitedRange();
-            }
+            _closestInteractable.PlayerExitedRange();
         }
         
         if (bestInteractable == null)

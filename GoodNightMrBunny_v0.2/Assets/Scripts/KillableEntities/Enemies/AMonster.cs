@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class AMonster : AKillableEntity
 {
     #region Attributes
 
     [SerializeField] protected float _damage = 2f;
     [SerializeField] protected float _speed = 5f;
-    protected NavMeshAgent _agent;
     protected Animator _animator;
+    protected Rigidbody _rb;
 
     public float Damage => _damage;
 
@@ -26,9 +28,9 @@ public abstract class AMonster : AKillableEntity
     protected override void Awake()
     {
         base.Awake();
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _speed;
+
         _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     #endregion

@@ -8,6 +8,8 @@ namespace EvilBunny
     [RequireComponent(typeof(NavMeshAgent))]
     public class EvilBunny : AMonster
     {
+        private NavMeshAgent _agent;
+
         // Animator strings
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorJump = "Jump";
@@ -15,9 +17,12 @@ namespace EvilBunny
         private const string _animatorMerge = "Merge";
         private const string _animatorDie = "Die";
 
-        private void Start()
+        protected override void Awake()
         {
-            //spawneo
+            base.Awake();
+
+            _agent = GetComponent<NavMeshAgent>();
+            _agent.speed = _speed;
         }
 
         private void Update()
