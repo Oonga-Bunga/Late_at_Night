@@ -51,6 +51,9 @@ MonoBehaviour:
   _holdDuration: 0
   _pressBuffer: 0
   _outlineHolder: {fileID: 8589912158611132386}
+  _outline: {fileID: 8028533968204290069}
+  _promptCanvas: {fileID: 4289225882605511137}
+  _radialBar: {fileID: 3911349111860019544}
   _rechargeRate: 0.2
   _drainRate: 0.2
   _drainDuration: 10
@@ -933,6 +936,22 @@ PrefabInstance:
 --- !u!4 &3652456598135737490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1583077953146822212, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 2830539777902121686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3911349111860019544 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1229482308043330446, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 2830539777902121686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!223 &4289225882605511137 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2075733751432016695, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
   m_PrefabInstance: {fileID: 2830539777902121686}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3418259993476216588
