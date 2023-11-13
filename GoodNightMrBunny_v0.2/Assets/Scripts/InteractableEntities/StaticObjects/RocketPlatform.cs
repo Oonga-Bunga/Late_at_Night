@@ -214,7 +214,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     }
 
-    public void DropHeldObject(float force = 0)
+    public void DropHeldObject()
     {
 
     }

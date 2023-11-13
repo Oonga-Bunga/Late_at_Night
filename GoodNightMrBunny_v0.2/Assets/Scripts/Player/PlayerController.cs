@@ -432,7 +432,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// Es similar al m�todo ChangeHeldObject, la �nica diferencia es que el objeto al que cambia el jugador es el vac�o
     /// </summary>
     /// <param name="force">Fuerza con la que se suelta el objeto</param>
-    public void DropHeldObject(float force = 0)
+    public void DropHeldObject()
     {
         if (_pauseManager.isPaused) return;
 

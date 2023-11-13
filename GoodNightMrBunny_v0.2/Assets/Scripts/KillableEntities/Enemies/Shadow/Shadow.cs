@@ -9,7 +9,8 @@ namespace Shadow
     {
         [SerializeField] private float _fleeingSpeed = 10;
         private bool _isAvoiding = false;
-        [SerializeField] private float stunTime = 5;
+        [SerializeField] private float _stunTime = 5;
+        private float _fleeingTime = 0;
 
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorIsFleeing = "IsFleeing";
@@ -30,6 +31,16 @@ namespace Shadow
             {
                 //steering avoidance
             }
+
+            if (_fleeingTime > 0)
+            {
+                _fleeingTime = Mathf.Max(0, _fleeingTime - Time.deltaTime);
+
+                if (_fleeingTime == 0)
+                {
+                    _animator.SetBool(_animatorIsFleeing, false);
+                }
+            }
         }
 
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
@@ -38,6 +49,8 @@ namespace Shadow
             {
                 case IKillableEntity.AttackSource.Flashlight:
                     ChangeHealth(damage, true);
+                    _animator.SetBool(_animatorIsFleeing, true);
+                    _fleeingTime = 1;
                     break;
                 case IKillableEntity.AttackSource.ClayBall:
                 case IKillableEntity.AttackSource.Rocket:
@@ -54,7 +67,7 @@ namespace Shadow
         public void Stunned()
         {
             _animator.SetBool(_animatorIsStunned, true);
-            Invoke("Recover", stunTime);
+            Invoke("Recover", _stunTime);
         }
 
         private void Recover()

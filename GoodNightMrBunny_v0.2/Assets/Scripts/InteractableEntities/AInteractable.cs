@@ -21,9 +21,9 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     protected PlayerController _player; // Referencia al jugador
     [SerializeField] protected GameObject _outlineHolder = null; // Referencia al objeto que tiene el _outline y con el que debe interactuar el jugador
-    protected Outline _outline; // Referencia al _outline
-    protected Canvas _promptCanvas; // Referencia al canvas del button prompt
-    protected Image _radialBar; // Referencia a la barra radial del button prompt
+    [SerializeField] protected Outline _outline; // Referencia al _outline
+    [SerializeField] protected Canvas _promptCanvas; // Referencia al canvas del button prompt
+    [SerializeField] protected Image _radialBar; // Referencia a la barra radial del button prompt
 
     protected PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
@@ -36,9 +36,6 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected virtual void Start()
     {
         _player = PlayerController.Instance;
-        _outline = _outlineHolder.GetComponent<Outline>();
-        _promptCanvas = transform.GetChild(0).GetComponentInChildren<Canvas>();
-        _radialBar = _promptCanvas.GetComponentInChildren<Image>();
         _promptCanvas.enabled = false;
         _radialBar.fillAmount = 0f;
     }

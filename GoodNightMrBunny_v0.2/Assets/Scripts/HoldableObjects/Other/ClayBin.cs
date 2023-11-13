@@ -27,6 +27,11 @@ public class ClayBin : AHoldableObject
 
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
-        _player.DropHeldObject(_launchForce);
+        _player.DropHeldObject();
+    }
+
+    protected override void InitializeInstance(GameObject instance)
+    {
+        instance.GetComponent<Rigidbody>().AddForce(Vector3.forward * _launchForce, ForceMode.Impulse);
     }
 }

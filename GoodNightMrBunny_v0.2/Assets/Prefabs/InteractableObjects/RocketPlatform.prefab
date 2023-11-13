@@ -731,6 +731,9 @@ MonoBehaviour:
   _holdDuration: 0
   _pressBuffer: 0
   _outlineHolder: {fileID: 8555154764282405744}
+  _outline: {fileID: 4812222698435726330}
+  _promptCanvas: {fileID: 7338771715104697413}
+  _radialBar: {fileID: 7501042607155825916}
   _cooldown: 5
   _rotationSpeed: 30
   _rotationPoint: {fileID: 4651136274596131989}
@@ -1511,6 +1514,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+--- !u!223 &7338771715104697413 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2075733751432016695, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 8725426479629541234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7501042607155825916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1229482308043330446, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 8725426479629541234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7849431264494518582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1583077953146822212, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}

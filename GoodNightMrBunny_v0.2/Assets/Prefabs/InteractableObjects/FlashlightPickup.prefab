@@ -830,9 +830,9 @@ MonoBehaviour:
   _holdDuration: 0
   _pressBuffer: 0
   _outlineHolder: {fileID: 2176474491992119817}
-  onPickup:
-    m_PersistentCalls:
-      m_Calls: []
+  _outline: {fileID: 4547261442108829406}
+  _promptCanvas: {fileID: 7331638684836631967}
+  _radialBar: {fileID: 7529655696348624166}
 --- !u!54 &6463400791846346273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1003,6 +1003,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+--- !u!223 &7331638684836631967 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2075733751432016695, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 8750857272933476008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7529655696348624166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1229482308043330446, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
+  m_PrefabInstance: {fileID: 8750857272933476008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7820909022458312940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1583077953146822212, guid: 3dd14c872df40fb4a93198257caea0b4, type: 3}
