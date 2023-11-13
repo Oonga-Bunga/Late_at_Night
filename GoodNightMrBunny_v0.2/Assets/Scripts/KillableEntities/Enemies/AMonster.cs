@@ -4,16 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Rigidbody))]
 public abstract class AMonster : AKillableEntity
 {
     #region Attributes
 
     [SerializeField] protected float _damage = 2f;
     [SerializeField] protected float _speed = 5f;
-    protected Animator _animator;
-    protected Rigidbody _rb;
+    [SerializeField] protected Animator _animator;
 
     public float Damage => _damage;
 
@@ -28,9 +25,6 @@ public abstract class AMonster : AKillableEntity
     protected override void Awake()
     {
         base.Awake();
-
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
     }
 
     #endregion

@@ -17,6 +17,7 @@ namespace Shadow
         [SerializeField] private float _obstacleDetectionDistance = 20;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _rotationalDamp = 0.5f;
+        [SerializeField] private Transform _actualCenter;
 
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorIsFleeing = "IsFleeing";
@@ -44,7 +45,7 @@ namespace Shadow
 
         private void Update()
         {
-            if (_target != transform)
+            if (Vector3.Distance(_target.position, transform.position) > 0.01f)
             {
                 _animator.SetBool(_animatorIsWalking, true);
                 Pathfinding();
@@ -53,7 +54,6 @@ namespace Shadow
             else
             {
                 _animator.SetBool(_animatorIsWalking, false);
-                _rb.velocity = Vector3.zero;
             }
 
             if (_isAvoiding)
@@ -131,11 +131,11 @@ namespace Shadow
         {
             if (_fleeingTime > 0)
             {
-                _rb.velocity = transform.forward * _fleeingSpeed;
+                transform.position += transform.forward * _fleeingSpeed * Time.deltaTime;
             }
             else
             {
-                _rb.velocity = transform.forward * _speed;
+                transform.position += transform.forward * _speed * Time.deltaTime;
             }
         }
 
@@ -144,10 +144,10 @@ namespace Shadow
             RaycastHit hit;
             Vector3 raycastOffset = Vector3.zero;
 
-            Vector3 left = transform.position - transform.right * _rayOffset;
-            Vector3 right = transform.position + transform.right * _rayOffset;
-            Vector3 up = transform.position + transform.up * _rayOffset * 2;
-            Vector3 down = transform.position - transform.up * _rayOffset * 2;
+            Vector3 left = _actualCenter.position - transform.right * _rayOffset;
+            Vector3 right = _actualCenter.position + transform.right * _rayOffset;
+            Vector3 up = _actualCenter.position + transform.up * _rayOffset * 2;
+            Vector3 down = _actualCenter.position - transform.up * _rayOffset * 2;
 
             Debug.DrawRay(left, transform.forward * _obstacleDetectionDistance, Color.yellow);
             Debug.DrawRay(right, transform.forward * _obstacleDetectionDistance, Color.yellow);
@@ -163,18 +163,18 @@ namespace Shadow
                 raycastOffset -= Vector3.right;
             }
 
-            if (Physics.Raycast(up, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
-            {
-                raycastOffset -= Vector3.up;
-            }
-            else if (Physics.Raycast(down, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            if (Physics.Raycast(down, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
             {
                 raycastOffset += Vector3.up;
+            }
+            else if (Physics.Raycast(up, transform.forward, out hit, _obstacleDetectionDistance, _groundLayer))
+            {
+                raycastOffset -= Vector3.up;
             }
 
             if (raycastOffset != Vector3.zero)
             {
-                transform.Rotate(raycastOffset * 10f * Time.deltaTime);
+                transform.Rotate(raycastOffset * 20f * Time.deltaTime);
             }
             else
             {
