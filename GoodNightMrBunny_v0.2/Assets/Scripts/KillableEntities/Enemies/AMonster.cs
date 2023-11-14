@@ -8,16 +8,19 @@ public abstract class AMonster : AKillableEntity
 {
     #region Attributes
 
+    [Header("AMonster Settings")]
+
     [SerializeField] protected float _damage = 2f;
-    [SerializeField] protected float _speed = 5f;
+    [SerializeField] protected float _walkingSpeed = 5f;
+    protected float _currentSpeed = 0f;
     [SerializeField] protected Animator _animator;
-    [SerializeField] protected Rigidbody _rb;
+    protected Rigidbody _rb;
 
     public float Damage => _damage;
 
     #endregion
 
-    #region Constructor
+    #region Initialization
 
     /// <summary>
     /// Constructor de la clase abstracta
@@ -26,13 +29,10 @@ public abstract class AMonster : AKillableEntity
     protected override void Awake()
     {
         base.Awake();
+
+        _currentSpeed = _walkingSpeed;
+        _rb = GetComponent<Rigidbody>();
     }
 
     #endregion
-
-    #region Methods
-
-
-    #endregion
-
 }

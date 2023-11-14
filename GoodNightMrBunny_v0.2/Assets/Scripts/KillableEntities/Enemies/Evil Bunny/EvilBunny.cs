@@ -22,7 +22,7 @@ namespace EvilBunny
             base.Awake();
 
             _agent = GetComponent<NavMeshAgent>();
-            _agent.speed = _speed;
+            _agent.speed = _walkingSpeed;
         }
 
         private void Update()

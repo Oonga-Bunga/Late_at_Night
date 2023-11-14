@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
     #region Movement
 
-    [Header("Speed")]
+    [Header("WalkingSpeed")]
 
     [SerializeField] private float _maxWalkingSpeed = 7.0f; // Velocidad m�xima al caminar
     [SerializeField] private float _maxRunningSpeed = 14.0f; // Velocidad m�xima al correr

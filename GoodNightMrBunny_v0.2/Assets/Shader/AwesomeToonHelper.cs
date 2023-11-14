@@ -31,7 +31,7 @@ namespace AwesomeToon {
         [SerializeField] Vector3 meshCenter = Vector3.zero;
         [SerializeField] int maxLights = 6;
 
-        [Header("Recieve Shadow Check")]
+        [Header("Recieve Zanybell Check")]
         [SerializeField] bool raycast = true;
         [SerializeField] LayerMask raycastMask = new LayerMask();
         [SerializeField] float raycastFadeSpeed = 10f;
