@@ -41,14 +41,11 @@ public class ClayBalls : AHoldableObject
 
     public override void Initialize(float ballNumber)
     {
-        //_uiClayAmmo.gameObject.SetActive(true);
         _currentBallNumber = Mathf.Min((int)ballNumber, _maxBallNumber);
         foreach (var ball in _handClayBalls)
         {
             ball.gameObject.SetActive(true);
         }
-        //_uiClayAmmo.setMaxBallNumber(_maxBallNumber);
-        //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
 
     /// <summary>
@@ -72,20 +69,21 @@ public class ClayBalls : AHoldableObject
     {
         if (_currentBallNumber <= 0) return;
 
-        GameObject clayBall = Instantiate(_clayBallPrefab, this.transform.position, Quaternion.identity);
-        clayBall.GetComponent<ClayBallBehaviour>().Initialize(transform.forward, _shotForce);
+        Quaternion rotacionDisparo = transform.rotation;
+        rotacionDisparo *= Quaternion.Euler(-20f, 0f, 0f);
+        GameObject clayBall = Instantiate(_clayBallPrefab, this.transform.position, rotacionDisparo);
+        
+        clayBall.GetComponent<ClayBallBehaviour>().Initialize(clayBall.transform.forward, _shotForce);
 
         _currentBallNumber -= 1;
         if (_currentBallNumber == 0)
         {
-            //_uiClayAmmo.gameObject.SetActive(false);
             _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None,false);
             gameObject.SetActive(false);
             return;
         }
 
         _handClayBalls[_currentBallNumber-1].gameObject.SetActive(false);
-        //_uiClayAmmo.UpdateClayText(_currentBallNumber);
     }
     
     #endregion
