@@ -7,13 +7,13 @@ public interface IKillableEntity
         Flashlight,
         ClayBall,
         Rocket,
-        Shadow,
+        Zanybell,
         KitestingerTrap,
         EvilBunny,
         Cat
     }
 
     public void TakeHit(float damage, AttackSource source);
-    public void ChangeHealth(float value, bool isDamage);
+    public void RecoverHealth(float amount);
     public void Die();
 }

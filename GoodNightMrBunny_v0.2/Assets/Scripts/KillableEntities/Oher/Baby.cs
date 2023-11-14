@@ -22,9 +22,10 @@ public class Baby : AKillableEntity
         {
             _instance = this;
         }
-
-        this._currentHealth = _maxHealth;
-        this._hitbox = GetComponent<Collider>();
+        else
+        {
+            Destroy(this);
+        }
     }
 
     public void EvilBunnyGoesUnderBed()

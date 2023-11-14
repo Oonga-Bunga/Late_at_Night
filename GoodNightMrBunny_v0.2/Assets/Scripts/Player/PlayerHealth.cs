@@ -11,7 +11,7 @@ public class PlayerHealth : AKillableEntity
         base.Awake();
     }
 
-    public override void ChangeHealth(float value, bool IsDamage)
+    protected override void ChangeHealth(float value, bool IsDamage)
     {
         base.ChangeHealth(value, IsDamage);
     }
