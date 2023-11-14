@@ -148,6 +148,14 @@ public class MenuManager : MonoBehaviour
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    /// <summary>
+    /// Cierra la ventana del videojuego
+    /// </summary>
+    public void CloseApplication()
+    {
+        Application.Quit();
+    }
+
     #endregion
     
 }

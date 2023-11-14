@@ -7,11 +7,15 @@ using UnityEngine.UI;
 
 public class ScrollListGenerator : MonoBehaviour
 {
-    public Button buttonPrefab;
-    public RectTransform content; 
-    public MenuManager menuManager;
+    #region Attributes
+    [SerializeField]private Button buttonPrefab;
+    [SerializeField]private TextMeshProUGUI _textMenuAgeButton;
+    [SerializeField]private RectTransform content; 
+    [SerializeField]private MenuManager menuManager;
     private UserData userData;
-
+    #endregion
+    
+    #region Methods
     private void Awake()
     {
         userData = FindObjectOfType<UserData>();
@@ -27,9 +31,14 @@ public class ScrollListGenerator : MonoBehaviour
 
             // Configura el texto del botón con el número
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
-            
-            newButton.onClick.AddListener(()=>userData.setAge(int.Parse(newButton.GetComponentInChildren<TextMeshProUGUI>().text)));
+
+            newButton.onClick.AddListener(() =>
+            {
+                userData.setAge(int.Parse(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
+                _textMenuAgeButton.text = newButton.GetComponentInChildren<TextMeshProUGUI>().text; 
+            });
             newButton.onClick.AddListener(()=>menuManager.selectAgeButton());
         }
     }
+    #endregion
 }
