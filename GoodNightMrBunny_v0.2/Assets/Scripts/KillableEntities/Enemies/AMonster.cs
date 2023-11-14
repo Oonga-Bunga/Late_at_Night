@@ -11,6 +11,7 @@ public abstract class AMonster : AKillableEntity
     [SerializeField] protected float _damage = 2f;
     [SerializeField] protected float _speed = 5f;
     [SerializeField] protected Animator _animator;
+    [SerializeField] protected Rigidbody _rb;
 
     public float Damage => _damage;
 
