@@ -9,7 +9,6 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float _blastRadius = 5f;
     [SerializeField] private float _speed = 5f; // Velocidad de movimiento hacia arriba
     [SerializeField] private GameObject _explosionPrefab = null; // Prefab del efecto de explosión
-    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _enemyLayer;
 
     void Update()
@@ -20,10 +19,7 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (((_groundLayer.value & (1 << collision.gameObject.layer)) > 0) || ((_enemyLayer.value & (1 << collision.gameObject.layer)) > 0)) 
-        {
-            Explode();
-        }
+        Explode();
     }
 
     void Explode()
