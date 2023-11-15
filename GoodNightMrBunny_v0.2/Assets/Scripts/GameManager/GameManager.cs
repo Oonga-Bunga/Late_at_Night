@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,7 +30,8 @@ public class SceneData
 {
     public List<Object> SceneObjects;
     public List<MyVector3> SwitchNodes;
-    public List<MyVector3> CatNodes;
+    public List<MyVector3> ZanybellNodes;
+    public List<MyVector3> EvilBunnyNodes;
 }
 
 public class GameManager : MonoBehaviour
@@ -39,6 +41,11 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     public static GameManager Instance => _instance;
+
+    //------------------------------------------------------
+    [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private TextMeshProUGUI _loadingText;
+    //------------------------------------------------------
 
     // Interruptores
     private int _totalSwitches = 0;
@@ -107,8 +114,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
+
+
+
         // Inicialización de valores y estados
 
         _currentTime = _maxTime;
@@ -169,6 +179,11 @@ public class GameManager : MonoBehaviour
         _isInGame = true;
     }
 
+    IEnumerator GenerateLevel()
+    {
+        yield return null;
+    }
+
     private void LoadPrefabs()
     {
         foreach (var propPrefab in _prefabsList)
@@ -209,7 +224,7 @@ public class GameManager : MonoBehaviour
             _possibleSwitchLocationList.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
         }
 
-        foreach (var catNode in sceneData.CatNodes)
+        foreach (var catNode in sceneData.ZanybellNodes)
         {
             _catWanderingNodesList.Add(new Vector3(catNode.X, catNode.Y, catNode.Z));
         }
