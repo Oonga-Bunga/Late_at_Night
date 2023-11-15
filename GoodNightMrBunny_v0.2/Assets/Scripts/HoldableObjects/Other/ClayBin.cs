@@ -11,10 +11,8 @@ public class ClayBin : AHoldableObject
 
     [SerializeField] private float _launchForce = 20f;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         if (_instance == null)
         {
             _instance = this;

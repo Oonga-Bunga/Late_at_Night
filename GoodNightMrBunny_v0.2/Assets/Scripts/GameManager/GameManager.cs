@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
 {
     #region Attributes
 
+    private static GameManager _instance;
+
+    public static GameManager Instance => _instance;
+
     // Interruptores
     private int _totalSwitches = 0;
     private int _currentActivatedSwitches = 0;
@@ -90,6 +94,18 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Initialization
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {

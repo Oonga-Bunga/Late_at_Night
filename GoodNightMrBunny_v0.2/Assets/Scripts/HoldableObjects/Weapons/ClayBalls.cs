@@ -18,23 +18,22 @@ public class ClayBalls : AHoldableObject
     [SerializeField] private float _shotForce = 20f;
     [SerializeField] private GameObject[] _handClayBalls;
     
+    public float BaseDamage => _baseDamage;
+
     public int MaxBallNumber => _maxBallNumber;
 
     #endregion
 
     #region Methods
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         if (_instance == null)
         {
             _instance = this;
         }
 
         _holdableObjectType = IPlayerReceiver.HoldableObjectType.ClayBalls;
-        _clayBallPrefab.GetComponent<ClayBallBehaviour>().baseDamage = _baseDamage;
 
         gameObject.SetActive(false);
     }

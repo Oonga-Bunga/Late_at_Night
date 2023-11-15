@@ -8,10 +8,8 @@ public class EmptyWeapon : AHoldableObject
 
     public static EmptyWeapon Instance => _instance;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         if (_instance == null)
         {
             _instance = this;

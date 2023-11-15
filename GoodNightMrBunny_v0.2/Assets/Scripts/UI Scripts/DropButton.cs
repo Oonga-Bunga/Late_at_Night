@@ -10,7 +10,7 @@ public class DropButton : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = PlayerController.Instance;
         player.OnInteractableChanged += ShowButton;
         dropButton = transform.GetChild(0).gameObject;
     }

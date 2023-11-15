@@ -35,10 +35,8 @@ public class Flashlight : AHoldableObject
         get { return _maxCharge; }
     }
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         if (_instance == null)
         {
             _instance = this;

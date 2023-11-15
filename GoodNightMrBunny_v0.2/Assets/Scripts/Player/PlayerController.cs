@@ -108,8 +108,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private Transform _cameraHolder; // Referencia a la cámara principal
 
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
-    private PlayerInputManager _inputManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
-
+    
     #endregion
 
     #endregion
@@ -151,8 +150,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private void Start()
     {
         _pauseManager = PauseManager.Instance;
-        _inputManager = PlayerInputManager.Instance;
-        _inputManager.SetPlayer(this);
     }
 
     #endregion

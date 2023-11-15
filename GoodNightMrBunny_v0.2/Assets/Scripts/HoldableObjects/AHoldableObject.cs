@@ -6,11 +6,13 @@ public class AHoldableObject : MonoBehaviour, IHoldableObject
 {
     protected PlayerController _player;
     [SerializeField] protected GameObject _droppedObject;
-    [SerializeField] public IPlayerReceiver.HoldableObjectType _holdableObjectType;
+    [SerializeField] protected IPlayerReceiver.HoldableObjectType _holdableObjectType;
 
-    protected virtual void Awake()
+    public IPlayerReceiver.HoldableObjectType HoldableObjectType => _holdableObjectType;
+
+    protected virtual void Start()
     {
-        _player = FindObjectOfType<PlayerController>();
+        _player = PlayerController.Instance;
     }
 
     public virtual void Use(IPlayerReceiver.InputType attackInput)

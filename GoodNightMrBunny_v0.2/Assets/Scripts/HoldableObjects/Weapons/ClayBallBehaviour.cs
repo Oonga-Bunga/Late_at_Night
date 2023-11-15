@@ -17,6 +17,7 @@ public class ClayBallBehaviour : MonoBehaviour
 
     public void Initialize(Vector3 direction, float force)
     {
+        baseDamage = ClayBalls.Instance.BaseDamage;
         GetComponent<Rigidbody>().AddForce(direction * force, ForceMode.Impulse);
     }
 

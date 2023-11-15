@@ -10,7 +10,7 @@ public class InteractButton : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = PlayerController.Instance;
         player.OnInteractableChanged += ShowButton;
         interactButton = transform.GetChild(0).gameObject;
     }

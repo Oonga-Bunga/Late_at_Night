@@ -78,7 +78,7 @@ public class FlashlightRechargeStation : AInteractable
     /// </summary>
     protected override void InteractedPressAction()
     {
-        if (_player.CurrentHeldObject._holdableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
+        if (_player.CurrentHeldObject.HoldableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
         {
             if (_hasFlashlight)
             {
