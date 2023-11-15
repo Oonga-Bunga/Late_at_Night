@@ -12,16 +12,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _enemyLayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        // Mueve el objeto hacia arriba a una velocidad constante
+        // Mueve el objeto hacia delante a una velocidad constante
         transform.Translate(Vector3.up * _speed * Time.deltaTime);
     }
 
