@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
+using DG.Tweening;
 
 [RequireComponent(typeof(LineRenderer))]
 public class RocketPlatform : AInteractable, IPlayerReceiver
@@ -17,7 +18,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         RotatingUp
     }
 
-    private RocketPlatformState _state;
+    //private RocketPlatformState _state;
 
     [Header("Rocket Platform Settings")]
 
@@ -40,10 +41,11 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     #region Initialization
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
-        _state = RocketPlatformState.Ready;
+        base.Awake();
+
+        //_state = RocketPlatformState.Ready;
         _lowerArmAnimator = _lowerArm.GetComponent<Animator>();
         _laser.enabled = false;
     }
@@ -55,7 +57,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     protected override void Update()
     {
         base.Update();
-
+        /*
         switch (_state)
         {
             case RocketPlatformState.Mounted:
@@ -105,7 +107,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
                     _canBeInteracted = true;
                 }
                 break;
-        }
+        }*/
     }
 
     #endregion
@@ -115,7 +117,11 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     private void RechargeRocket()
     {
         _rocketPlatformModel.SetActive(true);
-        _lowerArmAnimator.SetTrigger("MoveUp");
+    }
+
+    private void RocketReady()
+    {
+        _canBeInteracted = true;
     }
 
     private bool HasAnimationFinished(string animationName)
@@ -129,20 +135,26 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     private void LaunchRocket()
     {
-        if (_state != RocketPlatformState.Ready) { return; }
-
         _canBeInteracted = false;
-        _state = RocketPlatformState.RotatingDown;
+        //_state = RocketPlatformState.RotatingDown;
         Instantiate(_rocketPrefab, _rocketPlatformModel.transform.position, _rocketPlatformModel.transform.rotation);
         _rocketPlatformModel.SetActive(false);
+
+        Sequence mySequence = DOTween.Sequence();
+
+        mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3));
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(-3, 3));
+        mySequence.Insert(3, _lowerArm.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3).OnComplete(RechargeRocket));
+        mySequence.AppendInterval(_cooldown);
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(3, 3));
+        mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(60f, 0f, 0f)), 3).OnComplete(RocketReady));
     }
 
     protected override void InteractedPressAction()
     {
         _player.AssignMount(this, _mountingPoint);
-        _state = RocketPlatformState.Mounted;
+        //_state = RocketPlatformState.Mounted;
         _canBeInteracted = false;
-        DisableOutlineAndCanvas();
         _laser.enabled = true;
     }
 
@@ -192,8 +204,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
             _player.DisMount();
-            _state = RocketPlatformState.Ready;
-            _canBeInteracted = true;
+            //_state = RocketPlatformState.Ready;
             _laser.enabled = false;
             LaunchRocket();
         }
