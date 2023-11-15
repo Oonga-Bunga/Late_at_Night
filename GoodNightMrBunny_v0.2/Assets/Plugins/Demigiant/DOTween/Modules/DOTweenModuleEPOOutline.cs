@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 ﻿using UnityEngine;
-=======
-using UnityEngine;
->>>>>>> Stashed changes
 
 #if false || EPO_DOTWEEN // MODULE_MARKER
 
