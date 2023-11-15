@@ -48,6 +48,11 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SetPlayer(PlayerController.Instance);
+    }
+
     #endregion
 
     #region Input Actions

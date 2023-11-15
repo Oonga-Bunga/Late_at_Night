@@ -9,7 +9,7 @@ public class FlashlightRechargeStation : AInteractable
     [SerializeField, Range(0.0f, 1.0f)] private float _rechargeRate = 0.1f; // Velocidad de recarga
     [SerializeField, Range(0.0f, 1.0f)] private float _drainRate = 0.1f; // Velocidad de recarga
     [SerializeField] private float _drainDuration = 10f; // Velocidad de recarga
-    private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
+    [SerializeField] private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
     private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna
     private float _drainAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna

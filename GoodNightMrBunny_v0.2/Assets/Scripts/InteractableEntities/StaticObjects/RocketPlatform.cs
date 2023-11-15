@@ -20,8 +20,6 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     [SerializeField] private GameObject _mountingPoint = null;
     [SerializeField] private GameObject _rocketPlatformModel = null;
     [SerializeField] private GameObject _rocketPrefab = null;
-    [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private LayerMask _enemyLayer;
 
     [SerializeField] private MeshRenderer _laser;
 
