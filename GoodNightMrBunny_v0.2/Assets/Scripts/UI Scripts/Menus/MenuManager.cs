@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas optionsMenu;
     [SerializeField] private Canvas loginMenu;
     [SerializeField] private Canvas selectLevelMenu;
+    [SerializeField] private TextMeshProUGUI _optionsTabText;
 
     [SerializeField] private GameObject loginButtons;
     [SerializeField] private GameObject loginAgeScrollList;
@@ -105,6 +107,15 @@ public class MenuManager : MonoBehaviour
 
         // Actualiza el índice actual.
         _currentTabIndex = index;
+    }
+
+    /// <summary>
+    /// Cambia el nombre del tab en actual del menu de opciones
+    /// </summary>
+    /// <param name="tabName"></param>
+    public void SetTabsText(string tabName)
+    {
+        _optionsTabText.text = tabName;
     }
 
     /// <summary>
