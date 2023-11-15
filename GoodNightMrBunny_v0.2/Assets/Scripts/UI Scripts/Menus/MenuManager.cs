@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
     [SerializeField] private Canvas loginMenu;
+    [SerializeField] private Canvas selectLevelMenu;
+
     [SerializeField] private GameObject loginButtons;
     [SerializeField] private GameObject loginAgeScrollList;
     [SerializeField] private AudioSource _clickSound;
@@ -36,6 +38,7 @@ public class MenuManager : MonoBehaviour
         mainMenu.gameObject.SetActive(false);
         optionsMenu.gameObject.SetActive(false);
         loginAgeScrollList.SetActive(false);
+        selectLevelMenu.gameObject.SetActive(false);
 
         HidePanels();
         ShowTab(_currentTabIndex);
@@ -58,9 +61,11 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// Cambia a la escena de juego
     /// </summary>
-    public void PressPlayButton()
+    public void openSelectLevelMenu()
     {
-        SceneManager.LoadScene("LevelScene");
+        selectLevelMenu.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(false);
+        optionsMenu.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -83,6 +88,7 @@ public class MenuManager : MonoBehaviour
         mainMenu.gameObject.SetActive(true);
         optionsMenu.gameObject.SetActive(false);
         loginMenu.gameObject.SetActive(false);
+        selectLevelMenu.gameObject.SetActive(false);
     }
     
     /// <summary>
@@ -118,6 +124,14 @@ public class MenuManager : MonoBehaviour
     public void openUrl(string urlLink)
     {
         Application.OpenURL(urlLink);
+    }
+
+    /// <summary>
+    /// Abre la escena del menú seleccionado
+    /// </summary>
+    public void selectLevel(string levelRoute)
+    {
+        SceneManager.LoadScene(levelRoute);
     }
 
     /// <summary>
