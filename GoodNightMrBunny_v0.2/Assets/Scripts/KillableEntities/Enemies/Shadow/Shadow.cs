@@ -25,6 +25,7 @@ namespace Shadow
         [SerializeField] private float _obstacleDetectionDistance = 20;
         [SerializeField] private float _rotationalDamp = 0.5f;
         [SerializeField] private float _rotationSpeed = 10f;
+        private bool _isHittingAWall = false;
 
         [SerializeField] private Transform _actualCenter;
         [SerializeField] private LayerMask _groundLayer;
@@ -138,8 +139,8 @@ namespace Shadow
             Vector3 left = _actualCenter.position - transform.right * _rayOffset;
             Vector3 right = _actualCenter.position + transform.right * _rayOffset;
 
-            //Debug.DrawRay(left, transform.forward * _obstacleDetectionDistance, Color.yellow);
-            //Debug.DrawRay(right, transform.forward * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(left, transform.forward * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(right, transform.forward * _obstacleDetectionDistance, Color.yellow);
 
             CapsuleCollider collider = GetComponent<CapsuleCollider>();
             Vector3 p1 = transform.position + Vector3.up * (collider.radius);
@@ -172,6 +173,7 @@ namespace Shadow
             }
             else
             {
+                _isHittingAWall = true;
                 _rb.velocity += transform.up * _currentSpeed;
             }
 
@@ -197,9 +199,9 @@ namespace Shadow
             Vector3 down = _actualCenter.position - transform.up * _rayOffset * 2;
             Vector3 upward = _actualCenter.position + transform.forward * _rayOffset * 2;
 
-            //Debug.DrawRay(up, Vector3.Normalize(transform.forward + transform.up) * _obstacleDetectionDistance, Color.yellow);
-            //Debug.DrawRay(down, Vector3.Normalize(transform.forward - transform.up) * _obstacleDetectionDistance, Color.yellow);
-            //Debug.DrawRay(upward, transform.up * 1000, Color.yellow);
+            Debug.DrawRay(up, Vector3.Normalize(transform.forward + transform.up) * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(down, Vector3.Normalize(transform.forward - transform.up) * _obstacleDetectionDistance, Color.yellow);
+            Debug.DrawRay(upward, transform.up * 1000, Color.yellow);
 
             if (_target.position.y > transform.position.y)
             {
@@ -244,28 +246,44 @@ namespace Shadow
                 {
                     _rb.velocity += transform.up * _walkingSpeed;
                 }
+                else if (_target.position.y > transform.position.y && !_isHittingAWall)
+                {
+                    if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                    {
+                        _rb.velocity += transform.up * _walkingSpeed;
+                    }
+                }
             }
-            else if (Physics.Raycast(up, Vector3.Normalize(transform.forward + transform.up), out hit, _obstacleDetectionDistance, _groundLayer))
+            else if (Physics.Raycast(up, Vector3.Normalize(transform.forward + transform.up), out hit2, _obstacleDetectionDistance, _groundLayer))
             {
-                if (hit.distance < _obstacleDetectionDistance * 0.8)
+                if (hit2.distance < _obstacleDetectionDistance * 0.8)
                 {
                     _rb.velocity -= transform.up * _walkingSpeed;
                 }
+                else if (_target.position.y < transform.position.y && !_isHittingAWall)
+                {
+                    if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                    {
+                        _rb.velocity -= transform.up * _walkingSpeed;
+                    }
+                }
             }
-            else if (_target.position.y < transform.position.y)
+            else if (_target.position.y < transform.position.y && !_isHittingAWall)
             {
                 if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
                 {
                     _rb.velocity -= transform.up * _walkingSpeed;
                 }
             }
-            else if (_target.position.y > transform.position.y)
+            else if (_target.position.y > transform.position.y && !_isHittingAWall)
             {
                 if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
                 {
                     _rb.velocity += transform.up * _walkingSpeed;
                 }
             }
+
+            _isHittingAWall = false;
         }
 
         private void CalculateSteeringAvoidance()

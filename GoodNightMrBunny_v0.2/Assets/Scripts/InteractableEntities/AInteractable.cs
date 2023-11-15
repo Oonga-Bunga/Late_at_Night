@@ -13,8 +13,8 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     // El siguiente grupo de atributos solo sirve para AInteractable de tipo Hold o PressAndHold
     protected float _currentHoldTime = 0f; // Tiempo que lleva el jugador presionando el bot�n de interactuar con este objeto
-    [SerializeField] protected float _holdDuration; // Tiempo que debe presionarse el bot�n de interactuar para llevar a cabo la acci�n de este objeto
-    [SerializeField] protected float _pressBuffer; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
+    [SerializeField] protected float _holdDuration = 3f; // Tiempo que debe presionarse el bot�n de interactuar para llevar a cabo la acci�n de este objeto
+    [SerializeField] protected float _pressBuffer = 0.2f; // Tiempo de pulsado a partir del cual se considera como hold en vez de press
     protected bool _isBeingInteracted = false; // Si el objeto est� siendo interactuado por el jugador
     
     protected bool _canBeInteracted = true; // Si el objeto puede ser interactuado
@@ -33,11 +33,16 @@ public class AInteractable : MonoBehaviour, IInteractable
 
     #region Initialization
 
+    protected virtual void Awake()
+    {
+        _promptCanvas.enabled = false;
+        _radialBar.fillAmount = 0f;
+    }
+
     protected virtual void Start()
     {
         _player = PlayerController.Instance;
-        _promptCanvas.enabled = false;
-        _radialBar.fillAmount = 0f;
+        _pauseManager = PauseManager.Instance;
     }
 
     #endregion
@@ -51,6 +56,8 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     protected virtual void Update()
     {
+        if (_pauseManager.isPaused) return;
+
         if (_isBeingInteracted)
         {
             _currentHoldTime += Time.deltaTime;
@@ -83,12 +90,12 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// <param name="interactInput"></param>
     public virtual void Interacted(IPlayerReceiver.InputType interactInput)
     {
-        if (interactInput == IPlayerReceiver.InputType.Down)
+        if (_canBeInteracted)
         {
-            // Si el objeto es de tipo Press ejecuta InteractedPressAction, sino _isBeingInteracted pasa a ser true
-
-            if (_canBeInteracted)
+            if (interactInput == IPlayerReceiver.InputType.Down)
             {
+                // Si el objeto es de tipo Press ejecuta InteractedPressAction, sino _isBeingInteracted pasa a ser true
+
                 if (!(_interactType == IInteractable.InteractType.Press))
                 {
                     _isBeingInteracted = true;
@@ -98,18 +105,18 @@ public class AInteractable : MonoBehaviour, IInteractable
                     InteractedPressAction();
                 }
             }
-        }
-        else
-        {
-            // Si el objeto es de tipo PressAndHold y la duraci�n de la pulsaci�n ha sido muy corta se ejecuta InteractedPressAction
-
-            if (_interactType == IInteractable.InteractType.PressAndHold && _currentHoldTime < _pressBuffer && _isBeingInteracted)
+            else
             {
-                InteractedPressAction();
-            }
+                // Si el objeto es de tipo PressAndHold y la duraci�n de la pulsaci�n ha sido muy corta se ejecuta InteractedPressAction
 
-            _isBeingInteracted = false;
-            _currentHoldTime = 0;
+                if (_interactType == IInteractable.InteractType.PressAndHold && _currentHoldTime < _pressBuffer && _isBeingInteracted)
+                {
+                    InteractedPressAction();
+                }
+
+                _isBeingInteracted = false;
+                _currentHoldTime = 0;
+            }
         }
     }
 

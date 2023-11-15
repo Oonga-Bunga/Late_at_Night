@@ -28,10 +28,17 @@ public class FlashlightRechargeStation : AInteractable
 
     public bool IsDrained => _isDrained;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _flashlightModel.SetActive(_hasFlashlight);
+    }
+
     protected override void Start()
     {
         base.Start();
-        _flashlightModel.SetActive(_hasFlashlight);
+
         _rechargeAmount = Flashlight.Instance.MaxCharge * _rechargeRate;
         _drainAmount = Flashlight.Instance.MaxCharge * _drainRate;
         _currentCharge = Flashlight.Instance.MaxCharge;

@@ -9,8 +9,8 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
 
     [Header("AKillableEntity Settings")]
 
-    [SerializeField] protected float _maxHealth;
-    protected float _currentHealth;
+    [SerializeField] protected float _maxHealth = 10f;
+    protected float _currentHealth = 0f;
     protected Collider _hitbox;
     public EventHandler<float> HealthChanged;
 

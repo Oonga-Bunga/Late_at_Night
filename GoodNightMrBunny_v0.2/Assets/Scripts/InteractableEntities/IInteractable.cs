@@ -13,4 +13,5 @@ public interface IInteractable
     public void PlayerExitedRange();
     public void EnableOutlineAndCanvas();
     public void DisableOutlineAndCanvas();
+    public void Initialize(float value);
 }
