@@ -19,6 +19,7 @@ public class Flashlight : AHoldableObject
     //Se multiplica al time.fixedDeltaTime para controlar el tiempo de descarga de la linterna
     [SerializeField] private float _dischargeMultiplier = 5f; 
     [SerializeField] private Light _spotlight;
+    [SerializeField] private float _flashlightIntensity = 100f;
     private bool _lightOn = false;
     private float _currentCharge;
 
@@ -54,6 +55,7 @@ public class Flashlight : AHoldableObject
         _lightOn = false;
         _spotlight.enabled = false;
         _currentCharge = charge;
+        _spotlight.intensity = _flashlightIntensity;
     }
 
     /// <summary>
@@ -97,9 +99,9 @@ public class Flashlight : AHoldableObject
         }
 
         //Parpadeo de la linterna
-        if (_currentCharge < 8)
+        if (_currentCharge < 12)
         {
-            _spotlight.intensity = (int)_currentCharge % 2 == 0 ? 1f : 0f;
+            _spotlight.intensity = (int)_currentCharge % 2 == 0 ? _flashlightIntensity : 0f;
         }
     }
 
