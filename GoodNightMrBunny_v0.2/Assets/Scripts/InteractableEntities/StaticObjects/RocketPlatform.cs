@@ -143,10 +143,17 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         Sequence mySequence = DOTween.Sequence();
 
         mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3));
+<<<<<<< Updated upstream
         mySequence.Append(_lowerArm.transform.DOLocalMoveY(-3, 3));
         mySequence.Insert(3, _lowerArm.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3).OnComplete(RechargeRocket));
         mySequence.AppendInterval(_cooldown);
         mySequence.Append(_lowerArm.transform.DOLocalMoveY(3, 3));
+=======
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(-5, 3));
+        mySequence.Insert(3, _lowerArm.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3).OnComplete(RechargeRocket));
+        mySequence.AppendInterval(_cooldown);
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(5, 3));
+>>>>>>> Stashed changes
         mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(60f, 0f, 0f)), 3).OnComplete(RocketReady));
     }
 

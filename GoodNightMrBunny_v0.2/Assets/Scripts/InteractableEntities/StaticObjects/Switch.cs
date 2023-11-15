@@ -35,15 +35,7 @@ public class Switch : AInteractable
 
     protected override void InteractedHoldAction()
     {
-        if (_isOn)
-        {
-            TurnOff();
-        }
-        else
-        {
-            TurnOn();
-        }
-        
+        TurnOn();
     }
 
     private void TurnOn()
