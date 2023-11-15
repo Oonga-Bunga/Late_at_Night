@@ -791,6 +791,7 @@ MonoBehaviour:
   _baseDamage: 5
   _dischargeMultiplier: 5
   _spotlight: {fileID: 6054413384752437682}
+  _flashlightIntensity: 100
 --- !u!1 &5989100927109852399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1691,7 @@ Transform:
   - {fileID: 4531434369350564370}
   - {fileID: 5384688677823252723}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7333337456494456720
 MonoBehaviour:
@@ -1855,7 +1856,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3d3b998a0ff661d468e46993f6ae9930, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 75e8cf6fe70c8f1489d198fed7ca8116, type: 2}
+      objectReference: {fileID: 2100000, guid: 2f7cf9508d31dcc4784ef8e39cb62748, type: 2}
     - target: {fileID: 919132149155446097, guid: 3d3b998a0ff661d468e46993f6ae9930, type: 3}
       propertyPath: m_Name
       value: ModelosInteractuablesLinternaV3
@@ -1938,6 +1939,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f7cf9508d31dcc4784ef8e39cb62748, type: 2}
     - target: {fileID: 919132149155446097, guid: c5c4c8dd42cac36409734034611cd882, type: 3}
       propertyPath: m_Name
       value: ModelosInteractuablesBotePlastiV1_2
