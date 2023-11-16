@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UserData : MonoBehaviour
 {
     #region Atributtes
+
+    [SerializeField] private GameObject _startButton;
     
-    public string username;
-    public string gender;
-    public int age;
+    private string _username;
+    private string _gender;
+    private int _age;
     
     #endregion
 
@@ -18,6 +21,7 @@ public class UserData : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        _startButton.SetActive(false);
     }
 
     /// <summary>
@@ -26,7 +30,8 @@ public class UserData : MonoBehaviour
     /// <param name="input">nombre de usuario nuevo</param>
     public void setUsername(TextMeshProUGUI input)
     {
-        username = input.text;
+        _username = input.text;
+        CanStartGame();
     }
 
     /// <summary>
@@ -35,7 +40,8 @@ public class UserData : MonoBehaviour
     /// <param name="selectedGender">género del usuario</param>
     public void setGender(string selectedGender)
     {
-        gender = selectedGender;
+        _gender = selectedGender;
+        CanStartGame();
     }
 
     /// <summary>
@@ -44,7 +50,17 @@ public class UserData : MonoBehaviour
     /// <param name="selectedAge">Edad nueva a actualizar</param>
     public void setAge(int selectedAge)
     {
-        age = selectedAge;
+        _age = selectedAge;
+        CanStartGame();
+    }
+
+    public void CanStartGame()
+    {
+        if (_username != null && _username.Trim() != "" && _gender != null && _age != 0)
+        {
+            //ActivarBoton
+            _startButton.SetActive(true);
+        }
     }
     #endregion
 }

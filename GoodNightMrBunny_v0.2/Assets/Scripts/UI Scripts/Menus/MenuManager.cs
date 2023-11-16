@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
     #region Attributes
     [SerializeField] private Button[] tabButtons;
     [SerializeField] private GameObject[] tabPanels;
+    [SerializeField] private GameObject[] _mobileGUI;
+    [SerializeField] private GameObject[] _computerGUI;
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
@@ -43,6 +45,7 @@ public class MenuManager : MonoBehaviour
         loginAgeScrollList.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
 
+        ShowDispositiveElements();
         HidePanels();
         ShowTab(_currentTabIndex);
 
@@ -180,6 +183,27 @@ public class MenuManager : MonoBehaviour
     public void CloseApplication()
     {
         Application.Quit();
+    }
+
+    /// <summary>
+    /// Muestra los elementos del dispositivo con el que se está jugando
+    /// </summary>
+    public void ShowDispositiveElements()
+    {
+        if (!Application.isMobilePlatform)
+        {
+            foreach (var mobileElement in _mobileGUI)
+            {
+                mobileElement.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (var computerElemet in _computerGUI)
+            {
+                computerElemet.SetActive(false);
+            }
+        }
     }
 
     #endregion
