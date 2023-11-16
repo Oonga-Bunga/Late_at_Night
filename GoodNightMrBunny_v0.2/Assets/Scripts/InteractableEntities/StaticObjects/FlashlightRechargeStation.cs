@@ -51,7 +51,7 @@ public class FlashlightRechargeStation : AInteractable
     {
         base.Update();
 
-        if (_isDrained) { return; }
+        if (_isDrained) return;
 
         if (_isBeingAttacked)
         {

@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UIElements;
 using DG.Tweening;
 
-[RequireComponent(typeof(LineRenderer))]
 public class RocketPlatform : AInteractable, IPlayerReceiver
 {
     #region Attributes

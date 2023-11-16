@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
-
+using System.Linq;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [System.Serializable]
 public class MyVector3
@@ -47,7 +48,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen;
     [SerializeField] private TextMeshProUGUI _loadingText;
 
+    [SerializeField] private bool _generateJson;
+
     [SerializeField] private TextAsset _jsonFile;
+    [SerializeField] private GameObject _sceneHolder;
     [SerializeField] private List<GameObject> _prefabsList;
     private Dictionary<string, GameObject> _prefabDictionary = new Dictionary<string, GameObject>();
 
@@ -65,49 +69,42 @@ public class GameManager : MonoBehaviour
     public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
 
     [SerializeField] private GameObject _playerPrefab;
-    [SerializeField] private Transform _playerSpawnPoint;
+    private Transform _playerSpawnPoint;
 
     [SerializeField] private GameObject _mobileControls;
     [SerializeField] private TextMeshProUGUI _winLoseText;
     [SerializeField] private float _maxTime = 60f;
     private float _currentTime;
+
+    private PauseManager _pauseManager;
+    private bool _isInGame = false;
+    private int _currentActivatedSwitches = 0;
+    [SerializeField] private TextMeshProUGUI _upperText;
+    public EventHandler<float> OnTimeChanged;
+    [SerializeField] private List<GameObject> _groundEnemyList;
+    [SerializeField] private List<GameObject> _flyingEnemyList;
     //------------------------------------------------------
 
     // Interruptores
-    private int _currentActivatedSwitches = 0;
 
     // UI
-    [Header("UI")]
+    //[Header("UI")]
 
-    [SerializeField] private TextMeshProUGUI _upperText;
 
     // Json generation and loading
-    [Header("Json")]
+    //[Header("Json")]
 
-    [SerializeField] private GameObject _sceneHolder;
-
-    [SerializeField] private bool _generateJson;
 
     // Tiempo de supervivencia
-    [Header("Time")]
+    //[Header("Time")]
 
-    public EventHandler<float> OnTimeChanged;
 
     // Spawn de enemigos
-    [Header("Enemies")]
-
-    [SerializeField]  private List<GameObject> _enemyList;
-    [SerializeField]  private float _spawnRate = 15f;
-    private float _enemySpawnCooldown = 0f;
-    [SerializeField] private Transform _enemySpawnPoint;
-
-    private List<Vector3> _catWanderingNodesList = new List<Vector3>();
+    //[Header("Enemies")]
 
     // Otros
-    [Header("Other")]
+    //[Header("Other")]
 
-    [SerializeField] private PauseManager _pauseManager;
-    private bool _isInGame;
 
     #endregion
 
@@ -132,66 +129,6 @@ public class GameManager : MonoBehaviour
 
         // Iniciar la generación del nivel en una corrutina
         StartCoroutine(GenerateLevel());
-
-        return;
-        // Inicialización de valores y estados
-
-        _currentTime = _maxTime;
-        _winLoseText.gameObject.SetActive(false);
-
-        if (_generateJson)
-        {
-            CreateJson();
-        }
-
-        if (Application.isMobilePlatform)
-        {
-            _mobileControls.SetActive(true);
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            _mobileControls.SetActive(false);
-        }
-
-        // Generación de la escena
-        
-        LoadPrefabs();
-        LoadSceneFromJson();
-
-        // Una vez generada hacer cosas con ciertos objetos
-
-        List<Switch> tempSwitchList = new List<Switch>();
-
-        foreach (Switch interruptor in FindObjectsOfType<Switch>())
-        {
-            interruptor.OnTurnedOnOrOff += SwitchChangedState;
-            _totalSwitches++;
-            tempSwitchList.Add(interruptor);
-        }
-
-        _switchListInstance = tempSwitchList;
-
-        List<FlashlightRechargeStation> tempRechargeStationList = new List<FlashlightRechargeStation>();
-
-        foreach (FlashlightRechargeStation rechargeStation in FindObjectsOfType<FlashlightRechargeStation>())
-        {
-            tempRechargeStationList.Add(rechargeStation);
-        }
-
-        _rechargeStationListInstance = tempRechargeStationList;
-
-        Baby baby = FindObjectOfType<Baby>();
-
-        if (baby != null)
-        {
-            baby.HealthChanged += BabyDied;
-        }
-
-        // Empezar nivel
-
-        _isInGame = true;
     }
 
     IEnumerator GenerateLevel()
@@ -208,7 +145,7 @@ public class GameManager : MonoBehaviour
             _loadingText.text = "Json generated";
             Debug.Log("Json generated");
 
-            yield return null;
+            yield break;
         }
 
         //generación de objetos a partir del json
@@ -225,8 +162,8 @@ public class GameManager : MonoBehaviour
 
         //Generar interruptores
 
-        _loadingText.text = "Generating switches";
-        Debug.Log("Generating switches");
+        _loadingText.text = "Instantiating switches";
+        Debug.Log("Instantiating switches");
 
         List<Switch> tempSwitchList = new List<Switch>();
         int nSwitches = Mathf.Min(_switchSpawnLocationsList.Count, _totalSwitches);
@@ -234,7 +171,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < nSwitches; i++)
         {
             int randomPos = UnityEngine.Random.Range(0, _switchSpawnLocationsList.Count);
-            GameObject switchInstance = Instantiate(_switchPrefab, _switchSpawnLocationsList[randomPos], Quaternion.identity);
+            GameObject switchInstance = Instantiate(_switchPrefab, Vector3.zero, Quaternion.identity);
+            switchInstance.transform.SetParent(_sceneHolder.transform);
+            switchInstance.transform.localPosition = _switchSpawnLocationsList[randomPos];
             Switch switchComponent = switchInstance.GetComponent<Switch>();
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
@@ -243,6 +182,11 @@ public class GameManager : MonoBehaviour
         }
 
         _switchListInstance = tempSwitchList;
+
+        //generar nav mesh
+
+        _loadingText.text = "Generating NavMesh";
+        Debug.Log("Generating NavMesh");
 
         //buscar ciertos objetos y añadirlos a las listas
 
@@ -272,16 +216,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("No baby found");
         }
 
-        //instanciar al jugador y comunicárselo al inputmanager
-
-        GameObject playerInstance = Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity);
-        playerInstance.transform.localScale = _playerSpawnPoint.localScale;
-        playerInstance.transform.position = _playerSpawnPoint.position;
-        playerInstance.transform.rotation = Quaternion.Euler(_playerSpawnPoint.rotation.eulerAngles);
-
-        PlayerInputManager.Instance.SetPlayer(playerInstance.GetComponent<PlayerController>());
-
         //detectar si el juego es en movil o pc y modificar lo necesario, como los elementos de la UI
+
+        _loadingText.text = "Checking type of device";
+        Debug.Log("Checking type of device");
 
         if (Application.isMobilePlatform)
         {
@@ -296,18 +234,34 @@ public class GameManager : MonoBehaviour
 
         //inicializar variables del nivel
 
+        _loadingText.text = "Initializing level variables";
+        Debug.Log("Initializing level variables");
+
         _currentTime = _maxTime;
         _winLoseText.gameObject.SetActive(false);
 
+        _pauseManager = PauseManager.Instance;
+
+        //instanciar al jugador
+
+        _loadingText.text = "Instantiating player";
+        Debug.Log("Instantiating player");
+
+        GameObject playerInstance = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.Euler(_playerSpawnPoint.rotation.eulerAngles));
+
         //Desactivar la pantalla de carga y cambiar la main cámara a la del jugador
+
+        _loadingText.text = "Loading finished!";
+        Debug.Log("Loading finished!");
 
         _loadingScreen.SetActive(false);
 
         //iniciar el transcurso del juego
 
+        _isInGame = true;
+
         yield return null;
     }
-
 
     private void CreateJson()
     {
@@ -315,12 +269,13 @@ public class GameManager : MonoBehaviour
         List<MyVector3> switchNodeList = new List<MyVector3>();
         List<MyVector3> zanybellNodeList = new List<MyVector3>();
         List<MyVector3> evilBunnyNodeList = new List<MyVector3>();
+        Object playerSpawnPointData = new Object();
 
-        GameObject[] sceneObjects = GameObject.FindGameObjectsWithTag("SceneObject");
-        GameObject[] switchNodes = GameObject.FindGameObjectsWithTag("SwitchNode");
-        GameObject[] zanybellNodes = GameObject.FindGameObjectsWithTag("ZanybellNode");
-        GameObject[] evilBunnyNodes = GameObject.FindGameObjectsWithTag("EvilBunnyNode");
-        GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawnPoint");
+        GameObject[] sceneObjects = FindChildObjectsWithTag(_sceneHolder, "SceneObject");
+        GameObject[] switchNodes = FindChildObjectsWithTag(_sceneHolder, "SwitchNode");
+        GameObject[] zanybellNodes = FindChildObjectsWithTag(_sceneHolder, "ZanybellNode");
+        GameObject[] evilBunnyNodes = FindChildObjectsWithTag(_sceneHolder, "EvilBunnyNode");
+        GameObject playerSpawnPoint = FindChildObjectsWithTag(_sceneHolder, "PlayerSpawnPoint")[0];
 
         foreach (GameObject sceneObject in sceneObjects)
         {
@@ -368,13 +323,16 @@ public class GameManager : MonoBehaviour
             Rotation = new MyVector3 { X = playerRotation.x, Y = playerRotation.y, Z = playerRotation.z },
             Scale = new MyVector3 { X = playerScale.x, Y = playerScale.y, Z = playerScale.z }
         };
-        sceneObjectList.Add(playerData);
+        playerSpawnPointData = playerData;
 
         // Crear un objeto JSON que contiene las listas de props y objects
         var sceneData = new
         {
             SceneObjects = sceneObjectList,
             SwitchNodes = switchNodeList,
+            ZanybellNodes = zanybellNodeList,
+            EvilBunnyNodes = evilBunnyNodeList,
+            PlayerSpawnPoint = playerSpawnPointData
         };
 
         // Convertir el objeto JSON a una cadena JSON
@@ -384,6 +342,18 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(Application.dataPath + "/Scripts/GameManager/LevelJsons/newSceneData.json", jsonData);
 
         Debug.Log("Datos de la escena guardados como JSON.");
+    }
+
+    private GameObject[] FindChildObjectsWithTag(GameObject parent, string tag)
+    {
+        Transform[] children = parent.GetComponentsInChildren<Transform>(true); // Incluye componentes inactivos
+
+        // Filtra los hijos por la etiqueta
+        GameObject[] childrenWithTag = System.Array.FindAll(children, child => child != parent && child.CompareTag(tag))
+            .Select(child => child.gameObject)
+            .ToArray();
+
+        return childrenWithTag;
     }
 
     private void LoadPrefabs()
@@ -468,36 +438,31 @@ public class GameManager : MonoBehaviour
         _playerSpawnPoint = emptyGameObject.transform;
     }
 
-    private void SearchScene()
-    {
-
-    }
-
     #endregion
 
     #region Update
 
     void Update()
     {
+        if (!_isInGame) return;
+
         if (_pauseManager.isPaused) return;
 
-        if (_isInGame)
+        /*
+        _enemySpawnCooldown += Time.deltaTime;
+
+        if (_enemySpawnCooldown >= _spawnRate)
         {
-            _enemySpawnCooldown += Time.deltaTime;
+            _enemySpawnCooldown = 0f;
+            Instantiate(_enemyList[0], _enemySpawnPoint.position, Quaternion.identity);
+        }
+        */
+        _currentTime -= Time.deltaTime;
+        OnTimeChanged?.Invoke(this, _currentTime);
 
-            if (_enemySpawnCooldown >= _spawnRate)
-            {
-                _enemySpawnCooldown = 0f;
-                Instantiate(_enemyList[0], _enemySpawnPoint.position, Quaternion.identity);
-            }
-
-            _currentTime -= Time.deltaTime;
-            OnTimeChanged?.Invoke(this, _currentTime);
-
-            if (_currentTime < 0)
-            {
-                PlayerWon();
-            }
+        if (_currentTime < 0)
+        {
+            PlayerWon();
         }
     }
 

@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -57,6 +58,8 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        if (_player == null) return;
+
         Vector2 value = _move.action.ReadValue<Vector2>();
         _commands["move"].Execute(value);
     }
@@ -66,6 +69,8 @@ public class PlayerInputManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (_player == null) return;
+
         if (_use.action.ReadValue<float>() == 1f)
         {
             _commands["use"].Execute(IPlayerReceiver.InputType.Hold);
@@ -85,7 +90,7 @@ public class PlayerInputManager : MonoBehaviour
     /// de "move"
     /// </summary>
     /// <param name="player">Referencia al script PlayerController del jugador</param>
-    public void SetPlayer(IPlayerReceiver player)
+    private void SetPlayer(IPlayerReceiver player)
     {
         _commands = new Dictionary<string, ICommand> {
             { "move", new MoveCommand(player) },

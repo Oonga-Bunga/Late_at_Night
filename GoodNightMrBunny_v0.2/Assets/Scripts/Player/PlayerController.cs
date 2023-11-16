@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private AHoldableObject _currentHeldObject; // Object que lleva encima en cada momento
 
     private Rigidbody _rb; // Referencia al rigidbody del jugador
-    private Transform _cameraHolder; // Referencia a la cámara principal
+    [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
 
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
     
@@ -140,7 +140,6 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
 
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = false;
-        _cameraHolder = Camera.main.transform.parent;
 
         _maxCurrentSpeed = _maxWalkingSpeed;
         _currentStamina = _maxStamina;
@@ -150,6 +149,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private void Start()
     {
         _pauseManager = PauseManager.Instance;
+        PlayerInputManager.Instance.Player = this;
     }
 
     #endregion
@@ -451,7 +451,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="mountingPoint">Punto en el que el jugador se situa respecto a la montura</param>
     public void AssignMount(IPlayerReceiver mount, GameObject mountingPoint)
     {
-        PlayerInputManager.Instance.SetPlayer(mount);
+        PlayerInputManager.Instance.Player = mount;
 
         transform.parent = mountingPoint.transform;
         transform.localPosition = Vector3.zero;
@@ -468,7 +468,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     public void DisMount()
     {
-        PlayerInputManager.Instance.SetPlayer(this);
+        PlayerInputManager.Instance.Player = this;
 
         transform.parent = null;
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
