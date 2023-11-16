@@ -21,6 +21,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     [SerializeField] private GameObject _rocketPrefab = null;
 
     [SerializeField] private MeshRenderer _laser;
+    private PauseManager _pauseManager;
 
     #endregion
 
@@ -31,6 +32,13 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
         base.Awake();
 
         _laser.enabled = false;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _pauseManager = PauseManager.Instance;
     }
 
     #endregion
@@ -76,6 +84,8 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     public void Move(Vector2 direction)
     {
+        if (_pauseManager.IsPaused) return;
+
         // Obt�n la rotaci�n actual del punto de rotaci�n como cuaterni�n
         Quaternion currentRotationX = _rotationPoint.transform.rotation;
         Quaternion currentRotationY = _lowerArm.transform.rotation;
@@ -113,6 +123,8 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
+        if (_pauseManager.IsPaused) return;
+
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
             _player.DisMount();

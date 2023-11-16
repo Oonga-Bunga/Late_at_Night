@@ -25,8 +25,6 @@ public class AInteractable : MonoBehaviour, IInteractable
     [SerializeField] protected Canvas _promptCanvas; // Referencia al canvas del button prompt
     [SerializeField] protected Image _radialBar; // Referencia a la barra radial del button prompt
 
-    protected PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
-
     public bool CanBeInteracted => _canBeInteracted;
 
     #endregion
@@ -42,7 +40,6 @@ public class AInteractable : MonoBehaviour, IInteractable
     protected virtual void Start()
     {
         _player = PlayerController.Instance;
-        _pauseManager = PauseManager.Instance;
     }
 
     #endregion
@@ -56,8 +53,6 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     protected virtual void Update()
     {
-        if (_pauseManager.isPaused) return;
-
         if (_isBeingInteracted)
         {
             _currentHoldTime += Time.deltaTime;

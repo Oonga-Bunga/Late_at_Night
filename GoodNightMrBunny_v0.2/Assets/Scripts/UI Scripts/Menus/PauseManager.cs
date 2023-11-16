@@ -11,8 +11,11 @@ public class PauseManager : MonoBehaviour
 
     public static PauseManager Instance => _instance;
 
-    public bool isPaused = false;
-    public TextMeshProUGUI pauseText;
+    [SerializeField] private bool _startsPaused = false;
+    [SerializeField] private bool _isPaused = false;
+    [SerializeField] private TextMeshProUGUI _pauseText;
+
+    public bool IsPaused => _isPaused;
 
     private void Awake()
     {
@@ -21,14 +24,17 @@ public class PauseManager : MonoBehaviour
             _instance = this;
         }
 
-        pauseText.gameObject.SetActive(false);
+        if (_startsPaused)
+        {
+            PauseGame();
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)
         {
-            isPaused = !isPaused;
+            _isPaused = !_isPaused;
             PauseGame();
         }
     }
@@ -36,14 +42,14 @@ public class PauseManager : MonoBehaviour
     /// <summary>
     /// Detiene el tiempo del juego
     /// </summary>
-    private void PauseGame()
+    public void PauseGame()
     {
-        if (isPaused)
+        if (_isPaused)
         {
             //_camera._enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            pauseText.gameObject.SetActive(true);
+            _pauseText.gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
         else
@@ -51,7 +57,7 @@ public class PauseManager : MonoBehaviour
             //_camera._enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            pauseText.gameObject.SetActive(false);
+            _pauseText.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
     }

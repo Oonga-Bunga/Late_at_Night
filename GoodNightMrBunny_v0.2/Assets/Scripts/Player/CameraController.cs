@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_pauseManager.isPaused || !_isLookEnabled) return;
+        if (_pauseManager.IsPaused || !_isLookEnabled) return;
 
         _lookFunction();
     }

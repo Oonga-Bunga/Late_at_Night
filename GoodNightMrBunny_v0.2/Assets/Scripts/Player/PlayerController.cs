@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void FixedUpdate()
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         _rb.AddForce(Physics.gravity * _localGravityScale);
     }
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// </summary>
     private void Update()
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         // Comprobar si el jugador está en el suelo
 
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="direction">Direcci�n de movimiento recibida a partir del input del jugador</param>
     public void Move(Vector2 direction)
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="runInput">Tipo de input, Down, Hold o Up</param>
     public void Run(IPlayerReceiver.InputType runInput)
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         if (runInput != IPlayerReceiver.InputType.Up)
         {
@@ -342,7 +342,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="jumpInput">Tipo de input, Down o Up</param>
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
     public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         _currentHeldObject.Use(useInput);
     }
@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="interactInput">Tipo de input, Down, Hold o Up</param>
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         if (_closestInteractable != null)
         {
@@ -436,7 +436,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     /// <param name="force">Fuerza con la que se suelta el objeto</param>
     public void DropHeldObject()
     {
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);

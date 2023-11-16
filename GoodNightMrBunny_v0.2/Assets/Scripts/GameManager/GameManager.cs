@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefab;
     private Transform _playerSpawnPoint;
 
+    [SerializeField] private Camera _loadingScreenCamera;
+
     [SerializeField] private GameObject _mobileControls;
     [SerializeField] private TextMeshProUGUI _winLoseText;
     [SerializeField] private float _maxTime = 60f;
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour
     public EventHandler<float> OnTimeChanged;
     [SerializeField] private List<GameObject> _groundEnemyList;
     [SerializeField] private List<GameObject> _flyingEnemyList;
+
+    public bool IsInGame => _isInGame;
     //------------------------------------------------------
 
     // Interruptores
@@ -254,10 +258,14 @@ public class GameManager : MonoBehaviour
         _loadingText.text = "Loading finished!";
         Debug.Log("Loading finished!");
 
+        yield return new WaitForSeconds(2);
+
         _loadingScreen.SetActive(false);
+        _loadingScreenCamera.gameObject.SetActive(false);
 
         //iniciar el transcurso del juego
 
+        _pauseManager.PauseGame();
         _isInGame = true;
 
         yield return null;
@@ -446,7 +454,7 @@ public class GameManager : MonoBehaviour
     {
         if (!_isInGame) return;
 
-        if (_pauseManager.isPaused) return;
+        if (_pauseManager.IsPaused) return;
 
         /*
         _enemySpawnCooldown += Time.deltaTime;
