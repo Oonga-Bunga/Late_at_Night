@@ -13,6 +13,10 @@ public class Baby : AKillableEntity
     [SerializeField] private int maxEvilBunnies;
     private int nEvilBunnies = 0;
 
+    [SerializeField] private Transform _pathfindingPoint;
+
+    public Transform PathFindingPoint => _pathfindingPoint;
+
     // Start is called before the first frame update
     protected override void Awake()
     {

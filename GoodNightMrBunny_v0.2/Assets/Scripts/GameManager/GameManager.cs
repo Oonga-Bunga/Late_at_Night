@@ -1,3 +1,4 @@
+using eDmitriyAssets.NavmeshLinksGenerator;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -7,6 +8,7 @@ using System.Linq;
 using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _winLoseText;
     [SerializeField] private float _maxTime = 60f;
     private float _currentTime;
+    [SerializeField] private GameObject _gameUI;
 
     private PauseManager _pauseManager;
     private bool _isInGame = false;
@@ -230,6 +233,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Generating NavMesh");
 
         _sceneHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
+        _sceneHolder.GetComponent<NavMeshLinks_AutoPlacer>().Generate();
+        _sceneHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
 
         #endregion
 
@@ -348,6 +353,7 @@ public class GameManager : MonoBehaviour
 
         #region Start game
 
+        _gameUI.SetActive(true);
         _pauseManager.PauseGame();
         _isInGame = true;
 

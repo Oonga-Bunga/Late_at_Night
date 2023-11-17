@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3444508772418855366}
   - component: {fileID: 6800280293658566836}
   - component: {fileID: 5541350615111256729}
-  - component: {fileID: 8289816838350152907}
+  - component: {fileID: 5137890228065302203}
   m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 57a033cfec1900748ae4af71d4de51f2, type: 3}
---- !u!114 &8289816838350152907
+--- !u!114 &5137890228065302203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,13 +119,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
+  m_OverrideArea: 1
+  m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 1
+  m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!1 &4442346926433434925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1797979947247999490}
+  m_Layer: 0
+  m_Name: PathfindingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1797979947247999490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442346926433434925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2567313342605843182}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4788600386640337827
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +167,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2567313342605843182}
   - component: {fileID: 7153459856478342594}
-  - component: {fileID: 2601702391008876283}
   m_Layer: 0
   m_Name: FlashlightRechargeStation
   m_TagString: SceneObject
@@ -160,6 +190,7 @@ Transform:
   - {fileID: 4359427880426091461}
   - {fileID: 7855160366125066929}
   - {fileID: 6715377648432461701}
+  - {fileID: 1797979947247999490}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -187,28 +218,7 @@ MonoBehaviour:
   _drainDuration: 10
   _hasFlashlight: 1
   _flashlightModel: {fileID: 2571960606942366301}
---- !u!64 &2601702391008876283
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788600386640337827}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 57064236490095703, guid: 6c2177f13e7ad9143a27b3eb1e1335e8, type: 3}
+  _pathfindingPoint: {fileID: 1797979947247999490}
 --- !u!1 &8589912158611132386
 GameObject:
   m_ObjectHideFlags: 0

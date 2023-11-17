@@ -17,6 +17,9 @@ public class FlashlightRechargeStation : AInteractable
     private bool _isBeingAttacked = false;
     private bool _isTaken = false;
     private bool _isDrained = false;
+    [SerializeField] private Transform _pathfindingPoint;
+
+    public Transform PathFindingPoint => _pathfindingPoint;
 
     public bool IsTaken
     {

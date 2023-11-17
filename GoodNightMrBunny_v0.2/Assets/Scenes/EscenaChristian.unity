@@ -1718,6 +1718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 890930687}
   - component: {fileID: 890930686}
+  - component: {fileID: 890930688}
   m_Layer: 0
   m_Name: ----ESCENARIO----
   m_TagString: Untagged
@@ -1746,7 +1747,7 @@ MonoBehaviour:
     m_Bits: 8
   m_UseGeometry: 1
   m_DefaultArea: 0
-  m_GenerateLinks: 1
+  m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -1771,6 +1772,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &890930688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890930685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535f35baca0f8d3439c205394a6f2fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkPrefab: {fileID: 4317947346746682, guid: 7ba11a294e2d3a449a03fe2833a54916, type: 3}
+  tileWidth: 2
+  maxJumpHeight: 100000
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  invertFacingNormal: 0
+  dontAllignYAxis: 0
 --- !u!1 &963542001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,7 +2643,7 @@ MonoBehaviour:
   _loadingScreen: {fileID: 802246190}
   _loadingText: {fileID: 1184058140}
   _generateJson: 0
-  _sceneJsonFile: {fileID: 4900000, guid: 07eea3543a4accc4fa1fc7732c407c32, type: 3}
+  _sceneJsonFile: {fileID: 4900000, guid: b3372d39027bbb44a9a8212b58a203ec, type: 3}
   _enemyWavesJsonFile: {fileID: 4900000, guid: ab00802662dbcb947aa5896c08366781, type: 3}
   _sceneHolder: {fileID: 890930685}
   _prefabsList:
