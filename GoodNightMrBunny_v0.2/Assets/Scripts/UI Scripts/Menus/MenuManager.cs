@@ -15,6 +15,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] tabPanels;
     [SerializeField] private GameObject[] _mobileGUI;
     [SerializeField] private GameObject[] _computerGUI;
+    [SerializeField] private Button[] _selectedButton;
+    [SerializeField] private Sprite[] _buttonsSprites;
+    private int _selectedButtonIndex = -1;
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
@@ -204,6 +207,23 @@ public class MenuManager : MonoBehaviour
                 computerElemet.SetActive(false);
             }
         }
+    }
+
+    //Cambia el sprite del boton seleccionado
+    public void ChangeSelectedButtonSprite(int buttonIndex)
+    {
+        //Sprite seleccionado
+        _selectedButton[buttonIndex].image.sprite = _buttonsSprites[1];
+
+        if (_selectedButtonIndex < 0)
+        {
+            _selectedButtonIndex = buttonIndex;
+            return;
+        }
+        
+        //DeseleccionarAnterior
+        _selectedButton[_selectedButtonIndex].image.sprite = _buttonsSprites[0];
+        _selectedButtonIndex = buttonIndex;
     }
 
     #endregion
