@@ -28,6 +28,16 @@ public class Baby : AKillableEntity
         }
     }
 
+    public override void TakeHit(float damage, IKillableEntity.AttackSource source)
+    {
+        base.TakeHit(damage, source);
+
+        if (_currentHealth == 0) 
+        {
+            Die();
+        }
+    }
+
     public void EvilBunnyGoesUnderBed()
     {
         nEvilBunnies++;
@@ -36,6 +46,12 @@ public class Baby : AKillableEntity
         {
             //activar animación de ataque del bicho gigante
             //cuando termine el jugador pierde
+            Die();
         }
+    }
+
+    public override void Die()
+    {
+        Died?.Invoke(this, true);
     }
 }

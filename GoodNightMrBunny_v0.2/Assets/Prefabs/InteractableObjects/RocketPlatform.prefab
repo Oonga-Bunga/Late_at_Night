@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1648738887758148203}
   - component: {fileID: 3678767235525700832}
   - component: {fileID: 57925418004461884}
+  - component: {fileID: 7028781874412132542}
   m_Layer: 3
   m_Name: PlatformModel
   m_TagString: Untagged
@@ -105,6 +106,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8032511, y: 0.85748786, z: 1.0440493}
   m_Center: {x: -0.0025912286, y: 0.43329233, z: 0.001295519}
+--- !u!114 &7028781874412132542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162558601626672668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &2286542518860496530
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +168,7 @@ GameObject:
   - component: {fileID: 8741063204052862932}
   - component: {fileID: 2240671627953545053}
   - component: {fileID: 8903775079585574139}
+  - component: {fileID: 5825609304585324732}
   m_Layer: 3
   m_Name: LowerArmModel
   m_TagString: Untagged
@@ -243,6 +264,25 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 1.28, z: -0.00000008940697}
+--- !u!114 &5825609304585324732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422050351632158073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &4651136274596131989
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +361,7 @@ GameObject:
   - component: {fileID: 4885290217087587395}
   - component: {fileID: 2818772650432961228}
   - component: {fileID: 3047924595065364721}
+  - component: {fileID: 5564526208612754635}
   m_Layer: 0
   m_Name: UpperArmModel
   m_TagString: Untagged
@@ -437,6 +478,25 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.45
   m_Center: {x: 0.00037157536, y: 0.43, z: -0.0008020997}
+--- !u!114 &5564526208612754635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423873165191554299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5458706109650974535
 GameObject:
   m_ObjectHideFlags: 0

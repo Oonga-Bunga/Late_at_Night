@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +18,7 @@ public class MyVector3
 }
 
 [System.Serializable]
-public class Object
+public class SceneObject
 {
     public string ID;
     public MyVector3 Position;
@@ -28,15 +29,21 @@ public class Object
 [System.Serializable]
 public class SceneData
 {
-    public List<Object> SceneObjects;
+    public List<SceneObject> SceneObjects;
     public List<MyVector3> SwitchNodes;
     public List<MyVector3> ZanybellNodes;
     public List<MyVector3> EvilBunnyNodes;
-    public Object PlayerSpawnPoint;
+    public SceneObject PlayerSpawnPoint;
 }
 
 [System.Serializable]
 public class EnemyWaveData
+{
+    public List<EnemyWave> EnemyWaves;
+}
+
+[System.Serializable]
+public class EnemyWave
 {
     public bool NeedsEnemiesKilled;
     public float TimeDelay;
@@ -83,7 +90,7 @@ public class GameManager : MonoBehaviour
     private static List<FlashlightRechargeStation> _rechargeStationListInstance = new List<FlashlightRechargeStation>();
     public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
 
-    private List<EnemyWaveData> _enemyWaveList = new List<EnemyWaveData>();
+    private List<EnemyWave> _enemyWaveList = new List<EnemyWave>();
     private int _aliveEnemies = 0;
     public static event Action AllEnemiesDefeated;
 
@@ -156,7 +163,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GenerateLevel()
     {
-        //crear json a partir de los objetos de la escena y return si generateJson es true
+        #region Create json
 
         _loadingText.text = "Beggin loading";
         Debug.Log("Beggin loading");
@@ -171,19 +178,27 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
-        //generación de objetos a partir del json
+        #endregion
+
+        #region Load prefabs
 
         _loadingText.text = "Loading prefabs";
         Debug.Log("Loading prefabs");
 
         StartCoroutine(LoadPrefabs());
 
+        #endregion
+
+        #region Load scene
+
         _loadingText.text = "Reading json";
         Debug.Log("Reading json");
 
         StartCoroutine(LoadSceneFromJson());
 
-        //Generar interruptores
+        #endregion
+
+        #region Create switches
 
         _loadingText.text = "Instantiating switches";
         Debug.Log("Instantiating switches");
@@ -207,12 +222,18 @@ public class GameManager : MonoBehaviour
 
         _switchListInstance = tempSwitchList;
 
-        //generar nav mesh
+        #endregion
+
+        #region Create NavMesh
 
         _loadingText.text = "Generating NavMesh";
         Debug.Log("Generating NavMesh");
 
-        //buscar ciertos objetos y añadirlos a las listas
+        _sceneHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        #endregion
+
+        #region Search key objects
 
         _loadingText.text = "Searching flashlight recharge stations";
         Debug.Log("Searching flashlight recharge stations");
@@ -233,14 +254,16 @@ public class GameManager : MonoBehaviour
 
         if (baby != null)
         {
-            baby.HealthChanged += BabyDied;
+            baby.Died += BabyDied;
         }
         else
         {
             Debug.Log("No baby found");
         }
 
-        //detectar si el juego es en movil o pc y modificar lo necesario, como los elementos de la UI
+        #endregion
+
+        #region Detect platform
 
         _loadingText.text = "Checking type of device";
         Debug.Log("Checking type of device");
@@ -256,7 +279,9 @@ public class GameManager : MonoBehaviour
             _mobileControls.SetActive(false);
         }
 
-        //inicializar variables del nivel
+        #endregion
+
+        #region Initialize level variables
 
         _loadingText.text = "Initializing level variables";
         Debug.Log("Initializing level variables");
@@ -266,28 +291,50 @@ public class GameManager : MonoBehaviour
 
         _pauseManager = PauseManager.Instance;
 
-        //almacenar las oleadas de enemigos
+        #endregion
+
+        #region Store enemy waves
 
         _loadingText.text = "Reading enemy waves";
         Debug.Log("Reading enemy waves");
 
-        string jsonString = _enemyWavesJsonFile.text;
+        // Lee el JSON como una cadena
+        string json = _enemyWavesJsonFile.text;
 
-        List<EnemyWaveData> enemyWaves = JsonUtility.FromJson<List<EnemyWaveData>>(jsonString);
+        // Convierte la cadena JSON a objetos EnemyWaveList
+        EnemyWaveData waveList = JsonUtility.FromJson<EnemyWaveData>(json);
 
-        foreach(EnemyWaveData enemyWave in enemyWaves)
+        if (waveList != null && waveList.EnemyWaves != null)
         {
-            _enemyWaveList.Add(enemyWave);
+            // Aquí tienes tu lista de oleadas de enemigos
+            List<EnemyWave> enemyWaves = waveList.EnemyWaves;
+
+            // Puedes iterar sobre las oleadas y hacer lo que necesites con ellas
+            foreach (EnemyWave wave in enemyWaves)
+            {
+                _enemyWaveList.Add(wave);
+            }
+        }
+        else
+        {
+            Debug.LogError("Error parsing JSON or waveList is null.");
         }
 
-        //instanciar al jugador
+        #endregion
+
+        #region Instantiate player
 
         _loadingText.text = "Instantiating player";
         Debug.Log("Instantiating player");
 
-        GameObject playerInstance = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.Euler(_playerSpawnPoint.rotation.eulerAngles));
+        GameObject playerInstance = Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity);
+        playerInstance.transform.SetParent(_sceneHolder.transform);
+        playerInstance.transform.localPosition = _playerSpawnPoint.localPosition;
+        playerInstance.transform.localRotation = _playerSpawnPoint.localRotation;
 
-        //Desactivar la pantalla de carga y cambiar la main cámara a la del jugador
+        #endregion
+
+        #region Disable loading screen and switch camera
 
         _loadingText.text = "Loading finished!";
         Debug.Log("Loading finished!");
@@ -297,19 +344,25 @@ public class GameManager : MonoBehaviour
         _loadingScreen.SetActive(false);
         _loadingScreenCamera.gameObject.SetActive(false);
 
-        //iniciar el transcurso del juego
+        #endregion
+
+        #region Start game
 
         _pauseManager.PauseGame();
         _isInGame = true;
 
-        //iniciar oleadas de enemigos
+        #endregion
+
+        #region Start enemy waves
 
         StartCoroutine(EnemyWavesProcessing());
+
+        #endregion
 
         yield return null;
     }
 
-    private IEnumerator SpawnEnemyWave(EnemyWaveData enemyWave)
+    private IEnumerator SpawnEnemyWave(EnemyWave enemyWave)
     {
         int nZanybell = enemyWave.NZanybell;
         int nEvilBunny = enemyWave.NEvilBunny;
@@ -331,7 +384,6 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < nEnemies; i++)
         {
-            //spawnear con pequeños intervalos
             randomIndex = UnityEngine.Random.Range(0, enemyList.Count);
             EnemyTypes enemy = enemyList[randomIndex];
             GameObject enemyInstance;
@@ -339,14 +391,18 @@ public class GameManager : MonoBehaviour
             {
                 case EnemyTypes.Zanybell:
                     randomSpawn = UnityEngine.Random.Range(0, _zanybellSpawnLocationsList.Count);
-                    enemyInstance = Instantiate(_flyingEnemyList[0], _zanybellSpawnLocationsList[randomSpawn], Quaternion.identity);
+                    enemyInstance = Instantiate(_flyingEnemyList[0], Vector3.zero, Quaternion.identity);
+                    enemyInstance.transform.SetParent(_sceneHolder.transform);
+                    enemyInstance.transform.localPosition = _zanybellSpawnLocationsList[randomSpawn];
                     enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
                     _aliveEnemies++;
                     enemyList.RemoveAt(randomIndex);
                     break;
                 case EnemyTypes.EvilBunny:
                     randomSpawn = UnityEngine.Random.Range(0, _evilBunnySpawnLocationsList.Count);
-                    enemyInstance = Instantiate(_groundEnemyList[0], _evilBunnySpawnLocationsList[randomSpawn], Quaternion.identity);
+                    enemyInstance = Instantiate(_groundEnemyList[0], Vector3.zero, Quaternion.identity);
+                    enemyInstance.transform.SetParent(_sceneHolder.transform);
+                    enemyInstance.transform.localPosition = _evilBunnySpawnLocationsList[randomSpawn];
                     enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
                     _aliveEnemies++;
                     enemyList.RemoveAt(randomIndex);
@@ -361,9 +417,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EnemyWavesProcessing()
     {
-        foreach (EnemyWaveData enemyWave in _enemyWaveList)
+        foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             yield return new WaitForSeconds(enemyWave.TimeDelay);
+
             if (enemyWave.NeedsEnemiesKilled)
             {
                 bool enemiesDefeated = false;
@@ -374,6 +431,7 @@ public class GameManager : MonoBehaviour
 
                 AllEnemiesDefeated -= () => enemiesDefeated = true;
             }
+
             StartCoroutine(SpawnEnemyWave(enemyWave));
         }
 
@@ -392,11 +450,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CreateJson()
     {
-        List<Object> sceneObjectList = new List<Object>();
+        List<SceneObject> sceneObjectList = new List<SceneObject>();
         List<MyVector3> switchNodeList = new List<MyVector3>();
         List<MyVector3> zanybellNodeList = new List<MyVector3>();
         List<MyVector3> evilBunnyNodeList = new List<MyVector3>();
-        Object playerSpawnPointData = new Object();
+        SceneObject playerSpawnPointData = new SceneObject();
 
         GameObject[] sceneObjects = FindChildObjectsWithTag(_sceneHolder, "SceneObject");
         GameObject[] switchNodes = FindChildObjectsWithTag(_sceneHolder, "SwitchNode");
@@ -409,7 +467,7 @@ public class GameManager : MonoBehaviour
             Vector3 position = sceneObject.transform.localPosition;
             Vector3 rotation = sceneObject.transform.localRotation.eulerAngles;
             Vector3 scale = sceneObject.transform.localScale;
-            Object data = new Object
+            SceneObject data = new SceneObject
             {
                 ID = sceneObject.name,
                 Position = new MyVector3 { X = position.x, Y = position.y, Z = position.z },
@@ -440,10 +498,10 @@ public class GameManager : MonoBehaviour
             evilBunnyNodeList.Add(data);
         }
 
-        Vector3 playerPosition = playerSpawnPoint.transform.position;
-        Vector3 playerRotation = playerSpawnPoint.transform.rotation.eulerAngles;
+        Vector3 playerPosition = playerSpawnPoint.transform.localPosition;
+        Vector3 playerRotation = playerSpawnPoint.transform.localRotation.eulerAngles;
         Vector3 playerScale = playerSpawnPoint.transform.localScale;
-        Object playerData = new Object
+        SceneObject playerData = new SceneObject
         {
             ID = playerSpawnPoint.name,
             Position = new MyVector3 { X = playerPosition.x, Y = playerPosition.y, Z = playerPosition.z },
@@ -562,9 +620,10 @@ public class GameManager : MonoBehaviour
         Vector3 playerScale = new Vector3(playerSpawnPointData.Scale.X, playerSpawnPointData.Scale.Y, playerSpawnPointData.Scale.Z);
 
         GameObject emptyGameObject = new GameObject("EmptyGameObject");
+        emptyGameObject.transform.SetParent(_sceneHolder.transform);
         emptyGameObject.transform.localScale = playerScale;
-        emptyGameObject.transform.position = playerPosition;
-        emptyGameObject.transform.rotation = Quaternion.Euler(playerRotation);
+        emptyGameObject.transform.localPosition = playerPosition;
+        emptyGameObject.transform.localRotation = Quaternion.Euler(playerRotation);
 
         _playerSpawnPoint = emptyGameObject.transform;
 
@@ -603,12 +662,9 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void BabyDied(object sender, float babyHealth)
+    private void BabyDied(object sender, bool value)
     {
-        if (babyHealth == 0)
-        {
-            PlayerLost();
-        }
+        PlayerLost();
     }
 
     private void SwitchChangedState(object sender, bool isOn)

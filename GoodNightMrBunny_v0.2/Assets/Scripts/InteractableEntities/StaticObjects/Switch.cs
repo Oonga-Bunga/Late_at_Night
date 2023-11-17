@@ -10,7 +10,7 @@ public class Switch : AInteractable
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     [SerializeField] private Light _light;
     [SerializeField] private float _hitsRequired = 20f;
-    private float _currentHits = 20f;
+    private float _currentHits = 0f;
 
     public bool IsOn => _isOn;
 
@@ -20,17 +20,6 @@ public class Switch : AInteractable
 
         _light.enabled = false;
         _currentHits = _hitsRequired;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        if (_currentHits <= 0)
-        {
-            TurnOff();
-            _currentHits = _hitsRequired;
-        }
     }
 
     protected override void InteractedHoldAction()
@@ -56,6 +45,12 @@ public class Switch : AInteractable
 
     public void TakeHit()
     {
-        _currentHits = Mathf.Max(0, _currentHits - 1);
+        _currentHits = Mathf.Min(_hitsRequired, _currentHits + 1);
+
+        if (_currentHits == _hitsRequired)
+        {
+            TurnOff();
+            _currentHits = 0;
+        }
     }
 }

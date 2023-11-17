@@ -50,16 +50,6 @@ namespace EvilBunny
             _hitbox.enabled = false;
             Died?.Invoke(this, true);
         }
-
-        public void PlayAttackAnimation()
-        {
-            _animator.SetTrigger(_animatorAttack);
-        }
-
-        public void PlayMergeAnimation()
-        {
-            _animator.SetTrigger(_animatorMerge);
-        }
     }
 }
 

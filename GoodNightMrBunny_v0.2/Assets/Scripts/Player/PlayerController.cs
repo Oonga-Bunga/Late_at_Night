@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [Header("Other")]
 
     [SerializeField] private List<AHoldableObject> _holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
-    private AHoldableObject _currentHeldObject; // Object que lleva encima en cada momento
+    private AHoldableObject _currentHeldObject; // SceneObject que lleva encima en cada momento
 
     private Rigidbody _rb; // Referencia al rigidbody del jugador
     [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
