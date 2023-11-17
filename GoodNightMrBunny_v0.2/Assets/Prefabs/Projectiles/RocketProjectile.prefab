@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1737921083058542430}
   - component: {fileID: 954340848918433002}
-  - component: {fileID: 4618536659969744334}
   - component: {fileID: 6999700715437096515}
   m_Layer: 0
   m_Name: RocketProjectile
@@ -54,33 +53,6 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!54 &4618536659969744334
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082339784288179950}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 136
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 119
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!64 &6999700715437096515
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -101,7 +73,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
-  m_CookingOptions: 30
+  m_CookingOptions: -1
   m_Mesh: {fileID: -3184469312120514548, guid: 33c23d6626b99144e9b288e599f0ae41, type: 3}
 --- !u!1001 &206333403825166566
 PrefabInstance:
