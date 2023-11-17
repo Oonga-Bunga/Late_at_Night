@@ -18,6 +18,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button[] _selectedButton;
     [SerializeField] private Sprite[] _buttonsSprites;
     private int _selectedButtonIndex = -1;
+    [SerializeField] private TextMeshProUGUI _canvasQualityText;
+    private String[] _qualityLevels = new[] { "High", "Medium", "Low" };
+    private int _qualityIntLevel = 0;
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
@@ -47,7 +50,9 @@ public class MenuManager : MonoBehaviour
         optionsMenu.gameObject.SetActive(false);
         loginAgeScrollList.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
+        if(FindObjectOfType<UserData>().GetAge() >= 0) OpenMainMenu();
 
+        //Elementos de interfaz
         ShowDispositiveElements();
         HidePanels();
         ShowTab(_currentTabIndex);
@@ -64,6 +69,15 @@ public class MenuManager : MonoBehaviour
         foreach (var button in _buttons)
         {
             button.onClick.AddListener(()=>_clickSound.PlayOneShot(_clickSound.clip));
+        }
+    }
+
+    private void Update()
+    {
+        if (optionsMenu.enabled == false)return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenMainMenu();
         }
     }
 
@@ -174,10 +188,13 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// Cambia el nivel de calidad del videojuego
     /// </summary>
-    /// <param name="qualityIndex">Indice del nivel de calidad a cambiar</param>
-    public void SetQuality(int qualityIndex)
+    /// <param name="arrowDirection">-1 si se pulsa la flecha izquierda y +1 la derecha</param>
+    public void SetQuality(int arrowDirection)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        _qualityIntLevel = (_qualityIntLevel + arrowDirection)%3;
+        if (_qualityIntLevel < 0) _qualityIntLevel = 2;
+        _canvasQualityText.text = _qualityLevels[_qualityIntLevel];
+        QualitySettings.SetQualityLevel(_qualityIntLevel);
     }
 
     /// <summary>
