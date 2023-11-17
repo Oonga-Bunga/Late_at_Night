@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,8 +15,8 @@ public class UserData : MonoBehaviour
     
     private string _username;
     private string _gender;
-    private int _age;
-    
+    private int _age = -1;
+
     #endregion
 
     #region Methods
@@ -22,6 +24,11 @@ public class UserData : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         _startButton.SetActive(false);
+    }
+
+    public int GetAge()
+    {
+        return _age;
     }
 
     /// <summary>
@@ -54,12 +61,21 @@ public class UserData : MonoBehaviour
         CanStartGame();
     }
 
+    /// <summary>
+    /// Comprueba si los datos introducidos en el login son correctos
+    /// </summary>
     public void CanStartGame()
     {
-        if (_username != null && _username.Trim() != "" && _gender != null && _age != 0)
+        if (_username != null && _gender != null && _age > 0)
         {
-            //ActivarBoton
-            _startButton.SetActive(true);
+            if (_username.Any(c => char.IsLetterOrDigit(c)))
+            {
+                _startButton.SetActive(true);
+            }
+        }
+        else
+        {
+            _startButton.SetActive(false);
         }
     }
     #endregion
