@@ -48,6 +48,7 @@ namespace EvilBunny
         {
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
+            Died?.Invoke(this, true);
         }
 
         public void PlayAttackAnimation()

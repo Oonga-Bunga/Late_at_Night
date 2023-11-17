@@ -1,13 +1,12 @@
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
-using Newtonsoft.Json;
-using System.Linq;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 [System.Serializable]
 public class MyVector3
@@ -36,8 +35,23 @@ public class SceneData
     public Object PlayerSpawnPoint;
 }
 
+[System.Serializable]
+public class EnemyWaveData
+{
+    public bool NeedsEnemiesKilled;
+    public float TimeDelay;
+    public int NZanybell;
+    public int NEvilBunny;
+}
+
 public class GameManager : MonoBehaviour
 {
+    public enum EnemyTypes
+    {
+        Zanybell,
+        EvilBunny
+    }
+
     #region Attributes
 
     private static GameManager _instance;
@@ -50,7 +64,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool _generateJson;
 
-    [SerializeField] private TextAsset _jsonFile;
+    [SerializeField] private TextAsset _sceneJsonFile;
+    [SerializeField] private TextAsset _enemyWavesJsonFile;
     [SerializeField] private GameObject _sceneHolder;
     [SerializeField] private List<GameObject> _prefabsList;
     private Dictionary<string, GameObject> _prefabDictionary = new Dictionary<string, GameObject>();
@@ -67,6 +82,10 @@ public class GameManager : MonoBehaviour
 
     private static List<FlashlightRechargeStation> _rechargeStationListInstance = new List<FlashlightRechargeStation>();
     public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
+
+    private List<EnemyWaveData> _enemyWaveList = new List<EnemyWaveData>();
+    private int _aliveEnemies = 0;
+    public static event Action AllEnemiesDefeated;
 
     [SerializeField] private GameObject _playerPrefab;
     private Transform _playerSpawnPoint;
@@ -135,7 +154,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GenerateLevel());
     }
 
-    IEnumerator GenerateLevel()
+    private IEnumerator GenerateLevel()
     {
         //crear json a partir de los objetos de la escena y return si generateJson es true
 
@@ -143,8 +162,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Beggin loading");
 
         if (_generateJson) 
-        { 
-            CreateJson();
+        {
+            StartCoroutine(CreateJson());
 
             _loadingText.text = "Json generated";
             Debug.Log("Json generated");
@@ -157,12 +176,12 @@ public class GameManager : MonoBehaviour
         _loadingText.text = "Loading prefabs";
         Debug.Log("Loading prefabs");
 
-        LoadPrefabs();
+        StartCoroutine(LoadPrefabs());
 
         _loadingText.text = "Reading json";
         Debug.Log("Reading json");
 
-        LoadSceneFromJson();
+        StartCoroutine(LoadSceneFromJson());
 
         //Generar interruptores
 
@@ -171,10 +190,11 @@ public class GameManager : MonoBehaviour
 
         List<Switch> tempSwitchList = new List<Switch>();
         int nSwitches = Mathf.Min(_switchSpawnLocationsList.Count, _totalSwitches);
+        int randomPos;
 
         for (int i = 0; i < nSwitches; i++)
         {
-            int randomPos = UnityEngine.Random.Range(0, _switchSpawnLocationsList.Count);
+            randomPos = UnityEngine.Random.Range(0, _switchSpawnLocationsList.Count);
             GameObject switchInstance = Instantiate(_switchPrefab, Vector3.zero, Quaternion.identity);
             switchInstance.transform.SetParent(_sceneHolder.transform);
             switchInstance.transform.localPosition = _switchSpawnLocationsList[randomPos];
@@ -246,6 +266,20 @@ public class GameManager : MonoBehaviour
 
         _pauseManager = PauseManager.Instance;
 
+        //almacenar las oleadas de enemigos
+
+        _loadingText.text = "Reading enemy waves";
+        Debug.Log("Reading enemy waves");
+
+        string jsonString = _enemyWavesJsonFile.text;
+
+        List<EnemyWaveData> enemyWaves = JsonUtility.FromJson<List<EnemyWaveData>>(jsonString);
+
+        foreach(EnemyWaveData enemyWave in enemyWaves)
+        {
+            _enemyWaveList.Add(enemyWave);
+        }
+
         //instanciar al jugador
 
         _loadingText.text = "Instantiating player";
@@ -268,10 +302,95 @@ public class GameManager : MonoBehaviour
         _pauseManager.PauseGame();
         _isInGame = true;
 
+        //iniciar oleadas de enemigos
+
+        StartCoroutine(EnemyWavesProcessing());
+
         yield return null;
     }
 
-    private void CreateJson()
+    private IEnumerator SpawnEnemyWave(EnemyWaveData enemyWave)
+    {
+        int nZanybell = enemyWave.NZanybell;
+        int nEvilBunny = enemyWave.NEvilBunny;
+
+        List<EnemyTypes> enemyList = new List<EnemyTypes>();
+
+        for (int i = 0; i < nZanybell; i++)
+        {
+            enemyList.Add(EnemyTypes.Zanybell);
+        }
+        for (int i = 0; i < nEvilBunny; i++)
+        {
+            enemyList.Add(EnemyTypes.EvilBunny);
+        }
+
+        int nEnemies = enemyList.Count;
+        int randomIndex;
+        int randomSpawn;
+
+        for (int i = 0; i < nEnemies; i++)
+        {
+            //spawnear con pequeños intervalos
+            randomIndex = UnityEngine.Random.Range(0, enemyList.Count);
+            EnemyTypes enemy = enemyList[randomIndex];
+            GameObject enemyInstance;
+            switch (enemy)
+            {
+                case EnemyTypes.Zanybell:
+                    randomSpawn = UnityEngine.Random.Range(0, _zanybellSpawnLocationsList.Count);
+                    enemyInstance = Instantiate(_flyingEnemyList[0], _zanybellSpawnLocationsList[randomSpawn], Quaternion.identity);
+                    enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
+                    _aliveEnemies++;
+                    enemyList.RemoveAt(randomIndex);
+                    break;
+                case EnemyTypes.EvilBunny:
+                    randomSpawn = UnityEngine.Random.Range(0, _evilBunnySpawnLocationsList.Count);
+                    enemyInstance = Instantiate(_groundEnemyList[0], _evilBunnySpawnLocationsList[randomSpawn], Quaternion.identity);
+                    enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
+                    _aliveEnemies++;
+                    enemyList.RemoveAt(randomIndex);
+                    break;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator EnemyWavesProcessing()
+    {
+        foreach (EnemyWaveData enemyWave in _enemyWaveList)
+        {
+            yield return new WaitForSeconds(enemyWave.TimeDelay);
+            if (enemyWave.NeedsEnemiesKilled)
+            {
+                bool enemiesDefeated = false;
+
+                AllEnemiesDefeated += () => enemiesDefeated = true;
+
+                yield return new WaitUntil(() => enemiesDefeated);
+
+                AllEnemiesDefeated -= () => enemiesDefeated = true;
+            }
+            StartCoroutine(SpawnEnemyWave(enemyWave));
+        }
+
+        yield return null;
+    }
+
+    private void UpdateAliveEnemies(object sender, bool value)
+    {
+        _aliveEnemies--;
+
+        if (_aliveEnemies == 0)
+        {
+            AllEnemiesDefeated?.Invoke();
+        }
+    }
+
+    private IEnumerator CreateJson()
     {
         List<Object> sceneObjectList = new List<Object>();
         List<MyVector3> switchNodeList = new List<MyVector3>();
@@ -350,6 +469,8 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(Application.dataPath + "/Scripts/GameManager/LevelJsons/newSceneData.json", jsonData);
 
         Debug.Log("Datos de la escena guardados como JSON.");
+
+        yield return null;
     }
 
     private GameObject[] FindChildObjectsWithTag(GameObject parent, string tag)
@@ -364,17 +485,19 @@ public class GameManager : MonoBehaviour
         return childrenWithTag;
     }
 
-    private void LoadPrefabs()
+    private IEnumerator LoadPrefabs()
     {
         foreach (var propPrefab in _prefabsList)
         {
             _prefabDictionary[propPrefab.name] = propPrefab;
         }
+
+        yield return null;
     }
 
-    private void LoadSceneFromJson()
+    private IEnumerator LoadSceneFromJson()
     {
-        string jsonString = _jsonFile.text;
+        string jsonString = _sceneJsonFile.text;
 
         SceneData sceneData = JsonUtility.FromJson<SceneData>(jsonString);
 
@@ -444,6 +567,8 @@ public class GameManager : MonoBehaviour
         emptyGameObject.transform.rotation = Quaternion.Euler(playerRotation);
 
         _playerSpawnPoint = emptyGameObject.transform;
+
+        yield return null;
     }
 
     #endregion

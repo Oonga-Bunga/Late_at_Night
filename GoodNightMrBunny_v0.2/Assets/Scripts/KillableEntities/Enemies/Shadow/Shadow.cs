@@ -127,6 +127,7 @@ namespace Shadow
         {
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
+            Died?.Invoke(this, true);
         }
 
         private void Turn()

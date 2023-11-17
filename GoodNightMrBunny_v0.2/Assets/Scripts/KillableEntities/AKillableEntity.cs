@@ -13,6 +13,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     protected float _currentHealth = 0f;
     protected Collider _hitbox;
     public EventHandler<float> HealthChanged;
+    public EventHandler<bool> Died;
 
     public float MaxHealth => _maxHealth;
 
@@ -76,6 +77,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// </summary>
     public virtual void Die()
     {
+        Died?.Invoke(this, true);
         Destroy(gameObject);
     }
 
