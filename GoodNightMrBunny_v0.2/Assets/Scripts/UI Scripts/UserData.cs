@@ -72,6 +72,10 @@ public class UserData : MonoBehaviour
             {
                 _startButton.SetActive(true);
             }
+            else
+            {
+                _startButton.SetActive(false);
+            }
         }
         else
         {
