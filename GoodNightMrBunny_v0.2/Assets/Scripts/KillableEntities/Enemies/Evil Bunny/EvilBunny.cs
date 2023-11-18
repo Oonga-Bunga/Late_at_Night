@@ -46,9 +46,9 @@ namespace EvilBunny
 
         public override void Die()
         {
+            Died?.Invoke(this, true);
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
-            Died?.Invoke(this, true);
         }
     }
 }
