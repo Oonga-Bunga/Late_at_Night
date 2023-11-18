@@ -400,6 +400,8 @@ public class GameManager : MonoBehaviour
         int nEnemies = enemyList.Count;
         int randomIndex;
         int randomSpawn;
+        NavMeshTriangulation navtri = NavMesh.CalculateTriangulation();
+        NavMeshHit hit;
 
         for (int i = 0; i < nEnemies; i++)
         {
@@ -425,6 +427,14 @@ public class GameManager : MonoBehaviour
                     enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
                     _aliveEnemies++;
                     enemyList.RemoveAt(randomIndex);
+
+                    /*
+                    if (true)
+                    {
+                        enemyInstance.GetComponent<NavMeshAgent>().Warp();
+                    }
+                    */
+
                     break;
             }
 

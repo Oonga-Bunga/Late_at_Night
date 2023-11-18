@@ -7417,6 +7417,8 @@ GameObject:
   - component: {fileID: 1273689934}
   - component: {fileID: 1273689933}
   - component: {fileID: 1273689932}
+  - component: {fileID: 1273689936}
+  - component: {fileID: 1273689935}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -7455,7 +7457,7 @@ MonoBehaviour:
   _loadingScreen: {fileID: 802246190}
   _loadingText: {fileID: 1184058140}
   _generateJson: 0
-  _sceneJsonFile: {fileID: 4900000, guid: f5904b60c185af14d8efc72503c3e329, type: 3}
+  _sceneJsonFile: {fileID: 4900000, guid: b3372d39027bbb44a9a8212b58a203ec, type: 3}
   _enemyWavesJsonFile: {fileID: 4900000, guid: ab00802662dbcb947aa5896c08366781, type: 3}
   _sceneHolder: {fileID: 890930685}
   _prefabsList:
@@ -7521,6 +7523,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1273689935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273689931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cff8783674a8ed4aaf988ba937b2a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 010d9feaa8fb60741b2555abd39e498c, type: 2}
+--- !u!114 &1273689936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273689931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b10f8ef9164814a474aa00636d8280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pausePanel: {fileID: 1398357291}
+  _optionsCanvas: {fileID: 31201481}
+  tabButtons:
+  - {fileID: 219343662}
+  - {fileID: 1869629886}
+  - {fileID: 1633232866}
+  - {fileID: 717719792}
+  tabPanels:
+  - {fileID: 2106385563}
+  - {fileID: 178109562}
+  - {fileID: 131788272}
+  - {fileID: 306264388}
+  _optionsTabText: {fileID: 1727449225}
+  _selectedButton:
+  - {fileID: 219343662}
+  - {fileID: 1869629886}
+  - {fileID: 1633232866}
+  - {fileID: 717719792}
+  _buttonsSprites:
+  - {fileID: 21300000, guid: 46ab2b7b10de85840a78e54fa9d7b173, type: 3}
+  - {fileID: 21300000, guid: 2fdc177359137ff4db366d8c8c137c9e, type: 3}
+  _canvasQualityText: {fileID: 1484159277}
 --- !u!1 &1282092718
 GameObject:
   m_ObjectHideFlags: 0
