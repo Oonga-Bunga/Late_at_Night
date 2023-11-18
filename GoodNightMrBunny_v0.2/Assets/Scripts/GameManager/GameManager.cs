@@ -75,6 +75,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextAsset _sceneJsonFile;
     [SerializeField] private TextAsset _enemyWavesJsonFile;
+
+    public TextAsset SceneJsonFile
+    {
+        get { return _sceneJsonFile; }
+        set { _sceneJsonFile = value; }
+    }
+
+    public TextAsset EnemyWavesJsonFile
+    {
+        get { return _enemyWavesJsonFile; }
+        set { _enemyWavesJsonFile = value; }
+    }
+
     [SerializeField] private GameObject _sceneHolder;
     [SerializeField] private List<GameObject> _prefabsList;
     private Dictionary<string, GameObject> _prefabDictionary = new Dictionary<string, GameObject>();
