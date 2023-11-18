@@ -168,12 +168,12 @@ public class MenuManager : MonoBehaviour
 
     public void SetJsonOne(TextAsset jsonAsset)
     {
-        FindObjectOfType<LevelJsons>().SetFirstJason(jsonAsset);
+        FindObjectOfType<LevelJsons>().SceneJsonFile = jsonAsset;
     }
 
     public void SetJsonTwo(TextAsset jsonAsset)
     {
-        FindObjectOfType<LevelJsons>().SetSecondJason(jsonAsset);
+        FindObjectOfType<LevelJsons>().EnemyWavesJsonFile = jsonAsset;
     }
 
     /// <summary>

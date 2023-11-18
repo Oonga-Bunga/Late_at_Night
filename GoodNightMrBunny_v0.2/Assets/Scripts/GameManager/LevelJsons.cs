@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelJsons : MonoBehaviour
 {
-    [SerializeField] private TextAsset _json01;
-    [SerializeField] private TextAsset _json02;
+    [SerializeField] private TextAsset _sceneJsonFile;
+    [SerializeField] private TextAsset _enemyWavesJsonFile;
 
     #region Methods
     void Start()
@@ -13,24 +13,16 @@ public class LevelJsons : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void SetFirstJason(TextAsset json)
+    public TextAsset SceneJsonFile
     {
-        _json01 = json;
+        get { return _sceneJsonFile; }
+        set { _sceneJsonFile = value; }
     }
 
-    public void SetSecondJason(TextAsset json)
+    public TextAsset EnemyWavesJsonFile
     {
-        _json02 = json;
-    }
-    
-    public TextAsset GetFirstJason()
-    {
-        return _json01;
-    }
-
-    public TextAsset GetSecondJason()
-    {
-        return _json02;
+        get { return _enemyWavesJsonFile; }
+        set { _enemyWavesJsonFile = value; }
     }
     #endregion
 }
