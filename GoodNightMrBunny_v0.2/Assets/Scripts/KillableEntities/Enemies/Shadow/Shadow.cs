@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 namespace Shadow
 {
@@ -18,6 +19,8 @@ namespace Shadow
         [SerializeField] private float _stunTime = 5;
         [SerializeField] private float _fleeingBuffer = 1;
         private float _fleeingTime = 0;
+        [SerializeField] private float _switchDirectionCooldown = 2f;
+        private float _switchDirectionTime = 0f;
 
         [Header("Navigation")]
 
@@ -29,7 +32,7 @@ namespace Shadow
 
         [SerializeField] private Transform _actualCenter;
         [SerializeField] private LayerMask _groundLayer;
-        private Transform _target;
+        private Vector3 _target;
 
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorIsFleeing = "IsFleeing";
@@ -38,7 +41,7 @@ namespace Shadow
         private const string _animatorAttack = "Attack";
         private const string _animatorDie = "Die";
 
-        public Transform Target
+        public Vector3 Target
         {
             get { return _target; }
             set { _target = value; }
@@ -50,16 +53,23 @@ namespace Shadow
         {
             base.Awake();
 
-            _target = transform;
+            _target = new Vector3(-9999, -9999, -9999);
         }
 
         private void Update()
         {
-            if (_target != transform)
+            if (_target != new Vector3(-9999, -9999, -9999))
             {
                 _animator.SetBool(_animatorIsWalking, true);
                 _rb.velocity = Vector3.zero;
-                Turn();
+                if (_isAvoiding)
+                {
+                    CalculateSteeringAvoidance();
+                }
+                else
+                {
+                    Turn();
+                }
                 Move();
             }
             else
@@ -68,21 +78,40 @@ namespace Shadow
                 _rb.velocity = Vector3.zero;
             }
 
-            if (_isAvoiding)
-            {
-                CalculateSteeringAvoidance();
-            }
-
             if (_fleeingTime > 0)
             {
                 _fleeingTime = Mathf.Max(0, _fleeingTime - Time.deltaTime);
+                _switchDirectionTime = Mathf.Max(0, _switchDirectionTime - Time.deltaTime);
 
                 if (_fleeingTime == 0)
                 {
+                    _switchDirectionTime = 0;
                     _animator.SetBool(_animatorIsFleeing, false);
                     _currentSpeed = _walkingSpeed;
                 }
+                else if (_switchDirectionTime == 0)
+                {
+                    GenerateRandomTarget();
+                }
             }
+        }
+
+        public void GenerateRandomTarget()
+        {
+            // Generar un ángulo aleatorio en radianes
+            float angle = Random.Range(0f, 2f * Mathf.PI);
+
+            // Calcular las coordenadas x y z del nuevo punto en la circunferencia
+            float newX = transform.position.x + 1000 * Mathf.Cos(angle);
+            float newZ = transform.position.z + 1000 * Mathf.Sin(angle);
+
+            // Mantener la misma posición en el eje y
+            float newY = transform.position.y;
+
+            // Devolver el nuevo punto
+            _target = new Vector3(newX, newY, newZ);
+
+            _switchDirectionTime = _switchDirectionCooldown;
         }
 
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
@@ -184,7 +213,7 @@ namespace Shadow
             }
             else
             {
-                Vector3 pos = _target.position - transform.position;
+                Vector3 pos = _target - transform.position;
                 pos.y = 0;
                 Quaternion rotation = Quaternion.LookRotation(pos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationalDamp * Time.deltaTime);
@@ -204,11 +233,11 @@ namespace Shadow
             Debug.DrawRay(down, Vector3.Normalize(transform.forward - transform.up) * _obstacleDetectionDistance, Color.yellow);
             Debug.DrawRay(upward, transform.up * 1000, Color.yellow);
 
-            if (_target.position.y > transform.position.y)
+            if (_target.y > transform.position.y)
             {
                 if (Physics.Raycast(upward, transform.up, out hit, 1000, _groundLayer))
                 {
-                    if (hit.distance < Mathf.Abs(_target.position.y - transform.position.y))
+                    if (hit.distance < Mathf.Abs(_target.y - transform.position.y))
                     {
                         if (Physics.Raycast(_actualCenter.transform.position, transform.up, out hit2, 1000, _groundLayer))
                         {
@@ -247,9 +276,9 @@ namespace Shadow
                 {
                     _rb.velocity += transform.up * _walkingSpeed;
                 }
-                else if (_target.position.y > transform.position.y && !_isHittingAWall)
+                else if (_target.y > transform.position.y && !_isHittingAWall)
                 {
-                    if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                    if (Mathf.Abs(_target.y - transform.position.y) > 0.1f)
                     {
                         _rb.velocity += transform.up * _walkingSpeed;
                     }
@@ -261,24 +290,24 @@ namespace Shadow
                 {
                     _rb.velocity -= transform.up * _walkingSpeed;
                 }
-                else if (_target.position.y < transform.position.y && !_isHittingAWall)
+                else if (_target.y < transform.position.y && !_isHittingAWall)
                 {
-                    if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                    if (Mathf.Abs(_target.y - transform.position.y) > 0.1f)
                     {
                         _rb.velocity -= transform.up * _walkingSpeed;
                     }
                 }
             }
-            else if (_target.position.y < transform.position.y && !_isHittingAWall)
+            else if (_target.y < transform.position.y && !_isHittingAWall)
             {
-                if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                if (Mathf.Abs(_target.y - transform.position.y) > 0.1f)
                 {
                     _rb.velocity -= transform.up * _walkingSpeed;
                 }
             }
-            else if (_target.position.y > transform.position.y && !_isHittingAWall)
+            else if (_target.y > transform.position.y && !_isHittingAWall)
             {
-                if (Mathf.Abs(_target.position.y - transform.position.y) > 0.1f)
+                if (Mathf.Abs(_target.y - transform.position.y) > 0.1f)
                 {
                     _rb.velocity += transform.up * _walkingSpeed;
                 }
@@ -289,7 +318,41 @@ namespace Shadow
 
         private void CalculateSteeringAvoidance()
         {
+            Vector3 distanceFromPlayerNormalized = (_player.transform.position - transform.position).normalized;
 
+            Vector2 perpendicular = Vector2.Perpendicular(new Vector2(distanceFromPlayerNormalized.x, distanceFromPlayerNormalized.z)).normalized * _walkingSpeed;
+            Vector3 firstPoint = new Vector3(transform.position.x + perpendicular.x, transform.position.y, transform.position.z + perpendicular.y);
+            Vector3 secondPoint = new Vector3(-firstPoint.x, -firstPoint.y, -firstPoint.z);
+
+            float firstDistance = Vector3.Distance(firstPoint, Baby.Instance.transform.position);
+            float secondDistance = Vector3.Distance(secondPoint, Baby.Instance.transform.position);
+            float currentDistance = Vector3.Distance(transform.position, Baby.Instance.transform.position);
+
+            Vector3 final = new Vector3(-9999999, -9999999, -9999999);
+
+            if (firstDistance <= secondDistance && firstDistance < currentDistance)
+            {
+                final = firstPoint;
+            }
+            else if (secondDistance <= firstDistance && secondDistance < currentDistance)
+            {
+                final = secondPoint;
+            }
+
+            if (final.x != -9999999)
+            {
+                Vector3 direction = final - transform.position;
+                direction.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationalDamp * Time.deltaTime);
+            }
+            else
+            {
+                Vector3 pos = _target - transform.position;
+                pos.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(pos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationalDamp * Time.deltaTime);
+            }
         }
     }
 }

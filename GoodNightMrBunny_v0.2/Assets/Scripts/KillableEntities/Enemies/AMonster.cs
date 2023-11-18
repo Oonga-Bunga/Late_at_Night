@@ -15,6 +15,7 @@ public abstract class AMonster : AKillableEntity
     protected float _currentSpeed = 0f;
     [SerializeField] protected Animator _animator;
     protected Rigidbody _rb;
+    protected PlayerController _player;
 
     public float Damage => _damage;
 
@@ -32,6 +33,11 @@ public abstract class AMonster : AKillableEntity
 
         _currentSpeed = _walkingSpeed;
         _rb = GetComponent<Rigidbody>();
+    }
+
+    protected virtual void Start()
+    {
+        _player = PlayerController.Instance;
     }
 
     #endregion

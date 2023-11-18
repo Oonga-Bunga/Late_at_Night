@@ -19,7 +19,7 @@ public class Switch : AInteractable
         base.Awake();
 
         _light.enabled = false;
-        _currentHits = _hitsRequired;
+        _currentHits = 0;
     }
 
     protected override void InteractedHoldAction()
