@@ -1116,7 +1116,39 @@ En el apartado de fuente de ingresos, exploraremos cómo generamos ingresos como
 - **Venta de licencias a colegios:** Consiste en la venta de licencias a los centros educativos, de manera que puedan usar nuestro videojuego en sus clases, además de ofrecerles métricas y resultados de los alumnos. 
 - **Fondos recibidos de inversiones:** Son capital que invierten en nuestra empresa con el objetivo de desarrollar el videojuego, pueden ir desde donaciones hasta ayudas gubernamentales. 
 - **Venta de métricas y datos recopilados:** Consiste en la venta de información de métricas y resultados de tus propias partidas, de manera que puedas analizar tu progreso, puede ir desde venta a personas individuales hasta a organizaciones. 
-15. **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
+
+15. **Análisis MDA <a name ="MDA"></a>**   
+15.1. **Estética** 
+La parte estética de nuestro videojuego dentro del análisis MDA identifica nuestro videojuego dentro de una “diversión” narrativa, sensación y desafío. A continuación, desglosamos estos apartados:
+ 
+Fantasía:  
+La fantasía de 'Good Night Mr. Bunny' juega un papel central en la estética del juego. La historia nos sumerge en el imaginario de un niño y su relación con su querido conejo de peluche, el Sr. Mr. Bunny. A medida que avanzamos en el juego, descubrimos que el niño enfrenta una amenaza en forma de monstruos que emergen de las sombras de su habitación. Esto aporta elemento emocional que motiva al jugador a proteger al niño y su mundo de pesadillas y sentirse parte de él. La conexión entre la trama y la jugabilidad es fundamental para crear una experiencia atractiva y envolvente.   
+
+Sensación:   
+La sensación de 'Good Night Mr. Bunny' está diseñada para sumergir al jugador en una ambientación nocturna e inmersiva. Los gráficos alegres y coloridos, contrastados con la iluminación tenue, contribuyen a la sensación de misterio y tensión. La música y los efectos de sonido están diseñados para influir en las emociones del jugador, reforzando la tensión dentro del juego. La sensación de alerta que rodea al jugador al enfrentarse a los monstruos se intensifica gracias a la música y los efectos de sonido creando un contraste con el aspecto estético que rodea al juego.   
+
+Desafío:   
+El desafío en 'Good Night Mr. Bunny' es otro componente clave de la estética del juego. Controlar a los monstruos y proteger al niño es un desafío que exige estrategia y habilidad. Los jugadores experimentan un constante equilibrio entre el miedo de ser atrapados por los monstruos (o que los monstruos capturen al niño) y la necesidad de cumplir con su misión. Este desafío se convierte en un factor motivador, ya que los jugadores se esfuerzan por superar obstáculos y avanzar por los distintos escenarios, manteniendo la inmersión en la estética de la experiencia nocturna y aterradora del juego.   
+
+15.2. **Mecánicas**   
+Las mecánicas del juego "Good Night Mr. Bunny" se centran en la gestión estratégica de las armas disponibles en el entorno y la toma de decisiones que el jugador debe realizar para defenderse de los monstruos. Estas mecánicas añaden profundidad al juego al ofrecer a los jugadores opciones para abordar los desafíos de manera eficiente.   
+
+Gestión de armas:   
+Una de las mecánicas clave del juego es la gestión de las armas del entorno. El jugador debe tomar decisiones estratégicas sobre cuáles armas utilizar en cada situación. Estas armas incluyen objetos cotidianos de la habitación, como linternas, juguetes o muebles, que pueden ser utilizados para combatir a los monstruos. Cada arma tiene sus propias características y capacidades, lo que requiere que el jugador elija cuidadosamente qué objetos utilizar para defenderse y cuáles reservar para momentos más críticos. Esta mecánica agrega un elemento de planificación y gestión de recursos al juego.   
+
+Interruptores de la habitación:   
+Además de la gestión de armas, el juego presenta una mecánica adicional que permite al jugador encender los interruptores de la habitación. Esta opción proporciona una segunda forma de completar el nivel y lidiar con los monstruos en las sombras.  Los jugadores deben tomar decisiones estratégicas sobre cuándo y cómo utilizar esta mecánica, ya que encender todos los interruptores puede ser una estrategia eficaz o por el contrario puede dejar desprotegido al niño.   
+
+Mecánicas de enemigos:   
+Con respecto a los enemigos, estos tienen distintos tipos de mecánicas generales dependiendo del enemigo. Algunos pueden atacar al jugador para hacerle daño, otros son capaces de interferir con ciertos elementos de la escena para afectar negativamente al jugador, y la mayoría son capaces de dañar al niño. El objetivo del jugador con los enemigos es utilizar las distintas armas y elementos del escenario para evitar que lleven a cabo ciertas acciones negativas y matar a los que puedan morir.   
+
+15.3. **Dinámicas**   
+En las dinámicas del videojuego, gracias a las distintas mecánicas que existen, el jugador podría realizar distintas dinámicas emergentes. Pudiendo jugar al juego de la manera común (aguantar la noche o apagar interruptores para pasar a la siguiente noche), pero también podrían surgir nuevas dinámicas como realizar un speed run del juego y acabarlo en el menor tiempo posible. O incluso intentar “Jugar” con los enemigos, utilizando sus distintas percepciones para que actúen de maneras inesperadas. 
+También podrían intentar “redecorar” la habitación, moviendo todos los objetos que pueda coger de un lado a otro del cuarto en el que estén, llegando a crear formas inesperadas.   
+
+El hecho de que los jugadores tengan dos formas de completar el nivel ya sea sobreviviendo toda la noche o encendiendo los interruptores, añade una dimensión adicional a las mecánicas del juego. Esto permite a los jugadores elegir su enfoque preferido y adaptarse a su estilo de juego. La capacidad de elegir entre diferentes enfoques agrega variedad y rejugabilidad al juego.   
+
+16. **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 
 CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
 CHRISTIAN CAMPOS PAN  Programación   
@@ -1126,7 +1158,7 @@ UMESH MOSTAJO SAEZ  2D, interfaces y texturas
 HECTOR MUÑOZ GÓMEZ  2D y Programación    
 PAULA ROJO DE LA FUENTE  3D y diseño 
 
-16. **Anexos<a name="_page62_x69.00_y577.00"></a>** 
+17. **Anexos<a name="_page62_x69.00_y577.00"></a>** 
 
 VERSION DE UNITY 2022.3.2f1 Cuadro de Referencias
 
