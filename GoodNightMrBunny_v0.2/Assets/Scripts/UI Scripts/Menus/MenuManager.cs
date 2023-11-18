@@ -166,6 +166,16 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(levelRoute);
     }
 
+    public void SetJsonOne(TextAsset jsonAsset)
+    {
+        FindObjectOfType<LevelJsons>().SetFirstJason(jsonAsset);
+    }
+
+    public void SetJsonTwo(TextAsset jsonAsset)
+    {
+        FindObjectOfType<LevelJsons>().SetSecondJason(jsonAsset);
+    }
+
     /// <summary>
     /// Activa o desactiva el ScrollList para seleccionar la edad
     /// </summary>
