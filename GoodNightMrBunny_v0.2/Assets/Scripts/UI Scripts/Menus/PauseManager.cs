@@ -13,7 +13,8 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private bool _startsPaused = false;
     [SerializeField] private bool _isPaused = false;
-    [SerializeField] private TextMeshProUGUI _pauseText;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private Canvas _optionsCanvas;
 
     public bool IsPaused => _isPaused;
 
@@ -32,7 +33,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)
+        if (Input.GetKeyDown(KeyCode.Escape) /*&& GameManager.Instance.IsInGame*/)
         {
             _isPaused = !_isPaused;
             PauseGame();
@@ -49,7 +50,8 @@ public class PauseManager : MonoBehaviour
             //_camera._enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            _pauseText.gameObject.SetActive(true);
+            _pausePanel.gameObject.SetActive(true);
+            _optionsCanvas.gameObject.SetActive(false);
             Time.timeScale = 0f;
         }
         else
@@ -57,7 +59,8 @@ public class PauseManager : MonoBehaviour
             //_camera._enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            _pauseText.gameObject.SetActive(false);
+            _pausePanel.gameObject.SetActive(false);
+            _optionsCanvas.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
     }
