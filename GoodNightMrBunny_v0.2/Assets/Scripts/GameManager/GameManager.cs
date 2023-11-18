@@ -170,9 +170,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Mostrar la pantalla de carga
-        _loadingScreen.SetActive(true);
-
         // Iniciar la generación del nivel en una corrutina
         StartCoroutine(GenerateLevel());
     }
@@ -181,17 +178,20 @@ public class GameManager : MonoBehaviour
     {
         #region Create json
 
-        _loadingText.text = "Beggin loading";
-        Debug.Log("Beggin loading");
-
         if (_generateJson) 
         {
             StartCoroutine(CreateJson());
 
-            _loadingText.text = "Json generated";
             Debug.Log("Json generated");
 
             yield break;
+        }
+        else
+        {
+            _loadingText.text = "Beggin loading";
+            Debug.Log("Beggin loading");
+
+            _loadingScreen.SetActive(true);
         }
 
         #endregion
