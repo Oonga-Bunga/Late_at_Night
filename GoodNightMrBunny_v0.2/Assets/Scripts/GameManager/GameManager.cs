@@ -425,17 +425,20 @@ public class GameManager : MonoBehaviour
     {
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
-            yield return new WaitForSeconds(enemyWave.TimeDelay);
-
             if (enemyWave.NeedsEnemiesKilled)
             {
                 bool enemiesDefeated = false;
 
                 AllEnemiesDefeated += () => enemiesDefeated = true;
 
+                yield return new WaitForSeconds(enemyWave.TimeDelay);
                 yield return new WaitUntil(() => enemiesDefeated);
 
                 AllEnemiesDefeated -= () => enemiesDefeated = true;
+            }
+            else
+            {
+                yield return new WaitForSeconds(enemyWave.TimeDelay);
             }
 
             StartCoroutine(SpawnEnemyWave(enemyWave));
