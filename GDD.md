@@ -1118,7 +1118,7 @@ En el apartado de fuente de ingresos, exploraremos cómo generamos ingresos como
 - **Fondos recibidos de inversiones:** Son capital que invierten en nuestra empresa con el objetivo de desarrollar el videojuego, pueden ir desde donaciones hasta ayudas gubernamentales. 
 - **Venta de métricas y datos recopilados:** Consiste en la venta de información de métricas y resultados de tus propias partidas, de manera que puedas analizar tu progreso, puede ir desde venta a personas individuales hasta a organizaciones. 
 
-15. ** <a name ="MDA">Análisis MDA</a>**   
+15. **Análisis <a name ="MDA"></a> MDA**   
 15.1. **Estética** 
 La parte estética de nuestro videojuego dentro del análisis MDA identifica nuestro videojuego dentro de una “diversión” narrativa, sensación y desafío. A continuación, desglosamos estos apartados:
  
