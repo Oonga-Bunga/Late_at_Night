@@ -714,7 +714,7 @@ public class GameManager : MonoBehaviour
         _isInGame = false;
         _winLoseText.text = "You won!";
         _winLoseText.gameObject.SetActive(true);
-        SceneManager.LoadScene("FinalScene");
+        SceneManager.LoadScene("WinScene");
     }
 
     private void PlayerLost()
@@ -722,7 +722,7 @@ public class GameManager : MonoBehaviour
         _isInGame = false;
         _winLoseText.text = "You lost...";
         _winLoseText.gameObject.SetActive(true);
-        SceneManager.LoadScene("FinalScene");
+        SceneManager.LoadScene("LoseScene");
     }
 
     #endregion
