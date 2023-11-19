@@ -12,6 +12,7 @@ public class Baby : AKillableEntity
 
     [SerializeField] private int _maxEvilBunnies;
     private int _nEvilBunnies = 0;
+    [SerializeField] private Animator _amalgamateAnimator;
 
     [SerializeField] private Transform _zanybellPoint;
     [SerializeField] private Transform _evilBunnyPoint;
@@ -34,6 +35,22 @@ public class Baby : AKillableEntity
         }
     }
 
+    protected void Update()
+    {
+        if (_amalgamateAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            // Obtener el estado actual de la animación
+            AnimatorStateInfo stateInfo = _amalgamateAnimator.GetCurrentAnimatorStateInfo(0);
+
+            // Verificar si la animación ha llegado al final
+            if (stateInfo.normalizedTime >= 1.0f)
+            {
+                // La animación ha llegado al final
+                Die();
+            }
+        }
+    }
+
     public override void TakeHit(float damage, IKillableEntity.AttackSource source)
     {
         base.TakeHit(damage, source);
@@ -47,13 +64,7 @@ public class Baby : AKillableEntity
     public void EvilBunnyGoesUnderBed()
     {
         _nEvilBunnies++;
-        //Actualizar morpher
-        if(_nEvilBunnies >= _maxEvilBunnies)
-        {
-            //activar animación de ataque del bicho gigante
-            //cuando termine el jugador pierde
-            Die();
-        }
+        _amalgamateAnimator.SetTrigger("Grow");
     }
 
     public override void Die()
