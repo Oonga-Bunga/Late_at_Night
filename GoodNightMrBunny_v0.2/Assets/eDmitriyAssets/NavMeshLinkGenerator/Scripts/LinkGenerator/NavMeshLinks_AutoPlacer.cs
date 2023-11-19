@@ -3,9 +3,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
+using UnityEditor.SceneManagement;
 
 
 #if UNITY_EDITOR

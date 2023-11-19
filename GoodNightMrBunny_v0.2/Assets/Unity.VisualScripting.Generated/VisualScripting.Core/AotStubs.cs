@@ -903,19 +903,19 @@ namespace Unity.VisualScripting.Generated.Aot
 	// --------------- Asset Stubs
 	// UnityEngine.GameObject.transform
 	// UnityEngine.Transform.position
-	// Shadow.Shadow.Die
 	// UnityEngine.GameObject.Destroy
+	// Shadow.Shadow.Die
 	// Shadow.Shadow.Target
 	// UnityEngine.Component.gameObject
+	// FlashlightRechargeStation.IsTaken
 	// UnityEngine.Animator.SetBool
 	// Shadow.Shadow.GenerateRandomTarget
 	// UnityEngine.Time.deltaTime
-	// Baby.ZanybellPoint
 	// UnityEngine.Mathf.Max
-	// FlashlightRechargeStation.IsTaken
+	// Baby.ZanybellPoint
 	// FlashlightRechargeStation.PathFindingPoint
-	// FlashlightRechargeStation.StopTheSucc
 	// FlashlightRechargeStation.BegginTheSucc
+	// FlashlightRechargeStation.StopTheSucc
 	// Shadow.Shadow.StartAvoiding
 	// Shadow.Shadow.StopAvoiding
 	// Shadow.Shadow.Damage
@@ -936,13 +936,12 @@ namespace Unity.VisualScripting.Generated.Aot
 	// EvilBunny.EvilBunny.Die
 	// UnityEngine.AI.NavMeshAgent.destination
 	// Baby.EvilBunnyPoint
-	// Baby.EvilBunnyGoesUnderBed
 	// EvilBunny.EvilBunny.Merge
-	// GameManager.SwitchListInstance
+	// Baby.EvilBunnyGoesUnderBed
 	// Switch.IsOn
+	// GameManager.SwitchListInstance
 	// Switch.TakeHit
 	// EvilBunny.EvilBunny.CurrentHealth
-	// --------------- Scene Stubs
 	// --------------- Scene Stubs
 	// --------------- Scene Stubs
 	// --------------- Scene Stubs
@@ -11304,17 +11303,6 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.SetValue(default(global::UnityEngine.Transform), default(global::UnityEngine.Vector3));
 		}
 		
-		// Shadow.Shadow.Die
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void Shadow_Shadow_Die()
-		{
-			global::Shadow.Shadow target = default(global::Shadow.Shadow);
-			target.Die();
-			global::Unity.VisualScripting.ReflectionInvoker optimized = new global::Unity.VisualScripting.ReflectionInvoker(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(default(global::Shadow.Shadow));
-			optimized.Invoke(default(object[]));
-		}
-		
 		// UnityEngine.GameObject.Destroy
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void UnityEngine_GameObject_Destroy()
@@ -11323,6 +11311,17 @@ namespace Unity.VisualScripting.Generated.Aot
 			global::UnityEngine.Object.Destroy(arg0);
 			global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object> optimized = new global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// Shadow.Shadow.Die
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void Shadow_Shadow_Die()
+		{
+			global::Shadow.Shadow target = default(global::Shadow.Shadow);
+			target.Die();
+			global::Unity.VisualScripting.ReflectionInvoker optimized = new global::Unity.VisualScripting.ReflectionInvoker(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::Shadow.Shadow));
 			optimized.Invoke(default(object[]));
 		}
 		
@@ -11346,6 +11345,18 @@ namespace Unity.VisualScripting.Generated.Aot
 			global::UnityEngine.GameObject accessor = target.gameObject;
 			global::Unity.VisualScripting.InstancePropertyAccessor<UnityEngine.Component, UnityEngine.GameObject> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<UnityEngine.Component, UnityEngine.GameObject>(default(global::System.Reflection.PropertyInfo));
 			optimized.GetValue(default(global::UnityEngine.Component));
+		}
+		
+		// FlashlightRechargeStation.IsTaken
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void FlashlightRechargeStation_IsTaken()
+		{
+			global::FlashlightRechargeStation target = default(global::FlashlightRechargeStation);
+			bool accessor = target.IsTaken;
+			target.IsTaken = default(bool);
+			global::Unity.VisualScripting.InstancePropertyAccessor<FlashlightRechargeStation, bool> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<FlashlightRechargeStation, bool>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::FlashlightRechargeStation));
+			optimized.SetValue(default(global::FlashlightRechargeStation), default(bool));
 		}
 		
 		// UnityEngine.Animator.SetBool
@@ -11381,16 +11392,6 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.GetValue(null);
 		}
 		
-		// Baby.ZanybellPoint
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void Baby_ZanybellPoint()
-		{
-			global::Baby target = default(global::Baby);
-			global::UnityEngine.Transform accessor = target.ZanybellPoint;
-			global::Unity.VisualScripting.InstancePropertyAccessor<Baby, UnityEngine.Transform> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<Baby, UnityEngine.Transform>(default(global::System.Reflection.PropertyInfo));
-			optimized.GetValue(default(global::Baby));
-		}
-		
 		// UnityEngine.Mathf.Max
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void UnityEngine_Mathf_Max()
@@ -11403,16 +11404,14 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// FlashlightRechargeStation.IsTaken
+		// Baby.ZanybellPoint
 		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void FlashlightRechargeStation_IsTaken()
+		public static void Baby_ZanybellPoint()
 		{
-			global::FlashlightRechargeStation target = default(global::FlashlightRechargeStation);
-			bool accessor = target.IsTaken;
-			target.IsTaken = default(bool);
-			global::Unity.VisualScripting.InstancePropertyAccessor<FlashlightRechargeStation, bool> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<FlashlightRechargeStation, bool>(default(global::System.Reflection.PropertyInfo));
-			optimized.GetValue(default(global::FlashlightRechargeStation));
-			optimized.SetValue(default(global::FlashlightRechargeStation), default(bool));
+			global::Baby target = default(global::Baby);
+			global::UnityEngine.Transform accessor = target.ZanybellPoint;
+			global::Unity.VisualScripting.InstancePropertyAccessor<Baby, UnityEngine.Transform> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<Baby, UnityEngine.Transform>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::Baby));
 		}
 		
 		// FlashlightRechargeStation.PathFindingPoint
@@ -11425,23 +11424,23 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.GetValue(default(global::FlashlightRechargeStation));
 		}
 		
-		// FlashlightRechargeStation.StopTheSucc
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void FlashlightRechargeStation_StopTheSucc()
-		{
-			global::FlashlightRechargeStation target = default(global::FlashlightRechargeStation);
-			target.StopTheSucc();
-			global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(default(global::FlashlightRechargeStation));
-			optimized.Invoke(default(object[]));
-		}
-		
 		// FlashlightRechargeStation.BegginTheSucc
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void FlashlightRechargeStation_BegginTheSucc()
 		{
 			global::FlashlightRechargeStation target = default(global::FlashlightRechargeStation);
 			target.BegginTheSucc();
+			global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::FlashlightRechargeStation));
+			optimized.Invoke(default(object[]));
+		}
+		
+		// FlashlightRechargeStation.StopTheSucc
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void FlashlightRechargeStation_StopTheSucc()
+		{
+			global::FlashlightRechargeStation target = default(global::FlashlightRechargeStation);
+			target.StopTheSucc();
 			global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<FlashlightRechargeStation>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(default(global::FlashlightRechargeStation));
 			optimized.Invoke(default(object[]));
@@ -11662,17 +11661,6 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.GetValue(default(global::Baby));
 		}
 		
-		// Baby.EvilBunnyGoesUnderBed
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void Baby_EvilBunnyGoesUnderBed()
-		{
-			global::Baby target = default(global::Baby);
-			target.EvilBunnyGoesUnderBed();
-			global::Unity.VisualScripting.InstanceActionInvoker<Baby> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<Baby>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(default(global::Baby));
-			optimized.Invoke(default(object[]));
-		}
-		
 		// EvilBunny.EvilBunny.Merge
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void EvilBunny_EvilBunny_Merge()
@@ -11684,13 +11672,15 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// GameManager.SwitchListInstance
+		// Baby.EvilBunnyGoesUnderBed
 		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void GameManager_SwitchListInstance()
+		public static void Baby_EvilBunnyGoesUnderBed()
 		{
-			global::System.Collections.Generic.List<Switch> accessor = global::GameManager.SwitchListInstance;
-			global::Unity.VisualScripting.StaticPropertyAccessor<System.Collections.Generic.List<Switch>> optimized = new global::Unity.VisualScripting.StaticPropertyAccessor<System.Collections.Generic.List<Switch>>(default(global::System.Reflection.PropertyInfo));
-			optimized.GetValue(null);
+			global::Baby target = default(global::Baby);
+			target.EvilBunnyGoesUnderBed();
+			global::Unity.VisualScripting.InstanceActionInvoker<Baby> optimized = new global::Unity.VisualScripting.InstanceActionInvoker<Baby>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::Baby));
+			optimized.Invoke(default(object[]));
 		}
 		
 		// Switch.IsOn
@@ -11701,6 +11691,15 @@ namespace Unity.VisualScripting.Generated.Aot
 			bool accessor = target.IsOn;
 			global::Unity.VisualScripting.InstancePropertyAccessor<Switch, bool> optimized = new global::Unity.VisualScripting.InstancePropertyAccessor<Switch, bool>(default(global::System.Reflection.PropertyInfo));
 			optimized.GetValue(default(global::Switch));
+		}
+		
+		// GameManager.SwitchListInstance
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void GameManager_SwitchListInstance()
+		{
+			global::System.Collections.Generic.List<Switch> accessor = global::GameManager.SwitchListInstance;
+			global::Unity.VisualScripting.StaticPropertyAccessor<System.Collections.Generic.List<Switch>> optimized = new global::Unity.VisualScripting.StaticPropertyAccessor<System.Collections.Generic.List<Switch>>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(null);
 		}
 		
 		// Switch.TakeHit
