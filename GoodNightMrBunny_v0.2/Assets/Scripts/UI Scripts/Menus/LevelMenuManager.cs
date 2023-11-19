@@ -10,6 +10,8 @@ namespace UI_Scripts.Menus
     {
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private Canvas _optionsCanvas;
+        [SerializeField] private GameObject _instructionPanel;
+        [SerializeField] private GameObject _gameUI;
         
         [SerializeField] private Button[] tabButtons;
         [SerializeField] private GameObject[] tabPanels;
@@ -30,6 +32,34 @@ namespace UI_Scripts.Menus
         {
             _optionsCanvas.gameObject.SetActive(true);
             _pausePanel.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Abre el panel de instrucciones
+        /// </summary>
+        public void OpenInstructionsPanel()
+        {
+            FindObjectOfType<PauseManager>().CanPause = false;
+            _instructionPanel.gameObject.SetActive(true);
+            _optionsCanvas.gameObject.SetActive(false );
+            _gameUI.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+
+        /// <summary>
+        /// Cierra el panel de intrucciones
+        /// </summary>
+        public void CloseInstructionsPanel()
+        {
+            FindObjectOfType<PauseManager>().CanPause = true;
+            _instructionPanel.gameObject.SetActive(false);
+            _optionsCanvas.gameObject.SetActive(false);
+            _gameUI.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
         }
 
         /// <summary>
