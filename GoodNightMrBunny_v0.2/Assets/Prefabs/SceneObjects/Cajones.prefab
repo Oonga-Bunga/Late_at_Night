@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 2001205541478800952}
   - component: {fileID: 5755436220039344378}
   - component: {fileID: 6522419703907927191}
+  - component: {fileID: 6995292337378538287}
   m_Layer: 3
   m_Name: Cajones
   m_TagString: SceneObject
@@ -312,6 +313,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 1.6, z: 10}
   m_Center: {x: -0.51, y: 2.625, z: 0}
+--- !u!114 &6995292337378538287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856164596168775616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 4.71, y: 3, z: 9.67}
+  m_Center: {x: 0.3, y: -2.5, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5269300774954642500
 GameObject:
   m_ObjectHideFlags: 0

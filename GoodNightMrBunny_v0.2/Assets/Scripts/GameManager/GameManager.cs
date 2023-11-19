@@ -366,7 +366,7 @@ public class GameManager : MonoBehaviour
         #region Start game
 
         _gameUI.SetActive(true);
-        _pauseManager.PauseGame();
+        //_pauseManager.PauseGame();
         _isInGame = true;
 
         #endregion
@@ -662,15 +662,6 @@ public class GameManager : MonoBehaviour
 
         if (_pauseManager.IsPaused) return;
 
-        /*
-        _enemySpawnCooldown += Time.deltaTime;
-
-        if (_enemySpawnCooldown >= _spawnRate)
-        {
-            _enemySpawnCooldown = 0f;
-            Instantiate(_enemyList[0], _enemySpawnPoint.position, Quaternion.identity);
-        }
-        */
         _currentTime -= Time.deltaTime;
         OnTimeChanged?.Invoke(this, _currentTime);
 
