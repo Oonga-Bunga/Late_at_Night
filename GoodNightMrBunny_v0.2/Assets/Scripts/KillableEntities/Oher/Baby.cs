@@ -10,8 +10,6 @@ public class Baby : AKillableEntity
 
     public static Baby Instance => _instance;
 
-    [SerializeField] private int _maxEvilBunnies;
-    private int _nEvilBunnies = 0;
     [SerializeField] private Animator _amalgamateAnimator;
 
     [SerializeField] private Transform _zanybellPoint;
@@ -63,7 +61,6 @@ public class Baby : AKillableEntity
 
     public void EvilBunnyGoesUnderBed()
     {
-        _nEvilBunnies++;
         _amalgamateAnimator.SetTrigger("Grow");
     }
 
