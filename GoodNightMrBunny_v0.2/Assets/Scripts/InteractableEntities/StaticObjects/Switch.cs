@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static IInteractable;
 
 public class Switch : AInteractable
 {
     private bool _isOn = false; // Si el interruptor está o no encendido
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
-    [SerializeField] private Light _light;
+    [SerializeField] private GameObject _emissiveObject;
+    [SerializeField] private GameObject _nonEmissiveObject;
     [SerializeField] private float _hitsRequired = 20f;
     private float _currentHits = 0f;
 
@@ -18,7 +18,8 @@ public class Switch : AInteractable
     {
         base.Awake();
 
-        _light.enabled = false;
+        _emissiveObject.SetActive(false);
+        _nonEmissiveObject.SetActive(true);
         _currentHits = 0;
     }
 
@@ -32,7 +33,8 @@ public class Switch : AInteractable
         _isOn = true;
         OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = false;
-        _light.enabled = true;
+        _emissiveObject.SetActive(true);
+        _nonEmissiveObject.SetActive(false);
     }
 
     private void TurnOff()
@@ -40,7 +42,8 @@ public class Switch : AInteractable
         _isOn = false;
         OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = true;
-        _light.enabled = false;
+        _emissiveObject.SetActive(false);
+        _nonEmissiveObject.SetActive(true);
     }
 
     public void TakeHit()
