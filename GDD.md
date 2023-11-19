@@ -328,7 +328,7 @@ Al llegar junto a la cuna empieza a hacer daño al niño.
 
 Es débil contra la luz de la linterna y tras acumular cierta cantidad de daño desaparecerá. 
 
-- **Plancton:**  
+- **Evil Bunny**  
 
 Es de tamaño reducido, aparecen de sitios estrechos y cerrados como los huecos de los muebles. Se mueve en sprints cortos pero rápidos mientras se acerca a la cuna realizando un camino serpenteante. 
 
@@ -488,15 +488,18 @@ Imagen del enemigo Zanybell
 ### **Evil Bunny** 
 
 Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mutiladas y el relleno expuesto. Representa el miedo a que las cosas preciadas se rompan y a los seres erráticos e impredecibles.
+
 ![](/Documentacion/DiseñoFinalEvilBunny2D.png)
 
-### **Amalgante Bunny**
+Imagen del enemigo Zanybell
+
+### **Amalgamate Bunny**
 
 Es el resultado de la fusión de gran cantidad de Evil Bunnies debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
-![](/Documentacion/EnemigoEsqueleto.png)
+![](/Documentacion/ConceptArtAmalgamateBunnySileuta.png)
 
-Imagen del enemigo Amalgante Bunny 
+Imagen del enemigo Amalgamate Bunny 
 
 ### **Kitestinger** 
 
