@@ -50,6 +50,7 @@ public class EnemyWave
 {
     public bool NeedsEnemiesKilled;
     public float TimeDelay;
+    public float TimePerEnemy;
     public int NZanybell;
     public int NEvilBunny;
 }
@@ -437,7 +438,7 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(enemyWave.TimePerEnemy);
         }
 
         yield return null;
