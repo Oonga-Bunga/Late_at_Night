@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         _loadingScreen.SetActive(false);
-        _loadingScreenCamera.gameObject.SetActive(false);
+        Destroy(_loadingScreenCamera.gameObject);
 
         //Mostrar instrucciones de nivel (Comentar en caso de quere quitar)
         try
