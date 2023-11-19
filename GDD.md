@@ -795,6 +795,9 @@ Modelado Habitación 3
 
 Diseño final y modelo 3d de la linterna
 
+![](/Documentacion/TexturizadoLinterna3D.jpeg)
+
+Modelo 3d con texturas de la linterna
 
 ### **Cargador Linterna** 
 
