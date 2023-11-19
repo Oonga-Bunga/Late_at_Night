@@ -50,6 +50,12 @@ namespace EvilBunny
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
         }
+
+        public void Merge()
+        {
+            Died?.Invoke(this, true);
+            _hitbox.enabled = false;
+        }
     }
 }
 

@@ -58,16 +58,16 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     private void LaunchRocket()
     {
         _canBeInteracted = false;
-        Instantiate(_rocketPrefab, _rocketPlatformModel.transform.position, _rocketPlatformModel.transform.rotation);
         _rocketPlatformModel.SetActive(false);
+        Instantiate(_rocketPrefab, _rocketPlatformModel.transform.position, _rocketPlatformModel.transform.rotation);
 
         Sequence mySequence = DOTween.Sequence();
 
         mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3));
-        mySequence.Append(_lowerArm.transform.DOLocalMoveY(-3, 3));
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(-4.3f, 3));
         mySequence.Insert(3, _lowerArm.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(0f, 0f, 0f)), 3).OnComplete(RechargeRocket));
         mySequence.AppendInterval(_cooldown);
-        mySequence.Append(_lowerArm.transform.DOLocalMoveY(0, 3));
+        mySequence.Append(_lowerArm.transform.DOLocalMoveY(1.7f, 3));
         mySequence.Append(_rotationPoint.transform.DOLocalRotateQuaternion(Quaternion.Euler(new Vector3(60f, 0f, 0f)), 3).OnComplete(RocketReady));
     }
 
