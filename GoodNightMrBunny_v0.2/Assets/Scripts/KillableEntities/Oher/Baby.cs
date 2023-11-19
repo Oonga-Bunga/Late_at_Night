@@ -9,6 +9,7 @@ public class Baby : AKillableEntity
     private static Baby _instance;
 
     public static Baby Instance => _instance;
+    private int _counter = 0;
 
     [SerializeField] private Animator _amalgamateAnimator;
 
@@ -61,7 +62,12 @@ public class Baby : AKillableEntity
 
     public void EvilBunnyGoesUnderBed()
     {
-        _amalgamateAnimator.SetTrigger("Grow");
+        _counter++;
+        if (_counter == 2) 
+        {
+            _counter = 0;
+            _amalgamateAnimator.SetTrigger("Grow");
+        }
     }
 
     public override void Die()
