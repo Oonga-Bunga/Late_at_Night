@@ -26,6 +26,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas optionsMenu;
     [SerializeField] private Canvas loginMenu;
     [SerializeField] private Canvas selectLevelMenu;
+    [SerializeField] private Canvas creditsMenu;
     [SerializeField] private TextMeshProUGUI _optionsTabText;
 
     [SerializeField] private GameObject loginButtons;
@@ -50,7 +51,8 @@ public class MenuManager : MonoBehaviour
         optionsMenu.gameObject.SetActive(false);
         loginAgeScrollList.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
-        if(FindObjectOfType<UserData>().GetAge() >= 0) OpenMainMenu();
+        creditsMenu.gameObject.SetActive(false);
+        if (FindObjectOfType<UserData>().GetAge() >= 0) OpenMainMenu();
 
         //Elementos de interfaz
         ShowDispositiveElements();
@@ -89,6 +91,7 @@ public class MenuManager : MonoBehaviour
         selectLevelMenu.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
         optionsMenu.gameObject.SetActive(false);
+        creditsMenu.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -104,6 +107,17 @@ public class MenuManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Cambia al canvas de creditos
+    /// </summary>
+    public void OpenCredits()
+    {
+        selectLevelMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
+        optionsMenu.gameObject.SetActive(false);
+        creditsMenu.gameObject.SetActive(true);
+    }
+
+    /// <summary>
     /// Cambia al canvas del menú principal
     /// </summary>
     public void OpenMainMenu()
@@ -112,6 +126,7 @@ public class MenuManager : MonoBehaviour
         optionsMenu.gameObject.SetActive(false);
         loginMenu.gameObject.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
+        creditsMenu.gameObject.SetActive(false);
     }
     
     /// <summary>
