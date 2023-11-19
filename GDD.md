@@ -653,6 +653,18 @@ Imagen de estudio del diseño del Kitestinger
 
 Imagen de los diseños del Comandante Blubs
 
+![](/Documentacion/ConceptArtSiluetasEvilBunny.png)
+
+Imagen de las siluetas del Evil Bunny
+
+![](/Documentacion/BocetosEvilBunnyV2.png)
+
+Imagen de estudio del diseño del Evil Bunny
+
+![](/Documentacion/ConceptArtSiluetasAmalgamateBunny.png)
+
+Imagen de las siluetas del Amalgamate Bunny
+
 ### **Escenario**
 
 ![](/Documentacion/ConceptArtEscenario.png)
@@ -709,6 +721,8 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
 
 ![](/Documentacion/TurnAroundKitestinger.png)
 
+>Turn around del Kitestinger
+
 ### **Comandante Blubs** 
 
 ![](/Documentacion/EnemigoComandanteBlubs.png)
@@ -716,6 +730,8 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
  >Imagen del diseño final de Comandante Blubs
 
 ![](/Documentacion/TurnAroundComandanteBlubs.png)
+
+>Turn around de Comandante Blubs
 
 ![](/Documentacion/DiseñoFinalComandanteBlubs3D.png)
 
@@ -729,17 +745,27 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
 
 ![](/Documentacion/TurnAroundSombra.png)
 
-![](/Documentacion/DiseñoFinalSombra3D.PNG)
+>Turn around del ZanyBell
+
+![](/Documentacion/DiseñoFinalZanybell3D.jpeg)
 
  >Imagen del modelo 3d de la Zanybell
 
+![](/Documentacion/TexturizadoZanybell3D.jpeg)
+
+ >Imagen del modelo 3d texturizado de la Zanybell
+
 ### **Evil Bunny**
 
-![](/Documentacion/BocetosEvilBunnyV2.png)
- >Tur-Around EvilBunny
-
-![](/Documentacion/DiseñoFinalEvilBunny3D.PNG.png)
+![](/Documentacion/DiseñoFinalEvilBunny3D.png)
  >EvilBunny Modelo 3D
+
+### **Amalgamate Bunny**
+![](/Documentacion/TurnAroundAmalgamateBunny.png)
+>Turn around del Amalgamate Bunny
+
+![](/Documentacion/DiseñoFinalAmalgamateBunny3D.png)
+>Modelo 3D del Amalgamate Bunny
 
 ## **Escenarios**
 
@@ -787,11 +813,19 @@ Diseño final del cohete
 
 Modelado 3D del cohete
 
+![](/Documentacion/TexturizadoCohete3DV2.jpeg)
+
+Modelado 3D del cohete con texturas
+
 ### **Plastilina** 
 
 ![](/Documentacion/DiseñoPlastilina2D3D.png)
 
 Diseño final y modelo 3d de la plastilina (dos versiones, bote abierto y cerrado)
+
+![](/Documentacion/TexturizadoPlastilina3D.jpeg)
+
+Modelado 3D de la plastilina con texturas
 
 ## **Texturizado<a name="_page45_x69.00_y289.00"></a>** 
 
