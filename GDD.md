@@ -860,16 +860,34 @@ A  continuación,  tenemos  una  tabla  con  los  distintos  Packs  de  texturas
 
 
 <table><tr><th colspan="1" valign="top">Nombre del Pack </th><th colspan="1" valign="top">Modelos del Pack </th></tr>
-<tr><td colspan="1" rowspan="5" valign="top">Pack 1: Armas </td><td colspan="1" valign="bottom">Linterna </td></tr>
+<tr><td colspan="1" rowspan="5" valign="top">Pack 1: </td><td colspan="1" valign="bottom">Linterna </td></tr>
 <tr><td colspan="1">Base Linterna </td></tr>
 <tr><td colspan="1">Cohete </td></tr>
 <tr><td colspan="1">Cubo Plastilina Junto</td></tr>
 <tr><td colspan="1">Cubo Plastilina Separado</td></tr>
-<tr><td colspan="1" rowspan="5">Pack 2: Escenario 1 </td><td colspan="1">Paredes 1 </td></tr>
+<tr><td colspan="1" rowspan="5">Pack 2: </td><td colspan="1">Paredes modulares </td></tr>
 <tr><td colspan="1">Suelo (material suelo madera habitación) </td></tr>
 <tr><td colspan="1">Ventana (material madera caoba)</td></tr>
 <tr><td colspan="1">Bisagras (material metal galvanizado)</td></tr>
 <tr><td colspan="1">Marco Ventana (material madera aluminio)</td></tr>
+<tr><td colspan="1"></td><td colspan="1"></td></tr>
+ <tr><td colspan="1" rowspan="5">Pack 3: </td><td colspan="1">Ventana (bisagras,persiana,marco) </td></tr>
+<tr><td colspan="1">Mesa </td></tr>
+<tr><td colspan="1">Silla </td></tr>
+<tr><td colspan="1"></td></tr>
+<tr><td colspan="1"></td></tr>
+<tr><td colspan="1"></td><td colspan="1"></td></tr>
+  <tr><td colspan="1" rowspan="5">Pack 4:</td><td colspan="1">Cuna </td></tr>
+<tr><td colspan="1">Interruptor </td></tr>
+<tr><td colspan="1">Castillo</td></tr>
+<tr><td colspan="1"></td></tr>
+<tr><td colspan="1"></td></tr>
+<tr><td colspan="1"></td><td colspan="1"></td></tr>
+  <tr><td colspan="1" rowspan="5">Pack 5: </td><td colspan="1">Cubo 1 </td></tr>
+<tr><td colspan="1">Cubo 2 </td></tr>
+<tr><td colspan="1">Cubo 3 </td></tr>
+<tr><td colspan="1"></td></tr>
+<tr><td colspan="1"></td></tr>
 <tr><td colspan="1"></td><td colspan="1"></td></tr>
 </table>
 Algunas texturas ya creadas:
