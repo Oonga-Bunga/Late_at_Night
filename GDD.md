@@ -2,7 +2,7 @@
 
 Juegos en Web y Redes Sociales- Grupo C 
 
-![](/Documentacion/OongaBungaLogo.png)
+![](/Documentacion/LogoImagotipoAzulV1.png)
 
 CÉCILE LAURA BELLO DUPREZ    
 CHRISTIAN CAMPOS PAN    
@@ -756,6 +756,8 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
  >Imagen del modelo 3d texturizado de la Zanybell
 
 ### **Evil Bunny**
+![](/Documentacion/DiseñoFinalEvilBunny2D.png)
+>Evil Bunny diseño final a color
 
 ![](/Documentacion/DiseñoFinalEvilBunny3D.png)
  >EvilBunny Modelo 3D
@@ -787,11 +789,12 @@ Modelado Habitación 3
 
 ## **Objetos**
 
-<a name="_page42_x69.00_y389.00"></a>**Linterna** 
+### <a name="_page42_x69.00_y389.00"></a>**Linterna** 
 
 ![](/Documentacion/DiseñoFinalLinterna2D3D.png)
 
 Diseño final y modelo 3d de la linterna
+
 
 ### **Cargador Linterna** 
 
@@ -856,9 +859,39 @@ A  continuación,  tenemos  una  tabla  con  los  distintos  Packs  de  texturas
 </table>
 Algunas texturas ya creadas:
 
+### **Textura de las paredes**
+
 ![](/Documentacion/TexturaParedNubes.png)
 
 Las paredes de la habitación están decoradas con  nubes sobre un fondo azul. Este diseño se encuentra en la parte superior de la pared.
+
+### **Texturas Zanybell**
+
+![](/Documentacion/Zanybell(1)_Default_OBJ_AlbedoTransparency.png)
+>Color base del Zanybell
+
+![](/Documentacion/UV_Zanybell.jpg)
+>UVS del Zanybell
+
+### **Texturas Evil Bunny**
+![](/Documentacion/TexturaEvilBunny.png)
+>Color base del Evil Bunny
+
+![](/Documentacion/UV_EvilBunny.jpg)
+>UVS del Evil Bunny
+
+![](/Documentacion/TexturaMartilloEvilBunny.png)
+>Color base del martillo del Evil Bunny
+
+![](/Documentacion/UV_EvilBunny_Martillo.jpg)
+>UVS del martillo Evil Bunny
+
+### **Texturas Amalgamate Bunny
+![](/Documentacion/TexturaAmalgamteBunny.png)
+>Color base del Amalgamate Bunny
+
+![](/Documentacion/UV_AmalgamateBunny.jpg)
+>UVS del Amalgamate Bunny
 
 # **Pensamiento<a name="_page46_x69.00_y361.00"></a> Computacional**
 
