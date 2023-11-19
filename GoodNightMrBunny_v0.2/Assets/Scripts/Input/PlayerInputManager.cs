@@ -150,5 +150,20 @@ public class PlayerInputManager : MonoBehaviour
         _interact.action.Enable();
     }
 
+    public void DisableActions()
+    {
+        _move.action.Disable();
+
+        _run.action.Disable();
+
+        _jump.action.Disable();
+
+        _use.action.Disable();
+
+        _drop.action.Disable();
+
+        _interact.action.Disable();
+    }
+
     #endregion
 }
