@@ -10,11 +10,12 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float _speed = 5f; // Velocidad de movimiento hacia arriba
     [SerializeField] private GameObject _explosionPrefab = null; // Prefab del efecto de explosión
     [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private Rigidbody _rb;
 
     void Update()
     {
         // Mueve el objeto hacia delante a una velocidad constante
-        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        _rb.velocity = transform.up * _speed;
     }
 
     private void OnCollisionEnter(Collision collision)

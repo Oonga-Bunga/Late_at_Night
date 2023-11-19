@@ -36,7 +36,6 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) /*&& GameManager.Instance.IsInGame*/)
         {
-            _isPaused = !_isPaused;
             PauseGame();
         }
     }
@@ -60,6 +59,7 @@ public class PauseManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
+        _isPaused = !_isPaused;
         if (_isPaused)
         {
             //_camera._enabled = false;

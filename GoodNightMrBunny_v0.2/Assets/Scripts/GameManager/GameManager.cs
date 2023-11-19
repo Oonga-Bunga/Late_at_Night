@@ -247,7 +247,6 @@ public class GameManager : MonoBehaviour
 
         _sceneHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
         _sceneHolder.GetComponent<NavMeshLinks_AutoPlacer>().Generate();
-        _sceneHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
 
         #endregion
 
