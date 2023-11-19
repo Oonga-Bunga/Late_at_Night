@@ -489,15 +489,15 @@ Imagen del enemigo Zanybell
 
 Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mutiladas y el relleno expuesto. Representa el miedo a que las cosas preciadas se rompan y a los seres erráticos e impredecibles.
 
-![](/Documentacion/DiseñoFinalEvilBunny2D.png)
+![](/Documentacion/EnemigoEvilBunny.png)
 
-Imagen del enemigo Zanybell
+Imagen del enemigo Evil Bunny
 
 ### **Amalgamate Bunny**
 
 Es el resultado de la fusión de gran cantidad de Evil Bunnies debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
-![](/Documentacion/ConceptArtAmalgamateBunnySileuta.png)
+![](/Documentacion/EnemigoAmalgamateBunny.png)
 
 Imagen del enemigo Amalgamate Bunny 
 
