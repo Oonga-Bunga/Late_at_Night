@@ -8,6 +8,14 @@ public class LevelJsons : MonoBehaviour
     [SerializeField] private TextAsset _enemyWavesJsonFile;
 
     #region Methods
+
+    private void Awake()
+    {
+        GameManager manager = FindObjectOfType<GameManager>();
+        manager.SceneJsonFile = _sceneJsonFile;
+        manager.EnemyWavesJsonFile = _enemyWavesJsonFile;
+    }
+
     void Start()
     {
         DontDestroyOnLoad(this);

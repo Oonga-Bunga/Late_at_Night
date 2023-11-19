@@ -166,11 +166,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        // Cargar Jsons desde el menu principal
-        SceneJsonFile = FindObjectOfType<LevelJsons>().SceneJsonFile;
-        EnemyWavesJsonFile = FindObjectOfType<LevelJsons>().EnemyWavesJsonFile;
-
     }
 
     private void Start()
