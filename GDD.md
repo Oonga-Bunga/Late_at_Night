@@ -74,7 +74,7 @@ HÉCTOR MUÑOZ GÓMEZ
 
 Este documento especificará todo el diseño del juego ‘Good Night Mr. Bunny’. Los elementos de este GDD se han empezado a crear a partir de del 13 de septiembre de 2023 y en el quedarán registradas todas las acciones que se quieran llevar a cabo y todo el desarrollo del videojuego.
 
-Las partes implicadas en el desarrollo de este documento son: Cécile Laura Bello Duprez, Christian Campos Pan, Gonzalo Gómez Tejedor, Umesh Mostajo Sáez, Paula Rojo de la fuente, Natalia Martínez Clemente y Héctor Muñoz Gómez. 
+Las partes implicadas en el desarrollo de este documento son: Cécile Laura Bello Duprez, Christian Campos Pan, Gonzalo Gómez Tejedor, Umesh Mostajo Sáez, Paula Rojo de la Fuente, Natalia Martínez Clemente y Héctor Muñoz Gómez. 
 
 ## **Título<a name="_page4_x69.00_y244.00"></a>** 
 
