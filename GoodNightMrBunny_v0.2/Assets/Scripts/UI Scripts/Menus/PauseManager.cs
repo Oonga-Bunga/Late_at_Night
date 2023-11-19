@@ -16,6 +16,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private Canvas _optionsCanvas;
     [SerializeField] private GameObject _inGameUI;
+    private bool canPause = true;
 
     public bool IsPaused => _isPaused;
 
@@ -34,10 +35,16 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) /*&& GameManager.Instance.IsInGame*/)
+        if (Input.GetKeyDown(KeyCode.Escape) && canPause/*&& GameManager.Instance.IsInGame*/)
         {
             PauseGame();
         }
+    }
+
+    public bool CanPause
+    {
+        get { return canPause; }
+        set { canPause = value; }
     }
 
     /// <summary>

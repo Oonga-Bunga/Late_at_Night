@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
+using UI_Scripts.Menus;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         // Iniciar la generación del nivel en una corrutina
         StartCoroutine(GenerateLevel());
+       
     }
 
     private IEnumerator GenerateLevel()
@@ -360,6 +362,13 @@ public class GameManager : MonoBehaviour
 
         _loadingScreen.SetActive(false);
         _loadingScreenCamera.gameObject.SetActive(false);
+
+        //Mostrar instrucciones de nivel (Comentar en caso de quere quitar)
+        try
+        {
+            FindObjectOfType<LevelMenuManager>().OpenInstructionsPanel();
+        }
+        catch { }
 
         #endregion
 
