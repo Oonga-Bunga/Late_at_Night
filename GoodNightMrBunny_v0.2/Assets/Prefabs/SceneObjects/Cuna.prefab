@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  maxEvilBunnies: 5
+  _maxEvilBunnies: 4
+  _amalgamateAnimator: {fileID: 5955749114913665934}
   _zanybellPoint: {fileID: 1764653051612531567}
   _evilBunnyPoint: {fileID: 6162320431583232870}
 --- !u!114 &9185037210425918813
@@ -247,8 +248,20 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.32
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -285,6 +298,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1db1209792524d5468955a7c72b6ecbe, type: 3}
       propertyPath: m_Name
