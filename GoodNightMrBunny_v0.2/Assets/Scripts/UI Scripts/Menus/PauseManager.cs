@@ -15,6 +15,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private bool _isPaused = false;
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private Canvas _optionsCanvas;
+    [SerializeField] private GameObject _inGameUI;
 
     public bool IsPaused => _isPaused;
 
@@ -41,6 +42,20 @@ public class PauseManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Cierra el panel de pausa y reanuda el juego
+    /// </summary>
+    public void ClosePauseMenu()
+    {
+        _isPaused = !_isPaused;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        _inGameUI.gameObject.SetActive(true);
+        _pausePanel.gameObject.SetActive(false);
+        _optionsCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    /// <summary>
     /// Detiene el tiempo del juego
     /// </summary>
     public void PauseGame()
@@ -52,6 +67,7 @@ public class PauseManager : MonoBehaviour
             Cursor.visible = true;
             _pausePanel.gameObject.SetActive(true);
             _optionsCanvas.gameObject.SetActive(false);
+            _inGameUI.gameObject.SetActive(false);
             Time.timeScale = 0f;
         }
         else
@@ -59,6 +75,7 @@ public class PauseManager : MonoBehaviour
             //_camera._enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            _inGameUI.gameObject.SetActive(true);
             _pausePanel.gameObject.SetActive(false);
             _optionsCanvas.gameObject.SetActive(false);
             Time.timeScale = 1f;

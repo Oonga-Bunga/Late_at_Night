@@ -166,14 +166,14 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(levelRoute);
     }
 
-    public void SetJsonOne(TextAsset jsonAsset)
+    public void SetSceneJson(TextAsset jsonAsset)
     {
-        FindObjectOfType<LevelJsons>().SetFirstJason(jsonAsset);
+        FindObjectOfType<LevelJsons>().SceneJsonFile = jsonAsset;
     }
 
-    public void SetJsonTwo(TextAsset jsonAsset)
+    public void SetEnemiesJson(TextAsset jsonAsset)
     {
-        FindObjectOfType<LevelJsons>().SetSecondJason(jsonAsset);
+        FindObjectOfType<LevelJsons>().EnemyWavesJsonFile = jsonAsset;
     }
 
     /// <summary>
