@@ -19,8 +19,8 @@ HÉCTOR MUÑOZ GÓMEZ
 
 |Versión |Autores |Fecha |Comentarios |
 | - | - | - | - |
-|1\.0 |<p>CÉCILE LAURA BELLO DUPREZ CHRISTIAN CAMPOS PAN GONZALO GÓMEZ TEJEDOR UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE NATALIA MARTÍNEZ CLEMENTE HÉCTOR MUÑOZ GÓMEZ</p>|22/10/2023 |Versión inicial  |
-|||||
+|1\.0 |<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE</p><p> NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|22/10/2023 |Versión inicial  |
+|1\.1|<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE </p><p>NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|19/11/2023|Versión Beta del Juego|
 |||||
 |||||
 1. [Introducción...................................................................................................................................................... 5 ](#_page4_x69.00_y103.00)
@@ -69,19 +69,20 @@ HÉCTOR MUÑOZ GÓMEZ
 18. [MDA ....................................................................................................................... 60 ](#MDA)   
 13. [Miembros del Equipo ................................................................................................................................ 63 ](#_page62_x69.00_y350.00)
 13. [Anexos........................................................................................................................................................... 63 ](#_page62_x69.00_y577.00)
-1. **Introducción<a name="_page4_x69.00_y103.00"></a>** 
+
+# **Introducción<a name="_page4_x69.00_y103.00"></a>** 
 
 Este documento especificará todo el diseño del juego ‘Good Night Mr. Bunny’. Los elementos de este GDD se han empezado a crear a partir de del 13 de septiembre de 2023 y en el quedarán registradas todas las acciones que se quieran llevar a cabo y todo el desarrollo del videojuego.
 
 Las partes implicadas en el desarrollo de este documento son: Cécile Laura Bello Duprez, Christian Campos Pan, Gonzalo Gómez Tejedor, Umesh Mostajo Sáez, Paula Rojo de la fuente, Natalia Martínez Clemente y Héctor Muñoz Gómez. 
 
-1. **Título<a name="_page4_x69.00_y244.00"></a>** 
+## **Título<a name="_page4_x69.00_y244.00"></a>** 
 
 Good Night Mr. Bunny 
 
-2. **Concepto<a name="_page4_x69.00_y298.00"></a> principal** 
+## **Concepto<a name="_page4_x69.00_y298.00"></a> principal** 
 
-"Good Night Mr. Bunny" es un juego de terror en primera persona (FP) que sumerge a los jugadores en una experiencia única y aterradora. En el corazón de esta aventura se encuentra un conejo de peluche que cobra vida para proteger a un inocente niño de tan solo dos años de edad de los monstruos que emergen en la oscuridad de la noche. La trama se desarrolla en un escenario de pesadilla, donde el niño se enfrenta a sus miedos más profundos, y nuestro valiente protagonista, Mr. Bunny (el jugador), se convierte en la última línea de defensa contra las criaturas que amenazan con arrastrar al niño a las tinieblas. 
+"Good Night Mr. Bunny" es un juego de terror en primera persona (FP) que sumerge a los jugadores en una experiencia única y aterradora. En el corazón de esta aventura se encuentra un conejo de peluche que cobra vida para proteger a un inocente niño  de los monstruos que emergen en la oscuridad de la noche. La trama se desarrolla en un escenario de pesadilla, donde el niño se enfrenta a sus miedos más profundos, y nuestro valiente protagonista, Mr. Bunny (el jugador), se convierte en la última línea de defensa contra las criaturas que amenazan con arrastrar al niño a las tinieblas. 
 
 La energía y determinación del conejo de peluche, que ahora es controlado por el jugador, son fundamentales para salvaguardar la seguridad del niño y, al mismo tiempo,  protegerse de los peligros que acechan en cada rincón de esta aterradora noche. Para lograrlo, el jugador contará con un  variado  arsenal  de  dispositivos y  herramientas  que  podrán  utilizarse  estratégicamente  para repeler y eliminar a los monstruos, creando así una experiencia de juego inmersiva y llena de suspense. 
 
@@ -96,11 +97,11 @@ El  juego  no  solo  ofrece  una  experiencia  de  horror  desafiante,  sino  qu
 
 Estas características principales se combinan para crear una experiencia de juego que desafiará a los jugadores a superar sus miedos mientras luchan por sobrevivir en "Good Night Mr. Bunny". 
 
-4. **Género<a name="_page5_x69.00_y274.00"></a> y Categoría** 
+## **Género<a name="_page5_x69.00_y274.00"></a> y Categoría** 
 
 "Good  Night  Mr.  Bunny"  combina  los  géneros  de  fantasía  y  terror  en  un  juego  de  acción  y plataformas  en  formato  de  shooter  en  primera  persona  (FPS),  ofreciendo  a  los  jugadores  una experiencia intensa y emocionante.
 
-5. **Propósito<a name="_page5_x69.00_y354.00"></a> y Público Objetivo** 
+## **Propósito<a name="_page5_x69.00_y354.00"></a> y Público Objetivo** 
 
 El objetivo principal de "Good Night Mr. Bunny" es proporcionar una experiencia de juego que fomente la identificación de patrones y la resolución de problemas mediante estrategias, haciendo uso de situaciones estresantes para potenciar una experiencia inmersiva, entretenida, desafiante y a la vez ligeramente aterradora.
 
@@ -108,7 +109,7 @@ El juego está diseñado para un público diverso, abarcando edades desde jóven
 
 Es importante destacar que "Good Night Mr. Bunny" no es recomendado para personas que estén embarazadas ni para aquellos que tengan problemas cardíacos o condiciones médicas que puedan verse agravadas por el estrés y nerviosismo. La intensidad de la experiencia de juego puede no ser adecuada para estos grupos y, por lo tanto, se sugiere precaución al considerar jugarlo.
 
-6. **Jugabilidad<a name="_page5_x69.00_y551.00"></a>** 
+## **Jugabilidad<a name="_page5_x69.00_y551.00"></a>** 
 
 "Good  Night Mr. Bunny" ofrece una jugabilidad única en la que los jugadores se encuentran en la posición de defender a un niño en su cuna de los diversos monstruos que nacen de su imaginación. La habitación se convierte en un campo de batalla, y los jugadores deben hacer uso de un variado arsenal de armas y herramientas, mientras se enfrentan a las diferentes mecánicas de los monstruos. Cada tipo de monstruo presenta desafíos y tácticas  únicas, lo  que requiere que los jugadores adapten sus estrategias y utilicen sus recursos de manera inteligente para proteger al niño. 
 
@@ -117,7 +118,7 @@ Además, la mecánica especial que añade una capa adicional de emoción al jueg
 El objetivo final del jugador en "Good Night Mr. Bunny" implica avanzar a través de diferentes niveles 
 
 - noches, cada una más desafiante que la anterior. A medida que los jugadores progresan, se enfrentarán a una creciente variedad de monstruos y desafíos, lo que les brindará una sensación de logro y progresión en su lucha por sobrevivir a esta aterradora pesadilla.
-7. **Estilo<a name="_page6_x69.00_y169.00"></a> Visual** 
+## **Estilo<a name="_page6_x69.00_y169.00"></a> Visual** 
 
 El estilo visual para el videojuego es un concepto 3D estilizado y semi-cartoon, más orientado a un aspecto oscuro y lúgubre, pero sin profundizar en este. Este estilo se distingue por su simplicidad y su enfoque meticuloso en los detalles, con un toque artístico que se crea a mano para dar vida al mundo del juego.
 
@@ -145,13 +146,13 @@ El estilo visual desempeña un papel fundamental en la narrativa y la jugabilida
 
 <a name="_page7_x69.00_y236.00"></a><a name="_page7_x75.00_y224.00"></a>[Ref 5 ](#_page63_x75.00_y178.00)<a name="_page7_x300.00_y224.00"></a> [Ref 6 ](#_page63_x75.00_y227.00)
 
-8. **Alcance** 
+## **Alcance** 
 
 En cuanto al alcance de nuestro proyecto, "Good Night Mr. Bunny" se lanzarán una serie de niveles iniciales en una versión primeriza del juego de forma gratuita, y posteriormente una versión final de pago  que ofrecerá una experiencia completa.  La versión final estará sujeta a actualizaciones que recibirá de forma gratuita.
 
 No está previsto el lanzamiento de DLCs  a corto plazo. La visión principal es proporcionar a los jugadores un juego completo y enriquecedor que ofrezca horas de diversión y desafíos desde el momento en que se lance. Sin embargo, no se descarta la posibilidad de considerar contenido adicional en el futuro si surge una demanda significativa por parte de la comunidad de jugadores y si se alinea con la visión del juego. Cualquier expansión potencial se planificará cuidadosamente para mantener la coherencia y calidad del juego principal.
 
-9. **Plataforma<a name="_page7_x69.00_y433.00"></a>** 
+## **Plataforma<a name="_page7_x69.00_y433.00"></a>** 
 
 Nuestro videojuego está diseñado para ser versátil en plataformas. La primera versión del juego se lanzará inicialmente para ser jugable en navegador web y dispositivos móviles, lo que brindará a los jugadores la flexibilidad de acceder a la experiencia de juego desde una variedad de dispositivos.
 
@@ -159,7 +160,7 @@ Para garantizar una jugabilidad  óptima en el navegador web y dispositivos móv
 
 En un futuro, se deja abierta la posibilidad de trasladar el videojuego a otras plataformas, lo que permitirá optar a un público aún más amplio y diversificado. Esta estrategia busca no solo mantener la relevancia del juego a largo plazo, sino también aprovechar nuevas oportunidades emergentes en el mercado de los videojuegos.
 
-10. **Licencia<a name="_page7_x69.00_y643.00"></a>** 
+## **Licencia<a name="_page7_x69.00_y643.00"></a>** 
 
 Nuestro juego se atiene a una licencia Creative Commons Attribution-NonCommercial (CC BY - NC), la cual establece el permiso para modificar, distribuir y crear obras derivadas y usar nuestro producto con fines no comerciales y siempre dando crédito a la empresa y autores originales de la obra (Oonga Bunga games). En adición a las restricciones del tipo de licencia se establecen las siguientes limitaciones con respecto al producto:
 
@@ -167,7 +168,7 @@ Nuestro juego se atiene a una licencia Creative Commons Attribution-NonCommercia
 - No se permitirá el uso inapropiado del contenido intelectual del juego que pueda llegar a dañar la imagen del mismo. 
 - Se permite la creación de mods que alteren el contenido de la obra original pero no la comercialización de estos. 
 - Se permite la comercialización de merchandising de externos siempre y cuando este sea previamente autorizado por los autores originales a través de una solicitud la cual ha de ser emitida por el propio comerciante. 
-2. **Guion<a name="_page8_x69.00_y263.00"></a>** 
+# **Guion<a name="_page8_x69.00_y263.00"></a>** 
 
 La trama del juego se reproducirá a través de una cinemática que se reproduce al iniciar una nueva partida. 
 
@@ -213,11 +214,11 @@ Una vez que se muestra la última página, la cámara se acerca a la última ilu
 
 <a name="_page10_x303.00_y369.00"></a>[Img 7 ](#_page63_x75.00_y276.00)![](/Documentacion/DrawingStyleRef.jpeg)
 
-3. **Mecánicas<a name="_page10_x69.00_y649.00"></a> del Juego** 
+# **Mecánicas<a name="_page10_x69.00_y649.00"></a> del Juego** 
 
 En  los  siguientes  apartados  se  describen  diversas  las  mecánicas  que  existen  en  el  proyecto. Incluyendo las mecánicas del Jugador, de los diversos enemigos, de las armas y de los niveles. 
 
-1. **Mecánicas<a name="_page11_x69.00_y103.00"></a> del Jugador** 
+## **Mecánicas<a name="_page11_x69.00_y103.00"></a> del Jugador** 
 
 Los movimientos principales del jugador son los siguientes:
 
@@ -265,7 +266,7 @@ móvil
 
 <a name="_page13_x387.00_y575.00"></a>[Img 9 ](#_page63_x75.00_y362.00)
 
-2. **Mecánicas<a name="_page13_x69.00_y664.00"></a> de Armas** 
+## **Mecánicas<a name="_page13_x69.00_y664.00"></a> de Armas** 
 - **Escapar y Esconderse:**  
 
 Existen ciertos enemigos que perseguirán directamente al jugador cuando le localicen. En estos casos, el jugador tendrá que buscar escondites o evitar al enemigo para que no le atrape.  
@@ -301,7 +302,7 @@ Tras  el lanzamiento, el cohete se precipita hacia la dirección indicada, donde
 
 Esta arma derriba de un solo golpe al Kitenstinger. Su explosión sirve para dispersar y dañar a los grupos de Plancton. 
 
-3. **Mecánicas<a name="_page15_x69.00_y323.00"></a> de Niveles** 
+## **Mecánicas<a name="_page15_x69.00_y323.00"></a> de Niveles** 
 - **Aguantar:**  
 
 El jugador tendrá que aguantar defendiendo al bebé hasta el amanecer, si lo consigue se supera el nivel. El tiempo de aguante está definido pero el jugador no lo podrá ver de manera directa. Se integrarán las horas dentro del juego mediante relojes esparcidos por la habitación.  
@@ -310,7 +311,7 @@ El jugador tendrá que aguantar defendiendo al bebé hasta el amanecer, si lo co
 
 Existirán varios interruptores esparcidos por la habitación, los cuales el jugador tendrá que accionar  para  activarlos  y  una  vez  estén  todos  activos,  se  activará  la  iluminación  de  la habitación el nivel será superado. Estos interruptores aparecerán de manera aleatoria por la sala en la que esté jugando el jugador y cuando estén accionados emitirán una pequeña luz. No se puede interactuar con ellos hasta que no pasa un tiempo desde el inicio del nivel. 
 
-4. **Mecánicas<a name="_page15_x69.00_y546.00"></a> de Enemigos** 
+## **Mecánicas<a name="_page15_x69.00_y546.00"></a> de Enemigos** 
 - **Comandante Blubs:**  
 
 En ocasiones, un gato (denominado “Comandante Blubs”) irrumpirá en la habitación donde se desarrolla el nivel. Dicho enemigo no consta de debilidades ni puede ser eliminado, por lo cual, la única opción del jugador será esconderse o distraerlo. Una vez que el gato atrapa al jugador, se pierde el nivel, pues se lo lleva fuera de la habitación.  
@@ -351,7 +352,7 @@ Para atacar al niño ha de hallarse justo encima de este.
 
 Desaparece tras ser golpeado una vez por un cohete o acumular gran cantidad de daño con otras armas. 
 
-4. **Estados<a name="_page17_x69.00_y219.00"></a> del Juego** 
+# **Estados<a name="_page17_x69.00_y219.00"></a> del Juego** 
 
 ![](/Documentacion/EstadosDelJuegoRef.png)
 
@@ -382,53 +383,82 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 
 [Img 9 ](#_page63_x75.00_y362.00)
 
-**Menú inicial (Concept básico, sujeto a cambios):**
 
-![](/Documentacion/InterfazTitulo.png)
+**Menú Logging** 
+
+![](/Documentacion/InterfacesLogging.jpeg)
+
+**Menú inicial:**
+
+![](/Documentacion/InterfacesMainMenu.jpeg)
 
 **Menú ajustes** 
 
-![](/Documentacion/InterfazAjustes1.png)
+![](/Documentacion/InterfacesSettings.jpeg)
 
-![](/Documentacion/InterfazAjustes2.png)
+**Menú Pausa** 
 
-![](/Documentacion/InterfazAjustes3.png)
+![](/Documentacion/InterfacesPause.jpeg)
 
-![](/Documentacion/InterfazAjustes4.png)
+**Menú seleccionar nivel** 
+![](/Documentacion/InterfacesSelectLevel.jpeg)
 
 **In game** 
 
-Pantalla ![](/Documentacion/InterfazInGame1.png)general 
+**Pantalla general**  
+![](/Documentacion/InterfazInGame1.png)   
 
-Coger ![](/Documentacion/InterfazInGame2.png)objetos 
+**Coger objetos**   
+ ![](/Documentacion/InterfazInGame2.png)
+ 
+**Sprint (solo aparece cuando se corre)**   
+![](/Documentacion/InterfazInGame3.png)
 
-Sprint (solo ![](/Documentacion/InterfazInGame3.png)aparece cuando se corre) 
+
+**Victoria**   
+![](/Documentacion/InterfacesVictory.jpeg)
+
 
 **Créditos** 
 
 ![](/Documentacion/InterfazCreditos.png)
 
-6. **Niveles<a name="_page22_x69.00_y103.00"></a>**  
+# **Niveles<a name="_page22_x69.00_y103.00"></a>**  
 
 Este juego se compone de varios Escenarios, y cada escenario consta de varios niveles. 
 
 El primer  Escenario sería el nivel introductorio, el cual se desarrolla en la habitación de un niño pequeño, donde el jugador tendrá que proteger durante el transcurso de una noche. Este escenario consta  de  varias  noches  de  supervivencia.  Para  este  escenario  habrá  cuatro  noches  o  niveles. En el escenario habrá repartidos elementos grandes por los que el jugador puede subirse y tener una  mejor  panorámica  del  escenario.  También  habrá  objetos  medianos  y  pequeños  que entorpecerán su camino y objetos medianos que servirán para esconderse de algunos enemigos. Los objetos interactivos (interruptores) aparecerán de manera aleatoria entre una serie de puntos estratégicos establecidos. Las armas se encuentran repartidas por el escenario de manera fija, es decir,  siempre  aparecen  en  el  mismo  sitio  dependiendo  de  la  disposición  de  los  objetos  del escenario.  
 
 Para que tenga variabilidad y no sea siempre el mismo escenario, habrá variaciones de este mismo.  
+Comenzaremos presentando el primer escenario, que es una versión reducida de la habitación del niño y servirá de tutorial para el jugador. 
 
 ![](/Documentacion/Niveles1Mapa.jpeg)![](/Documentacion/Niveles1Mapa2.jpeg)![](/Documentacion/Niveles1Mapa3.jpeg)
+ >Imágenes nivel tutorial
 
 Recorridos del nivel: 
 
 Para realizar los recorridos se ha tenido en cuenta que la distribución de las armas esté de manera equilibrada a través del  escenario, obligando al jugador a llegar a lugares altos en algunos casos. También se ha intentado abarcar la mayor parte del espacio disponible para que esté obligado a investigar todo el escenario y encuentre los posibles escondites de este.
 
-![](/Documentacion/RecorridosNivel.png)
+![](/Documentacion/RecorridosNivel.png) 
+ >Imágenes recorridos y armas dentro del tutorial
+
+Como ya se ha mencionado anteriormente, el primer nivel contará con varias versiones. Este escenario es más grande que el anterior y tiene giros dentro del cuarto, lo que hará que el jugador no tenga constantemente visión de todo el escenario y obligará a que se mueva por este para controlar las oleadas de enemigos. Además, también le obligará a colocar y dejar las armas en la posición que más le convenga si es que las va a usar. Y los interruptores se encontrarán esparcidos (y algunos más escondidos que otros) por el escenario.   
+
+![](/Documentacion/NivelesKidRoom1.png)
+ >Ordenación del escenario   
+
+Recorridos del nivel:   
+
+![](/Documentacion/NivelesKidRoom1Recorridos.png)
+ >Recorridos y armas dentro del escenario
+![](/Documentacion/NivelesKidRoom1Enemigos.png)
+ >Posición Spawn Enemigos
 
 El siguiente nivel se desarrolla en el salón de la casa, siguiendo la misma mecánica de supervivencia anteriormente descrita. El nivel será un poco más grande que el anterior, implementando nuevos modelos que el jugador podrá usar para  visionar el campo de visión, esconderse e interactuar.  Seguirá la misma mecánica de los Interruptores repartidos aleatoriamente entre una serie de puntos establecidos y las armas aparecerán siempre en el mismo sitio dependiendo de la disposición de los elementos del escenario. 
 
 El tercer nivel se desarrolla en la guardería, siguiendo las mismas mecánicas de supervivencia anteriores.  A  diferencia  de  los  anteriores  este  escenario  abarcará  más  de  una  sala,  pero  las mecánicas y el funcionamiento seguirá los mismos pasos que los anteriores. Además, en este nivel se deberá de proteger no solo a un NPC, sino a varios.
 
-7. **Progreso<a name="_page24_x69.00_y103.00"></a> del Juego** 
+# **Progreso<a name="_page24_x69.00_y103.00"></a> del Juego** 
 
 Para  superar  la  etapa  o  nivel  el  jugador  deberá  sobrevivir  varias  noches  seguidas. Una vez has sobrevivido a todas las noches de ese nivel, saltará una  cinemática introductoria que desbloqueará el siguiente Escenario.
 
@@ -438,36 +468,36 @@ Para aumentar la dificultad de los  niveles de manera progresiva, se  actualizar
 
 ![](/Documentacion/EsquemaProgresoDelJuego.png)
 
-8. **Personajes<a name="_page24_x69.00_y490.00"></a>** 
-1. **Mr.<a name="_page24_x69.00_y539.00"></a> Bunny** 
+# **Personajes<a name="_page24_x69.00_y490.00"></a>** 
+## **Mr.<a name="_page24_x69.00_y539.00"></a> Bunny** 
 
 El jugador encarnará a un peluche con forma de conejo, el cual tendrá la misión de proteger a su dueño de los diversos monstruos que lo amenazan. Es verde azulado con una pajarita y un sombrero morados. 
 
-2. **Enemigos<a name="_page24_x69.00_y627.00"></a>** 
+## **Enemigos<a name="_page24_x69.00_y627.00"></a>** 
 
 Los  enemigos  son  una  representación  de  los  miedos  de  un  niño,  como  pueden  ser  sombras, monstruos, bichos..., así como la encarnación de problemas en casa y con sus padres.
 
-1. **Sombra**
+### **Zanybell**
 
 Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  El aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
 
 ![](/Documentacion/EnemigoSombra.png)
 
-Imagen del enemigo sombra
+Imagen del enemigo Zanybell
 
-2. **Plancton** 
+### **Evil Bunny** 
 
 Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mutiladas y el relleno expuesto. Representa el miedo a que las cosas preciadas se rompan y a los seres erráticos e impredecibles.
 
-3. **Esqueleto**
+### **Amalgante Bunny**
 
-Es el resultado de la fusión de gran cantidad de plancton debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
+Es el resultado de la fusión de gran cantidad de Evil Bunnies debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
 ![](/Documentacion/EnemigoEsqueleto.png)
 
-Imagen del enemigo Esqueleto 
+Imagen del enemigo Amalgante Bunny 
 
-4. **Kitestinger** 
+### **Kitestinger** 
 
 Es una especie de insecto que trepa por el techo, con una boca dentada en la espalda, una cola similar a la de  un escorpión y forma romboidal, haciendo alusión a la forma de una cometa de juguete. Este monstruo representa el temor que se puede transmitir en los niños 
 
@@ -477,7 +507,7 @@ las fobias y prejuicios de los padres como es el miedo a los insectos.
 
 Imagen del enemigo Kitenstinger
 
-5. **Comandante Blubs**
+### **Comandante Blubs**
 
 Es un gato de aspecto rechoncho, peludo y  de mal carácter perteneciente a la familia del niño. Es el archienemigo del conejo de peluche dado que este, debido a su curiosidad felina, intenta darle caza; por lo que es amenazador desde el punto de vista del jugador.
 
@@ -485,7 +515,7 @@ Es un gato de aspecto rechoncho, peludo y  de mal carácter perteneciente a la f
 
 Imagen del enemigo Comandante Blubs
 
-3. **Niño<a name="_page26_x69.00_y604.00"></a>** 
+## **Niño<a name="_page26_x69.00_y604.00"></a>** 
 
 El único personaje humano del juego es el niño de 2 años a quien tendrá que proteger el jugador. Solo  se ve su aspecto durante la cinemática inicial, durante el juego permanece completamente cubierto por una manta. 
 
@@ -493,8 +523,8 @@ El único personaje humano del juego es el niño de 2 años a quien tendrá que 
 
 Imagen del Niño 
 
-9. **Ítems<a name="_page27_x69.00_y302.00"></a>** 
-1. **Linterna** 
+# **Ítems<a name="_page27_x69.00_y302.00"></a>** 
+## **Linterna** 
 
 Este es el arma básica del juego y puede dejarse apoyada en el suelo en cualquier momento. Esta arma inflige daño a los enemigos cuando los alcanza con el foco de la luz. Tiene más poder sobre las sombras. Para recargar la linterna, hay que colocarla en una plataforma de carga, las cuales están distribuidas por el mapa. 
 
@@ -502,7 +532,7 @@ Este es el arma básica del juego y puede dejarse apoyada en el suelo en cualqui
 
 Imagen de la Linterna
 
-2. **Plastilina** 
+## **Plastilina** 
 
 La plastilina es un arma que consiste en lanzar bolas de plastilina a los enemigos, se obtiene y recarga  a  partir  de  un  cubo  de  plastilina.  Cuando  sueltas  este  objeto  la  munición  restante desaparece. Cuando las bolas impactan en el suelo se aplastan y se pueden usar de trampolín. Es más efectivo contra el plancton, al cual fulmina con un solo impacto. 
 
@@ -510,7 +540,7 @@ La plastilina es un arma que consiste en lanzar bolas de plastilina a los enemig
 
 Imagen de la Plastilina
 
-3. **Cohete** 
+## **Cohete** 
 
 El cohete se encuentra estático en una plataforma de disparo en el mapa. Para utilizarlo el jugador ha de ir hasta esta plataforma, apuntar el cohete al objetivo y accionar el interruptor de lanzamiento. Al cabo de un tiempo, la plataforma suministra un nuevo cohete. Derrota de un solo golpe al kitestinger. 
 
@@ -518,7 +548,7 @@ El cohete se encuentra estático en una plataforma de disparo en el mapa. Para u
 
 Imagen del Cohete
 
-4. **Plataforma de carga de linterna**
+## **Plataforma de carga de linterna**
 
 Son plataformas circulares donde se coloca la linterna para poder recargarla. Poseen un indicador que muestra mediante barras cuanta batería posee la linterna colocada en cada momento.
 
@@ -526,11 +556,11 @@ Son plataformas circulares donde se coloca la linterna para poder recargarla. Po
 
 Imagen de la Plataforma de Carga
 
-5. **Interruptores** 
+## **Interruptores** 
 
 Son interruptores que cuando están accionados emiten una pequeña luz. Sirven para activar la iluminación de la habitación, haciendo que desaparezcan todos los monstruos y así completar el nivel. 
 
-10. **Logros<a name="_page29_x69.00_y352.00"></a>** 
+# **Logros<a name="_page29_x69.00_y352.00"></a>** 
 
 A  lo  largo  de  los  niveles,  el  jugador  podrá  conseguir  diversos  logros.  Estos  no  proporcionan elementos  del  juego  ni  mejoras,  simplemente  son  unas  curiosidades  para  coleccionar  por  el jugador. 
 
@@ -547,11 +577,9 @@ A  lo  largo  de  los  niveles,  el  jugador  podrá  conseguir  diversos  logro
 - **¡Están por todas partes!:** Activa 20 trampas de Kitenstinger en una misma partida.
 - **Lluvia de Arañas:** Derriba a Kitenstinger lanzando únicamente bolas de plastilina.
 - **Apagón:** Los Plancton logran apagar un interruptor. 
-- **Por los Pelos:** Acaba el nivel cuando sólo falta un Plancton para el monstruo de debajo de 
+- **Por los Pelos:** Acaba el nivel cuando sólo falta un Plancton para el monstruo de debajo de la cuna. 
 
-la cuna. 
-
-11. **Música<a name="_page29_x69.00_y708.00"></a> y Sonidos** 
+# **Música<a name="_page29_x69.00_y708.00"></a> y Sonidos** 
 
 Música: 
 
@@ -586,7 +614,9 @@ Efectos de Sonido:
 - Lanzamiento de pelotas: sonido de lanzamiento que se reproduce al lanzar las pelotas de plastilina. 
 - Trampolín: sonido de rebote que se reproduce al saltar encima de un trampolín dejado por las bolas de plastilina que impactan en el suelo.
 - Lanzar/colocar objeto: sonido de caída cuando un objeto colisiona con una pared o suelo.
-12. **Arte<a name="_page31_x69.00_y103.00"></a> y Concept** 
+
+   
+# **Arte<a name="_page31_x69.00_y103.00"></a> y Concept** 
 
 Para realizar los conceptos generales del juego, nos hemos basado en la idea principal del juego intentando mezclarla con los bocetos y referencias que ya se han mencionado previamente en este documento. 
 
@@ -596,8 +626,8 @@ Por ello se han desarrollado distintos conceptos para cada enemigo antes de deci
 
 Para la realización de los elementos del escenario, nos hemos basado en objetos reales que tendría un niño pequeño en su habitación. La paleta de color de los objetos es variada y con colores claros para que sean perceptibles en el entorno oscuro del escenario.
 
-1. **Concept<a name="_page31_x69.00_y373.00"></a> art** 
-1. **Personajes**
+## **Concept<a name="_page31_x69.00_y373.00"></a> art** 
+### **Personajes**
 
 ![](/Documentacion/ConceptArtMrBunny.png)
 
@@ -605,7 +635,7 @@ Para la realización de los elementos del escenario, nos hemos basado en objetos
 
 ![](/Documentacion/ConceptArtSombra.png)
 
-Imagen de los diseños del enemigo sombra 
+Imagen de los diseños del enemigo Zanybell 
 
 ![](/Documentacion/ConceptArtSiluetasKitestinger.png)
 
@@ -623,13 +653,13 @@ Imagen de estudio del diseño del Kitestinger
 
 Imagen de los diseños del Comandante Blubs
 
-2. **Escenario**
+### **Escenario**
 
 ![](/Documentacion/ConceptArtEscenario.png)
 
 <a name="_page33_x69.00_y576.00"></a>Imagen de la visión general de la habitación 
 
-3. **Elementos**
+### **Elementos**
 
 ![](/Documentacion/ConceptArtLinterna.png)
 
@@ -651,7 +681,7 @@ Imagen del diseño y colores de la plastilina
 
 Imagen del tirachinas (descartado)
 
-2. **Diseño<a name="_page36_x69.00_y355.00"></a> Final 2D y 3D** 
+## **Diseño<a name="_page36_x69.00_y355.00"></a> Final 2D y 3D** 
 
 Para realizar los diseños finales de los personajes, elementos y escenarios, se ha recurrido a utilizar los bocetos creados anteriormente y mejorarlos, perfilando las líneas y asignando los colores definitivos.  
 
@@ -659,51 +689,59 @@ En la realización del Turn-Around se ha puesto a cada objeto y personaje en las
 
 Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en el modelado Low-Poly, y ZBrush para realizar el High-Poly de los modelos que lo necesiten. Tras terminar el modelo Low-Poly, se han mapeado todos los modelos, separándolos en Packs de modelos, para facilitar el texturizado y optimizar espacio. Más adelante se especificará como se texturiza y cuáles son los packs de modelos junto con que objetos tiene cada uno. 
 
-1. **Personajes**
+### **Personajes**
 
-<a name="_page36_x69.00_y564.00"></a>**Mr. Bunny:** 
+### **Mr. Bunny:<a name="_page36_x69.00_y564.00"></a>** 
 
 ![](/Documentacion/DiseñoFinalMrBunny.png)
 
-Imágenes del diseño definitivo del conejo
+ >Imágenes del diseño definitivo del conejo
 
 ![](/Documentacion/DiseñoFinalMrBunny3D.png)
 
-Render Mr. Bunny en 3DMax
+ >Render Mr. Bunny en 3DMax
 
-**Kitestinger** 
+### **Kitestinger** 
 
 ![](/Documentacion/DiseñoFinalKitestinger.png)
 
-Imagen del diseño definitivo y las versiones de color del Kitestinger
+ >Imagen del diseño definitivo y las versiones de color del Kitestinger
 
 ![](/Documentacion/TurnAroundKitestinger.png)
 
-**Comandante Blubs** 
+### **Comandante Blubs** 
 
 ![](/Documentacion/EnemigoComandanteBlubs.png)
 
-Imagen del diseño final de Comandante Blubs
+ >Imagen del diseño final de Comandante Blubs
 
 ![](/Documentacion/TurnAroundComandanteBlubs.png)
 
 ![](/Documentacion/DiseñoFinalComandanteBlubs3D.png)
 
-Imagen del modelo 3d de Comandante Blubs
+ >Imagen del modelo 3d de Comandante Blubs
 
-**Sombra** 
+### **Zanybell** 
 
 ![](/Documentacion/EnemigoSombra.png)
 
-Imagen definitiva Sombra
+ >Imagen definitiva Zanybell
 
 ![](/Documentacion/TurnAroundSombra.png)
 
-![](/Documentacion/DiseñoFinalSombra3D.png)
+![](/Documentacion/DiseñoFinalSombra3D.PNG)
 
-Imagen del modelo 3d de la sombra
+ >Imagen del modelo 3d de la Zanybell
 
-2. **Escenarios**
+### **Evil Bunny**
+
+![](/Documentacion/BocetosEvilBunnyV2.png)
+ >Tur-Around EvilBunny
+
+![](/Documentacion/DiseñoFinalEvilBunny3D.PNG.png)
+ >EvilBunny Modelo 3D
+
+## **Escenarios**
 
 ![](/Documentacion/DiseñoFinalEscenario.png)
 
@@ -721,7 +759,7 @@ Modelado Habitación1
 
 Modelado Habitación 3 
 
-3. **Objetos**
+## **Objetos**
 
 <a name="_page42_x69.00_y389.00"></a>**Linterna** 
 
@@ -729,7 +767,7 @@ Modelado Habitación 3
 
 Diseño final y modelo 3d de la linterna
 
-**Cargador Linterna** 
+### **Cargador Linterna** 
 
 ![](/Documentacion/DiseñoFinalLinternaYCarga2D.png)
 
@@ -739,7 +777,7 @@ Diseño final de la linterna y la base de carga (Turn-Around de ambos)
 
 Modelado de la base de carga de la linterna
 
-**Cohete** 
+### **Cohete** 
 
 ![](/Documentacion/DiseñoFinalCohete2D.png)
 
@@ -749,13 +787,13 @@ Diseño final del cohete
 
 Modelado 3D del cohete
 
-**Plastilina** 
+### **Plastilina** 
 
 ![](/Documentacion/DiseñoPlastilina2D3D.png)
 
 Diseño final y modelo 3d de la plastilina (dos versiones, bote abierto y cerrado)
 
-3. **Texturizado<a name="_page45_x69.00_y289.00"></a>** 
+## **Texturizado<a name="_page45_x69.00_y289.00"></a>** 
 
 Para realizar el texturizado nos basaremos en dos técnicas principales, ambas que den un aspecto estilizado a los modelos.
 
@@ -788,7 +826,7 @@ Algunas texturas ya creadas:
 
 Las paredes de la habitación están decoradas con  nubes sobre un fondo azul. Este diseño se encuentra en la parte superior de la pared.
 
-13. **Pensamiento<a name="_page46_x69.00_y361.00"></a> Computacional**
+# **Pensamiento<a name="_page46_x69.00_y361.00"></a> Computacional**
 
 En  este  documento  se  detallará  qué  y  cómo  este  proyecto  cumple  con  ciertos  elementos relacionados  con  el  pensamiento  computacional,  entendiendo  el  pensamiento  computacional como  la  habilidad  para  solucionar  problemas  en  la  vida  cotidiana  mediante  estrategias computacionales, o sea, estrategias  que relacionen aspectos de la informática en el mundo real aplicando técnicas que permitan llegar a una solución (factible o no factible).
 
@@ -797,7 +835,7 @@ El  reto  de  implementar  el  pensamiento  computacional  reside  en  que  debe
 Con esta introducción, nos centraremos ahora en explicar que destrezas computacionales son las que cumple este juego, observándolas apartado por apartado:    
 
 1. Abstracción: Durante el desarrollo del juego el jugador tendrá que encontrar y utilizar las armas  que  le  brinda  el  juego  para  poder  ganar,  el  reconocimiento  de  estas  armas distribuidas en el escenario como claves  para derrotar enemigos es fundamental en el juego. Lo mismo ocurre con los interruptores, reconocerlos y activarlos puede hacer que ganes  más  deprisa,  pero  primero  tienes  que  saber  que  objeto  en  el  escenario  es  un interruptor  que  se  puede  pulsar.     Por otro lado, el jugador también deberá reconocer los enemigos y cómo se comporta cada uno, encontrando un patrón particular por cada tipo de monstruo.    
-1. Evaluación: Cada enemigo tiene un tipo de arma al que es más débil, por lo tanto, el jugador tendrá que elegir si utilizar el arma actual o ir a buscar el arma  más fuerte contra ese monstruo. También puede colocar las armas en una disposición que le resulte más cómoda 
+2. Evaluación: Cada enemigo tiene un tipo de arma al que es más débil, por lo tanto, el jugador tendrá que elegir si utilizar el arma actual o ir a buscar el arma  más fuerte contra ese monstruo. También puede colocar las armas en una disposición que le resulte más cómoda 
 
 de gestionar por el escenario, lo que le facilitaría su uso cuando sea necesario. Todo esto se engloba dentro de la gestión de recursos que ofrece el juego y saber cómo y cuándo utilizar cada uno, teniendo en cuenta cual es el enemigo y  que estrategia  quiere seguir. Una estrategia podría ser aguantar todo lo que dura la noche derrotando y  ahuyentando a los enemigos mientras que otra muy diferente podría ser intentar encontrar y activar todos los interruptores del escenario para poder pasar el nivel más rápido. Existiría una tercera opción que sería  realiza una técnica  mixta, intentando aguantar la noche y si se encuentra los interruptores  por  el  camino,  los  activa.  En  este  caso  existe  un  conflicto  entre  ambas estrategias, o defiendes al bebé o dejas un poco de lado al bebé para intentar conseguir superar el nivel más rápido, y esto al final es un sistema de decisión del propio jugador.
 
@@ -818,7 +856,8 @@ Una vez conocidos todos estos limitantes, tendremos que poder realizar un contro
 - Que armas son las que más se utilizan, de este modo podremos nivelarlas para que se utilicen de la manera que hemos establecido.
 - Almacenar el recorrido que hacen durante la sesión de juego en cada mapa, guardando los puntos donde más tiempo están como puntos críticos, así sabremos si realmente todo el espacio utilizable es útil o no y podremos modificar el espacio no útil para que el recorrido por toda la sala sea uniforme, y no solo estando en tres sitios favorecer el ganar la partida.    
 - Qué tipo de comportamiento tienen al aparecer un enemigo (evasivo o atacante). Este comportamiento puede ser fundamental para darnos claves como si los enemigos causan la sensación correcta, como puede ser asustar, pero no tenerles miedo. Ya que si todos los jugadores huyesen de los enemigos podría ser que les pareciese aburrido luchar contra ellos o que tienen el suficiente miedo como para no querer intentar enfrentarse a ellos. En este caso, habría que rediseñar a los enemigos completamente.
-14. **Modelo<a name="_page48_x69.00_y340.00"></a> de Negocio**
+
+  # **Modelo<a name="_page48_x69.00_y340.00"></a> de Negocio**
 
 Para realizar el modelo de negocio primero identificaremos quienes son los interesados, tras esto haremos un análisis de estor con la herramienta del mapa de empatía y tras esto elaboraremos un plan de negocio visionando la visión del negocio junto con el Business Model Canvas. 
 
@@ -1118,8 +1157,8 @@ En el apartado de fuente de ingresos, exploraremos cómo generamos ingresos como
 - **Fondos recibidos de inversiones:** Son capital que invierten en nuestra empresa con el objetivo de desarrollar el videojuego, pueden ir desde donaciones hasta ayudas gubernamentales. 
 - **Venta de métricas y datos recopilados:** Consiste en la venta de información de métricas y resultados de tus propias partidas, de manera que puedas analizar tu progreso, puede ir desde venta a personas individuales hasta a organizaciones. 
 
-15. **Análisis <a name ="MDA"></a> MDA**   
-15.1. **Estética** 
+# **Análisis <a name ="MDA"></a> MDA**   
+## **Estética** 
 La parte estética de nuestro videojuego dentro del análisis MDA identifica nuestro videojuego dentro de una “diversión” narrativa, sensación y desafío. A continuación, desglosamos estos apartados:
  
 Fantasía:  
@@ -1131,7 +1170,7 @@ La sensación de 'Good Night Mr. Bunny' está diseñada para sumergir al jugador
 Desafío:   
 El desafío en 'Good Night Mr. Bunny' es otro componente clave de la estética del juego. Controlar a los monstruos y proteger al niño es un desafío que exige estrategia y habilidad. Los jugadores experimentan un constante equilibrio entre el miedo de ser atrapados por los monstruos (o que los monstruos capturen al niño) y la necesidad de cumplir con su misión. Este desafío se convierte en un factor motivador, ya que los jugadores se esfuerzan por superar obstáculos y avanzar por los distintos escenarios, manteniendo la inmersión en la estética de la experiencia nocturna y aterradora del juego.   
 
-15.2. **Mecánicas**   
+## **Mecánicas**   
 Las mecánicas del juego "Good Night Mr. Bunny" se centran en la gestión estratégica de las armas disponibles en el entorno y la toma de decisiones que el jugador debe realizar para defenderse de los monstruos. Estas mecánicas añaden profundidad al juego al ofrecer a los jugadores opciones para abordar los desafíos de manera eficiente.   
 
 Gestión de armas:   
@@ -1143,13 +1182,13 @@ Además de la gestión de armas, el juego presenta una mecánica adicional que p
 Mecánicas de enemigos:   
 Con respecto a los enemigos, estos tienen distintos tipos de mecánicas generales dependiendo del enemigo. Algunos pueden atacar al jugador para hacerle daño, otros son capaces de interferir con ciertos elementos de la escena para afectar negativamente al jugador, y la mayoría son capaces de dañar al niño. El objetivo del jugador con los enemigos es utilizar las distintas armas y elementos del escenario para evitar que lleven a cabo ciertas acciones negativas y matar a los que puedan morir.   
 
-15.3. **Dinámicas**   
+## **Dinámicas**   
 En las dinámicas del videojuego, gracias a las distintas mecánicas que existen, el jugador podría realizar distintas dinámicas emergentes. Pudiendo jugar al juego de la manera común (aguantar la noche o apagar interruptores para pasar a la siguiente noche), pero también podrían surgir nuevas dinámicas como realizar un speed run del juego y acabarlo en el menor tiempo posible. O incluso intentar “Jugar” con los enemigos, utilizando sus distintas percepciones para que actúen de maneras inesperadas. 
 También podrían intentar “redecorar” la habitación, moviendo todos los objetos que pueda coger de un lado a otro del cuarto en el que estén, llegando a crear formas inesperadas.   
 
 El hecho de que los jugadores tengan dos formas de completar el nivel ya sea sobreviviendo toda la noche o encendiendo los interruptores, añade una dimensión adicional a las mecánicas del juego. Esto permite a los jugadores elegir su enfoque preferido y adaptarse a su estilo de juego. La capacidad de elegir entre diferentes enfoques agrega variedad y rejugabilidad al juego.   
 
-16. **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
+# **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 
 CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
 CHRISTIAN CAMPOS PAN  Programación   
@@ -1159,7 +1198,7 @@ UMESH MOSTAJO SAEZ  2D, interfaces y texturas
 HECTOR MUÑOZ GÓMEZ  2D y Programación    
 PAULA ROJO DE LA FUENTE  3D y diseño 
 
-17. **Anexos<a name="_page62_x69.00_y577.00"></a>** 
+# **Anexos<a name="_page62_x69.00_y577.00"></a>** 
 
 VERSION DE UNITY 2022.3.2f1 Cuadro de Referencias
 
