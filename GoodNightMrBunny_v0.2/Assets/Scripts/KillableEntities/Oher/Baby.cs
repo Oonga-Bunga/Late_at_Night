@@ -10,8 +10,8 @@ public class Baby : AKillableEntity
 
     public static Baby Instance => _instance;
 
-    [SerializeField] private int maxEvilBunnies;
-    private int nEvilBunnies = 0;
+    [SerializeField] private int _maxEvilBunnies;
+    private int _nEvilBunnies = 0;
 
     [SerializeField] private Transform _zanybellPoint;
     [SerializeField] private Transform _evilBunnyPoint;
@@ -46,9 +46,9 @@ public class Baby : AKillableEntity
 
     public void EvilBunnyGoesUnderBed()
     {
-        nEvilBunnies++;
+        _nEvilBunnies++;
         //Actualizar morpher
-        if(nEvilBunnies >= maxEvilBunnies)
+        if(_nEvilBunnies >= _maxEvilBunnies)
         {
             //activar animación de ataque del bicho gigante
             //cuando termine el jugador pierde

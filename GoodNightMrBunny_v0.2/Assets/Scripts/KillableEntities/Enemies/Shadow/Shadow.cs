@@ -17,6 +17,7 @@ namespace Shadow
         [SerializeField] private float _fleeingSpeed = 10;
         private bool _isAvoiding = false;
         [SerializeField] private float _stunTime = 5;
+        private bool _isStunned = false;
         [SerializeField] private float _fleeingBuffer = 1;
         private float _fleeingTime = 0;
         [SerializeField] private float _switchDirectionCooldown = 2f;
@@ -120,9 +121,12 @@ namespace Shadow
             {
                 case IKillableEntity.AttackSource.Flashlight:
                     ChangeHealth(damage, true);
-                    _animator.SetBool(_animatorIsFleeing, true);
-                    _fleeingTime = 1;
-                    _currentSpeed = _fleeingSpeed;
+                    if (!_isStunned)
+                    {
+                        _animator.SetBool(_animatorIsFleeing, true);
+                        _fleeingTime = 1;
+                        _currentSpeed = _fleeingSpeed;
+                    }
                     break;
                 case IKillableEntity.AttackSource.ClayBall:
                 case IKillableEntity.AttackSource.Rocket:
@@ -134,12 +138,14 @@ namespace Shadow
         public void Stunned()
         {
             _animator.SetBool(_animatorIsStunned, true);
+            _isStunned = true;
             Invoke("Recover", _stunTime);
         }
 
         private void Recover()
         {
             _animator.SetBool(_animatorIsStunned, false);
+            _isStunned = false;
         }
 
         public void StartAvoiding()
