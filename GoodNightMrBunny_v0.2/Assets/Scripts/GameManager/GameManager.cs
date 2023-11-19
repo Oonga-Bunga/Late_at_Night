@@ -11,6 +11,7 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 [System.Serializable]
 public class MyVector3
@@ -168,13 +169,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        LevelJsons levelJsons = FindObjectOfType<LevelJsons>();
+
+        if (levelJsons != null)
+        {
+            _sceneJsonFile = levelJsons.SceneJsonFile;
+            _enemyWavesJsonFile = levelJsons.EnemyWavesJsonFile;
+        }
     }
 
     private void Start()
     {
         // Iniciar la generación del nivel en una corrutina
         StartCoroutine(GenerateLevel());
-       
     }
 
     private IEnumerator GenerateLevel()
@@ -696,7 +704,17 @@ public class GameManager : MonoBehaviour
         {
             _currentActivatedSwitches++;
             _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
-            _upperText.GetComponent<Animator>().SetTrigger("ShowText");
+            Invoke("ResetText", 3);
+
+            /*
+            Sequence mySequence = DOTween.Sequence();
+
+            
+            mySequence.Append(_upperText.transform.DOLocalMoveY(-91, 1));
+            mySequence.AppendInterval(3);
+            mySequence.Append(_upperText.transform.DOLocalMoveY(91, 1));
+            */
+
             if (_currentActivatedSwitches == _totalSwitches)
             {
                 PlayerWon();
@@ -706,8 +724,21 @@ public class GameManager : MonoBehaviour
         {
             _currentActivatedSwitches--;
             _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
-            _upperText.GetComponent<Animator>().SetTrigger("ShowText");
+            Invoke("ResetText", 3);
+
+            /*
+            Sequence mySequence = DOTween.Sequence();
+
+            mySequence.Append(_upperText.transform.DOLocalMoveY(450f, 1));
+            mySequence.AppendInterval(3);
+            mySequence.Append(_upperText.transform.DOLocalMoveY(630f, 1));
+            */
         }
+    }
+    
+    private void ResetText()
+    {
+        _upperText.text = "";
     }
 
     private void PlayerWon()

@@ -35,7 +35,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && canPause/*&& GameManager.Instance.IsInGame*/)
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)
         {
             PauseGame();
         }

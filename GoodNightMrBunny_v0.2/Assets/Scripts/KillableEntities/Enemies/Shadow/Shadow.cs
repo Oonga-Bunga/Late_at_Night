@@ -61,6 +61,7 @@ namespace Shadow
         {
             if (_target != new Vector3(-9999, -9999, -9999))
             {
+
                 _animator.SetBool(_animatorIsWalking, true);
                 _rb.velocity = Vector3.zero;
                 if (_isAvoiding)
