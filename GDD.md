@@ -488,6 +488,7 @@ Imagen del enemigo Zanybell
 ### **Evil Bunny** 
 
 Es de aspecto similar al conejo de peluche, pero destrozado, con extremidades mutiladas y el relleno expuesto. Representa el miedo a que las cosas preciadas se rompan y a los seres erráticos e impredecibles.
+![](/Documentacion/DiseñoFinalEvilBunny2D.png)
 
 ### **Amalgante Bunny**
 
