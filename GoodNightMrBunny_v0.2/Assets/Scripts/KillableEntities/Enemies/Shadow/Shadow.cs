@@ -161,14 +161,17 @@ namespace Shadow
 
         private void Turn()
         {
+            RaycastHit upHit;
             RaycastHit fowardHit;
             RaycastHit leftHit;
             RaycastHit rightHit;
             Vector3 raycastOffset = Vector3.zero;
 
+            Vector3 up = _actualCenter.position + transform.up * _rayOffset * 2;
             Vector3 left = _actualCenter.position - transform.right * _rayOffset;
             Vector3 right = _actualCenter.position + transform.right * _rayOffset;
 
+            Debug.DrawRay(up, transform.up * _obstacleDetectionDistance, Color.red);
             Debug.DrawRay(left, transform.forward * _obstacleDetectionDistance, Color.yellow);
             Debug.DrawRay(right, transform.forward * _obstacleDetectionDistance, Color.yellow);
 
@@ -179,7 +182,7 @@ namespace Shadow
             bool leftHasHit = Physics.Raycast(left, transform.forward, out leftHit, _obstacleDetectionDistance, _groundLayer);
             bool rightHasHit = Physics.Raycast(right, transform.forward, out rightHit, _obstacleDetectionDistance, _groundLayer);
 
-            if (!fowardHasHit)
+            if (!fowardHasHit || Physics.Raycast(up, transform.up, out upHit, _obstacleDetectionDistance, _groundLayer))
             {
                 if (leftHasHit && rightHasHit)
                 {
