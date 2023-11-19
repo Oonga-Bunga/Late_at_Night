@@ -20,7 +20,7 @@ HÉCTOR MUÑOZ GÓMEZ
 |Versión |Autores |Fecha |Comentarios |
 | - | - | - | - |
 |1\.0 |<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE</p><p> NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|22/10/2023 |Versión inicial  |
-|1\.1|<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE </p><p>NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|19/11/2023|Versión Beta del Juego|
+|1\.1|<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE </p><p>NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|19/11/2023|<p>Versión Beta del Juego</p><p>Cambios: Interfaces, Niveles, Mecánicas de enemigos, Personajes, Arte y concept, MDA.</p>|
 |||||
 |||||
 1. [Introducción...................................................................................................................................................... 5 ](#_page4_x69.00_y103.00)
@@ -186,7 +186,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *“El pequeño se aferraba con fuerzas a su conejito de peluche:* 
 
-*‘Por favor, haz que los monstruos se vayan,’ rogaba.”* 
+*‘Por favor, haz que los monstruos se vayan’ rogaba.”* 
 
 ![](/Documentacion/Pagina2Cuento.png)
 
@@ -256,13 +256,15 @@ En el PC será Clic Derecho del ratón. En dispositivos móviles será un botón
 
 La cámara en el juego será en primera persona, permitiendo ver las extremidades del personaje parcialmente, pues estará limitada a ciertos ángulos.  
 
-Controles del jugador con ![](/Documentacion/ControlesEsquema.png)teclado y ratón 
+![](/Documentacion/ControlesEsquema.png)
+
+*Controles del jugador con teclado y ratón*
 
 <a name="_page13_x387.00_y448.00"></a>[Img 8 ](#_page63_x75.00_y337.00)
 
-Controles del jugador con ![](/Documentacion/ControlesEsquema2.png)
+![](/Documentacion/ControlesEsquema2.png)
 
-móvil 
+*Controles del jugador con móvil*
 
 <a name="_page13_x387.00_y575.00"></a>[Img 9 ](#_page63_x75.00_y362.00)
 
@@ -277,7 +279,7 @@ Otro método es  usar elementos del escenario para  distraer al enemigo, eso se 
 
 - **Linterna :**  
 
-El  jugador  tendrá  que  apuntar  a  los  monstruos  que  sean  débiles  frente  a  la  luz  para ahuyentarlos y/o matarlos.  Los enemigos más débiles frente a esta arma son las Sombras.  
+El  jugador  tendrá  que  apuntar  a  los  monstruos  que  sean  débiles  frente  a  la  luz  para ahuyentarlos y/o matarlos.  Los enemigos más débiles frente a esta arma son los Zanybell.  
 
 La linterna se quedará sin batería progresivamente, y el jugador tendrá que ir a las estaciones de carga para poder recargarla y depositarla en  esta. Mientras  está cargando, el jugador puede  hacer  otras  acciones.  La  linterna  se  puede  recoger  en  cualquier  momento independientemente de cuanta batería tenga.  
 
@@ -292,7 +294,7 @@ La luz de la linterna empezará a parpadear a medida que vaya bajando la baterí
 
 Se encuentran repartidos por el escenario y el jugador puede interactuar con ellos para recoger 6 bolas de plastilina que puede lanzar a los enemigos al mantener pulsado el botón de ataque. Cuanto más tiempo pulse el botón, más lejos llega el lanzamiento. 
 
-Estas bolas causan daño a los enemigos, matando de un golpe al Plancton, causan algún daño a Kitenstinger y apenas daña a la Sombra. Si golpean una superficie, como el suelo, se quedan pegadas y el jugador las puede usar como trampolín de un solo uso. Si se alcanza un número determinado de trampolines en el escenario, los más viejos irán desapareciendo para ser reemplazados con cada nuevo trampolín. 
+Estas bolas causan daño a los enemigos, matando de un golpe al Evil Bunny, causan algún daño a Kitenstinger y apenas daña al Zanybell. Si golpean una superficie, como el suelo, se quedan pegadas y el jugador las puede usar como trampolín de un solo uso. Si se alcanza un número determinado de trampolines en el escenario, los más viejos irán desapareciendo para ser reemplazados con cada nuevo trampolín. 
 
 - **Cohete**:  
 
@@ -300,7 +302,7 @@ En la habitación hay varias estaciones de lanzamiento, generalmente en zonas al
 
 Tras  el lanzamiento, el cohete se precipita hacia la dirección indicada, donde chocará y explotará contra el primer elemento con el que se encuentre.
 
-Esta arma derriba de un solo golpe al Kitenstinger. Su explosión sirve para dispersar y dañar a los grupos de Plancton. 
+Esta arma derriba de un solo golpe al Kitenstinger. Su explosión sirve para dispersar y dañar a los grupos de Evil Bunny. 
 
 ## **Mecánicas<a name="_page15_x69.00_y323.00"></a> de Niveles** 
 - **Aguantar:**  
@@ -314,15 +316,21 @@ Existirán varios interruptores esparcidos por la habitación, los cuales el jug
 ## **Mecánicas<a name="_page15_x69.00_y546.00"></a> de Enemigos** 
 - **Comandante Blubs:**  
 
-En ocasiones, un gato (denominado “Comandante Blubs”) irrumpirá en la habitación donde se desarrolla el nivel. Dicho enemigo no consta de debilidades ni puede ser eliminado, por lo cual, la única opción del jugador será esconderse o distraerlo. Una vez que el gato atrapa al jugador, se pierde el nivel, pues se lo lleva fuera de la habitación.  
+Entra en la habitación al menos una vez por nivel y unos segundos antes de pasar a la habitación se le escucha rascar la puerta. A medida que se incrementa la dificultad de los niveles su frecuencia aumenta y el tiempo entre rascar la puerta y entrar a la habitación se reduce. Cuando entra en la habitación se puede ver un poco de luz procedente de la puesta entreabierta. 
 
-El gato no hace ruido al avanzar de manera continua, pero si hará algún efecto de sonido de vez en cuando para indicar su posición. Se avisa de su llegada cuando se escucha el arañazo en la puerta de la habitación y entra, haciendo que entre algo de luz del pasillo. En ocasiones, al no encontrar al jugador, puede llevarse alguno de los juguetes que el jugador usa como arma, complicando un poco más el nivel. 
+Este enemigo no consta de debilidades ni puede ser eliminado, por lo cual, la única opción del jugador será esconderse o distraerlo. El jugador puede utilizar la linterna para cegarlo temporalmente, sin embargo, se va adquiriendo resistencia a este efecto hasta que termina no afectándole. 
 
-- **Sombra Básica:**  
+El gato no hace ruido al avanzar, pero si hará algún efecto de sonido de vez en cuando para indicar su posición. En ocasiones, al no encontrar al jugador, puede llevarse alguno de los juguetes que el jugador usa como arma, complicando un poco más el nivel. 
 
-Aparece desde las paredes y se mueve  flotando  en línea recta hacia la cuna. Cuando el jugador lleva equipada una linterna siguen avanzando hacia la cuna, pero manteniéndose lejos del jugador y si puede ser fuera de su campo de visión. Cuando el jugador les ilumina se  vuelven  más  rápidos  e  intentan  moverse  de  forma  errática  para  que  sea  más  difícil apuntarles. 
+Una vez ha entrado en el nivel, el gato lo recorrerá de forma aleatoria buscando al jugador. El gato tiene cierto rango de detección, y cuando el jugador entra en él se empezará a llenar un icono que indica que el gato le está empezando a detectar, y cuando se llene del todo el gato pasará al modo de persecución. Si pasa cierto tiempo y el gato no ha detectado al jugador este se marchará. 
 
-Si  hay  una  linterna  que  se  carga  en  una  estación  de  carga  y  una  sombra  pasa  lo suficientemente cerca, irá a esa estación para quitarle la carga a la linterna e impedir que cargue durante cierto tiempo, pero el jugador puede interrumpir a la sombra empleando las  armas  del  escenario.  Si  el  jugador  posee  una  linterna  no  podrá  realizar  este comportamiento. 
+En el estado de persecución el icono mencionado antes estará siempre visible, el gato se dirigirá rápidamente hacia el jugador e intentará atacarlo, y si le atrapa el jugador perderá instantáneamente. Este estado de persecución durará durante cierto tiempo hasta que el jugador se esconda durante el tiempo suficiente, durante el cual el icono empezará a vaciarse. 
+
+- **Zanybell:**  
+
+Aparece desde las paredes y se mueve flotando en línea recta hacia la cuna. Cuando el jugador lleva equipada una linterna siguen avanzando hacia la cuna, pero manteniéndose lejos del jugador y si puede ser fuera de su campo de visión. Cuando el jugador les ilumina se vuelven más rápidos e intentan moverse de forma errática para que sea más difícil apuntarles. 
+
+Si hay una linterna que se carga en una estación de carga y un Zanybell pasa lo suficientemente cerca, irá a esa estación para quitarle la carga a la linterna e impedir que cargue durante cierto tiempo, pero el jugador puede interrumpir al Zanybell empleando el resto de armas del escenario. Si el jugador posee una linterna no podrá realizar este comportamiento. 
 
 Al llegar junto a la cuna empieza a hacer daño al niño. 
 
@@ -330,25 +338,25 @@ Es débil contra la luz de la linterna y tras acumular cierta cantidad de daño 
 
 - **Evil Bunny**  
 
-Es de tamaño reducido, aparecen de sitios estrechos y cerrados como los huecos de los muebles. Se mueve en sprints cortos pero rápidos mientras se acerca a la cuna realizando un camino serpenteante. 
+Es de tamaño reducido, aparecen de sitios estrechos y cerrados como los huecos de los muebles. Se mueve en sprints cortos pero rápidos mientras se acerca a la cuna realizando un camino serpenteante.  
 
-Si hay un interruptor encendido a cierta distancia, va hacia  él e  intenta apagarlo. Como necesitan ser al menos 3 para completar esta acción, llama a otros Plancton cercanos para ayudarle hasta sean suficientes en el interruptor, en cuyo caso se apaga y no puede volver a encenderse durante un periodo de tiempo. Esta acción solo se intenta  llevar a cabo si hay suficientes Plancton en el escenario.
+Si hay un interruptor encendido a cierta distancia, va hacia él e intenta apagarlo. Como necesitan ser al menos 3 para completar esta acción, llama a otros Evil Bunny cercanos para ayudarle hasta sean suficientes en el interruptor, en cuyo caso se apaga y no puede volver a encenderse durante un periodo de tiempo. Esta acción solo se intenta llevar a cabo si hay suficientes Evil Bunny en el escenario.  
 
 Otro de sus comportamientos característicos es que intenta viajar en grupo con otros de su especie.  
 
-Desaparece tras ser golpeado una vez por una bola de plastilina o acumular cierta cantidad de daño con otras armas.
+Desaparece tras ser golpeado una vez por una bola de plastilina o el cohete, o tras acumular cierta cantidad de daño con la linterna. 
 
-Cuando llegan debajo de la cuna ya no pueden recibir daño y se van juntando formando un monstruo  más  grande.  Cuando  se  juntan  un  gran  número,  el  monstruo  fusionado  se completa y automáticamente se pierde la partida.
+Cuando llegan debajo de la cuna ya no pueden recibir daño y se van juntando formando un monstruo más grande. Cuando se juntan varios, el monstruo fusionado (Amalgamate Bunny) se completa y automáticamente se pierde la partida. 
 
 - **Mecánica Kitestinger:**  
 
 Aparece desde las esquinas superiores de la habitación y se desplaza por el techo y las paredes acercándose a la cuna y lanzando trampas desde la boca que posee en la espalda, las cuales caen justo debajo de él.  
 
-Al  elegir  la  ruta,  pasará  justo  por  encima  de  ciertos  puntos  clave  y  objetos  como  los interruptores,  cohetes,  estaciones  de  recarga,  cuna,  armas  que  no  se  encuentran  en posesión del jugador, etc. Si un objeto se mueve de sitio elige otro punto por el que pasar y si el jugador se encuentra justo debajo lanzará automáticamente una trampa intentando atinar a este. Si ya hay cierto número de trampas en el escenario no pone más, y no ponen trampas cerca de otras existentes.
+El kitestinger irá lanzando trampas cada cierto tiempo y si el jugador se encuentra justo debajo lanzará automáticamente una trampa intentando atinar a este. Si ya hay cierto número de trampas en el escenario no pone más, y no ponen trampas cerca de otras existentes. 
 
-Las  trampas  permanecen  inmóviles  en  su  sitio  hasta  que  se  acerca  el  jugador  a  cierta distancia, en ese momento sale de ellas una figura propulsada por un muelle que golpea al jugador y lo aturde durante un tiempo y le empuja.
+Las trampas permanecen inmóviles en su sitio hasta que se acerca el jugador a cierta distancia, en ese momento sale de ellas una figura propulsada por un muelle que golpea al jugador y lo aturde durante un tiempo y le empuja. 
 
-Para atacar al niño ha de hallarse justo encima de este.
+Para atacar al niño ha de hallarse justo encima de este. 
 
 Desaparece tras ser golpeado una vez por un cohete o acumular gran cantidad de daño con otras armas. 
 
@@ -479,7 +487,7 @@ Los  enemigos  son  una  representación  de  los  miedos  de  un  niño,  como 
 
 ### **Zanybell**
 
-Es una sombra que consiste en una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  El aspecto de la sombra hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
+Su apariencia es la de una cabeza flotante con forma de bufón. Este monstruo representa el miedo que tienen los niños cuando se les acerca demasiado un extraño.  Su aspecto hace referencia a los payasos (Joker, IT) ya que son personajes que pueden provocan miedo en los niños.   
 
 ![](/Documentacion/EnemigoSombra.png)
 
@@ -495,7 +503,7 @@ Imagen del enemigo Evil Bunny
 
 ### **Amalgamate Bunny**
 
-Es el resultado de la fusión de gran cantidad de Evil Bunnies debajo de la cuna. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
+Es el resultado de la fusión varios Evil Bunnies debajo de la cuna, de ahí su nombre. Su origen es lo desconocido que se encuentra justo  en un punto ciego para el niño, haciendo alusión al miedo del “monstruo de debajo de la cama”.
 
 ![](/Documentacion/EnemigoAmalgamateBunny.png)
 
@@ -530,7 +538,7 @@ Imagen del Niño
 # **Ítems<a name="_page27_x69.00_y302.00"></a>** 
 ## **Linterna** 
 
-Este es el arma básica del juego y puede dejarse apoyada en el suelo en cualquier momento. Esta arma inflige daño a los enemigos cuando los alcanza con el foco de la luz. Tiene más poder sobre las sombras. Para recargar la linterna, hay que colocarla en una plataforma de carga, las cuales están distribuidas por el mapa. 
+Este es el arma básica del juego y puede dejarse apoyada en el suelo en cualquier momento. Esta arma inflige daño a los enemigos cuando los alcanza con el foco de la luz. Tiene más poder sobre los Zanybell. Para recargar la linterna, hay que colocarla en una plataforma de carga, las cuales están distribuidas por el mapa. 
 
 ![](/Documentacion/ItemLinterna.png)
 
@@ -538,7 +546,7 @@ Imagen de la Linterna
 
 ## **Plastilina** 
 
-La plastilina es un arma que consiste en lanzar bolas de plastilina a los enemigos, se obtiene y recarga  a  partir  de  un  cubo  de  plastilina.  Cuando  sueltas  este  objeto  la  munición  restante desaparece. Cuando las bolas impactan en el suelo se aplastan y se pueden usar de trampolín. Es más efectivo contra el plancton, al cual fulmina con un solo impacto. 
+La plastilina es un arma que consiste en lanzar bolas de plastilina a los enemigos, se obtiene y recarga  a  partir  de  un  cubo  de  plastilina.  Cuando  sueltas  este  objeto  la  munición  restante desaparece. Cuando las bolas impactan en el suelo se aplastan y se pueden usar de trampolín. Es más efectivo contra el Evil Bunny, al cual fulmina con un solo impacto. 
 
 ![](/Documentacion/ItemPlastilina.png)
 
@@ -580,8 +588,8 @@ A  lo  largo  de  los  niveles,  el  jugador  podrá  conseguir  diversos  logro
 - **It’s a Trap!:** Activa una trampa de Kitenstinger.
 - **¡Están por todas partes!:** Activa 20 trampas de Kitenstinger en una misma partida.
 - **Lluvia de Arañas:** Derriba a Kitenstinger lanzando únicamente bolas de plastilina.
-- **Apagón:** Los Plancton logran apagar un interruptor. 
-- **Por los Pelos:** Acaba el nivel cuando sólo falta un Plancton para el monstruo de debajo de la cuna. 
+- **Apagón:** Los Evil Bunny logran apagar un interruptor. 
+- **Por los Pelos:** Acaba el nivel cuando sólo falta un Evil Bunny para el monstruo de debajo de la cuna. 
 
 # **Música<a name="_page29_x69.00_y708.00"></a> y Sonidos** 
 
@@ -596,9 +604,9 @@ Música:
 - Apretura de la puerta. (indicador de cuando el gato entra en la habitación) 
 - Ronroneo del gato (indicador de posición del gato, no es constante)
 - Arañazos del gato en paredes sutiles (indicador de posición del gato, no es constante). 
-- Risa tenebrosa suave (indicador de que Sombra está en la habitación, no es constante) 
+- Risa tenebrosa suave (indicador de que Zanybell está en la habitación, no es constante) 
 - Sonido de pasos consecutivos (Efecto de sonido Kitestinger, indica cuando está cerca del jugador en la habitación) 
-- Risitas de niños  (Efecto de sonido que suena cuando un Plancton aparece, indicando  al  jugador  que  tiene  que  tener  cuidado  porque  se  pueden acumular). Este efecto tiene que parecer que es lejano. 
+- Risitas de niños  (Efecto de sonido que suena cuando un Evil Bunny aparece, indicando  al  jugador  que  tiene  que  tener  cuidado  porque  se  pueden acumular). Este efecto tiene que parecer que es lejano. 
 - In Game (escenario 2): todavía por decidir 
 - In Game (escenario 3): todavía por decidir 
 - Game over: Suena una música tétrica y se oye al niño llorando. 
@@ -749,15 +757,15 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
 
 ![](/Documentacion/TurnAroundSombra.png)
 
->Turn around del ZanyBell
+>Turn around del Zanybell
 
 ![](/Documentacion/DiseñoFinalZanybell3D.jpeg)
 
- >Imagen del modelo 3d de la Zanybell
+ >Imagen del modelo 3d del Zanybell
 
 ![](/Documentacion/TexturizadoZanybell3D.jpeg)
 
- >Imagen del modelo 3d texturizado de la Zanybell
+ >Imagen del modelo 3d texturizado del Zanybell
 
 ### **Evil Bunny**
 ![](/Documentacion/DiseñoFinalEvilBunny2D.png)
@@ -893,7 +901,7 @@ Las paredes de la habitación están decoradas con  nubes sobre un fondo azul. E
 ![](/Documentacion/UV_EvilBunny_Martillo.jpg)
 >UVS del martillo Evil Bunny
 
-### **Texturas Amalgamate Bunny
+### **Texturas Amalgamate Bunny**
 ![](/Documentacion/TexturaAmalgamteBunny.png)
 >Color base del Amalgamate Bunny
 
