@@ -368,16 +368,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Loading finished!");
 
         yield return new WaitForSeconds(2);
-
         _loadingScreen.SetActive(false);
         Destroy(_loadingScreenCamera.gameObject);
-
         //Mostrar instrucciones de nivel (Comentar en caso de quere quitar)
         try
         {
             FindObjectOfType<LevelMenuManager>().OpenInstructionsPanel();
         }
-        catch { }
+        catch {}
 
         #endregion
 
@@ -386,7 +384,6 @@ public class GameManager : MonoBehaviour
         _gameUI.SetActive(true);
         //_pauseManager.PauseGame();
         _isInGame = true;
-
         #endregion
 
         #region Start enemy waves
@@ -743,6 +740,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerWon()
     {
+        StopAllCoroutines();
         _isInGame = false;
         _winLoseText.text = "You won!";
         _winLoseText.gameObject.SetActive(true);
@@ -751,6 +749,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerLost()
     {
+        StopAllCoroutines();
         _isInGame = false;
         _winLoseText.text = "You lost...";
         _winLoseText.gameObject.SetActive(true);

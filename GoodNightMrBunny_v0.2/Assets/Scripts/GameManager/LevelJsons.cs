@@ -6,16 +6,16 @@ public class LevelJsons : MonoBehaviour
 {
     private TextAsset _sceneJsonFile;
     private TextAsset _enemyWavesJsonFile;
+    private static GameObject sampleInstance;
 
     #region Methods
 
     private void Awake()
     {
-        
-    }
+        if (sampleInstance != null)
+            Destroy(sampleInstance);
 
-    void Start()
-    {
+        sampleInstance = gameObject;
         DontDestroyOnLoad(this);
     }
 

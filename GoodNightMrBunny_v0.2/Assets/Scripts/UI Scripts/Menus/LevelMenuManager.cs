@@ -76,6 +76,8 @@ namespace UI_Scripts.Menus
         /// </summary>
         public void OpenMainMenu()
         {
+            StopAllCoroutines();
+            Time.timeScale = 1f;
             SceneManager.LoadScene("Main Menu");
         }
 

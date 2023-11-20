@@ -16,6 +16,7 @@ public class UserData : MonoBehaviour
     private string _username;
     private string _gender;
     private int _age = -1;
+    private static GameObject sampleInstance;
 
     #endregion
 
