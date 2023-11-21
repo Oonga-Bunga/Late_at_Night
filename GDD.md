@@ -1288,8 +1288,34 @@ También podrían intentar “redecorar” la habitación, moviendo todos los ob
 
 El hecho de que los jugadores tengan dos formas de completar el nivel ya sea sobreviviendo toda la noche o encendiendo los interruptores, añade una dimensión adicional a las mecánicas del juego. Esto permite a los jugadores elegir su enfoque preferido y adaptarse a su estilo de juego. La capacidad de elegir entre diferentes enfoques agrega variedad y rejugabilidad al juego.   
 
-# **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
+# **Post <a name ="Post Mortem"></a> Mortem** 
+Para el desarrollo del juego el equipo se ha tenido que enfrentar a diversos desafios durante su progreso, siendo el tiempo de la deadline el principal obstáculo a superar. A pesar de este desafío, el equipo logró superar las adversidades y crear un producto final que cumplia con los objetivos previstos.
+## Desafios principales ##
 
+**Presión del Tiempo:**
+
+Uno de los mayores desafíos fue el tiempo ajustado para completar el desarrollo del juego. La fecha límite establecida creó una presión constante sobre el equipo, afectando la planificación y ejecución de tareas.
+## Aspectos Positivos ##
+**Eficiencia en el Trabajo:**
+
+A pesar de los desafíos, el equipo demostró una notable eficiencia en la ejecución de tareas. La capacidad para mantenerse enfocado y trabajar de manera colaborativa permitió cumplir con los plazos a pesar de las adversidades.
+
+**Creatividad en Soluciones:**
+
+La presión del tiempo incentivó la creatividad del equipo para encontrar soluciones rápidas y efectivas a los problemas emergentes. Esto condujo a la implementación de características innovadoras que, de lo contrario, podrían no haberse explorado.
+
+**Aprendizaje Continuo:**
+
+A lo largo del desarrollo, el equipo adquirió valiosas lecciones sobre la importancia de la planificación rigurosa, administración del tiempo y la gestión de expectativas. Estos conocimientos serán fundamentales para futuros proyectos.
+## Lecciones Aprendidas ##
+**Planificación Detallada:**
+
+Una planificación más detallada y realista desde el principio podría haber mitigado los desafíos asociados con la presión del tiempo.
+
+**Flexibilidad y Adaptabilidad:**
+
+Ante las adversidades hemos observado que pueder resulta esencial la habilidad de ajustarse ante imprevistos. Contar con una mentalidad flexible y la capacidad de modificar planes según sea necesario se vuelve fundamental.
+# **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
 CHRISTIAN CAMPOS PAN  Programación   
 GONZALO GÓMEZ TEJEDOR  Programación y sonido    
