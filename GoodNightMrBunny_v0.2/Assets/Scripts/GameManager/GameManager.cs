@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Positioning player");
 
         if (_playerInstance == null)
-            {
+        {
             _playerInstance = Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity);
         }
         _playerInstance.transform.SetParent(SceneGenerator.Instance.SceneHolder.transform);

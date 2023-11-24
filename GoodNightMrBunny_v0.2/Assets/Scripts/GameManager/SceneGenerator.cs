@@ -162,19 +162,19 @@ public class SceneGenerator : MonoBehaviour
         else
         {
             Debug.Log("There is no game manager and/or enemy waves manager in the scene");
+        }
 
-            int nSwitches = Mathf.Min(_switchSpawnLocations.Count, sceneData.TotalSwitches);
-            int randomPos;
+        int nSwitches = Mathf.Min(_switchSpawnLocations.Count, sceneData.TotalSwitches);
+        int randomPos;
 
-            for (int i = 0; i < nSwitches; i++)
-            {
-                randomPos = UnityEngine.Random.Range(0, _switchSpawnLocations.Count);
-                GameObject switchInstance = Instantiate(_switchPrefab, Vector3.zero, Quaternion.identity);
-                switchInstance.transform.SetParent(_sceneHolder.transform);
-                switchInstance.transform.localPosition = _switchSpawnLocations[randomPos];
+        for (int i = 0; i < nSwitches; i++)
+        {
+            randomPos = UnityEngine.Random.Range(0, _switchSpawnLocations.Count);
+            GameObject switchInstance = Instantiate(_switchPrefab, Vector3.zero, Quaternion.identity);
+            switchInstance.transform.SetParent(_sceneHolder.transform);
+            switchInstance.transform.localPosition = _switchSpawnLocations[randomPos];
 
-                _switchSpawnLocations.RemoveAt(randomPos);
-            }
+            _switchSpawnLocations.RemoveAt(randomPos);
         }
 
         Debug.Log("Baking the NavMesh");
