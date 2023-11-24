@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class LevelJsons : MonoBehaviour
 {
+    private static LevelJsons _instance;
+    public static LevelJsons Instance => _instance;
+
     private TextAsset _sceneJsonFile;
     private TextAsset _enemyWavesJsonFile;
-    private static GameObject sampleInstance;
 
     #region Methods
 
     private void Awake()
     {
-        if (sampleInstance != null)
-            Destroy(sampleInstance);
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
 
-        sampleInstance = gameObject;
         DontDestroyOnLoad(this);
     }
 
