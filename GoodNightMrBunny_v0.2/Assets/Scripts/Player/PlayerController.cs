@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
-        _cameraHolder.GetComponent<CameraController>().PlayerMounting();
+        _cameraHolder.GetComponent<Player.CameraController>().PlayerMounting();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
         transform.parent = null;
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, transform.eulerAngles.z));
 
-        _cameraHolder.GetComponent<CameraController>().PlayerDismounting();
+        _cameraHolder.GetComponent<Player.CameraController>().PlayerDismounting();
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
