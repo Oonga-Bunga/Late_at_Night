@@ -2,28 +2,32 @@
   "EnemyWaves": [
     {
       "NeedsEnemiesKilled": false,
-      "TimeDelay": 2,
+      "InitialTimeDelay": 2,
+      "DelayAfterEnemiesKilled": 2,
       "TimePerEnemy": 1,
       "NZanybell": 1,
       "NEvilBunny": 0
     },
     {
       "NeedsEnemiesKilled": true,
-      "TimeDelay": 50,
+      "InitialTimeDelay": 2,
+      "DelayAfterEnemiesKilled": 50,
       "TimePerEnemy": 8,
       "NZanybell": 3,
       "NEvilBunny": 3
     },
     {
       "NeedsEnemiesKilled": false,
-      "TimeDelay": 40,
+      "InitialTimeDelay": 40,
+      "DelayAfterEnemiesKilled": 2,
       "TimePerEnemy": 8,
       "NZanybell": 4,
       "NEvilBunny": 3
     },
     {
       "NeedsEnemiesKilled": false,
-      "TimeDelay": 55,
+      "InitialTimeDelay": 55,
+      "DelayAfterEnemiesKilled": 2,
       "TimePerEnemy": 5,
       "NZanybell": 5,
       "NEvilBunny": 4

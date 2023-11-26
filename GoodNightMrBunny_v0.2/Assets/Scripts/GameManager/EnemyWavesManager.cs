@@ -14,7 +14,8 @@ public class EnemyWaveData
 public class EnemyWave
 {
     public bool NeedsEnemiesKilled;
-    public float TimeDelay;
+    public float InitialTimeDelay;
+    public float DelayAfterEnemiesKilled;
     public float TimePerEnemy;
     public int NZanybell;
     public int NEvilBunny;
@@ -31,31 +32,18 @@ public class EnemyWavesManager : MonoBehaviour
     private static EnemyWavesManager _instance;
     public static EnemyWavesManager Instance => _instance;
 
-    [SerializeField] private TextAsset _enemyWavesJsonFile;
-    public TextAsset EnemyWavesJsonFile
-    {
-        get { return _enemyWavesJsonFile; }
-        set { _enemyWavesJsonFile = value; }
-    }
+    [SerializeField] private TextAsset _enemyWavesJsonFile; // Json con los datos de las oleadas de enemigos
+    private List<EnemyWave> _enemyWaveList = new List<EnemyWave>(); // Lista en la que se guarda la información de las oleadas de enemigos extraida del Json
+    
+    [SerializeField] private List<GameObject> _flyingEnemyList; // Lista de enemigos voladores
+    [SerializeField] private List<GameObject> _groundEnemyList; // Lista de enemigos terrestres
+    private List<Vector3> _flyingEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos voladores
+    private List<Vector3> _groundedEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos terrestres
+    public List<Vector3> FlyingEnemySpawnLocations{ set => _flyingEnemySpawnLocations = value; }
+    public List<Vector3> GroundedEnemySpawnLocations{ set => _groundedEnemySpawnLocations = value; }
 
-    private List<EnemyWave> _enemyWaveList = new List<EnemyWave>();
-    [SerializeField] private List<GameObject> _flyingEnemyList;
-    [SerializeField] private List<GameObject> _groundEnemyList;
-    private List<Vector3> _flyingEnemySpawnLocations = new List<Vector3>();
-    private List<Vector3> _groundedEnemySpawnLocations = new List<Vector3>();
-    public List<Vector3> FlyingEnemySpawnLocations
-    {
-        get { return _flyingEnemySpawnLocations; }
-        set { _flyingEnemySpawnLocations = value; }
-    }
-    public List<Vector3> GroundedEnemySpawnLocations
-    {
-        get { return _groundedEnemySpawnLocations; }
-        set { _groundedEnemySpawnLocations = value; }
-    }
-
-    private int _aliveEnemies = 0;
-    public static event Action AllEnemiesDefeated;
+    private int _aliveEnemies = 0; // Número de enemigos con vida
+    public static event Action AllEnemiesDefeated; // Invocado cuando todos los enemigos han muerto o desaparecido
 
     private void Awake()
     {
@@ -71,43 +59,41 @@ public class EnemyWavesManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnGameStarted += (object sender, bool value) => StartCoroutine(EnemyWavesProcessing());
+        // Se suscribe al evento del game manager para comenzar a spawnear enemigos una vez comience el nivel
+        GameManager.Instance.OnGameStarted += () => StartCoroutine(EnemyWavesProcessing());
 
+        // Obtiene el json de LevelJsons si existe, y se coge su EnemyWavesJsonFile
         if (LevelJsons.Instance != null)
         {
             _enemyWavesJsonFile = LevelJsons.Instance.EnemyWavesJsonFile;
         }
 
+        // Comienza a cargar la información del Json
         StartCoroutine(LoadEnemyWavesFromJson());
     }
 
     private IEnumerator LoadEnemyWavesFromJson()
     {
-        // Lee el JSON como una cadena
+        // Lee el Json como una cadena
         string json = _enemyWavesJsonFile.text;
 
-        // Convierte la cadena JSON a objetos EnemyWaveList
+        // Convierte la cadena Json a objetos EnemyWave
         EnemyWaveData waveList = JsonUtility.FromJson<EnemyWaveData>(json);
+        List<EnemyWave> enemyWaves = waveList.EnemyWaves;
 
-        if (waveList != null && waveList.EnemyWaves != null)
+        // Por cada oleada la añade a la lista _enemyWaveList
+        foreach (EnemyWave wave in enemyWaves)
         {
-            // Aquí tienes tu lista de oleadas de enemigos
-            List<EnemyWave> enemyWaves = waveList.EnemyWaves;
-
-            // Puedes iterar sobre las oleadas y hacer lo que necesites con ellas
-            foreach (EnemyWave wave in enemyWaves)
-            {
-                _enemyWaveList.Add(wave);
-            }
-        }
-        else
-        {
-            Debug.LogError("Error parsing JSON or waveList is null.");
+            _enemyWaveList.Add(wave);
         }
 
         yield return null;
     }
 
+    /// <summary>
+    /// Procesa cada oleada de enemigos según sus datos
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator EnemyWavesProcessing()
     {
         foreach (EnemyWave enemyWave in _enemyWaveList)
@@ -118,46 +104,45 @@ public class EnemyWavesManager : MonoBehaviour
 
                 AllEnemiesDefeated += () => enemiesDefeated = true;
 
-                yield return new WaitForSeconds(enemyWave.TimeDelay);
-                yield return new WaitUntil(() => enemiesDefeated);
+                yield return new WaitForSeconds(enemyWave.InitialTimeDelay);
 
+                yield return new WaitUntil(() => enemiesDefeated);
                 AllEnemiesDefeated -= () => enemiesDefeated = true;
+
+                yield return new WaitForSeconds(enemyWave.DelayAfterEnemiesKilled);
             }
             else
             {
-                yield return new WaitForSeconds(enemyWave.TimeDelay);
+                yield return new WaitForSeconds(enemyWave.InitialTimeDelay);
             }
 
-            StartCoroutine(SpawnEnemyWave(enemyWave));
+            List<EnemyTypes> enemyList = new List<EnemyTypes>();
+
+            AddEnemiesToList(EnemyTypes.Zanybell, enemyList, enemyWave);
+            AddEnemiesToList(EnemyTypes.EvilBunny, enemyList, enemyWave);
+
+            int randomIndex;
+            EnemyTypes enemy;
+
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                randomIndex = UnityEngine.Random.Range(0, enemyList.Count);
+                enemy = enemyList[randomIndex];
+                SpawnEnemy(enemy);
+                enemyList.RemoveAt(randomIndex);
+
+                yield return new WaitForSeconds(enemyWave.TimePerEnemy);
+            }
         }
 
         yield return null;
     }
 
-    private IEnumerator SpawnEnemyWave(EnemyWave enemyWave)
-    {
-        List<EnemyTypes> enemyList = new List<EnemyTypes>();
-
-        StartCoroutine(AddEnemiesToList(EnemyTypes.Zanybell, enemyList, enemyWave));
-        StartCoroutine(AddEnemiesToList(EnemyTypes.EvilBunny, enemyList, enemyWave));
-
-        int randomIndex;
-        EnemyTypes enemy;
-
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            randomIndex = UnityEngine.Random.Range(0, enemyList.Count);
-            enemy = enemyList[randomIndex];
-            StartCoroutine(SpawnEnemy(enemy));
-            enemyList.RemoveAt(randomIndex);
-
-            yield return new WaitForSeconds(enemyWave.TimePerEnemy);
-        }
-
-        yield return null;
-    }
-
-    private IEnumerator SpawnEnemy(EnemyTypes enemy)
+    /// <summary>
+    /// Spawnea a un enemigo de cierto tipo en un punto de spawn correspondiente aleatorio
+    /// </summary>
+    /// <param name="enemy"></param>
+    private void SpawnEnemy(EnemyTypes enemy)
     {
         int randomSpawn;
         GameObject enemyInstance;
@@ -167,26 +152,30 @@ public class EnemyWavesManager : MonoBehaviour
             case EnemyTypes.Zanybell:
                 randomSpawn = UnityEngine.Random.Range(0, _flyingEnemySpawnLocations.Count);
                 enemyInstance = Instantiate(_flyingEnemyList[0], Vector3.zero, Quaternion.identity);
-                enemyInstance.transform.SetParent(SceneGenerator.Instance.SceneHolder.transform);
-                enemyInstance.transform.localPosition = FlyingEnemySpawnLocations[randomSpawn];
-                enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
+                enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
+                enemyInstance.transform.localPosition = _flyingEnemySpawnLocations[randomSpawn];
+                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 break;
             case EnemyTypes.EvilBunny:
                 randomSpawn = UnityEngine.Random.Range(0, _groundedEnemySpawnLocations.Count);
                 enemyInstance = Instantiate(_groundEnemyList[0], Vector3.zero, Quaternion.identity);
-                enemyInstance.transform.SetParent(SceneGenerator.Instance.SceneHolder.transform);
+                enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
                 enemyInstance.transform.localPosition = _groundedEnemySpawnLocations[randomSpawn];
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
-                enemyInstance.GetComponent<AMonster>().Died += UpdateAliveEnemies;
+                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 break;
         }
-
-        yield return null;
     }
 
-    private IEnumerator AddEnemiesToList(EnemyTypes type, List<EnemyTypes> enemyList, EnemyWave enemyWave)
+    /// <summary>
+    /// Añade los enemigos de tipo type de una oleada a enemyList
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="enemyList"></param>
+    /// <param name="enemyWave"></param>
+    private void AddEnemiesToList(EnemyTypes type, List<EnemyTypes> enemyList, EnemyWave enemyWave)
     {
         int n = 0;
 
@@ -204,11 +193,15 @@ public class EnemyWavesManager : MonoBehaviour
         {
             enemyList.Add(type);
         }
-
-        yield return null;
     }
 
-    private void UpdateAliveEnemies(object sender, bool value)
+    /// <summary>
+    /// Se invoca cuando un enemigo muere, actualiza el numero de enemigos vivos, y si llega a 0 se invoca
+    /// el evento AllEnemiesDefeated
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="value"></param>
+    private void UpdateAliveEnemies()
     {
         _aliveEnemies--;
 

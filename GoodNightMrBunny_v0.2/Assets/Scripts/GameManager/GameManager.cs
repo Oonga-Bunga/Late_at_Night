@@ -9,20 +9,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     #region Attributes
-
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
-    [SerializeField] private GameObject _loadingScreen;
-    [SerializeField] private TextMeshProUGUI _loadingText;
-
     private Transform _playerSpawnPoint;
 
-    public Transform PlayerSpawnPoint
-    {
-        get { return _playerSpawnPoint; }
-        set { _playerSpawnPoint = value; }
-    }
+    public Transform PlayerSpawnPoint{ set => _playerSpawnPoint = value; }
 
     private static List<Switch> _switchListInstance = new List<Switch>();
     public static List<Switch> SwitchListInstance => _switchListInstance;
@@ -35,19 +27,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerInstance;
     [SerializeField] private GameObject _playerPrefab;
 
-    [SerializeField] private Camera _loadingScreenCamera;
-
-    [SerializeField] private GameObject _mobileControls;
     [SerializeField] private float _maxTime = 60f;
     private float _currentTime;
-    [SerializeField] private GameObject _gameUI;
 
     private PauseManager _pauseManager;
+    [SerializeField] private LevelMenuManager _levelMenuManager;
     private bool _isInGame = false;
-    public EventHandler<bool> OnGameStarted;
+    public event Action OnGameStarted;
     private int _currentActivatedSwitches = 0;
-    [SerializeField] private TextMeshProUGUI _upperText;
-    public EventHandler<float> OnTimeChanged;
+    public event Action<float> OnTimeChanged;
 
     public bool IsInGame => _isInGame;
     
@@ -65,17 +53,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        SceneGenerator sceneGenerator = SceneGenerator.Instance;
-
-        if (sceneGenerator != null)
-        {
-            sceneGenerator.OnSceneLoaded += (object sender, bool value) => StartCoroutine(GenerateLevel());
-        }
     }
 
     private void Start()
     {
+        LevelGenerator sceneGenerator = LevelGenerator.Instance;
+
+        if (sceneGenerator != null)
+        {
+            sceneGenerator.OnLevelLoaded += () => StartCoroutine(GenerateLevel());
+        }
+
         _pauseManager = PauseManager.Instance;
     }
 
@@ -87,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         List<Switch> tempSwitchList = new List<Switch>();
 
-        foreach (Switch switchComponent in SceneGenerator.Instance.transform.GetComponentsInChildren<Switch>())
+        foreach (Switch switchComponent in LevelGenerator.Instance.transform.GetComponentsInChildren<Switch>())
         {
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
@@ -113,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         if (baby != null)
         {
-            baby.Died += BabyDied;
+            baby.OnDied += () => PlayerLost();
         }
         else
         {
@@ -122,62 +110,29 @@ public class GameManager : MonoBehaviour
 
         #endregion
 
-        #region Detect platform
-
-        Debug.Log("Checking type of device");
-
-        if (Application.isMobilePlatform)
-        {
-            _mobileControls.SetActive(true);
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            _mobileControls.SetActive(false);
-        }
-
-        #endregion
-
         #region Instantiate player
 
-        Debug.Log("Positioning player");
+        Debug.Log("Positioning _player");
 
         if (_playerInstance == null)
         {
             _playerInstance = Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity);
         }
-        _playerInstance.transform.SetParent(SceneGenerator.Instance.SceneHolder.transform);
+        _playerInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
         _playerInstance.transform.localPosition = _playerSpawnPoint.localPosition;
         _playerInstance.transform.localRotation = _playerSpawnPoint.localRotation;
 
         #endregion
 
-        #region Disable loading screen and switch camera
+        #region Wait a bit and start game
 
-        _loadingText.text = "Loading finished!";
         Debug.Log("Loading finished!");
 
         yield return new WaitForSeconds(2);
 
         _currentTime = _maxTime;
-        _loadingScreen.SetActive(false);
-        _loadingScreenCamera.enabled = false;
-        //Mostrar instrucciones de nivel (Comentar en caso de quere quitar)
-        try
-        {
-            FindObjectOfType<LevelMenuManager>().OpenInstructionsPanel();
-        }
-        catch {}
-
-        #endregion
-
-        #region Start game
-
-        _gameUI.SetActive(true);
-        //_pauseManager.PauseGame();
+        OnGameStarted?.Invoke();
         _isInGame = true;
-        OnGameStarted?.Invoke(this, true);
 
         #endregion
 
@@ -195,7 +150,7 @@ public class GameManager : MonoBehaviour
         if (_pauseManager.IsPaused) return;
 
         _currentTime -= Time.deltaTime;
-        OnTimeChanged?.Invoke(this, _currentTime);
+        OnTimeChanged?.Invoke(_currentTime);
 
         if (_currentTime < 0)
         {
@@ -207,17 +162,12 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void BabyDied(object sender, bool value)
-    {
-        PlayerLost();
-    }
-
     private void SwitchChangedState(object sender, bool isOn)
     {
         if (isOn)
         {
             _currentActivatedSwitches++;
-            _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
+            //_upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             Invoke("ResetText", 3);
 
             if (_currentActivatedSwitches == _totalSwitches)
@@ -228,14 +178,14 @@ public class GameManager : MonoBehaviour
         else
         {
             _currentActivatedSwitches--;
-            _upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
+            //_upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             Invoke("ResetText", 3);
         }
     }
     
     private void ResetText()
     {
-        _upperText.text = "";
+        //_upperText.text = "";
     }
 
     private void PlayerWon()

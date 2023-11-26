@@ -81,16 +81,17 @@ public class FlashlightRechargeStation : AInteractable
     /// </summary>
     protected override void InteractedPressAction()
     {
-        if (_player.CurrentHeldObject.HoldableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
+        AHoldableObject playerObject = _player.PlayerWeapons.CurrentHeldObject;
+        if (playerObject.HoldableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight)
         {
             if (_hasFlashlight)
             {
-                _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
+                _currentCharge = ((Flashlight)playerObject).CurrentCharge;
                 _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.Flashlight, false, _currentCharge);
             }
             else
             {
-                _currentCharge = ((Flashlight)_player.CurrentHeldObject).CurrentCharge;
+                _currentCharge = ((Flashlight)playerObject).CurrentCharge;
                 _player.ChangeHeldObject(IPlayerReceiver.HoldableObjectType.None, false);
                 _hasFlashlight = true;
                 _flashlightModel.SetActive(true);

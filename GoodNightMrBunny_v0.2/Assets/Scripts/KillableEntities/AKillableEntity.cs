@@ -12,8 +12,8 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     [SerializeField] protected float _maxHealth = 10f;
     protected float _currentHealth = 0f;
     protected Collider _hitbox;
-    public EventHandler<float> HealthChanged;
-    public EventHandler<bool> Died;
+    public event Action<float> OnHealthChanged;
+    public event Action OnDied;
 
     public float MaxHealth => _maxHealth;
 
@@ -63,12 +63,12 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         if (isDamage)
         {
             _currentHealth = Mathf.Max(_currentHealth - value, 0);
-            HealthChanged?.Invoke(this, _currentHealth);
+            OnHealthChanged?.Invoke(_currentHealth);
         }
         else
         {
             _currentHealth = Mathf.Min(_currentHealth + value, _maxHealth);
-            HealthChanged?.Invoke(this, _currentHealth);
+            OnHealthChanged?.Invoke(_currentHealth);
         }
     }
 
@@ -77,7 +77,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     /// </summary>
     public virtual void Die()
     {
-        Died?.Invoke(this, true);
+        OnDied?.Invoke();
         Destroy(gameObject);
     }
 

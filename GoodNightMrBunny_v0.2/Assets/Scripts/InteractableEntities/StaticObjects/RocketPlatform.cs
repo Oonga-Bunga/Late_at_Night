@@ -73,7 +73,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     protected override void InteractedPressAction()
     {
-        _player.AssignMount(this, _mountingPoint);
+        _player.Mount(this, _mountingPoint);
         _canBeInteracted = false;
         _laser.enabled = true;
     }
@@ -127,7 +127,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
-            _player.DisMount();
+            _player.Dismount();
             _laser.enabled = false;
             LaunchRocket();
         }

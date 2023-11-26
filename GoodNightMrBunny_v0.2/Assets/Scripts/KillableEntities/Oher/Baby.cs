@@ -19,6 +19,8 @@ public class Baby : AKillableEntity
     public Transform ZanybellPoint => _zanybellPoint;
     public Transform EvilBunnyPoint => _evilBunnyPoint;
 
+    public event Action OnDied;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -72,6 +74,6 @@ public class Baby : AKillableEntity
 
     public override void Die()
     {
-        Died?.Invoke(this, true);
+        OnDied?.Invoke();
     }
 }

@@ -20,11 +20,11 @@ public class BabyBar : MonoBehaviour
         Baby baby = FindObjectOfType<Baby>();
         slider.maxValue = baby.MaxHealth;
         slider.value = slider.maxValue;
-        baby.HealthChanged += UpdateBar;
+        baby.OnHealthChanged += UpdateBar;
         babyFound = true;
     }
 
-    private void UpdateBar(object sender, float value)
+    private void UpdateBar(float value)
     {
         slider.value = value;
     }

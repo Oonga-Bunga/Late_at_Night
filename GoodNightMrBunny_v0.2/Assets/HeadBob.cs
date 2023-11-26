@@ -17,13 +17,12 @@ public class HeadBob : MonoBehaviour
     [SerializeField] private Transform _defaultCameraPos = null;
 
     private float _toggleSpeed = 1.0f;
-    private PlayerController _playerController;
-    private Rigidbody _playerRb;
+    private PlayerController _player;
+    [SerializeField] private Rigidbody _playerRb;
 
-    private void Awake()
+    private void Start()
     {
-        _playerController= GetComponent<PlayerController>();
-        _playerRb = GetComponent<Rigidbody>();
+        _player = PlayerController.Instance;
     }
 
     private void LateUpdate()
@@ -48,7 +47,7 @@ public class HeadBob : MonoBehaviour
         ResetPosition();
 
         if (speed < _toggleSpeed) return;
-        if (!_playerController.IsPlayerGrounded) return;
+        if (!_player.PlayerMovement.IsPlayerGrounded) return;
 
         PlayMotion(FootStepMotion());
     }
@@ -56,11 +55,11 @@ public class HeadBob : MonoBehaviour
     private Vector3 FootStepMotion()
     {
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * _frequency * _playerController.MaxCurrentSpeed) * _amplitude;
+        pos.y += Mathf.Sin(Time.time * _frequency * _player.PlayerMovement.MaxCurrentSpeed) * _amplitude;
 
         if (!_sidewaysBobToggle) return pos;
 
-        pos.x += Mathf.Cos(Time.time * (_frequency * _playerController.MaxCurrentSpeed) / 2) * _amplitude * 0.5f;
+        pos.x += Mathf.Cos(Time.time * (_frequency * _player.PlayerMovement.MaxCurrentSpeed) / 2) * _amplitude * 0.5f;
 
         return pos;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace Shadow
         [SerializeField] private Transform _actualCenter;
         [SerializeField] private LayerMask _groundLayer;
         private Vector3 _target;
+        public event Action OnDied;
 
         private const string _animatorIsWalking = "IsWalking";
         private const string _animatorIsFleeing = "IsFleeing";
@@ -101,7 +103,7 @@ namespace Shadow
         public void GenerateRandomTarget()
         {
             // Generar un ángulo aleatorio en radianes
-            float angle = Random.Range(0f, 2f * Mathf.PI);
+            float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
 
             // Calcular las coordenadas x y z del nuevo punto en la circunferencia
             float newX = transform.position.x + 1000 * Mathf.Cos(angle);
@@ -161,7 +163,7 @@ namespace Shadow
 
         public override void Die()
         {
-            Died?.Invoke(this, true);
+            OnDied?.Invoke();
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
         }

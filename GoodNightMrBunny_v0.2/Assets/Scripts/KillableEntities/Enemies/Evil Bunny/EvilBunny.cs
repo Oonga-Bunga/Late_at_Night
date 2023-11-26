@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace EvilBunny
     public class EvilBunny : AMonster
     {
         private NavMeshAgent _agent;
+        public event Action OnDied;
 
         // Animator strings
         private const string _animatorIsWalking = "IsWalking";
@@ -46,14 +48,14 @@ namespace EvilBunny
 
         public override void Die()
         {
-            Died?.Invoke(this, true);
+            OnDied?.Invoke();
             _animator.SetTrigger(_animatorDie);
             _hitbox.enabled = false;
         }
 
         public void Merge()
         {
-            Died?.Invoke(this, true);
+            OnDied?.Invoke();
             _hitbox.enabled = false;
         }
     }

@@ -26,6 +26,10 @@ public class PauseManager : MonoBehaviour
         {
             _instance = this;
         }
+        else
+        {
+            Destroy(this);
+        }
 
         if (_startsPaused)
         {

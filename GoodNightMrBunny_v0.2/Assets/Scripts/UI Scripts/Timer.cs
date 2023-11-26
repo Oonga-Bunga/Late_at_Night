@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
 
     }
 
-    void UpdateTimerDisplay(object sender, float time)
+    void UpdateTimerDisplay(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);

@@ -8,11 +8,19 @@ namespace UI_Scripts.Menus
 {
     public class LevelMenuManager: MonoBehaviour
     {
+        private static LevelMenuManager _instance;
+
+        public static LevelMenuManager Instance => _instance;
+
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private Canvas _optionsCanvas;
         [SerializeField] private GameObject _instructionPanel;
         [SerializeField] private GameObject _gameUI;
-        
+        [SerializeField] private TextMeshProUGUI _loadingText;
+        [SerializeField] private GameObject _loadingScreen;
+        [SerializeField] private GameObject _loadingScreenCamera;
+        [SerializeField] private GameObject _mobileControls;
+
         [SerializeField] private Button[] tabButtons;
         [SerializeField] private GameObject[] tabPanels;
         [SerializeField] private TextMeshProUGUI _optionsTabText;
@@ -23,7 +31,47 @@ namespace UI_Scripts.Menus
         [SerializeField] private TextMeshProUGUI _canvasQualityText;
         private String[] _qualityLevels = new[] { "High", "Medium", "Low" };
         private int _qualityIntLevel = 0;
-        
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+
+            if (Application.isMobilePlatform)
+            {
+                _mobileControls.SetActive(true);
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                _mobileControls.SetActive(false);
+            }
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.OnGameStarted += StartGame;
+        }
+
+        public void ChangeLodingText(string text)
+        {
+            _loadingText.text = text;
+        }
+
+        public void StartGame()
+        {
+            _loadingScreen.SetActive(false);
+            _loadingScreenCamera.SetActive(false);
+            _gameUI.SetActive(true);
+            OpenInstructionsPanel();
+        }
 
         /// <summary>
         /// Abre el menú de opciones y cierra el panel de pausa

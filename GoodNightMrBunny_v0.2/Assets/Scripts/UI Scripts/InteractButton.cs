@@ -11,11 +11,11 @@ public class InteractButton : MonoBehaviour
     private void Start()
     {
         player = PlayerController.Instance;
-        player.OnInteractableChanged += ShowButton;
+        player.PlayerInteraction.OnInteractableChanged += ShowButton;
         interactButton = transform.GetChild(0).gameObject;
     }
 
-    private void ShowButton(object sender, bool isInteractableInRange)
+    private void ShowButton(bool isInteractableInRange)
     {
         interactButton.SetActive(isInteractableInRange);
     }

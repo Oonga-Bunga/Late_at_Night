@@ -20,6 +20,19 @@ public class SceneObject
     public MyVector3 Position;
     public MyVector3 Rotation;
     public MyVector3 Scale;
+
+    /// <summary>
+    /// Devuelve un array con 3 vectores con la posición, rotación y escala respectivamente
+    /// </summary>
+    /// <returns></returns>
+    public Vector3[] GetInfoAsVector3List()
+    {
+        Vector3[] vectors = new Vector3[3];
+        vectors[0] = new Vector3(Position.X, Position.Y, Position.Z);
+        vectors[1] = new Vector3(Rotation.X, Rotation.Y, Rotation.Z);
+        vectors[2] = new Vector3(Scale.X, Scale.Y, Scale.Z);
+        return vectors;
+    }
 }
 
 [System.Serializable]
@@ -38,10 +51,10 @@ public class JsonGenerator : MonoBehaviour
     private static JsonGenerator _instance;
     public static JsonGenerator Instance => _instance;
 
-    [SerializeField] private bool _generateJson = false;
+    [SerializeField] private bool _generateJson = false; // Si debe generar el Json o no
     public bool GenerateJson => _generateJson;
-    [SerializeField] private GameObject _sceneHolder;
-    [SerializeField] private int _totalSwitches = 3;
+    [SerializeField] private GameObject _sceneHolder; // Objeto que contiene todos los elementos del nivel que se van a guardar en el json
+    [SerializeField] private int _totalSwitches = 3; // Número total de interruptores que va a tener el nivel
 
 
     private void Awake()
@@ -66,17 +79,23 @@ public class JsonGenerator : MonoBehaviour
 
     private IEnumerator CreateJson()
     {
+        // Crear las listas donde se va a guardar la información del nivel
+
         List<SceneObject> sceneObjectList = new List<SceneObject>();
         List<MyVector3> switchNodeList = new List<MyVector3>();
         List<MyVector3> zanybellNodeList = new List<MyVector3>();
         List<MyVector3> evilBunnyNodeList = new List<MyVector3>();
         SceneObject playerSpawnPointData;
 
+        // Buscar dentro del _sceneHolder los objetos que tienen ciertas tags
+
         GameObject[] sceneObjects = FindChildObjectsWithTag(_sceneHolder, "SceneObject");
         GameObject[] switchNodes = FindChildObjectsWithTag(_sceneHolder, "SwitchNode");
         GameObject[] zanybellNodes = FindChildObjectsWithTag(_sceneHolder, "ZanybellNode");
         GameObject[] evilBunnyNodes = FindChildObjectsWithTag(_sceneHolder, "EvilBunnyNode");
         GameObject playerSpawnPoint = FindChildObjectsWithTag(_sceneHolder, "PlayerSpawnPoint")[0];
+
+        // Guardar la información de los objetos de la escena
 
         foreach (GameObject sceneObject in sceneObjects)
         {
@@ -93,12 +112,16 @@ public class JsonGenerator : MonoBehaviour
             sceneObjectList.Add(data);
         }
 
+        // Guardar la información de los puntos de spawn de los interruptores
+
         foreach (GameObject switchNode in switchNodes)
         {
             Vector3 position = switchNode.transform.localPosition;
             MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
             switchNodeList.Add(data);
         }
+
+        // Guardar la información de los puntos de spawn de los zanybell
 
         foreach (GameObject zanybellNode in zanybellNodes)
         {
@@ -107,12 +130,16 @@ public class JsonGenerator : MonoBehaviour
             zanybellNodeList.Add(data);
         }
 
+        // Guardar la información de los puntos de spawn de los evil bunny
+
         foreach (GameObject evilBunnyNode in evilBunnyNodes)
         {
             Vector3 position = evilBunnyNode.transform.localPosition;
             MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
             evilBunnyNodeList.Add(data);
         }
+
+        // Guardar la información de los puntos de spawn del jugador
 
         Vector3 playerPosition = playerSpawnPoint.transform.localPosition;
         Vector3 playerRotation = playerSpawnPoint.transform.localRotation.eulerAngles;
@@ -126,7 +153,8 @@ public class JsonGenerator : MonoBehaviour
         };
         playerSpawnPointData = playerData;
 
-        // Crear un objeto JSON que contiene las listas de props y objects
+        // Crear un objeto Json que contiene las listas con la información del nivel
+
         var sceneData = new
         {
             SceneObjects = sceneObjectList,
@@ -137,17 +165,23 @@ public class JsonGenerator : MonoBehaviour
             TotalSwitches = _totalSwitches
         };
 
-        // Convertir el objeto JSON a una cadena JSON
+        // Convertir el objeto Json a una cadena Json
         string jsonData = JsonConvert.SerializeObject(sceneData, Newtonsoft.Json.Formatting.Indented);
 
-        // Guardar la cadena JSON en un archivo
+        // Guardar la cadena Json en un archivo
         File.WriteAllText(Application.dataPath + "/Scripts/GameManager/LevelJsons/newSceneData.json", jsonData);
 
-        Debug.Log("Datos de la escena guardados como JSON.");
+        Debug.Log("Datos de la escena guardados como Json.");
 
         yield return null;
     }
 
+    /// <summary>
+    /// Devuelve un array con todos los hijos de parent que tengan cierta tag
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     private GameObject[] FindChildObjectsWithTag(GameObject parent, string tag)
     {
         Transform[] children = parent.GetComponentsInChildren<Transform>(true); // Incluye componentes inactivos

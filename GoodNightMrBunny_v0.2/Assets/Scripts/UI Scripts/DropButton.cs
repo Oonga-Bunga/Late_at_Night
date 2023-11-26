@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class DropButton : MonoBehaviour
 {
-    private PlayerController player;
-    private GameObject dropButton;
+    private PlayerController _player;
+    private GameObject _dropButton;
 
     private void Start()
     {
-        player = PlayerController.Instance;
-        player.OnInteractableChanged += ShowButton;
-        dropButton = transform.GetChild(0).gameObject;
+        _player = PlayerController.Instance;
+        _player.PlayerInteraction.OnInteractableChanged += ShowButton;
+        _dropButton = transform.GetChild(0).gameObject;
     }
 
-    private void ShowButton(object sender, bool interactable)
+    private void ShowButton(bool interactable)
     {
         if (interactable)
         {
-            dropButton.SetActive(true);
+            _dropButton.SetActive(true);
         }
         else
         {
-            dropButton.SetActive(false);
+            _dropButton.SetActive(false);
         }
     }
 }
