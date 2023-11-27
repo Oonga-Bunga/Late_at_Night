@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerInstance;
     [SerializeField] private GameObject _playerPrefab;
 
-    [SerializeField] private float _maxTime = 60f;
-    private float _currentTime;
+    //[SerializeField] private float _maxTime = 60f;
+    //private float _currentTime;
 
     private PauseManager _pauseManager;
     [SerializeField] private LevelMenuManager _levelMenuManager;
@@ -57,11 +57,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        LevelGenerator sceneGenerator = LevelGenerator.Instance;
+        LevelGenerator levelGenerator = LevelGenerator.Instance;
+        EnemyWavesManager waveManager = EnemyWavesManager.Instance;
 
-        if (sceneGenerator != null)
+        if (levelGenerator != null)
         {
-            sceneGenerator.OnLevelLoaded += () => StartCoroutine(GenerateLevel());
+            levelGenerator.OnLevelLoaded += () => StartCoroutine(GenerateLevel());
+        }
+
+        if (waveManager != null)
+        {
+            waveManager.OnAllWavesDefeated += () => PlayerWon();
         }
 
         _pauseManager = PauseManager.Instance;
@@ -80,6 +86,10 @@ public class GameManager : MonoBehaviour
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
             _totalSwitches++;
+            if (switchComponent.IsOn)
+            {
+                _currentActivatedSwitches++;
+            }
         }
 
         _switchListInstance = tempSwitchList;
@@ -130,7 +140,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        _currentTime = _maxTime;
+        //_currentTime = _maxTime;
         OnGameStarted?.Invoke();
         _isInGame = true;
 
@@ -148,7 +158,7 @@ public class GameManager : MonoBehaviour
         if (!_isInGame) return;
 
         if (_pauseManager.IsPaused) return;
-
+        /*
         _currentTime -= Time.deltaTime;
         OnTimeChanged?.Invoke(_currentTime);
 
@@ -156,6 +166,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerWon();
         }
+        */
     }
 
     #endregion
@@ -169,17 +180,17 @@ public class GameManager : MonoBehaviour
             _currentActivatedSwitches++;
             //_upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             Invoke("ResetText", 3);
-
-            if (_currentActivatedSwitches == _totalSwitches)
-            {
-                PlayerWon();
-            }
         }
         else
         {
             _currentActivatedSwitches--;
             //_upperText.text = $"{_currentActivatedSwitches}/{_totalSwitches} interruptores";
             Invoke("ResetText", 3);
+
+            if (_currentActivatedSwitches == 0)
+            {
+                PlayerLost();
+            }
         }
     }
     

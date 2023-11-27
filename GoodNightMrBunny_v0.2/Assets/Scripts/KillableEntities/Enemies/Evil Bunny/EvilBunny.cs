@@ -27,11 +27,6 @@ namespace EvilBunny
             _agent.speed = _walkingSpeed;
         }
 
-        private void Update()
-        {
-            _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude > 0.01f);
-        }
-
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
         {
             switch (source)
@@ -49,14 +44,11 @@ namespace EvilBunny
         public override void Die()
         {
             OnDied?.Invoke();
-            _animator.SetTrigger(_animatorDie);
-            _hitbox.enabled = false;
         }
 
         public void Merge()
         {
             OnDied?.Invoke();
-            _hitbox.enabled = false;
         }
     }
 }

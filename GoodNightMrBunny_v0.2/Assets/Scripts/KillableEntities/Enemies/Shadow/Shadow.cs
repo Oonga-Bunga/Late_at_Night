@@ -164,8 +164,6 @@ namespace Shadow
         public override void Die()
         {
             OnDied?.Invoke();
-            _animator.SetTrigger(_animatorDie);
-            _hitbox.enabled = false;
         }
 
         private void Turn()

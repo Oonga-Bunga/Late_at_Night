@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Switch : AInteractable
 {
-    private bool _isOn = false; // Si el interruptor está o no encendido
+    private bool _isOn = true; // Si el interruptor está o no encendido
     public EventHandler<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     [SerializeField] private GameObject _emissiveObject;
     [SerializeField] private GameObject _nonEmissiveObject;
@@ -18,8 +18,8 @@ public class Switch : AInteractable
     {
         base.Awake();
 
-        _emissiveObject.SetActive(false);
-        _nonEmissiveObject.SetActive(true);
+        _emissiveObject.SetActive(true);
+        _nonEmissiveObject.SetActive(false);
         _currentHits = 0;
     }
 

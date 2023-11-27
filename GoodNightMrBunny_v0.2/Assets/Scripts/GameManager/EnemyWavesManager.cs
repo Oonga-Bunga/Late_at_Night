@@ -43,7 +43,8 @@ public class EnemyWavesManager : MonoBehaviour
     public List<Vector3> GroundedEnemySpawnLocations{ set => _groundedEnemySpawnLocations = value; }
 
     private int _aliveEnemies = 0; // Número de enemigos con vida
-    public static event Action AllEnemiesDefeated; // Invocado cuando todos los enemigos han muerto o desaparecido
+    public event Action OnAllEnemiesDefeated; // Invocado cuando todos los enemigos han muerto o desaparecido
+    public event Action OnAllWavesDefeated; // Invocado cuando todas las oleadas han sido derrotadas
 
     private void Awake()
     {
@@ -102,12 +103,12 @@ public class EnemyWavesManager : MonoBehaviour
             {
                 bool enemiesDefeated = false;
 
-                AllEnemiesDefeated += () => enemiesDefeated = true;
+                OnAllEnemiesDefeated += () => enemiesDefeated = true;
 
                 yield return new WaitForSeconds(enemyWave.InitialTimeDelay);
 
                 yield return new WaitUntil(() => enemiesDefeated);
-                AllEnemiesDefeated -= () => enemiesDefeated = true;
+                OnAllEnemiesDefeated -= () => enemiesDefeated = true;
 
                 yield return new WaitForSeconds(enemyWave.DelayAfterEnemiesKilled);
             }
@@ -131,9 +132,14 @@ public class EnemyWavesManager : MonoBehaviour
                 SpawnEnemy(enemy);
                 enemyList.RemoveAt(randomIndex);
 
-                yield return new WaitForSeconds(enemyWave.TimePerEnemy);
+                if (i != enemyList.Count - 1)
+                {
+                    yield return new WaitForSeconds(enemyWave.TimePerEnemy);
+                }
             }
         }
+
+        OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
 
         yield return null;
     }
@@ -197,7 +203,7 @@ public class EnemyWavesManager : MonoBehaviour
 
     /// <summary>
     /// Se invoca cuando un enemigo muere, actualiza el numero de enemigos vivos, y si llega a 0 se invoca
-    /// el evento AllEnemiesDefeated
+    /// el evento OnAllEnemiesDefeated
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="value"></param>
@@ -207,7 +213,7 @@ public class EnemyWavesManager : MonoBehaviour
 
         if (_aliveEnemies == 0)
         {
-            AllEnemiesDefeated?.Invoke();
+            OnAllEnemiesDefeated?.Invoke();
         }
     }
 }
