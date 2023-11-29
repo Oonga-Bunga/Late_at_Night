@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using System.Threading.Tasks;
 using UnityEditor.PackageManager;
 using UnityEditor.Experimental.GraphView;
+using Newtonsoft.Json;
 
 public class UserData : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class UserData : MonoBehaviour
     private string serviceAccountKeyId = "cfc358f1-aefe-49da-94ed-e624c837326c";
     private string secretKey = "DbNZIFvQq7U-JLKyfMirM36irE221tPf";
 
+    private string _accessToken = "";
+    private string _sessionToken = "";
+
     #endregion
 
     #region Methods
@@ -37,37 +41,19 @@ public class UserData : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         _startButton.SetActive(false);
+
         SetupAndSignIn();
     }
 
     private async void SetupAndSignIn()
     {
         await UnityServices.InitializeAsync();
-        Debug.Log(UnityServices.State);
         SetupEvents();
-        StartCoroutine(ExchangeToken());
+        await ExchangeAccessToken();
+        await SignInWithUnityAsync(_accessToken);
     }
 
-    private async Task SignInAnonymouslyAsync()
-    {
-        try
-        {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Debug.Log("Sign in anonymously succeded");
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-        }
-        catch (AuthenticationException ex)
-        {
-            Debug.LogException(ex);
-        }
-        catch (RequestFailedException ex)
-        {
-            Debug.LogException(ex);
-        }
-    }
-
-    // Setup authentication event handlers if desired
-    private void SetupEvents()
+    void SetupEvents()
     {
         AuthenticationService.Instance.SignedIn += () => {
             // Shows how to get a playerID
@@ -92,7 +78,35 @@ public class UserData : MonoBehaviour
         };
     }
 
-    private IEnumerator ExchangeToken()
+    private async Task SignInWithUnityAsync(string accessToken)
+    {
+        try
+        {
+            Debug.Log(accessToken);
+            await AuthenticationService.Instance.SignInWithUnityAsync(accessToken);
+            Debug.Log("SignIn is successful.");
+        }
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+    }
+
+    [System.Serializable]
+    private class TokenResponse
+    {
+        public string accessToken;
+    }
+
+    private async Task ExchangeAccessToken()
     {
         // Construir la cadena de autorización
         string authorizationHeader = "Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(serviceAccountKeyId + ":" + secretKey));
@@ -107,13 +121,27 @@ public class UserData : MonoBehaviour
         request.SetRequestHeader("Authorization", authorizationHeader);
 
         // Enviar la solicitud y esperar la respuesta
-        yield return request.SendWebRequest();
+        var operation = request.SendWebRequest();
 
-        // Manejar la respuesta
+        // Esperar a que la operación se complete
+        while (!operation.isDone)
+        {
+            await Task.Yield();
+        }
+
+        // Verificar si hubo algún error
         if (request.result == UnityWebRequest.Result.Success)
         {
             // Acceder al token desde la respuesta
-            string token = request.downloadHandler.text;
+            string jsonResponse = request.downloadHandler.text;
+
+            // Deserializar el JSON para acceder al campo "token"
+            TokenResponse tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(jsonResponse);
+
+            // Acceder al token
+            string token = tokenResponse.accessToken;
+            _accessToken = token;
+
             Debug.Log("Token obtenido con éxito: " + token);
         }
         else
@@ -121,6 +149,39 @@ public class UserData : MonoBehaviour
             // Manejar el error
             Debug.LogError("Error al obtener el token: " + request.error);
         }
+    }
+
+    [Serializable]
+    public class CustomIdRequestBody
+    {
+        public string externalId;
+        public bool signInOnly;
+    }
+
+    [Serializable]
+    public class SessionResponse
+    {
+        public int expiresIn;
+        public string idToken;
+        public string sessionToken;
+        public UserResponse user;
+        public string userId;
+    }
+
+    [Serializable]
+    public class UserResponse
+    {
+        public bool disabled;
+        public ExternalId[] externalIds;
+        public string id;
+        public string username;
+    }
+
+    [Serializable]
+    public class ExternalId
+    {
+        public string externalId;
+        public string providerId;
     }
 
     public int GetAge()
@@ -195,7 +256,7 @@ public class UserData : MonoBehaviour
             if (_username.Any(c => char.IsLetterOrDigit(c)))
             {
                 _startButton.SetActive(true);
-                //SaveData();
+                SaveData();
                 LoadData();
             }
             else
