@@ -49,8 +49,16 @@ public class UserData : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
         SetupEvents();
-        await ExchangeAccessToken();
-        await SignInWithUnityAsync(_accessToken);
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        var loadedData = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
+        if (loadedData.ContainsKey("username"))
+        {
+            //skip filling information
+        }
+        else
+        {
+            //ask for filling information
+        }
     }
 
     void SetupEvents()
@@ -76,112 +84,6 @@ public class UserData : MonoBehaviour
         {
             Debug.Log("Player session could not be refreshed and expired.");
         };
-    }
-
-    private async Task SignInWithUnityAsync(string accessToken)
-    {
-        try
-        {
-            Debug.Log(accessToken);
-            await AuthenticationService.Instance.SignInWithUnityAsync(accessToken);
-            Debug.Log("SignIn is successful.");
-        }
-        catch (AuthenticationException ex)
-        {
-            // Compare error code to AuthenticationErrorCodes
-            // Notify the player with the proper error message
-            Debug.LogException(ex);
-        }
-        catch (RequestFailedException ex)
-        {
-            // Compare error code to CommonErrorCodes
-            // Notify the player with the proper error message
-            Debug.LogException(ex);
-        }
-    }
-
-    [System.Serializable]
-    private class TokenResponse
-    {
-        public string accessToken;
-    }
-
-    private async Task ExchangeAccessToken()
-    {
-        // Construir la cadena de autorización
-        string authorizationHeader = "Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(serviceAccountKeyId + ":" + secretKey));
-
-        // Construir la URL
-        string url = $"https://services.api.unity.com/auth/v1/token-exchange?projectId={projectId}&environmentId={environmentId}";
-
-        // Crear la solicitud
-        UnityWebRequest request = UnityWebRequest.Post(url, "", "application/json");
-
-        // Agregar el encabezado de autorización
-        request.SetRequestHeader("Authorization", authorizationHeader);
-
-        // Enviar la solicitud y esperar la respuesta
-        var operation = request.SendWebRequest();
-
-        // Esperar a que la operación se complete
-        while (!operation.isDone)
-        {
-            await Task.Yield();
-        }
-
-        // Verificar si hubo algún error
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            // Acceder al token desde la respuesta
-            string jsonResponse = request.downloadHandler.text;
-
-            // Deserializar el JSON para acceder al campo "token"
-            TokenResponse tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(jsonResponse);
-
-            // Acceder al token
-            string token = tokenResponse.accessToken;
-            _accessToken = token;
-
-            Debug.Log("Token obtenido con éxito: " + token);
-        }
-        else
-        {
-            // Manejar el error
-            Debug.LogError("Error al obtener el token: " + request.error);
-        }
-    }
-
-    [Serializable]
-    public class CustomIdRequestBody
-    {
-        public string externalId;
-        public bool signInOnly;
-    }
-
-    [Serializable]
-    public class SessionResponse
-    {
-        public int expiresIn;
-        public string idToken;
-        public string sessionToken;
-        public UserResponse user;
-        public string userId;
-    }
-
-    [Serializable]
-    public class UserResponse
-    {
-        public bool disabled;
-        public ExternalId[] externalIds;
-        public string id;
-        public string username;
-    }
-
-    [Serializable]
-    public class ExternalId
-    {
-        public string externalId;
-        public string providerId;
     }
 
     public int GetAge()
@@ -231,21 +133,6 @@ public class UserData : MonoBehaviour
         Debug.Log("Attempted to save data");
     }
 
-    private async void LoadData()
-    {
-        var keysToLoad = new HashSet<string>
-        {
-            "username",
-            "gender",
-            "age"
-        };
-        var loadedData = await CloudSaveService.Instance.Data.Player.LoadAsync(keysToLoad);
-        var loadedUsername = loadedData["username"].Value.GetAsString();
-        var loadedGender = loadedData["gender"].Value.GetAsString();
-        var loadedAge = loadedData["age"].Value.GetAsString();
-        Debug.Log("Loaded data. Username: " + loadedUsername + ", Gender: " + loadedGender + ", Age: " + loadedAge);
-    }
-
     /// <summary>
     /// Comprueba si los datos introducidos en el login son correctos
     /// </summary>
@@ -256,8 +143,6 @@ public class UserData : MonoBehaviour
             if (_username.Any(c => char.IsLetterOrDigit(c)))
             {
                 _startButton.SetActive(true);
-                SaveData();
-                LoadData();
             }
             else
             {
