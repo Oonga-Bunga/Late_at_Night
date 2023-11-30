@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class HeadBob : MonoBehaviour
     private float _toggleSpeed = 1.0f;
     private PlayerController _player;
     [SerializeField] private Rigidbody _playerRb;
+    private bool _positive = true;
+    public event Action OnStep;
 
     private void Start()
     {
@@ -56,6 +59,17 @@ public class HeadBob : MonoBehaviour
     {
         Vector3 pos = Vector3.zero;
         pos.y += Mathf.Sin(Time.time * _frequency * _player.PlayerMovement.MaxCurrentSpeed) * _amplitude;
+
+        if (Mathf.Sin(Time.time * _frequency * _player.PlayerMovement.MaxCurrentSpeed) < 0 && _positive)
+        {
+            _positive = !_positive;
+            OnStep?.Invoke();
+        }
+        else if (Mathf.Sin(Time.time * _frequency * _player.PlayerMovement.MaxCurrentSpeed) > 0 && !_positive)
+        {
+            _positive = !_positive;
+            //OnStep?.Invoke();
+        }
 
         if (!_sidewaysBobToggle) return pos;
 

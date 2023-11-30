@@ -14,6 +14,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     protected Collider _hitbox;
     public event Action<float> OnHealthChanged;
     public event Action OnDied;
+    public event Action OnDamaged;
 
     public float MaxHealth => _maxHealth;
 
@@ -41,6 +42,7 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
     public virtual void TakeHit(float damage, IKillableEntity.AttackSource source)
     {
         ChangeHealth(damage, true);
+        OnDamaged?.Invoke();
     }
 
     /// <summary>
