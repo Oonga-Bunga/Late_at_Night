@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button[] tabButtons;
     [SerializeField] private GameObject[] tabPanels;
     [SerializeField] private GameObject[] _mobileGUI;
+    [SerializeField] private Button[] _levelButtons;
     [SerializeField] private GameObject[] _computerGUI;
     [SerializeField] private Button[] _selectedButton;
     [SerializeField] private Sprite[] _buttonsSprites;
@@ -24,18 +26,14 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
-    [SerializeField] private Canvas loginMenu;
     [SerializeField] private Canvas selectLevelMenu;
     [SerializeField] private Canvas creditsMenu;
     [SerializeField] private TextMeshProUGUI _optionsTabText;
 
-    [SerializeField] private GameObject loginButtons;
-    [SerializeField] private GameObject loginAgeScrollList;
     [SerializeField] private AudioSource _clickSound;
 
     private Button[] _buttons;
     private int _currentTabIndex = 0;
-    private bool _ageScrollListOpen = false;
     #endregion
 
     #region Methods
@@ -46,10 +44,8 @@ public class MenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         //Se configuran las escenas
-        loginMenu.gameObject.SetActive(true);
-        mainMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
         optionsMenu.gameObject.SetActive(false);
-        loginAgeScrollList.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
 
@@ -70,6 +66,14 @@ public class MenuManager : MonoBehaviour
         foreach (var button in _buttons)
         {
             button.onClick.AddListener(()=>_clickSound.PlayOneShot(_clickSound.clip));
+        }
+
+        var _data = FindObjectOfType<UserData>();
+        for (int i = 0; i < _data.GetProgress(); i++)
+        {
+            _levelButtons[i].image.color = Color.white;
+            _levelButtons[i].interactable = true;
+            _levelButtons[i].GetComponent<EventTrigger>().enabled = true;
         }
     }
 
@@ -123,7 +127,6 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(true);
         optionsMenu.gameObject.SetActive(false);
-        loginMenu.gameObject.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
     }
@@ -152,6 +155,16 @@ public class MenuManager : MonoBehaviour
     {
         _optionsTabText.text = tabName;
     }
+
+    /// <summary>
+    /// Actualiza el último nivel al que está jugando el jugador
+    /// </summary>
+    /// <param name="levelIndex"></param>
+    public void UpdateCurrentLevel(int levelIndex)
+    {
+        FindObjectOfType<UserData>()._currentLevelPlayed = levelIndex;
+    }
+
 
     /// <summary>
     /// Desactiva todos los paneles del menú de opciones
@@ -190,25 +203,6 @@ public class MenuManager : MonoBehaviour
         FindObjectOfType<LevelJsons>().EnemyWavesJsonFile = jsonAsset;
     }
 
-    /// <summary>
-    /// Activa o desactiva el ScrollList para seleccionar la edad
-    /// </summary>
-    public void selectAgeButton()
-    {
-        if (_ageScrollListOpen)
-        {
-            _ageScrollListOpen = !_ageScrollListOpen;
-            loginAgeScrollList.SetActive(false);
-            loginButtons.SetActive(true);
-        }
-        else
-        {
-            _ageScrollListOpen = !_ageScrollListOpen;
-            loginAgeScrollList.SetActive(true);
-            loginButtons.SetActive(false);
-        }
-    }
-    
     /// <summary>
     /// Cambia el nivel de calidad del videojuego
     /// </summary>

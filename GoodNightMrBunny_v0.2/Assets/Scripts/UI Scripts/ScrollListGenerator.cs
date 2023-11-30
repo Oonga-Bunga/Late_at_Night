@@ -11,7 +11,7 @@ public class ScrollListGenerator : MonoBehaviour
     [SerializeField]private Button buttonPrefab;
     [SerializeField]private TextMeshProUGUI _textMenuAgeButton;
     [SerializeField]private RectTransform content; 
-    [SerializeField]private MenuManager menuManager;
+    [SerializeField]private LoginMenuManager loginMenuManager;
     private UserData userData;
     #endregion
     
@@ -37,7 +37,7 @@ public class ScrollListGenerator : MonoBehaviour
                 userData.setAge(int.Parse(newButton.GetComponentInChildren<TextMeshProUGUI>().text));
                 _textMenuAgeButton.text = newButton.GetComponentInChildren<TextMeshProUGUI>().text; 
             });
-            newButton.onClick.AddListener(()=>menuManager.selectAgeButton());
+            newButton.onClick.AddListener(()=>loginMenuManager.selectAgeButton());
         }
     }
     #endregion

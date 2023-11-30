@@ -12,6 +12,8 @@ using Unity.Services.CloudSave;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Unity.Services.CloudSave.Models;
+using UnityEngine.SceneManagement;
 
 public class UserData : MonoBehaviour
 {
@@ -19,13 +21,13 @@ public class UserData : MonoBehaviour
 
     [SerializeField] private GameObject _startButton;
 
-    private MenuManager _menuManager;
-    private bool _logged = false;
-    
     private string _username;
     private string _gender;
     private int _age = -1;
+    private int _progress = 1; //Levels available
     private static GameObject sampleInstance;
+
+    public int _currentLevelPlayed { get; set; } = 0;
 
     private string projectId = "a0aa3f3d-2e34-4fb5-9b07-f71db6dadf34";
     private string environmentId = "5079820c-3f88-4786-a800-84d185339de1";
@@ -40,18 +42,10 @@ public class UserData : MonoBehaviour
     #region Methods
     private void Awake()
     {
-        _menuManager = FindObjectOfType<MenuManager>();
-        if (_logged == true)
-        {
-            openMenu();
-        }
-        else
-        {
-            DontDestroyOnLoad(this.gameObject);
-            _startButton.SetActive(false);
+        DontDestroyOnLoad(this.gameObject);
+        _startButton.SetActive(false);
 
-            SetupAndSignIn();
-        }
+        SetupAndSignIn();
     }
 
     private async void SetupAndSignIn()
@@ -60,10 +54,13 @@ public class UserData : MonoBehaviour
         SetupEvents();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         var loadedData = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
-        if (loadedData.ContainsKey("username"))
+        if (loadedData.ContainsKey("username") && loadedData["username"].Value.ToString().Any(c => char.IsLetterOrDigit(c)))
         {
             //skip filling information
-            _menuManager.OpenMainMenu();
+            Debug.Log("Loaded Game as "+loadedData["username"].Value.GetAsString());
+
+            //SceneManager.LoadScene("Main Menu");
+            
         }
         else
         {
@@ -102,6 +99,20 @@ public class UserData : MonoBehaviour
     }
 
     /// <summary>
+    /// Actualiza el último nivel pasado por el jugador
+    /// </summary>
+    public void SetProgress()
+    {
+        _progress += 1;
+    }
+    
+    public int GetProgress()
+    {
+        return _progress;
+    }
+
+
+    /// <summary>
     /// Actualiza el nombre de usuario del jugador
     /// </summary>
     /// <param name="input">nombre de usuario nuevo</param>
@@ -130,17 +141,27 @@ public class UserData : MonoBehaviour
         _age = selectedAge;
         CanStartGame();
     }
+    
+    
 
-    private async void SaveData()
+    public async void SaveData()
     {
         var data = new Dictionary<string, object>
         {
             { "username", _username },
             { "gender", _gender },
-            { "age", _age}
+            { "age", _age},
+            {"progress", _progress}
         };
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
         Debug.Log("Attempted to save data");
+    }
+    
+    public async Task<Dictionary<string, Item>> LoadData()
+    {
+        var data = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
+        Debug.Log("Attempted to load data");
+        return data;
     }
 
     /// <summary>
@@ -167,9 +188,8 @@ public class UserData : MonoBehaviour
 
     public void openMenu()
     {
-        _logged = true;
         SaveData();
-        _menuManager.OpenMainMenu();
+        SceneManager.LoadScene("Main Menu");
     }
     
     #endregion
