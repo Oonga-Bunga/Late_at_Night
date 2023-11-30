@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -185,7 +184,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Instancia el objeto go dentro del _levelHolder, en la posición local pos, la rotación local rot y 
+    /// Instancia el objeto go dentro del _levelHolder, en la posiciï¿½n local pos, la rotaciï¿½n local rot y 
     /// la escala local scale
     /// </summary>
     /// <param name="go"></param>

@@ -52,7 +52,6 @@ public class MenuManager : MonoBehaviour
         loginAgeScrollList.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
-        if (FindObjectOfType<UserData>().GetAge() >= 0) OpenMainMenu();
 
         //Elementos de interfaz
         ShowDispositiveElements();

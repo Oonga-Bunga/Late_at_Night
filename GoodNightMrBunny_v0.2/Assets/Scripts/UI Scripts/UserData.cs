@@ -11,8 +11,6 @@ using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
-using UnityEditor.PackageManager;
-using UnityEditor.Experimental.GraphView;
 using Newtonsoft.Json;
 
 public class UserData : MonoBehaviour
@@ -20,6 +18,9 @@ public class UserData : MonoBehaviour
     #region Atributtes
 
     [SerializeField] private GameObject _startButton;
+
+    private MenuManager _menuManager;
+    private bool _logged = false;
     
     private string _username;
     private string _gender;
@@ -39,10 +40,18 @@ public class UserData : MonoBehaviour
     #region Methods
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        _startButton.SetActive(false);
+        _menuManager = FindObjectOfType<MenuManager>();
+        if (_logged == true)
+        {
+            openMenu();
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+            _startButton.SetActive(false);
 
-        SetupAndSignIn();
+            SetupAndSignIn();
+        }
     }
 
     private async void SetupAndSignIn()
@@ -54,6 +63,7 @@ public class UserData : MonoBehaviour
         if (loadedData.ContainsKey("username"))
         {
             //skip filling information
+            _menuManager.OpenMainMenu();
         }
         else
         {
@@ -154,5 +164,13 @@ public class UserData : MonoBehaviour
             _startButton.SetActive(false);
         }
     }
+
+    public void openMenu()
+    {
+        _logged = true;
+        SaveData();
+        _menuManager.OpenMainMenu();
+    }
+    
     #endregion
 }

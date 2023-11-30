@@ -5900,10 +5900,10 @@ RectTransform:
   m_Father: {fileID: 35521234}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 267.00128, y: -279.57788}
+  m_SizeDelta: {x: 404.0026, y: 399.15576}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754934896
 MonoBehaviour:
@@ -6185,7 +6185,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 105.75
+  m_fontSize: 105.55
   m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6273,10 +6273,10 @@ RectTransform:
   m_Father: {fileID: 35521234}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 691.0039, y: -279.57788}
+  m_SizeDelta: {x: 404.0026, y: 399.15576}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &787532926
 MonoBehaviour:
@@ -10678,10 +10678,10 @@ RectTransform:
   m_Father: {fileID: 35521234}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1115.0065, y: -279.57788}
+  m_SizeDelta: {x: 404.0026, y: 399.15576}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376320684
 MonoBehaviour:
@@ -10963,19 +10963,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 663986623}
         m_TargetAssemblyTypeName: UserData, Assembly-CSharp
-        m_MethodName: setUsername
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 651825194}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 716065946}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+        m_MethodName: openMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12689,7 +12677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HIGH
+  m_text: High
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 00807028e519fd845a009bd8c0970fc4, type: 2}
   m_sharedMaterial: {fileID: -462280963821155882, guid: 00807028e519fd845a009bd8c0970fc4, type: 2}
@@ -12776,7 +12764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1722771501
 MonoBehaviour:
   m_ObjectHideFlags: 0
