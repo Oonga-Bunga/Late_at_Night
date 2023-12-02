@@ -26,8 +26,6 @@ public class AInteractable : MonoBehaviour, IInteractable
     [SerializeField] protected Canvas _promptCanvas; // Referencia al canvas del button prompt
     [SerializeField] protected Image _radialBar; // Referencia a la barra radial del button prompt
 
-    public event Action<bool> OnPlayerRange;
-
     public bool CanBeInteracted => _canBeInteracted;
 
     #endregion
@@ -160,8 +158,6 @@ public class AInteractable : MonoBehaviour, IInteractable
         {
             _promptCanvas.enabled = true;
         }
-
-        OnPlayerRange?.Invoke(true);
     }
 
     /// <summary>
@@ -177,8 +173,6 @@ public class AInteractable : MonoBehaviour, IInteractable
         {
             _promptCanvas.enabled = false;
         }
-
-        OnPlayerRange?.Invoke(false);
     }
 
     public virtual void Initialize(float value)

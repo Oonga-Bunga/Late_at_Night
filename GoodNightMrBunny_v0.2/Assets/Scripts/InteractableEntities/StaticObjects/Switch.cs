@@ -8,6 +8,7 @@ public class Switch : AInteractable
     private bool _isOn = true; // Si el interruptor está o no encendido
     public event Action<object, bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     public event Action<object, bool> OnAttacked;
+    public event Action<object, bool> OnPlayerRange;
 
     [Header("Switch Settings")]
 
@@ -93,5 +94,19 @@ public class Switch : AInteractable
     {
         _currentAttackingEnemies--;
         if (_currentAttackingEnemies == 0) OnAttacked?.Invoke(this, false);
+    }
+
+    public override void EnableOutlineAndCanvas()
+    {
+        base.EnableOutlineAndCanvas();
+
+        OnPlayerRange?.Invoke(this, true);
+    }
+
+    public override void DisableOutlineAndCanvas()
+    {
+        base.DisableOutlineAndCanvas();
+
+        OnPlayerRange?.Invoke(this, false);
     }
 }
