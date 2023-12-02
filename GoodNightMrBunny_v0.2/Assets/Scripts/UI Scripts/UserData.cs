@@ -162,10 +162,6 @@ public class UserData : MonoBehaviour
         };
         var loadedData = await CloudSaveService.Instance.Data.LoadAsync(keysToLoad);
         return loadedData;
-
-        var data = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
-        Debug.Log("Attempted to load data");
-        return data;
     }
 
     /// <summary>
