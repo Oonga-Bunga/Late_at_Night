@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
         List<Switch> tempSwitchList = new List<Switch>();
 
-        foreach (Switch switchComponent in LevelGenerator.Instance.transform.GetComponentsInChildren<Switch>())
+        foreach (Switch switchComponent in LevelGenerator.Instance.LevelHolder.transform.GetComponentsInChildren<Switch>())
         {
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                 _currentActivatedSwitches++;
             }
         }
-
+        
         _switchListInstance = tempSwitchList;
 
         Debug.Log("Searching for flashlight recharge stations");
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void SwitchChangedState(bool isOn)
+    private void SwitchChangedState(object obj, bool isOn)
     {
         if (isOn)
         {
