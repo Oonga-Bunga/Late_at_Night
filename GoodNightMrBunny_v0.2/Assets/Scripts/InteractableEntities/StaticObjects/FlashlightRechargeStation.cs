@@ -127,4 +127,11 @@ public class FlashlightRechargeStation : AInteractable
         _isDrained = false;
         _canBeInteracted = true;
     }
+
+    public override void EnableOutlineAndCanvas()
+    {
+        //if (_player.PlayerWeapons.CurrentHeldObject.HoldableObjectType == IPlayerReceiver.HoldableObjectType.Flashlight && )
+
+        base.EnableOutlineAndCanvas();
+    }
 }

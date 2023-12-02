@@ -6,6 +6,7 @@ public class PlayerAudio : MonoBehaviour
 {
     [SerializeField] private AudioSource _stepAudioSource;
     [SerializeField] private AudioSource _jumpAudioSource;
+    [SerializeField] private AudioSource _landedAudioSource;
     [SerializeField] private AudioSource _hurtAudioSource;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private PlayerHealth _ph;
@@ -17,6 +18,7 @@ public class PlayerAudio : MonoBehaviour
     {
         _ph.OnDamaged += PlayHurtSound;
         _pm.OnJumped += PlayJumpSound;
+        _pm.OnLanded += PlayLandedSound;
         _hb.OnStep += PlayStepSound;
     }
 
@@ -28,31 +30,21 @@ public class PlayerAudio : MonoBehaviour
 
     private void PlayStepSound()
     {
-        if (_stepAudioSource.isPlaying)
-        {
-            return;
-        }
-
         _stepAudioSource.Play();
     }
 
     private void PlayJumpSound()
     {
-        if (_jumpAudioSource.isPlaying)
-        {
-            return;
-        }
-
         //_jumpAudioSource.Play();
+    }
+
+    private void PlayLandedSound()
+    {
+        _landedAudioSource.Play();
     }
 
     private void PlayHurtSound()
     {
-        if (_hurtAudioSource.isPlaying)
-        {
-            return;
-        }
-
         _hurtAudioSource.Play();
     }
 }

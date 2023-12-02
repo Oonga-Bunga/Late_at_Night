@@ -29,14 +29,6 @@ public class UserData : MonoBehaviour
 
     public int _currentLevelPlayed { get; set; } = 0;
 
-    private string projectId = "a0aa3f3d-2e34-4fb5-9b07-f71db6dadf34";
-    private string environmentId = "5079820c-3f88-4786-a800-84d185339de1";
-    private string serviceAccountKeyId = "cfc358f1-aefe-49da-94ed-e624c837326c";
-    private string secretKey = "DbNZIFvQq7U-JLKyfMirM36irE221tPf";
-
-    private string _accessToken = "";
-    private string _sessionToken = "";
-
     #endregion
 
     #region Methods
@@ -59,7 +51,10 @@ public class UserData : MonoBehaviour
             //skip filling information
             Debug.Log("Loaded Game as "+loadedData["username"].Value.GetAsString());
 
-            //SceneManager.LoadScene("Main Menu");
+            Dictionary<string, Item> data = await LoadData();
+            _progress = int.Parse(data["progress"].ToString());
+
+            SceneManager.LoadScene("Main Menu");
             
         }
         else
@@ -156,7 +151,7 @@ public class UserData : MonoBehaviour
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
         Debug.Log("Attempted to save data");
     }
-    
+
     public async Task<Dictionary<string, Item>> LoadData()
     {
         var data = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
