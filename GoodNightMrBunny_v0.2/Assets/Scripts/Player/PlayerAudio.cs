@@ -43,7 +43,7 @@ public class PlayerAudio : MonoBehaviour
             return;
         }
 
-        _jumpAudioSource.Play();
+        //_jumpAudioSource.Play();
     }
 
     private void PlayHurtSound()

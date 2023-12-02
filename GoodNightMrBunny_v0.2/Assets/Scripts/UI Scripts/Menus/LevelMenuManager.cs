@@ -69,6 +69,7 @@ namespace UI_Scripts.Menus
         {
             _loadingScreen.SetActive(false);
             _loadingScreenCamera.SetActive(false);
+            Destroy(_loadingScreenCamera.gameObject);
             _gameUI.SetActive(true);
             OpenInstructionsPanel();
         }

@@ -60,6 +60,9 @@ public class EnemyWavesManager : MonoBehaviour
 
     private void Start()
     {
+        // Comienza a cargar la información del Json
+        StartCoroutine(LoadEnemyWavesFromJson());
+
         // Se suscribe al evento del game manager para comenzar a spawnear enemigos una vez comience el nivel
         GameManager.Instance.OnGameStarted += () => StartCoroutine(EnemyWavesProcessing());
 
@@ -68,9 +71,6 @@ public class EnemyWavesManager : MonoBehaviour
         {
             _enemyWavesJsonFile = LevelJsons.Instance.EnemyWavesJsonFile;
         }
-
-        // Comienza a cargar la información del Json
-        StartCoroutine(LoadEnemyWavesFromJson());
     }
 
     private IEnumerator LoadEnemyWavesFromJson()
@@ -88,6 +88,8 @@ public class EnemyWavesManager : MonoBehaviour
             _enemyWaveList.Add(wave);
         }
 
+        Debug.Log("Finished loading enemies");
+
         yield return null;
     }
 
@@ -97,6 +99,8 @@ public class EnemyWavesManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator EnemyWavesProcessing()
     {
+        Debug.Log("Started enemy spawning");
+
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             if (enemyWave.NeedsEnemiesKilled)
@@ -173,6 +177,8 @@ public class EnemyWavesManager : MonoBehaviour
                 _aliveEnemies++;
                 break;
         }
+
+        Debug.Log("Enemy spawned");
     }
 
     /// <summary>

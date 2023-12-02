@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
     private static List<Switch> _switchListInstance = new List<Switch>();
     public static List<Switch> SwitchListInstance => _switchListInstance;
 
-    private int _totalSwitches = 0;
-
     private static List<FlashlightRechargeStation> _rechargeStationListInstance = new List<FlashlightRechargeStation>();
     public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
 
@@ -85,7 +83,6 @@ public class GameManager : MonoBehaviour
         {
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
-            _totalSwitches++;
             if (switchComponent.IsOn)
             {
                 _currentActivatedSwitches++;
@@ -173,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     #region Methods
 
-    private void SwitchChangedState(object sender, bool isOn)
+    private void SwitchChangedState(bool isOn)
     {
         if (isOn)
         {
