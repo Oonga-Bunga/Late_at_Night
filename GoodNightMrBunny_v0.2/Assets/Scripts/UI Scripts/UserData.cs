@@ -45,14 +45,13 @@ public class UserData : MonoBehaviour
         await UnityServices.InitializeAsync();
         SetupEvents();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        var loadedData = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
-        if (loadedData.ContainsKey("username") && loadedData["username"].Value.ToString().Any(c => char.IsLetterOrDigit(c)))
+        Dictionary<string, string> data = await LoadData();
+        if (data.ContainsKey("username"))
         {
             //skip filling information
-            Debug.Log("Loaded Game as "+loadedData["username"].Value.GetAsString());
+            Debug.Log("Loaded Game as " + data["username"]);
 
-            Dictionary<string, Item> data = await LoadData();
-            _progress = int.Parse(data["progress"].ToString());
+            _progress = int.Parse(data["progress"]);
 
             SceneManager.LoadScene("Main Menu");
             
@@ -152,8 +151,18 @@ public class UserData : MonoBehaviour
         Debug.Log("Attempted to save data");
     }
 
-    public async Task<Dictionary<string, Item>> LoadData()
+    public async Task<Dictionary<string, string>> LoadData()
     {
+        var keysToLoad = new HashSet<string>
+        {
+            "username",
+            "gender",
+            "age",
+            "progress"
+        };
+        var loadedData = await CloudSaveService.Instance.Data.LoadAsync(keysToLoad);
+        return loadedData;
+
         var data = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
         Debug.Log("Attempted to load data");
         return data;
