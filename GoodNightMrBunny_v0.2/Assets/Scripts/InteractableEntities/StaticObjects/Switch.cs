@@ -6,8 +6,8 @@ using UnityEngine;
 public class Switch : AInteractable
 {
     private bool _isOn = true; // Si el interruptor está o no encendido
-    public event Action<bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
-    public event Action<bool> OnAttacked;
+    public event Action<object, bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
+    public event Action<object, bool> OnAttacked;
 
     [Header("Switch Settings")]
 
@@ -56,7 +56,7 @@ public class Switch : AInteractable
     private void TurnOn()
     {
         _isOn = true;
-        OnTurnedOnOrOff?.Invoke(_isOn);
+        OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = false;
         DisableOutlineAndCanvas();
         _emissiveObject.SetActive(true);
@@ -66,7 +66,7 @@ public class Switch : AInteractable
     private void TurnOff()
     {
         _isOn = false;
-        OnTurnedOnOrOff?.Invoke(_isOn);
+        OnTurnedOnOrOff?.Invoke(this, _isOn);
         _canBeInteracted = true;
         _emissiveObject.SetActive(false);
         _nonEmissiveObject.SetActive(true);
@@ -85,13 +85,13 @@ public class Switch : AInteractable
 
     public void StartAttack()
     {
-        if (_currentAttackingEnemies == 0) OnAttacked?.Invoke(true);
+        if (_currentAttackingEnemies == 0) OnAttacked?.Invoke(this, true);
         _currentAttackingEnemies++;
     }
 
     public void EndAttack()
     {
         _currentAttackingEnemies--;
-        if (_currentAttackingEnemies == 0) OnAttacked?.Invoke(false);
+        if (_currentAttackingEnemies == 0) OnAttacked?.Invoke(this, false);
     }
 }
