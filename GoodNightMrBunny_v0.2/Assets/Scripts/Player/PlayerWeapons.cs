@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
+    public event Action OnPick;
+    public event Action OnDrop;
 
     public AHoldableObject CurrentHeldObject => _currentHeldObject;
 
@@ -74,6 +77,8 @@ public class PlayerWeapons : MonoBehaviour
         {
             _currentHeldObject.Initialize(initializationValue);
         }
+
+        OnPick?.Invoke();
     }
 
     /// <summary>
@@ -87,5 +92,6 @@ public class PlayerWeapons : MonoBehaviour
         _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);
         _currentHeldObject = _holdableObjectList[0];
+        OnDrop?.Invoke();
     }
 }

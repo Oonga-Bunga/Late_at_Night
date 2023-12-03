@@ -16,7 +16,8 @@ public class ClayBalls : AHoldableObject
     [SerializeField] private GameObject _clayBallPrefab;
     [SerializeField] private float _shotForce = 30f;
     [SerializeField] private GameObject[] _handClayBalls;
-    
+    [SerializeField] private AudioSource _trowBallAudioSource;
+
     public float BaseDamage => _baseDamage;
 
     public int MaxBallNumber => _maxBallNumber;
@@ -72,6 +73,7 @@ public class ClayBalls : AHoldableObject
         GameObject clayBall = Instantiate(_clayBallPrefab, this.transform.position, rotacionDisparo);
         
         clayBall.GetComponent<ClayBallBehaviour>().Initialize(clayBall.transform.forward, _shotForce);
+        _trowBallAudioSource.Play();
 
         _currentBallNumber -= 1;
         if (_currentBallNumber == 0)

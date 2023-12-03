@@ -7,10 +7,13 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioSource _stepAudioSource;
     [SerializeField] private AudioSource _jumpAudioSource;
     [SerializeField] private AudioSource _landedAudioSource;
+    [SerializeField] private AudioSource _pìckAudioSource;
+    [SerializeField] private AudioSource _dropAudioSource;
     [SerializeField] private AudioSource _hurtAudioSource;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private PlayerHealth _ph;
     [SerializeField] private PlayerMovement _pm;
+    [SerializeField] private PlayerWeapons _pw;
     [SerializeField] private HeadBob _hb;
 
     // Start is called before the first frame update
@@ -19,6 +22,8 @@ public class PlayerAudio : MonoBehaviour
         _ph.OnDamaged += PlayHurtSound;
         _pm.OnJumped += PlayJumpSound;
         _pm.OnLanded += PlayLandedSound;
+        _pw.OnPick += PlayPickSound;
+        _pw.OnDrop += PlayDropSound;
         _hb.OnStep += PlayStepSound;
     }
 
@@ -30,17 +35,33 @@ public class PlayerAudio : MonoBehaviour
 
     private void PlayStepSound()
     {
-        _stepAudioSource.Play();
+        if (!_landedAudioSource.isPlaying) 
+        {
+            _stepAudioSource.Play();
+        }
     }
 
     private void PlayJumpSound()
     {
-        //_jumpAudioSource.Play();
+        _jumpAudioSource.Play();
     }
 
     private void PlayLandedSound()
     {
-        _landedAudioSource.Play();
+        if (!_landedAudioSource.isPlaying)
+        {
+            _landedAudioSource.Play();
+        }
+    }
+
+    private void PlayPickSound()
+    {
+        _pìckAudioSource.Play();
+    }
+
+    private void PlayDropSound()
+    {
+        _dropAudioSource.Play();
     }
 
     private void PlayHurtSound()

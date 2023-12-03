@@ -138,7 +138,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     /// </summary>
     protected virtual void InteractedHoldAction()
     {
-
+        
     }
 
     #endregion
