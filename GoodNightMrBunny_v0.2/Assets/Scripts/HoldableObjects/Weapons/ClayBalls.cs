@@ -13,9 +13,8 @@ public class ClayBalls : AHoldableObject
     private int _currentBallNumber;
     [SerializeField] private int _maxBallNumber = 6;
     [SerializeField] private float _baseDamage = 5f;
-    [SerializeField] private UpdateUIClayAmmo _uiClayAmmo;
     [SerializeField] private GameObject _clayBallPrefab;
-    [SerializeField] private float _shotForce = 20f;
+    [SerializeField] private float _shotForce = 30f;
     [SerializeField] private GameObject[] _handClayBalls;
     
     public float BaseDamage => _baseDamage;
