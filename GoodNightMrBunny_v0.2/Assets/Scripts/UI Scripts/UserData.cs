@@ -36,8 +36,6 @@ public class UserData : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         _startButton.SetActive(false);
-
-        SetupAndSignIn();
     }
 
     private async void SetupAndSignIn()
@@ -188,7 +186,6 @@ public class UserData : MonoBehaviour
 
     public void openMenu()
     {
-        SaveData();
         SceneManager.LoadScene("Main Menu");
     }
     
