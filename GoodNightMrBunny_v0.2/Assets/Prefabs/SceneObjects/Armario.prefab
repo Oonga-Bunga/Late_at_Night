@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6246922158196880438}
   - component: {fileID: 6074002337193717264}
+  - component: {fileID: 8440810387897281866}
   m_Layer: 3
   m_Name: Armario
   m_TagString: SceneObject
@@ -52,8 +53,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.3330173, y: 15, z: 4.25}
+  m_Size: {x: 7.3330173, y: 15, z: 5.41}
   m_Center: {x: 0, y: 7.46, z: 0}
+--- !u!65 &8440810387897281866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292413099659291526}
+  m_Material: {fileID: 13400000, guid: 90697ed3962825d4a91449c08198c3a8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.04, y: 0.5, z: 6.61}
+  m_Center: {x: 0, y: 15.25, z: 0}
 --- !u!1001 &3756540213052440570
 PrefabInstance:
   m_ObjectHideFlags: 0
