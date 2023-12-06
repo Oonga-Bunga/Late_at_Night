@@ -75,6 +75,14 @@ public class MenuManager : MonoBehaviour
             _levelButtons[i].interactable = true;
             _levelButtons[i].GetComponent<EventTrigger>().enabled = true;
         }
+        
+        //PlayerPrefs
+        if (PlayerPrefs.HasKey("OptionsQualityIndex"))
+        {
+            _qualityIntLevel = PlayerPrefs.GetInt("OptionsQualityIndex");
+            QualitySettings.SetQualityLevel(_qualityIntLevel);
+            _canvasQualityText.text = _qualityLevels[_qualityIntLevel];
+        }
     }
 
     private void Update()
@@ -213,6 +221,7 @@ public class MenuManager : MonoBehaviour
         if (_qualityIntLevel < 0) _qualityIntLevel = 2;
         _canvasQualityText.text = _qualityLevels[_qualityIntLevel];
         QualitySettings.SetQualityLevel(_qualityIntLevel);
+        PlayerPrefs.SetInt("OptionsQualityIndex", _qualityIntLevel);
     }
 
     /// <summary>
@@ -237,9 +246,9 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            foreach (var computerElemet in _computerGUI)
+            foreach (var computerElement in _computerGUI)
             {
-                computerElemet.SetActive(false);
+                computerElement.SetActive(false);
             }
         }
     }

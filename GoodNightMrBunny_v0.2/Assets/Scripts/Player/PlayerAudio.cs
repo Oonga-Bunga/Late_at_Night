@@ -7,7 +7,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioSource _stepAudioSource;
     [SerializeField] private AudioSource _jumpAudioSource;
     [SerializeField] private AudioSource _landedAudioSource;
-    [SerializeField] private AudioSource _pìckAudioSource;
+    [SerializeField] private AudioSource _packAudioSource;
     [SerializeField] private AudioSource _dropAudioSource;
     [SerializeField] private AudioSource _hurtAudioSource;
     [SerializeField] private Rigidbody _rb;
@@ -56,7 +56,7 @@ public class PlayerAudio : MonoBehaviour
 
     private void PlayPickSound()
     {
-        _pìckAudioSource.Play();
+        _packAudioSource.Play();
     }
 
     private void PlayDropSound()

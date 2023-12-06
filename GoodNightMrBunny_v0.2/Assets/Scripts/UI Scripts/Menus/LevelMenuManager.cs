@@ -58,6 +58,14 @@ namespace UI_Scripts.Menus
         private void Start()
         {
             GameManager.Instance.OnGameStarted += StartGame;
+            
+            //PlayerPrefs
+            if (PlayerPrefs.HasKey("OptionsQualityIndex"))
+            {
+                int _qualityIdx = PlayerPrefs.GetInt("OptionsQualityIndex");
+                QualitySettings.SetQualityLevel(_qualityIdx);
+                _canvasQualityText.text = _qualityLevels[_qualityIdx];
+            }
         }
 
         public void ChangeLodingText(string text)
@@ -173,6 +181,8 @@ namespace UI_Scripts.Menus
             if (_qualityIntLevel < 0) _qualityIntLevel = 2;
             _canvasQualityText.text = _qualityLevels[_qualityIntLevel];
             QualitySettings.SetQualityLevel(_qualityIntLevel);
+            PlayerPrefs.SetInt("OptionsQualityIndex", _qualityIntLevel);
+            PlayerPrefs.Save();
         }
         
         /// <summary>
