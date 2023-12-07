@@ -137,13 +137,23 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        //_currentTime = _maxTime;
-        OnGameStarted?.Invoke();
+
+        // StartGame();
         _isInGame = true;
+        OnGameStarted?.Invoke();
 
         #endregion
 
         yield return null;
+    }
+
+    public void StartGame()
+    {
+        if (_isInGame)
+        {
+            // if booleano del script del cuento es true
+            OnGameStarted?.Invoke();
+        }
     }
 
     #endregion

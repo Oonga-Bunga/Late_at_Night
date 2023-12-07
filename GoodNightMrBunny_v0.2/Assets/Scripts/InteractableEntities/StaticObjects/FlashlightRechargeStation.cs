@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlashlightRechargeStation : AInteractable
 {
@@ -18,6 +19,7 @@ public class FlashlightRechargeStation : AInteractable
     private bool _isTaken = false;
     private bool _isDrained = false;
     [SerializeField] private Transform _pathfindingPoint;
+    [SerializeField] private Slider _energyBarSlider;
 
     public Transform PathFindingPoint => _pathfindingPoint;
 
@@ -45,6 +47,8 @@ public class FlashlightRechargeStation : AInteractable
         _rechargeAmount = Flashlight.Instance.MaxCharge * _rechargeRate;
         _drainAmount = Flashlight.Instance.MaxCharge * _drainRate;
         _currentCharge = Flashlight.Instance.MaxCharge;
+        _energyBarSlider.maxValue = Flashlight.Instance.MaxCharge;
+        _energyBarSlider.value = _currentCharge;
     }
 
     /// <summary>
@@ -53,6 +57,8 @@ public class FlashlightRechargeStation : AInteractable
     protected override void Update()
     {
         base.Update();
+
+        _energyBarSlider.value = _currentCharge;
 
         if (_isDrained) return;
 

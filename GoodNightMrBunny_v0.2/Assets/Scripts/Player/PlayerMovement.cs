@@ -98,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
         if (tempGrounded == false && _isPlayerGrounded) 
         {
             OnLanded?.Invoke();
-            Debug.Log("hey");
         }
 
         // Actualizar los temporizadores
