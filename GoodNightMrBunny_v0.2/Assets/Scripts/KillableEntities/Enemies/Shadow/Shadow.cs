@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -363,6 +364,12 @@ namespace Shadow
                 Quaternion rotation = Quaternion.LookRotation(pos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _rotationalDamp * Time.deltaTime);
             }
+        }
+
+        public void TurnToTarget(Vector3 targetPos)
+        {
+            targetPos.y = transform.position.y;
+            transform.DOLookAt(targetPos, 1);
         }
     }
 }

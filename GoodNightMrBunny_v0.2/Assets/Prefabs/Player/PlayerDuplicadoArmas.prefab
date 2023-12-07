@@ -66,6 +66,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 2895101039716760147}
   _playerWeapons: {fileID: 3267739950479791283}
   _playerInteraction: {fileID: 6975734142811771088}
+  _playerHealth: {fileID: 609685720219788569}
   _cameraHolder: {fileID: 8613049325841607027}
 --- !u!54 &5651541234777410266
 Rigidbody:
@@ -219,7 +220,7 @@ MonoBehaviour:
   _stepAudioSource: {fileID: 4743941801372951297}
   _jumpAudioSource: {fileID: 3669707552458813268}
   _landedAudioSource: {fileID: 275797381554796713}
-  _packAudioSource: {fileID: 0}
+  _pickAudioSource: {fileID: 987451909674552462}
   _dropAudioSource: {fileID: 2814231781711736698}
   _hurtAudioSource: {fileID: 4659981502889222682}
   _rb: {fileID: 5651541234777410266}
@@ -525,7 +526,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5871165724622955467, guid: 86fa44ec101d96c43896197456422995, type: 2}
-  m_audioClip: {fileID: 8300000, guid: c2da45a96c5895e4bae879197d94bb68, type: 3}
+  m_audioClip: {fileID: 8300000, guid: abd8c2d77d9c554468e4f0b498778aa2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: 1
@@ -1260,7 +1261,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 991
+    m_Bits: 4063
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1845,7 +1846,7 @@ GameObject:
   - component: {fileID: 5081922177987737973}
   - component: {fileID: 160207021672656756}
   - component: {fileID: 2514491312662984196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

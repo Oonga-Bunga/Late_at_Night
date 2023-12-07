@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [SerializeField] private PlayerMovement _playerMovement; // Referencia al script que maneja el movimiento del jugador
     [SerializeField] private PlayerWeapons _playerWeapons; // Referencia al script que maneja los holdable objects del jugador
     [SerializeField] private PlayerInteraction _playerInteraction; // Referencia al script que maneja la interacción del jugador con objetos interactivos
+    [SerializeField] private PlayerHealth _playerHealth; // Referencia al script que maneja la vida del jugador
     [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
 
     public PlayerMovement PlayerMovement => _playerMovement;
     public PlayerWeapons PlayerWeapons => _playerWeapons;
     public PlayerInteraction PlayerInteraction => _playerInteraction;
+    public PlayerHealth PlayerHealth => _playerHealth;
 
     private void Awake()
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 namespace EvilBunny
 {
@@ -27,6 +28,11 @@ namespace EvilBunny
             _agent.speed = _walkingSpeed;
         }
 
+        private void Update()
+        {
+            _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude >= 0.1f);
+        }
+
         public override void TakeHit(float damage, IKillableEntity.AttackSource source)
         {
             switch (source)
@@ -49,6 +55,12 @@ namespace EvilBunny
         public void Merge()
         {
             OnDied?.Invoke();
+        }
+
+        public void TurnToTarget(Vector3 targetPos)
+        {
+            targetPos.y = transform.position.y;
+            transform.DOLookAt(targetPos, 1);
         }
     }
 }

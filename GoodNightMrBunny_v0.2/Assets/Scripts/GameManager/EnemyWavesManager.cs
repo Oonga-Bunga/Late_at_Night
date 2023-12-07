@@ -13,9 +13,7 @@ public class EnemyWaveData
 [System.Serializable]
 public class EnemyWave
 {
-    public bool NeedsEnemiesKilled;
-    public float InitialTimeDelay;
-    public float DelayAfterEnemiesKilled;
+    public float TimeDelay;
     public float TimePerEnemy;
     public int NZanybell;
     public int NEvilBunny;
@@ -103,23 +101,7 @@ public class EnemyWavesManager : MonoBehaviour
 
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
-            if (enemyWave.NeedsEnemiesKilled)
-            {
-                bool enemiesDefeated = false;
-
-                OnAllEnemiesDefeated += () => enemiesDefeated = true;
-
-                yield return new WaitForSeconds(enemyWave.InitialTimeDelay);
-
-                yield return new WaitUntil(() => enemiesDefeated);
-                OnAllEnemiesDefeated -= () => enemiesDefeated = true;
-
-                yield return new WaitForSeconds(enemyWave.DelayAfterEnemiesKilled);
-            }
-            else
-            {
-                yield return new WaitForSeconds(enemyWave.InitialTimeDelay);
-            }
+            yield return new WaitForSeconds(enemyWave.TimeDelay);
 
             List<EnemyTypes> enemyList = new List<EnemyTypes>();
 
