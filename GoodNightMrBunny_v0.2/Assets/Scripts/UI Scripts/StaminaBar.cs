@@ -18,9 +18,4 @@ public class StaminaBar : MonoBehaviour
     {
         _staminaBar.fillAmount = Mathf.Clamp(value / (200), 0f, 0.5f);
     }
-
-    private void UpdateRadialBar()
-    {
-
-    }
 }
