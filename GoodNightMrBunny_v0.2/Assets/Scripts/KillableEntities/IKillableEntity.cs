@@ -8,6 +8,7 @@ public interface IKillableEntity
         ClayBall,
         Rocket,
         Zanybell,
+        KitestingerProjectile,
         KitestingerTrap,
         EvilBunny,
         Cat

@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChasePlayer : MonoBehaviour
+public class ChaseBaby : MonoBehaviour
 {
     private Transform objetivo; // El objeto al que queremos apuntar
-    [SerializeField] private float velocidadMovimiento = 5f; // Velocidad de movimiento constante
+    [SerializeField] private float velocidadMovimiento = 10f; // Velocidad de movimiento constante
     [SerializeField] private float velocidadRotacion = 120f; // Velocidad de rotación
 
     [SerializeField] private Rigidbody rb;
 
     private void Start()
     {
-        objetivo = PlayerController.Instance.transform;
+        objetivo = Baby.Instance.transform;
         transform.rotation = Quaternion.LookRotation(objetivo.position - transform.position);
 
         // Asegurarse de que el Rigidbody tenga restricciones en rotación para que no se caiga hacia un lado
@@ -57,9 +57,9 @@ public class ChasePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.GetComponent<Baby>() == Baby.Instance)
         {
-            PlayerController.Instance.PlayerHealth.TakeHit(1, IKillableEntity.AttackSource.Zanybell);
+            Baby.Instance.TakeHit(1, IKillableEntity.AttackSource.KitestingerProjectile);
         }
 
         Destroy(gameObject);
