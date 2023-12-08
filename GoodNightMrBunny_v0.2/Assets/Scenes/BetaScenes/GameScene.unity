@@ -5182,6 +5182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5651541234777410266, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6638416640845658961, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: _amplitude
       value: 0.1
@@ -6728,6 +6732,7 @@ GameObject:
   - component: {fileID: 890930687}
   - component: {fileID: 890930686}
   - component: {fileID: 890930688}
+  - component: {fileID: 890930689}
   m_Layer: 0
   m_Name: ----ESCENARIO----
   m_TagString: Untagged
@@ -6801,6 +6806,37 @@ MonoBehaviour:
     m_Bits: 8
   invertFacingNormal: 0
   dontAllignYAxis: 0
+--- !u!114 &890930689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890930685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &906132079
 GameObject:
   m_ObjectHideFlags: 0
@@ -9584,10 +9620,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyWavesJsonFile: {fileID: 4900000, guid: 9e7524a805495a94ebe2a475a5426f00, type: 3}
-  _flyingEnemyList:
-  - {fileID: 6709887814629590331, guid: 7209fb8ee0c20a74699525a348dafd46, type: 3}
   _groundEnemyList:
   - {fileID: 6709887814629590331, guid: 62c0ec0c3da797c4b86fcdf6cf4b12bb, type: 3}
+  _flyingEnemyList:
+  - {fileID: 6709887814629590331, guid: 7209fb8ee0c20a74699525a348dafd46, type: 3}
+  _ceilingEnemyList:
+  - {fileID: 6709887814629590331, guid: 3064593896120c44488b22cc27fc6317, type: 3}
 --- !u!114 &1273689938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9600,7 +9638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c0fcaeddbf6124ebd250198992e8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelJsonFile: {fileID: 4900000, guid: 26f9ba9ce3b70274ebda3427eb22354d, type: 3}
+  _levelJsonFile: {fileID: 4900000, guid: 40c39e77b48796f499dcf2b9290a5a0b, type: 3}
   _levelHolder: {fileID: 890930685}
   _prefabsList:
   - {fileID: 9080749433152833459, guid: 5b172543254629e44ad23e51c05e9dc6, type: 3}

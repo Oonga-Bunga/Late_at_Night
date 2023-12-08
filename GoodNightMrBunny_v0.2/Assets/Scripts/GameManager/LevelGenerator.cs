@@ -21,11 +21,14 @@ public class LevelGenerator : MonoBehaviour
     private Dictionary<string, GameObject> _prefabDictionary = new Dictionary<string, GameObject>(); // Diccionario que relaciona los prefabs de la lista de prefabs con sus nombres
 
     private List<Vector3> _switchSpawnLocations = new List<Vector3>(); // Puntos de spawn de los interruptores
+    private List<Vector3> _groundEnemySpawnLocations = new List<Vector3>(); // Puntos de spawn de enemigos terrestres
     private List<Vector3> _flyingEnemySpawnLocations = new List<Vector3>(); // Puntos de spawn de enemigos voladores
-    private List<Vector3> _groundedEnemySpawnLocations = new List<Vector3>(); // Puntos de spawn de enemigos terrestres
+    private List<Vector3> _ceilingEnemySpawnLocations = new List<Vector3>(); // Puntos de spawn de enemigos que reptan por el techo
     private Transform _playerSpawnPoint; // Punto de spawn del jugador
 
     public event Action OnLevelLoaded; // Invocado cuando termina de generarse el nivel
+
+    private GameObject _ceiling;
 
     #endregion
 
@@ -113,18 +116,25 @@ public class LevelGenerator : MonoBehaviour
             _switchSpawnLocations.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
         }
 
-        Debug.Log("Reading zanybellNodes");
+        Debug.Log("Reading groundEnemyNodes");
 
-        foreach (var zanybellNode in sceneData.ZanybellNodes)
+        foreach (var groundEnemyNode in sceneData.GroundEnemyNodes)
         {
-            _flyingEnemySpawnLocations.Add(new Vector3(zanybellNode.X, zanybellNode.Y, zanybellNode.Z));
+            _groundEnemySpawnLocations.Add(new Vector3(groundEnemyNode.X, groundEnemyNode.Y, groundEnemyNode.Z));
         }
 
-        Debug.Log("Reading evilBunnyNodes");
+        Debug.Log("Reading flyingEnemyNodes");
 
-        foreach (var evilBunnyNode in sceneData.EvilBunnyNodes)
+        foreach (var flyingEnemyNode in sceneData.FlyingEnemyNodes)
         {
-            _groundedEnemySpawnLocations.Add(new Vector3(evilBunnyNode.X, evilBunnyNode.Y, evilBunnyNode.Z));
+            _flyingEnemySpawnLocations.Add(new Vector3(flyingEnemyNode.X, flyingEnemyNode.Y, flyingEnemyNode.Z));
+        }
+
+        Debug.Log("Reading ceilingEnemyNodes");
+
+        foreach (var ceilingEnemyNode in sceneData.CeilingEnemyNodes)
+        {
+            _ceilingEnemySpawnLocations.Add(new Vector3(ceilingEnemyNode.X, ceilingEnemyNode.Y, ceilingEnemyNode.Z));
         }
 
         Debug.Log("Reading _player spawn point");
@@ -146,8 +156,9 @@ public class LevelGenerator : MonoBehaviour
 
             if (wavesManager != null)
             {
+                wavesManager.GroundEnemySpawnLocations = _groundEnemySpawnLocations;
                 wavesManager.FlyingEnemySpawnLocations = _flyingEnemySpawnLocations;
-                wavesManager.GroundedEnemySpawnLocations = _groundedEnemySpawnLocations;
+                wavesManager.CeilingEnemySpawnLocations = _ceilingEnemySpawnLocations;
             }
             else 
             {
@@ -175,6 +186,12 @@ public class LevelGenerator : MonoBehaviour
 
         _levelHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
         _levelHolder.GetComponent<NavMeshLinks_AutoPlacer>().Generate();
+
+        var component = GameObject.Find("Techo(Clone)").GetComponent<NavMeshSurface>();
+        if (component != null)
+        {
+            component.BuildNavMesh();
+        }
 
         Debug.Log("Scene generation finished");
         yield return new WaitForSeconds(2f);

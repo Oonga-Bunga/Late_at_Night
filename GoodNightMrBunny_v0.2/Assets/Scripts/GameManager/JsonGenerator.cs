@@ -40,8 +40,9 @@ public class SceneData
 {
     public List<SceneObject> SceneObjects;
     public List<MyVector3> SwitchNodes;
-    public List<MyVector3> ZanybellNodes;
-    public List<MyVector3> EvilBunnyNodes;
+    public List<MyVector3> GroundEnemyNodes;
+    public List<MyVector3> FlyingEnemyNodes;
+    public List<MyVector3> CeilingEnemyNodes;
     public SceneObject PlayerSpawnPoint;
     public int TotalSwitches;
 }
@@ -83,16 +84,18 @@ public class JsonGenerator : MonoBehaviour
 
         List<SceneObject> sceneObjectList = new List<SceneObject>();
         List<MyVector3> switchNodeList = new List<MyVector3>();
-        List<MyVector3> zanybellNodeList = new List<MyVector3>();
-        List<MyVector3> evilBunnyNodeList = new List<MyVector3>();
+        List<MyVector3> groundEnemyNodeList = new List<MyVector3>();
+        List<MyVector3> flyingEnemyNodeList = new List<MyVector3>();
+        List<MyVector3> ceilingEnemyNodeList = new List<MyVector3>();
         SceneObject playerSpawnPointData;
 
         // Buscar dentro del _sceneHolder los objetos que tienen ciertas tags
 
         GameObject[] sceneObjects = FindChildObjectsWithTag(_sceneHolder, "SceneObject");
         GameObject[] switchNodes = FindChildObjectsWithTag(_sceneHolder, "SwitchNode");
-        GameObject[] zanybellNodes = FindChildObjectsWithTag(_sceneHolder, "ZanybellNode");
-        GameObject[] evilBunnyNodes = FindChildObjectsWithTag(_sceneHolder, "EvilBunnyNode");
+        GameObject[] groundEnemyNodes = FindChildObjectsWithTag(_sceneHolder, "GroundEnemyNode");
+        GameObject[] flyingEnemyNodes = FindChildObjectsWithTag(_sceneHolder, "FlyingEnemyNode");
+        GameObject[] ceilingEnemyNodes = FindChildObjectsWithTag(_sceneHolder, "CeilingEnemyNode");
         GameObject playerSpawnPoint = FindChildObjectsWithTag(_sceneHolder, "PlayerSpawnPoint")[0];
 
         // Guardar la información de los objetos de la escena
@@ -121,22 +124,31 @@ public class JsonGenerator : MonoBehaviour
             switchNodeList.Add(data);
         }
 
-        // Guardar la información de los puntos de spawn de los zanybell
+        // Guardar la información de los puntos de spawn de los enemigos terrestres
 
-        foreach (GameObject zanybellNode in zanybellNodes)
+        foreach (GameObject groundEnemyNode in groundEnemyNodes)
         {
-            Vector3 position = zanybellNode.transform.localPosition;
+            Vector3 position = groundEnemyNode.transform.localPosition;
             MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
-            zanybellNodeList.Add(data);
+            groundEnemyNodeList.Add(data);
         }
 
-        // Guardar la información de los puntos de spawn de los evil bunny
+        // Guardar la información de los puntos de spawn de los enemigos voladores
 
-        foreach (GameObject evilBunnyNode in evilBunnyNodes)
+        foreach (GameObject flyingEnemyNode in flyingEnemyNodes)
         {
-            Vector3 position = evilBunnyNode.transform.localPosition;
+            Vector3 position = flyingEnemyNode.transform.localPosition;
             MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
-            evilBunnyNodeList.Add(data);
+            flyingEnemyNodeList.Add(data);
+        }
+
+        // Guardar la información de los puntos de spawn de los enemigos que reptan por el techo
+
+        foreach (GameObject ceilingEnemyNode in ceilingEnemyNodes)
+        {
+            Vector3 position = ceilingEnemyNode.transform.localPosition;
+            MyVector3 data = new MyVector3 { X = position.x, Y = position.y, Z = position.z };
+            ceilingEnemyNodeList.Add(data);
         }
 
         // Guardar la información de los puntos de spawn del jugador
@@ -159,8 +171,9 @@ public class JsonGenerator : MonoBehaviour
         {
             SceneObjects = sceneObjectList,
             SwitchNodes = switchNodeList,
-            ZanybellNodes = zanybellNodeList,
-            EvilBunnyNodes = evilBunnyNodeList,
+            GroundEnemyNodes = groundEnemyNodeList,
+            FlyingEnemyNodes = flyingEnemyNodeList,
+            CeilingEnemyNodes = ceilingEnemyNodeList,
             PlayerSpawnPoint = playerSpawnPointData,
             TotalSwitches = _totalSwitches
         };

@@ -15,16 +15,18 @@ public class EnemyWave
 {
     public float TimeDelay;
     public float TimePerEnemy;
-    public int NZanybell;
     public int NEvilBunny;
+    public int NZanybell;
+    public int NKitestinger;
 }
 
 public class EnemyWavesManager : MonoBehaviour
 {
     public enum EnemyTypes
     {
+        EvilBunny,
         Zanybell,
-        EvilBunny
+        Kitestinger
     }
 
     private static EnemyWavesManager _instance;
@@ -32,13 +34,16 @@ public class EnemyWavesManager : MonoBehaviour
 
     [SerializeField] private TextAsset _enemyWavesJsonFile; // Json con los datos de las oleadas de enemigos
     private List<EnemyWave> _enemyWaveList = new List<EnemyWave>(); // Lista en la que se guarda la información de las oleadas de enemigos extraida del Json
-    
-    [SerializeField] private List<GameObject> _flyingEnemyList; // Lista de enemigos voladores
+
     [SerializeField] private List<GameObject> _groundEnemyList; // Lista de enemigos terrestres
+    [SerializeField] private List<GameObject> _flyingEnemyList; // Lista de enemigos voladores
+    [SerializeField] private List<GameObject> _ceilingEnemyList; // Lista de enemigos terrestres
+    private List<Vector3> _groundEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos terrestres
     private List<Vector3> _flyingEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos voladores
-    private List<Vector3> _groundedEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos terrestres
+    private List<Vector3> _ceilingEnemySpawnLocations = new List<Vector3>(); // Lista de puntos de spawn de enemigos que reptan por el techo
+    public List<Vector3> GroundEnemySpawnLocations { set => _groundEnemySpawnLocations = value; }
     public List<Vector3> FlyingEnemySpawnLocations{ set => _flyingEnemySpawnLocations = value; }
-    public List<Vector3> GroundedEnemySpawnLocations{ set => _groundedEnemySpawnLocations = value; }
+    public List<Vector3> CeilingEnemySpawnLocations{ set => _ceilingEnemySpawnLocations = value; }
 
     private int _aliveEnemies = 0; // Número de enemigos con vida
     public event Action OnAllEnemiesDefeated; // Invocado cuando todos los enemigos han muerto o desaparecido
@@ -105,8 +110,9 @@ public class EnemyWavesManager : MonoBehaviour
 
             List<EnemyTypes> enemyList = new List<EnemyTypes>();
 
-            AddEnemiesToList(EnemyTypes.Zanybell, enemyList, enemyWave);
             AddEnemiesToList(EnemyTypes.EvilBunny, enemyList, enemyWave);
+            AddEnemiesToList(EnemyTypes.Zanybell, enemyList, enemyWave);
+            AddEnemiesToList(EnemyTypes.Kitestinger, enemyList, enemyWave);
 
             int randomIndex;
             EnemyTypes enemy;
@@ -141,6 +147,15 @@ public class EnemyWavesManager : MonoBehaviour
 
         switch (enemy)
         {
+            case EnemyTypes.EvilBunny:
+                randomSpawn = UnityEngine.Random.Range(0, _groundEnemySpawnLocations.Count);
+                enemyInstance = Instantiate(_groundEnemyList[0], Vector3.zero, Quaternion.identity);
+                enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
+                enemyInstance.transform.localPosition = _groundEnemySpawnLocations[randomSpawn];
+                enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
+                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
+                _aliveEnemies++;
+                break;
             case EnemyTypes.Zanybell:
                 randomSpawn = UnityEngine.Random.Range(0, _flyingEnemySpawnLocations.Count);
                 enemyInstance = Instantiate(_flyingEnemyList[0], Vector3.zero, Quaternion.identity);
@@ -149,11 +164,11 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 break;
-            case EnemyTypes.EvilBunny:
-                randomSpawn = UnityEngine.Random.Range(0, _groundedEnemySpawnLocations.Count);
-                enemyInstance = Instantiate(_groundEnemyList[0], Vector3.zero, Quaternion.identity);
+            case EnemyTypes.Kitestinger:
+                randomSpawn = UnityEngine.Random.Range(0, _ceilingEnemySpawnLocations.Count);
+                enemyInstance = Instantiate(_ceilingEnemyList[0], Vector3.zero, Quaternion.identity);
                 enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
-                enemyInstance.transform.localPosition = _groundedEnemySpawnLocations[randomSpawn];
+                enemyInstance.transform.localPosition = _ceilingEnemySpawnLocations[randomSpawn];
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
                 enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
@@ -175,11 +190,14 @@ public class EnemyWavesManager : MonoBehaviour
 
         switch (type)
         {
+            case EnemyTypes.EvilBunny:
+                n = enemyWave.NEvilBunny;
+                break;
             case EnemyTypes.Zanybell:
                 n = enemyWave.NZanybell;
                 break;
-            case EnemyTypes.EvilBunny:
-                n = enemyWave.NEvilBunny;
+            case EnemyTypes.Kitestinger:
+                n = enemyWave.NKitestinger;
                 break;
         }
 
