@@ -27,7 +27,7 @@ public class UserData : MonoBehaviour
     private int _progress = 1; //Levels available
     private static GameObject sampleInstance;
 
-    public int _currentLevelPlayed { get; set; } = 0;
+    public int currentLevelPlayed { get; set; } = 1;
 
     #endregion
 

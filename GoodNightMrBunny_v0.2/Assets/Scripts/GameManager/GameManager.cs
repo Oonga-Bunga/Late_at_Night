@@ -139,11 +139,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         _isReady = true;
-        // StartGame();
+        StartGame();
 
-        //quitar estas 2 cosas después
-        OnGameStarted?.Invoke();
-        _isInGame = true;
 
         #endregion
 
@@ -154,9 +151,11 @@ public class GameManager : MonoBehaviour
     {
         if (_isReady)
         {
-            // if booleano del script del cuento es true
-            OnGameStarted?.Invoke();
-            _isInGame = true;
+            if (BookStory.Instance.BookHasFinished)
+            {
+                OnGameStarted?.Invoke();
+                _isInGame = true;
+            }
         }
     }
 

@@ -170,7 +170,7 @@ public class MenuManager : MonoBehaviour
     /// <param name="levelIndex"></param>
     public void UpdateCurrentLevel(int levelIndex)
     {
-        FindObjectOfType<UserData>()._currentLevelPlayed = levelIndex;
+        FindObjectOfType<UserData>().currentLevelPlayed = levelIndex;
     }
 
 

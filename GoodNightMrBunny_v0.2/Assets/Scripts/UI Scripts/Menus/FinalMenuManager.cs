@@ -9,7 +9,7 @@ public class FinalMenuManager : MonoBehaviour
     private void Start()
     {
         var _userData = FindObjectOfType<UserData>();
-        if (SceneManager.GetActiveScene().name == "WinScene" && _userData._currentLevelPlayed == _userData.GetProgress())
+        if (SceneManager.GetActiveScene().name == "WinScene" && _userData.currentLevelPlayed == _userData.GetProgress())
         {
             _userData.SetProgress();
             _userData.SaveData();
