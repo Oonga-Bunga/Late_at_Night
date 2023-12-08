@@ -138,10 +138,12 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-
-        // StartGame();
         _isReady = true;
+        // StartGame();
+
+        //quitar estas 2 cosas después
         OnGameStarted?.Invoke();
+        _isInGame = true;
 
         #endregion
 

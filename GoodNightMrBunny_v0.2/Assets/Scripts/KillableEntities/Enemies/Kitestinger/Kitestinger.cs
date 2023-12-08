@@ -54,6 +54,16 @@ public class Kitestinger : AMonster
         return Vector3.Distance(babyPos, transform.position);
     }
 
+    /*
+    public float CompareDistanceToTraps()
+    {
+        Vector3 babyPos = Baby.Instance.transform.position;
+        babyPos.y = transform.position.y;
+
+        return Vector3.Distance(babyPos, transform.position);
+    }
+    */
+
     public override void Die()
     {
         OnDied?.Invoke();
