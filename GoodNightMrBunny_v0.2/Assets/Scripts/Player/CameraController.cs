@@ -59,6 +59,8 @@ namespace Player
         {
             if (_pauseManager.IsPaused || !_isLookEnabled) return;
 
+            if (!GameManager.Instance.IsInGame) return;
+
             _lookFunction();
         }
 

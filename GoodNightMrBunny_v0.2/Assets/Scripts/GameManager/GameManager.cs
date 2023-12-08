@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private PauseManager _pauseManager;
     [SerializeField] private LevelMenuManager _levelMenuManager;
     private bool _isInGame = false;
+    private bool _isReady = false;
     public event Action OnGameStarted;
     private int _currentActivatedSwitches = 0;
     public event Action<float> OnTimeChanged;
@@ -139,7 +140,7 @@ public class GameManager : MonoBehaviour
 
 
         // StartGame();
-        _isInGame = true;
+        _isReady = true;
         OnGameStarted?.Invoke();
 
         #endregion
@@ -149,10 +150,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        if (_isInGame)
+        if (_isReady)
         {
             // if booleano del script del cuento es true
             OnGameStarted?.Invoke();
+            _isInGame = true;
         }
     }
 
