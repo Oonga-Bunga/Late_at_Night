@@ -54,15 +54,25 @@ public class Kitestinger : AMonster
         return Vector3.Distance(babyPos, transform.position);
     }
 
-    /*
     public float CompareDistanceToTraps()
     {
-        Vector3 babyPos = Baby.Instance.transform.position;
-        babyPos.y = transform.position.y;
+        GameObject[] trapList = GameObject.FindGameObjectsWithTag("KitestingerTrap");
+        float bestDistance = 1000000;
 
-        return Vector3.Distance(babyPos, transform.position);
+        foreach (GameObject trap in trapList)
+        {
+            Vector3 trapPos = trap.transform.position;
+            trapPos.y = transform.position.y;
+            float distance = Vector3.Distance(trapPos, transform.position);
+
+            if (distance < bestDistance)
+            {
+                bestDistance = distance;
+            }
+        }
+
+        return bestDistance;
     }
-    */
 
     public override void Die()
     {
