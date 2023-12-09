@@ -20,6 +20,8 @@ namespace UI_Scripts.Menus
         [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private GameObject _loadingScreenCamera;
         [SerializeField] private GameObject _mobileControls;
+        [SerializeField] private GameObject[] _computerGUI;
+        [SerializeField] private GameObject[] _mobileGUI;
 
         [SerializeField] private Button[] tabButtons;
         [SerializeField] private GameObject[] tabPanels;
@@ -58,6 +60,8 @@ namespace UI_Scripts.Menus
         private void Start()
         {
             GameManager.Instance.OnGameStarted += StartGame;
+
+            ShowDispositiveElements();
             
             //PlayerPrefs
             if (PlayerPrefs.HasKey("OptionsQualityIndex"))
@@ -211,6 +215,24 @@ namespace UI_Scripts.Menus
         public void openUrl(string urlLink)
         {
             Application.OpenURL(urlLink);
+        }
+        
+        public void ShowDispositiveElements()
+        {
+            if (!Application.isMobilePlatform)
+            {
+                foreach (var mobileElement in _mobileGUI)
+                {
+                    mobileElement.SetActive(false);
+                }
+            }
+            else
+            {
+                foreach (var computerElement in _computerGUI)
+                {
+                    computerElement.SetActive(false);
+                }
+            }
         }
     }
 }
