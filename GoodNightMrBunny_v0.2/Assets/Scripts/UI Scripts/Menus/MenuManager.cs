@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _canvasQualityText;
     private String[] _qualityLevels = new[] { "High", "Medium", "Low" };
     private int _qualityIntLevel = 0;
+    
 
     [SerializeField] private Canvas mainMenu;
     [SerializeField] private Canvas optionsMenu;
@@ -83,6 +85,7 @@ public class MenuManager : MonoBehaviour
             QualitySettings.SetQualityLevel(_qualityIntLevel);
             _canvasQualityText.text = _qualityLevels[_qualityIntLevel];
         }
+
     }
 
     private void Update()
@@ -269,7 +272,6 @@ public class MenuManager : MonoBehaviour
         _selectedButton[_selectedButtonIndex].image.sprite = _buttonsSprites[0];
         _selectedButtonIndex = buttonIndex;
     }
-
     #endregion
     
 }

@@ -10,18 +10,18 @@ namespace Player
     {
         [Range(0.1f, 9f)][SerializeField] float _sensitivityX = 2f; // Sensibilidad en el eje X
         [Range(0.1f, 9f)][SerializeField] float _sensitivityY = 1f; // Sensibilidad en el eje Y
-        [Range(0f, 90f)][SerializeField] float _yRotationLimit = 88f; // Limite de la rotación en el eje Y para que la cámara no haga flip
+        [Range(0f, 90f)][SerializeField] float _yRotationLimit = 88f; // Limite de la rotaciï¿½n en el eje Y para que la cï¿½mara no haga flip
         [SerializeField] private InputActionReference _joystickValueAction;
         [SerializeField] private InputActionReference _mouseDeltaAction;
 
-        private List<int> _bannedTouches = new List<int>(); // Lista de toques en la pantalla tactil que no se usarán para mover la cámara
-        Vector2 rotation = Vector2.zero; // Rotación de la cámara
+        private List<int> _bannedTouches = new List<int>(); // Lista de toques en la pantalla tactil que no se usarï¿½n para mover la cï¿½mara
+        Vector2 rotation = Vector2.zero; // Rotaciï¿½n de la cï¿½mara
 
-        public delegate void LookCallback(); // Delegado para la función de comportamiento de la cámara
-        public LookCallback _lookFunction; // Función de comportamiento de la cámara, depende sel dispositivo
+        public delegate void LookCallback(); // Delegado para la funciï¿½n de comportamiento de la cï¿½mara
+        public LookCallback _lookFunction; // Funciï¿½n de comportamiento de la cï¿½mara, depende sel dispositivo
 
         private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
-        private bool _isLookEnabled = true; // Si la cámara del jugador sigue el ratón/toque o no
+        private bool _isLookEnabled = true; // Si la cï¿½mara del jugador sigue el ratï¿½n/toque o no
 
         public float SensitivityX
         {
@@ -53,7 +53,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Si el juego no está pausado y isLookEnabled es true entonces se ejecuta lookFunction
+        /// Si el juego no estï¿½ pausado y isLookEnabled es true entonces se ejecuta lookFunction
         /// </summary>
         private void Update()
         {
@@ -65,7 +65,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Maneja el movimiento de la cámara usando el delta del ratón
+        /// Maneja el movimiento de la cï¿½mara usando el delta del ratï¿½n
         /// </summary>
         private void HandlePCInput()
         {
@@ -79,7 +79,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Maneja el movimiento de la cámara usando el delta del toque que no esté tocando un elemento de la interfaz
+        /// Maneja el movimiento de la cï¿½mara usando el delta del toque que no estï¿½ tocando un elemento de la interfaz
         /// </summary>
         private void HandleMobileInput()
         {
@@ -123,7 +123,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Impide que el jugador pueda mover la cámara y resetea la posición de esta
+        /// Impide que el jugador pueda mover la cï¿½mara y resetea la posiciï¿½n de esta
         /// </summary>
         public void PlayerMounting()
         {
@@ -132,7 +132,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Permite al jugador volver a mover la cámara, y la rota para que esté mirando al frente
+        /// Permite al jugador volver a mover la cï¿½mara, y la rota para que estï¿½ mirando al frente
         /// </summary>
         public void PlayerDismounting()
         {
