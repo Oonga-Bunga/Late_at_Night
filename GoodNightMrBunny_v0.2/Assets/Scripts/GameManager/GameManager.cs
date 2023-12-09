@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("WinScene");
     }
 
-    private void PlayerLost()
+    public void PlayerLost()
     {
         StopAllCoroutines();
         _isInGame = false;

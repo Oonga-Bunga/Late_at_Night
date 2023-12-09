@@ -18,6 +18,6 @@ public class PlayerHealth : AKillableEntity
 
     public override void Die()
     {
-        //Die();
+        GameManager.Instance.PlayerLost();
     }
 }

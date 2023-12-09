@@ -167,8 +167,10 @@ public class UserData : MonoBehaviour
     /// </summary>
     public void CanStartGame()
     {
-        if (_username != null && _gender != null && _age > 0)
+        if (/*_username != null && */_gender != null && _age > 0)
         {
+            _startButton.SetActive(true);
+            /*
             if (_username.Any(c => char.IsLetterOrDigit(c)))
             {
                 _startButton.SetActive(true);
@@ -176,7 +178,7 @@ public class UserData : MonoBehaviour
             else
             {
                 _startButton.SetActive(false);
-            }
+            }*/
         }
         else
         {
