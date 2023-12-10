@@ -108,6 +108,8 @@ public class EnemyWavesManager : MonoBehaviour
     {
         Debug.Log("Started enemy spawning");
 
+        OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
+
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             yield return new WaitForSeconds(enemyWave.TimeDelay);
@@ -135,8 +137,6 @@ public class EnemyWavesManager : MonoBehaviour
                 }
             }
         }
-
-        OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
 
         yield return null;
     }
