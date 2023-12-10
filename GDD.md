@@ -417,7 +417,7 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 **In game** 
 
 **Pantalla general**  
-![](/Documentacion/InterfazInGame1.png)   
+![](/Documentacion/PantallaGeneral.jpeg)   
 
 **Coger objetos**   
  ![](/Documentacion/InterfazInGame2.png)
