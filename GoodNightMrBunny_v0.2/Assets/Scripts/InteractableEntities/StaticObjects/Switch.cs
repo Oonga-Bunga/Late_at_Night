@@ -20,6 +20,9 @@ public class Switch : AInteractable
     private float _currentTime = 5;
     private int _currentAttackingEnemies = 0;
 
+    [SerializeField] private AudioSource _OnAudioSource;
+    [SerializeField] private AudioSource _OffAudioSource;
+
     public bool IsOn => _isOn;
 
     protected override void Awake()
@@ -62,6 +65,7 @@ public class Switch : AInteractable
         DisableOutlineAndCanvas();
         _emissiveObject.SetActive(true);
         _nonEmissiveObject.SetActive(false);
+        _OnAudioSource.Play();
     }
 
     private void TurnOff()
@@ -71,6 +75,7 @@ public class Switch : AInteractable
         _canBeInteracted = true;
         _emissiveObject.SetActive(false);
         _nonEmissiveObject.SetActive(true);
+        _OffAudioSource.Play();
     }
 
     public void TakeHit()
