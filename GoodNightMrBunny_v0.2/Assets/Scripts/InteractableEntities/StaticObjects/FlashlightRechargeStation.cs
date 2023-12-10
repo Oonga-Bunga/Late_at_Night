@@ -21,6 +21,10 @@ public class FlashlightRechargeStation : AInteractable
     [SerializeField] private Transform _pathfindingPoint;
     [SerializeField] private Slider _energyBarSlider;
 
+    [SerializeField] private AudioSource _succAudioSource;
+    [SerializeField] private AudioSource _drainedAudioSource;
+    [SerializeField] private AudioSource _recoverAudioSource;
+
     public Transform PathFindingPoint => _pathfindingPoint;
 
     public bool IsTaken
@@ -69,7 +73,13 @@ public class FlashlightRechargeStation : AInteractable
             if (_currentCharge == 0f)
             {
                 _isDrained = true;
+                _succAudioSource.Stop();
+                _drainedAudioSource.Play();
                 Invoke("RecoverFromDrained", _drainDuration);
+            }
+            else if (!_succAudioSource.isPlaying)
+            {
+                _succAudioSource.Play();
             }
         }
         else
@@ -132,6 +142,7 @@ public class FlashlightRechargeStation : AInteractable
     {
         _isDrained = false;
         _canBeInteracted = true;
+        _recoverAudioSource.Play();
     }
 
     public override void EnableOutlineAndCanvas()
