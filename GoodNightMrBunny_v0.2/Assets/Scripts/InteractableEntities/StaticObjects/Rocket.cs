@@ -8,9 +8,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float _blastDamage = 5f;
     [SerializeField] private float _blastRadius = 5f;
     [SerializeField] private float _speed = 5f; // Velocidad de movimiento hacia arriba
-    [SerializeField] private GameObject _explosionPrefab = null; // Prefab del efecto de explosión
+    [SerializeField] private GameObject _explosionPrefab = null; // Prefab del efecto de explosiï¿½n
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Rigidbody _rb;
+
 
     void Update()
     {
@@ -25,7 +26,7 @@ public class Rocket : MonoBehaviour
 
     void Explode()
     {
-        // Crea el efecto de explosión en la posición del objeto
+        // Crea el efecto de explosiï¿½n en la posiciï¿½n del objeto
         GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         explosion.transform.localScale = Vector3.one * _blastRadius;
 

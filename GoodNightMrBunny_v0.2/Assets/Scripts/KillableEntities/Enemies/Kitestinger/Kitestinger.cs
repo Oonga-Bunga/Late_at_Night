@@ -14,6 +14,8 @@ public class Kitestinger : AMonster
     // Animator strings
     private const string _animatorIsWalking = "IsWalking";
 
+    [SerializeField] private AudioSource _deathSound02;
+
     protected override void Awake()
     {
         base.Awake();
@@ -34,6 +36,7 @@ public class Kitestinger : AMonster
         {
             case IKillableEntity.AttackSource.Rocket:
                 ChangeHealth(MaxHealth, true);
+                _deathSound02.Play();
                 break;
         }
     }

@@ -23,6 +23,8 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
     [SerializeField] private MeshRenderer _laser;
     private PauseManager _pauseManager;
 
+    [SerializeField] private AudioSource _shotSound;
+
     #endregion
 
     #region Initialization
@@ -57,6 +59,7 @@ public class RocketPlatform : AInteractable, IPlayerReceiver
 
     private void LaunchRocket()
     {
+        _shotSound.Play();
         _canBeInteracted = false;
         _rocketPlatformModel.SetActive(false);
         Instantiate(_rocketPrefab, _rocketPlatformModel.transform.position, _rocketPlatformModel.transform.rotation);

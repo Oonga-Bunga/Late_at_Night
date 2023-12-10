@@ -20,6 +20,10 @@ namespace EvilBunny
         private const string _animatorMerge = "Merge";
         private const string _animatorDie = "Die";
 
+        [SerializeField] private AudioSource _deathSound02;
+
+        
+
         protected override void Awake()
         {
             base.Awake();
@@ -43,6 +47,7 @@ namespace EvilBunny
                 case IKillableEntity.AttackSource.ClayBall:
                 case IKillableEntity.AttackSource.Rocket:
                     ChangeHealth(MaxHealth, true);
+                    _deathSound02.Play();
                     break;
             }
         }
