@@ -263,7 +263,7 @@ La cámara en el juego será en primera persona, permitiendo ver las extremidade
 
 <a name="_page13_x387.00_y448.00"></a>[Img 8 ](#_page63_x75.00_y337.00)
 
-![](/Documentacion/ControlesEsquema2.png)
+![](/Documentacion/EsquemaControlesMovil.jpeg)
 
 *Controles del jugador con móvil*
 
@@ -384,13 +384,13 @@ Tras seleccionar el modo de juego, se podrá pasar a Jugar una nueva partida o a
 
 **Controles dispositivos móviles:** 
 
-![](/Documentacion/ControlesEsquema2.png)
+![](/Documentacion/ControlesMovil.png)
 
 [Img 8 ](#_page63_x75.00_y337.00)
 
 **Controles teclado:** 
 
-![](/Documentacion/ControlesEsquema.png)
+![](/Documentacion/ControlesTeclado.jpeg)
 
 [Img 9 ](#_page63_x75.00_y362.00)
 
