@@ -179,7 +179,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *“Érase una vez, un pequeño niño que no podía dormir.       Unos terroríficos monstruos merodeaban por su habitación.”* 
 
-![](/Documentacion/Pagina1Cuento.png)
+![](/Documentacion/IlustracionPagina1V2.png)
 
 *Imagen Escena 1 del libro inicial* 
 
@@ -189,7 +189,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *‘Por favor, haz que los monstruos se vayan’ rogaba.”* 
 
-![](/Documentacion/Pagina2Cuento.png)
+![](/Documentacion/IlustracionPagina2.png)
 
 *Imagen Escena 2 del libro inicial* 
 
@@ -197,7 +197,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *“De repente, una fugaz luz iluminó la habitación y el peluche cobró vida según los deseos del niño.”* 
 
-![](/Documentacion/Pagina3Cuento.png)
+![](/Documentacion/IlustracionPagina3.png)
 
 *Imagen Escena 3 del libro inicial* 
 
@@ -207,7 +207,7 @@ La secuencia se inicia con un libro de cuentos cerrado, el cual se abre para pre
 
 *La noche tan solo estaba empezando...”* 
 
-![](/Documentacion/Pagina4Cuento.png)
+![](/Documentacion/IlustracionPagina4.png)
 
 *Imagen Escena 4 del libro inicial* 
 
