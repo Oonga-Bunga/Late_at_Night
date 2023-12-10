@@ -45,6 +45,8 @@ namespace Shadow
         private const string _animatorAttack = "Attack";
         private const string _animatorDie = "Die";
 
+        [SerializeField] private GameObject _stunnedEffect;
+
         public Vector3 Target
         {
             get { return _target; }
@@ -103,14 +105,14 @@ namespace Shadow
 
         public void GenerateRandomTarget()
         {
-            // Generar un ángulo aleatorio en radianes
+            // Generar un ï¿½ngulo aleatorio en radianes
             float angle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
 
             // Calcular las coordenadas x y z del nuevo punto en la circunferencia
             float newX = transform.position.x + 1000 * Mathf.Cos(angle);
             float newZ = transform.position.z + 1000 * Mathf.Sin(angle);
 
-            // Mantener la misma posición en el eje y
+            // Mantener la misma posiciï¿½n en el eje y
             float newY = transform.position.y;
 
             // Devolver el nuevo punto
@@ -143,6 +145,7 @@ namespace Shadow
         {
             _animator.SetBool(_animatorIsStunned, true);
             _isStunned = true;
+            _stunnedEffect.SetActive(true);
             Invoke("Recover", _stunTime);
         }
 
@@ -150,6 +153,7 @@ namespace Shadow
         {
             _animator.SetBool(_animatorIsStunned, false);
             _isStunned = false;
+            _stunnedEffect.SetActive(false);
         }
 
         public void StartAvoiding()

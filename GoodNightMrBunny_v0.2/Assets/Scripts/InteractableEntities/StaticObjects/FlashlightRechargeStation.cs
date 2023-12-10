@@ -10,7 +10,7 @@ public class FlashlightRechargeStation : AInteractable
     [SerializeField, Range(0.0f, 1.0f)] private float _rechargeRate = 0.1f; // Velocidad de recarga
     [SerializeField, Range(0.0f, 1.0f)] private float _drainRate = 0.1f; // Velocidad de recarga
     [SerializeField] private float _drainDuration = 10f; // Velocidad de recarga
-    [SerializeField] private bool _hasFlashlight = true; // Si tiene una linterna cargándose o no
+    [SerializeField] private bool _hasFlashlight = true; // Si tiene una linterna cargï¿½ndose o no
     private float _currentCharge = 0f; // Carga actual de la linterna que posee
     private float _rechargeAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna
     private float _drainAmount; // Cantidad de energia que se carga la linterna por segundo, depende de _rechargeRate y el _maxCharge de la linterna
@@ -24,6 +24,8 @@ public class FlashlightRechargeStation : AInteractable
     [SerializeField] private AudioSource _succAudioSource;
     [SerializeField] private AudioSource _drainedAudioSource;
     [SerializeField] private AudioSource _recoverAudioSource;
+
+    [SerializeField] private GameObject _brokenEffect;
 
     public Transform PathFindingPoint => _pathfindingPoint;
 
@@ -56,7 +58,7 @@ public class FlashlightRechargeStation : AInteractable
     }
 
     /// <summary>
-    /// Si tiene una linterna que no está cargada del todo le va sumando carga con el tiempo
+    /// Si tiene una linterna que no estï¿½ cargada del todo le va sumando carga con el tiempo
     /// </summary>
     protected override void Update()
     {
@@ -75,6 +77,7 @@ public class FlashlightRechargeStation : AInteractable
                 _isDrained = true;
                 _succAudioSource.Stop();
                 _drainedAudioSource.Play();
+                _brokenEffect.SetActive(true);
                 Invoke("RecoverFromDrained", _drainDuration);
             }
             else if (!_succAudioSource.isPlaying)
@@ -92,8 +95,8 @@ public class FlashlightRechargeStation : AInteractable
     }
 
     /// <summary>
-    /// Si la estación de recarga tiene una linterna se la da al jugador, que dropea lo que tuviese equipado, 
-    /// en caso contrario si el jugador tiene una linterna esta pasa a estar en la estación de recarga
+    /// Si la estaciï¿½n de recarga tiene una linterna se la da al jugador, que dropea lo que tuviese equipado, 
+    /// en caso contrario si el jugador tiene una linterna esta pasa a estar en la estaciï¿½n de recarga
     /// </summary>
     protected override void InteractedPressAction()
     {
@@ -143,6 +146,7 @@ public class FlashlightRechargeStation : AInteractable
         _isDrained = false;
         _canBeInteracted = true;
         _recoverAudioSource.Play();
+        _brokenEffect.SetActive(false);
     }
 
     public override void EnableOutlineAndCanvas()
