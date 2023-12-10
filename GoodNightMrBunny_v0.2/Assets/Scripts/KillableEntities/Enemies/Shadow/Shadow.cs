@@ -47,6 +47,7 @@ namespace Shadow
 
         [SerializeField] private GameObject _stunnedEffect;
         [SerializeField] private AudioSource _deathSound02;
+        [SerializeField] private GameObject _deathEffect;
 
         public Vector3 Target
         {
@@ -174,6 +175,7 @@ namespace Shadow
 
         public override void Die()
         {
+            Instantiate(_deathEffect, transform.position + Vector3.up, Quaternion.identity);
             OnDied?.Invoke();
         }
 

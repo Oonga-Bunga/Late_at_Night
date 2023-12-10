@@ -15,6 +15,8 @@ public class Kitestinger : AMonster
     private const string _animatorIsWalking = "IsWalking";
 
     [SerializeField] private AudioSource _deathSound02;
+    [SerializeField] private GameObject _deathEffect;
+
 
     protected override void Awake()
     {
@@ -79,6 +81,7 @@ public class Kitestinger : AMonster
 
     public override void Die()
     {
+        Instantiate(_deathEffect, transform.position + Vector3.down, Quaternion.identity);
         OnDied?.Invoke();
     }
 

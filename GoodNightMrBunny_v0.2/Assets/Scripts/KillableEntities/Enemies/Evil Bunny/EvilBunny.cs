@@ -21,8 +21,9 @@ namespace EvilBunny
         private const string _animatorDie = "Die";
 
         [SerializeField] private AudioSource _deathSound02;
+        [SerializeField] private GameObject _deathEffect;
 
-        
+
 
         protected override void Awake()
         {
@@ -54,6 +55,7 @@ namespace EvilBunny
 
         public override void Die()
         {
+            Instantiate(_deathEffect, transform.position + Vector3.up, Quaternion.identity);
             OnDied?.Invoke();
         }
 
