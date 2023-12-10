@@ -100,7 +100,7 @@ public class BookStory : MonoBehaviour
     public void SkipStory()
     {
         GetComponent<Book>().currentPage = 7;
-        Destroy(GetComponent<Book>());
+        GetComponent<Book>().enabled = false;
         _bookHasFinished = true;
         IsOnLastPage();
     }
