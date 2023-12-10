@@ -559,7 +559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.83965975}
-  m_AnchoredPosition: {x: -4.677429, y: 27.499512}
+  m_AnchoredPosition: {x: -4.67749, y: 27.499512}
   m_SizeDelta: {x: -445.78894, y: -73.349976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &26768196
@@ -1831,6 +1831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 010d9feaa8fb60741b2555abd39e498c, type: 2}
+  _musicSlider: {fileID: 0}
+  _fxSlider: {fileID: 0}
 --- !u!4 &172728400
 Transform:
   m_ObjectHideFlags: 0
@@ -3773,17 +3775,17 @@ MonoBehaviour:
   - {fileID: 213947132}
   _mobileGUI:
   - {fileID: 238068504}
+  _levelButtons: []
   _computerGUI:
   - {fileID: 862593684}
   _selectedButton: []
   _buttonsSprites: []
+  _canvasQualityText: {fileID: 0}
   mainMenu: {fileID: 973335774}
   optionsMenu: {fileID: 1442992331}
-  loginMenu: {fileID: 1762021076}
   selectLevelMenu: {fileID: 879102630}
+  creditsMenu: {fileID: 0}
   _optionsTabText: {fileID: 201476874}
-  loginButtons: {fileID: 1638518881}
-  loginAgeScrollList: {fileID: 1696838138}
   _clickSound: {fileID: 626841308}
 --- !u!82 &626841308
 AudioSource:
@@ -3894,6 +3896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 010d9feaa8fb60741b2555abd39e498c, type: 2}
+  _musicSlider: {fileID: 0}
+  _fxSlider: {fileID: 0}
 --- !u!4 &626841310
 Transform:
   m_ObjectHideFlags: 0
@@ -4121,7 +4125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 193.16243, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649970442
@@ -8537,7 +8541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 418.45486, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313168352
@@ -9329,7 +9333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 418.45486, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1353428214
@@ -11945,7 +11949,7 @@ MonoBehaviour:
   buttonPrefab: {fileID: 7300706384412013977, guid: 6ab46193e4fd9e540872b9d3fbacc907, type: 3}
   _textMenuAgeButton: {fileID: 615453364}
   content: {fileID: 2070917450}
-  menuManager: {fileID: 626841307}
+  loginMenuManager: {fileID: 0}
 --- !u!114 &1696838140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12414,7 +12418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 643.7473, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1740039561
