@@ -46,6 +46,7 @@ namespace Shadow
         private const string _animatorDie = "Die";
 
         [SerializeField] private GameObject _stunnedEffect;
+        [SerializeField] private AudioSource _deathSound02;
 
         public Vector3 Target
         {
@@ -132,6 +133,11 @@ namespace Shadow
                         _animator.SetBool(_animatorIsFleeing, true);
                         _fleeingTime = 1;
                         _currentSpeed = _fleeingSpeed;
+                    }
+
+                    if (_currentHealth == 0)
+                    {
+                        _deathSound02.Play();
                     }
                     break;
                 case IKillableEntity.AttackSource.ClayBall:

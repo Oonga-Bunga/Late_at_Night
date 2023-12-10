@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ClayBallBehaviour : MonoBehaviour
@@ -13,6 +14,7 @@ public class ClayBallBehaviour : MonoBehaviour
     private bool _canJump = false;
 
     [SerializeField] private AudioSource _stickSound;
+    [SerializeField] private GameObject _clayEffect;
 
     #endregion
 
@@ -37,6 +39,7 @@ public class ClayBallBehaviour : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
+            Instantiate(_clayEffect, transform.position, quaternion.identity);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Player") && _canJump)
@@ -46,6 +49,7 @@ public class ClayBallBehaviour : MonoBehaviour
             if (playerRigidbody != null)
             {
                 playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                Instantiate(_clayEffect, transform.position, quaternion.identity);
                 Destroy(gameObject);
             }
         }

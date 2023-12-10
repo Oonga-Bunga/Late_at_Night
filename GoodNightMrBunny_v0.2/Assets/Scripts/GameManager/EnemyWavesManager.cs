@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,7 +34,7 @@ public class EnemyWavesManager : MonoBehaviour
     public static EnemyWavesManager Instance => _instance;
 
     [SerializeField] private TextAsset _enemyWavesJsonFile; // Json con los datos de las oleadas de enemigos
-    private List<EnemyWave> _enemyWaveList = new List<EnemyWave>(); // Lista en la que se guarda la información de las oleadas de enemigos extraida del Json
+    private List<EnemyWave> _enemyWaveList = new List<EnemyWave>(); // Lista en la que se guarda la informaciï¿½n de las oleadas de enemigos extraida del Json
 
     [SerializeField] private List<GameObject> _groundEnemyList; // Lista de enemigos terrestres
     [SerializeField] private List<GameObject> _flyingEnemyList; // Lista de enemigos voladores
@@ -45,9 +46,12 @@ public class EnemyWavesManager : MonoBehaviour
     public List<Vector3> FlyingEnemySpawnLocations{ set => _flyingEnemySpawnLocations = value; }
     public List<Vector3> CeilingEnemySpawnLocations{ set => _ceilingEnemySpawnLocations = value; }
 
-    private int _aliveEnemies = 0; // Número de enemigos con vida
+    private int _aliveEnemies = 0; // Nï¿½mero de enemigos con vida
     public event Action OnAllEnemiesDefeated; // Invocado cuando todos los enemigos han muerto o desaparecido
     public event Action OnAllWavesDefeated; // Invocado cuando todas las oleadas han sido derrotadas
+
+    [SerializeField] private GameObject _spawnEffect;
+    [SerializeField] private AudioSource _waveStartedSound;
 
     private void Awake()
     {
@@ -63,7 +67,7 @@ public class EnemyWavesManager : MonoBehaviour
 
     private void Start()
     {
-        // Comienza a cargar la información del Json
+        // Comienza a cargar la informaciï¿½n del Json
         StartCoroutine(LoadEnemyWavesFromJson());
 
         // Se suscribe al evento del game manager para comenzar a spawnear enemigos una vez comience el nivel
@@ -85,7 +89,7 @@ public class EnemyWavesManager : MonoBehaviour
         EnemyWaveData waveList = JsonUtility.FromJson<EnemyWaveData>(json);
         List<EnemyWave> enemyWaves = waveList.EnemyWaves;
 
-        // Por cada oleada la añade a la lista _enemyWaveList
+        // Por cada oleada la aï¿½ade a la lista _enemyWaveList
         foreach (EnemyWave wave in enemyWaves)
         {
             _enemyWaveList.Add(wave);
@@ -97,13 +101,13 @@ public class EnemyWavesManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Procesa cada oleada de enemigos según sus datos
+    /// Procesa cada oleada de enemigos segï¿½n sus datos
     /// </summary>
     /// <returns></returns>
     private IEnumerator EnemyWavesProcessing()
     {
         Debug.Log("Started enemy spawning");
-
+        _waveStartedSound.Play();
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             yield return new WaitForSeconds(enemyWave.TimeDelay);
@@ -155,6 +159,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
                 enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
+                Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.up, quaternion.identity);
                 break;
             case EnemyTypes.Zanybell:
                 randomSpawn = UnityEngine.Random.Range(0, _flyingEnemySpawnLocations.Count);
@@ -163,6 +168,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.transform.localPosition = _flyingEnemySpawnLocations[randomSpawn];
                 enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
+                Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.up, quaternion.identity);
                 break;
             case EnemyTypes.Kitestinger:
                 randomSpawn = UnityEngine.Random.Range(0, _ceilingEnemySpawnLocations.Count);
@@ -172,6 +178,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
                 enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
+                Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.down, quaternion.identity);
                 break;
         }
 
@@ -179,7 +186,7 @@ public class EnemyWavesManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Añade los enemigos de tipo type de una oleada a enemyList
+    /// Aï¿½ade los enemigos de tipo type de una oleada a enemyList
     /// </summary>
     /// <param name="type"></param>
     /// <param name="enemyList"></param>

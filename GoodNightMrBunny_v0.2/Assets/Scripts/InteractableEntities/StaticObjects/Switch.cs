@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Switch : AInteractable
 {
-    private bool _isOn = true; // Si el interruptor está o no encendido
+    private bool _isOn = true; // Si el interruptor estï¿½ o no encendido
     public event Action<object, bool> OnTurnedOnOrOff; // Evento que notifica al gamemanager de si este interruptor ha sido encendido o apagado
     public event Action<object, bool> OnAttacked;
     public event Action<object, bool> OnPlayerRange;
@@ -22,6 +23,8 @@ public class Switch : AInteractable
 
     [SerializeField] private AudioSource _OnAudioSource;
     [SerializeField] private AudioSource _OffAudioSource;
+    [SerializeField] private AudioSource _damageSound;
+    [SerializeField] private GameObject _hitEffect;
 
     public bool IsOn => _isOn;
 
@@ -33,7 +36,7 @@ public class Switch : AInteractable
         _nonEmissiveObject.SetActive(false);
         _currentHits = 0;
         _currentTime = _regenCooldown;
-        TurnOn();
+        _canBeInteracted = false;
     }
 
     protected override void Update()
@@ -81,7 +84,8 @@ public class Switch : AInteractable
     public void TakeHit()
     {
         _currentHits = Mathf.Min(_hitsRequired, _currentHits + 1);
-
+        _damageSound.Play();
+        Instantiate(_hitEffect, transform.position+Vector3.up, quaternion.identity);
         if (_currentHits == _hitsRequired)
         {
             TurnOff();
