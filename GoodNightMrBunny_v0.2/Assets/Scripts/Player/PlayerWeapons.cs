@@ -40,7 +40,7 @@ public class PlayerWeapons : MonoBehaviour
     /// <param name="useInput">Tipo de input, Down, Hold o Up</param>
     public void UseHeldObject(IPlayerReceiver.InputType useInput)
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         _currentHeldObject.Use(useInput);
     }
@@ -87,7 +87,7 @@ public class PlayerWeapons : MonoBehaviour
     /// <param name="force">Fuerza con la que se suelta el objeto</param>
     public void DropHeldObject()
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);
