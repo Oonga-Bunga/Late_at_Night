@@ -10,6 +10,7 @@ public class ClayBin : AHoldableObject
     public static ClayBin Instance => _instance;
 
     [SerializeField] private float _launchForce = 20f;
+    [SerializeField] private AudioSource _clayBinSound;
 
     protected void Awake()
     {
@@ -26,6 +27,7 @@ public class ClayBin : AHoldableObject
     public override void Use(IPlayerReceiver.InputType attackInput)
     {
         _player.DropHeldObject();
+        _clayBinSound.Play();
     }
 
     protected override void InitializeInstance(GameObject instance)

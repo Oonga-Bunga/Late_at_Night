@@ -23,6 +23,11 @@ public class Flashlight : AHoldableObject
     private bool _lightOn = false;
     private float _currentCharge;
 
+    [SerializeField] private AudioSource _soundOn;
+    [SerializeField] private AudioSource _soundOff;
+    [SerializeField] private AudioSource _soundNoBattery;
+
+
     #endregion
     
     #region Methods
@@ -66,12 +71,14 @@ public class Flashlight : AHoldableObject
         
         if (attackInput == IPlayerReceiver.InputType.Down)
         {
+            _soundOn.Play();
             _lightOn = true;
             _spotlight.enabled = true;
         }
 
         if (attackInput == IPlayerReceiver.InputType.Up)
         {
+            _soundOff.Play();
             _lightOn = false;
             _spotlight.enabled = false;
         }
@@ -89,6 +96,10 @@ public class Flashlight : AHoldableObject
         {
             _currentCharge -= Time.deltaTime * _dischargeMultiplier;
             HitEnemy();
+            if (_currentCharge <= 0)
+            {
+                _soundNoBattery.Play();
+            }
         }
         else
         {
