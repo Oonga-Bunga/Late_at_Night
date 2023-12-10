@@ -65,9 +65,9 @@ public class Baby : AKillableEntity
     public void EvilBunnyGoesUnderBed()
     {
         _counter++;
-        if (_counter == 2) 
+        if (_counter >= 2) 
         {
-            _counter = 0;
+            _counter -= 2;
             _amalgamateAnimator.SetTrigger("Grow");
         }
     }
