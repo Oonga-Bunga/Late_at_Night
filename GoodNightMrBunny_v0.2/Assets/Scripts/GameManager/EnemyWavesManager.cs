@@ -107,10 +107,11 @@ public class EnemyWavesManager : MonoBehaviour
     private IEnumerator EnemyWavesProcessing()
     {
         Debug.Log("Started enemy spawning");
-        _waveStartedSound.Play();
+
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             yield return new WaitForSeconds(enemyWave.TimeDelay);
+            _waveStartedSound.Play();
 
             List<EnemyTypes> enemyList = new List<EnemyTypes>();
 
@@ -121,14 +122,14 @@ public class EnemyWavesManager : MonoBehaviour
             int randomIndex;
             EnemyTypes enemy;
 
-            for (int i = 0; i < enemyList.Count; i++)
+            while (enemyList.Count != 0)
             {
                 randomIndex = UnityEngine.Random.Range(0, enemyList.Count);
                 enemy = enemyList[randomIndex];
                 SpawnEnemy(enemy);
                 enemyList.RemoveAt(randomIndex);
-
-                if (i != enemyList.Count - 1)
+                
+                if (enemyList.Count != 0)
                 {
                     yield return new WaitForSeconds(enemyWave.TimePerEnemy);
                 }
@@ -207,11 +208,12 @@ public class EnemyWavesManager : MonoBehaviour
                 n = enemyWave.NKitestinger;
                 break;
         }
-
+        
         for (int i = 0; i < n; i++)
         {
             enemyList.Add(type);
         }
+        Debug.Log(enemyList.Count);
     }
 
     /// <summary>
