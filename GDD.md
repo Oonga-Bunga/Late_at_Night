@@ -21,6 +21,7 @@ HÉCTOR MUÑOZ GÓMEZ
 | - | - | - | - |
 |1\.0 |<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE</p><p> NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|22/10/2023 |Versión inicial  |
 |1\.1|<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE </p><p>NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|19/11/2023|<p>Versión Beta del Juego</p><p>Cambios: Interfaces, Niveles, Mecánicas de enemigos, Personajes, Arte y concept, MDA.</p>|
+|1\.2|<p>CÉCILE LAURA BELLO DUPREZ </p><p>CHRISTIAN CAMPOS PAN </p><p>GONZALO GÓMEZ TEJEDOR </p><p>UMESH MOSTAJO SÁEZ </p><p>PAULA ROJO DE LA FUENTE </p><p>NATALIA MARTÍNEZ CLEMENTE </p><p>HÉCTOR MUÑOZ GÓMEZ</p>|10/12/2023|<p>Versión Gold Master del Juego</p><p>Cambios: Interfaces, Niveles, Mecánicas de enemigos, Personajes, Arte y concept.</p>|
 |||||
 |||||
 1. [Introducción...................................................................................................................................................... 5 ](#_page4_x69.00_y103.00)
@@ -305,13 +306,13 @@ Tras  el lanzamiento, el cohete se precipita hacia la dirección indicada, donde
 Esta arma derriba de un solo golpe al Kitenstinger. Su explosión sirve para dispersar y dañar a los grupos de Evil Bunny. 
 
 ## **Mecánicas<a name="_page15_x69.00_y323.00"></a> de Niveles** 
-- **Aguantar:**  
+- **Derrotar Enemigos:**  
 
-El jugador tendrá que aguantar defendiendo al bebé hasta el amanecer, si lo consigue se supera el nivel. El tiempo de aguante está definido pero el jugador no lo podrá ver de manera directa. Se integrarán las horas dentro del juego mediante relojes esparcidos por la habitación.  
+El jugador tendrá que aguantar defendiendo al bebé y derrotar a todos lo enemigos que hay en el nivel para superar la noche. La cantidad de enemigos restantes se mostrará en con las horas faltantes para el amanecer en relojes situados en las habitaciones de forma integrada.  
 
 - **Interruptores:**  
 
-Existirán varios interruptores esparcidos por la habitación, los cuales el jugador tendrá que accionar  para  activarlos  y  una  vez  estén  todos  activos,  se  activará  la  iluminación  de  la habitación el nivel será superado. Estos interruptores aparecerán de manera aleatoria por la sala en la que esté jugando el jugador y cuando estén accionados emitirán una pequeña luz. No se puede interactuar con ellos hasta que no pasa un tiempo desde el inicio del nivel. 
+Para superar el nivel de forma exitosa habrá de mantenerse al menos un interruptor encendido hasta el final de la noche. Si se apaga un interruptor el jugador puede volver a encenderlo y si se apagan todos se pierde la partida.
 
 ## **Mecánicas<a name="_page15_x69.00_y546.00"></a> de Enemigos** 
 - **Comandante Blubs:**  
@@ -332,7 +333,7 @@ Aparece desde las paredes y se mueve flotando en línea recta hacia la cuna. Cua
 
 Si hay una linterna que se carga en una estación de carga y un Zanybell pasa lo suficientemente cerca, irá a esa estación para quitarle la carga a la linterna e impedir que cargue durante cierto tiempo, pero el jugador puede interrumpir al Zanybell empleando el resto de armas del escenario. Si el jugador posee una linterna no podrá realizar este comportamiento. 
 
-Al llegar junto a la cuna empieza a hacer daño al niño. 
+Al llegar junto a la cuna empieza a hacer daño al niño Y si el jugador se encuentra cerca le lanza un proyectil que lo persigue.
 
 Es débil contra la luz de la linterna y tras acumular cierta cantidad de daño desaparecerá. 
 
@@ -345,6 +346,8 @@ Si hay un interruptor encendido a cierta distancia, va hacia él e intenta apaga
 Otro de sus comportamientos característicos es que intenta viajar en grupo con otros de su especie.  
 
 Desaparece tras ser golpeado una vez por una bola de plastilina o el cohete, o tras acumular cierta cantidad de daño con la linterna. 
+
+Si se encuentra con el jugador por el camino intenta golpearlo.
 
 Cuando llegan debajo de la cuna ya no pueden recibir daño y se van juntando formando un monstruo más grande. Cuando se juntan varios, el monstruo fusionado (Amalgamate Bunny) se completa y automáticamente se pierde la partida. 
 
