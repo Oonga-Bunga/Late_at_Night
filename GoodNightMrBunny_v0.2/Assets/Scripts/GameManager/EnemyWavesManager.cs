@@ -158,7 +158,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
                 enemyInstance.transform.localPosition = _groundEnemySpawnLocations[randomSpawn];
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
-                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
+                enemyInstance.GetComponent<EvilBunny>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.up, quaternion.identity);
                 break;
@@ -167,7 +167,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance = Instantiate(_flyingEnemyList[0], Vector3.zero, Quaternion.identity);
                 enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
                 enemyInstance.transform.localPosition = _flyingEnemySpawnLocations[randomSpawn];
-                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
+                enemyInstance.GetComponent<Shadow>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.up, quaternion.identity);
                 break;
@@ -177,7 +177,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
                 enemyInstance.transform.localPosition = _ceilingEnemySpawnLocations[randomSpawn];
                 enemyInstance.GetComponent<NavMeshAgent>().Warp(enemyInstance.transform.position);
-                enemyInstance.GetComponent<AMonster>().OnDied += UpdateAliveEnemies;
+                enemyInstance.GetComponent<Kitestinger>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.down, quaternion.identity);
                 break;
