@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     /// <param name="interactInput">Tipo de input, Down, Hold o Up</param>
     public void Interact(IPlayerReceiver.InputType interactInput)
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         if (_closestInteractable != null)
         {

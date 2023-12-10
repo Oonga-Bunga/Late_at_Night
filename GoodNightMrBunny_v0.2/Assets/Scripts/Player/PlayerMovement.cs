@@ -82,14 +82,14 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         _rb.AddForce(Physics.gravity * _localGravityScale);
     }
 
     void Update()
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         // Comprobar si el jugador está en el suelo
 
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="direction">Direcci�n de movimiento recibida a partir del input del jugador</param>
     public void Move(Vector2 direction)
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         // C�lculo de la direcci�n de movimiento con respecto a la c�mara
 
@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="runInput">Tipo de input, Down, Hold o Up</param>
     public void Run(IPlayerReceiver.InputType runInput)
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         if (runInput != IPlayerReceiver.InputType.Up)
         {
@@ -257,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="jumpInput">Tipo de input, Down o Up</param>
     public void Jump(IPlayerReceiver.InputType jumpInput)
     {
-        if (_pauseManager.IsPaused) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
 
         if (jumpInput == IPlayerReceiver.InputType.Down)
         {
