@@ -738,6 +738,10 @@ Para realizar el modelado 3D se han utilizado los motores de 3DMax y Blender en 
 
 >Turn around del Kitestinger
 
+![](/Documentacion/KitestingerRender1.jpg)
+
+>Render Kitestinger
+
 ### **Comandante Blubs** 
 
 ![](/Documentacion/EnemigoComandanteBlubs.png)
