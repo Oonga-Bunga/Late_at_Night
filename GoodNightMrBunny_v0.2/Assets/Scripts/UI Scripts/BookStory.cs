@@ -11,7 +11,7 @@ public class BookStory : MonoBehaviour
     private static BookStory _instance;
     public static BookStory Instance => _instance;
     
-    public float duracionTransparencia = 2.0f;
+    public float duracionTransparencia = 4.0f;
     private float tiempoTranscurrido = 0f;
     [SerializeField]private Image imagenCanvas;
 
@@ -36,6 +36,8 @@ public class BookStory : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (FindObjectOfType<UserData>().currentLevelPlayed == 1)
         {
             _loadingCanvas.SetActive(false);
@@ -93,6 +95,14 @@ public class BookStory : MonoBehaviour
             GameManager.Instance.StartGame();
             
         }
+    }
+
+    public void SkipStory()
+    {
+        GetComponent<Book>().currentPage = 7;
+        Destroy(GetComponent<Book>());
+        _bookHasFinished = true;
+        IsOnLastPage();
     }
     #endregion
 }
