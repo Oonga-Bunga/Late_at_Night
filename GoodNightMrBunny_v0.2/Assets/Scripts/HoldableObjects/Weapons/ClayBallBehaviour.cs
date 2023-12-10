@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class ClayBallBehaviour : MonoBehaviour
@@ -10,6 +11,8 @@ public class ClayBallBehaviour : MonoBehaviour
     [SerializeField]private float lifeTime = 5f;
     [SerializeField]private float jumpForce = 30.0f;
     private bool _canJump = false;
+
+    [SerializeField] private AudioSource _stickSound;
 
     #endregion
 
@@ -34,7 +37,6 @@ public class ClayBallBehaviour : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
-
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Player") && _canJump)
@@ -44,7 +46,7 @@ public class ClayBallBehaviour : MonoBehaviour
             if (playerRigidbody != null)
             {
                 playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                Destroy(gameObject); // Destruye el trampolín después de usarlo.
+                Destroy(gameObject);
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -56,9 +58,10 @@ public class ClayBallBehaviour : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y/2, transform.localScale.z);
             transform.position = new Vector3(transform.position.x, transform.position.y-transform.localScale.x/3, transform.position.z);
             _canJump = true;
+            _stickSound.Play();
             Destroy(gameObject, lifeTime);
         }
     }
-    
+
     #endregion
 }
