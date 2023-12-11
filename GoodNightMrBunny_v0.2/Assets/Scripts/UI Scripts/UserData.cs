@@ -51,7 +51,7 @@ public class UserData : MonoBehaviour
     {
         _progress += 1;
     }
-    
+
     public int GetProgress()
     {
         return _progress;
@@ -87,8 +87,8 @@ public class UserData : MonoBehaviour
         _age = selectedAge;
         CanStartGame();
     }
-    
-    
+
+
 
     public async void SaveData()
     {
@@ -126,6 +126,6 @@ public class UserData : MonoBehaviour
         SaveData();
         SceneManager.LoadScene("Main Menu");
     }
-    
+
     #endregion
 }
