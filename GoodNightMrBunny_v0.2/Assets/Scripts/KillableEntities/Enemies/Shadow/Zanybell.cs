@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class Shadow : AMonster
+public class Zanybell : AMonster
 {
     #region Attributes
 

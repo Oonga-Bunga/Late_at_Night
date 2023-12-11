@@ -67,17 +67,18 @@ public class EnemyWavesManager : MonoBehaviour
 
     private void Start()
     {
+        // Obtiene el json de LevelJsons si existe, y se coge su EnemyWavesJsonFile
+        if (LevelJsons.Instance != null)
+        {
+            _enemyWavesJsonFile = LevelJsons.Instance.EnemyWavesJsonFile;
+        }
+        
         // Comienza a cargar la informaci�n del Json
         StartCoroutine(LoadEnemyWavesFromJson());
 
         // Se suscribe al evento del game manager para comenzar a spawnear enemigos una vez comience el nivel
         GameManager.Instance.OnGameStarted += () => StartCoroutine(EnemyWavesProcessing());
 
-        // Obtiene el json de LevelJsons si existe, y se coge su EnemyWavesJsonFile
-        if (LevelJsons.Instance != null)
-        {
-            _enemyWavesJsonFile = LevelJsons.Instance.EnemyWavesJsonFile;
-        }
     }
 
     private IEnumerator LoadEnemyWavesFromJson()
@@ -108,8 +109,6 @@ public class EnemyWavesManager : MonoBehaviour
     {
         Debug.Log("Started enemy spawning");
 
-        OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
-
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
             yield return new WaitForSeconds(enemyWave.TimeDelay);
@@ -137,6 +136,8 @@ public class EnemyWavesManager : MonoBehaviour
                 }
             }
         }
+        
+        OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
 
         yield return null;
     }
@@ -167,7 +168,7 @@ public class EnemyWavesManager : MonoBehaviour
                 enemyInstance = Instantiate(_flyingEnemyList[0], Vector3.zero, Quaternion.identity);
                 enemyInstance.transform.SetParent(LevelGenerator.Instance.LevelHolder.transform);
                 enemyInstance.transform.localPosition = _flyingEnemySpawnLocations[randomSpawn];
-                enemyInstance.GetComponent<Shadow>().OnDied += UpdateAliveEnemies;
+                enemyInstance.GetComponent<Zanybell>().OnDied += UpdateAliveEnemies;
                 _aliveEnemies++;
                 Instantiate(_spawnEffect, enemyInstance.transform.position+Vector3.up, quaternion.identity);
                 break;

@@ -17,6 +17,7 @@ public class BookStory : MonoBehaviour
 
     [SerializeField] private GameObject _loadingCanvas;
     [SerializeField] private GameObject _loadingText;
+    [SerializeField] private GameObject _skipButton;
     #endregion
 
     #region Methods
@@ -48,6 +49,7 @@ public class BookStory : MonoBehaviour
             _bookHasFinished = true;
             imagenCanvas.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
+            _skipButton.SetActive(false);
         }
     }
 
@@ -99,10 +101,12 @@ public class BookStory : MonoBehaviour
 
     public void SkipStory()
     {
+        _skipButton.GetComponent<Button>().interactable = false;
         GetComponent<Book>().currentPage = 7;
         GetComponent<Book>().enabled = false;
         _bookHasFinished = true;
         IsOnLastPage();
+        _skipButton.SetActive(false);
     }
     #endregion
 }

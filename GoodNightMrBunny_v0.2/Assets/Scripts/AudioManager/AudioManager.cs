@@ -73,8 +73,11 @@ public class AudioManager : MonoBehaviour
     /// <param name="value"></param>
     public void SetSensitivitySlider(float value)
     {
-        _cameraController.SensitivityX = value;
-        _cameraController.SensitivityY = _cameraController.SensitivityX / 2;
+        if (_cameraController != null)
+        {
+            _cameraController.SensitivityX = value;
+            _cameraController.SensitivityY = _cameraController.SensitivityX / 2;
+        }
             
         PlayerPrefs.SetFloat("CameraSensitivity", value);
     }

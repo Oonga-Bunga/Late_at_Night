@@ -25,8 +25,8 @@ public class DatabaseManager : MonoBehaviour
             ""data"": {{
                 ""name"": ""{name}"",
                 ""gender"": ""{gender}"",
-                ""age"": {age},
-                ""progress"": {progress},
+                ""age"": ""{age}"",
+                ""progress"": ""{progress}""
             }}
         }}";
 
