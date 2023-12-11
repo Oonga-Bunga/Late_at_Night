@@ -26,6 +26,7 @@ public class UserData : MonoBehaviour
     private int _age = -1;
     private int _progress = 1; //Levels available
     private static GameObject sampleInstance;
+    [SerializeField] private DatabaseManager _databaseManager;
 
     public int currentLevelPlayed { get; set; } = 1;
 
@@ -36,53 +37,6 @@ public class UserData : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         _startButton.SetActive(false);
-    }
-
-    private async void SetupAndSignIn()
-    {
-        await UnityServices.InitializeAsync();
-        SetupEvents();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        Dictionary<string, string> data = await LoadData();
-        if (data.ContainsKey("username"))
-        {
-            //skip filling information
-            Debug.Log("Loaded Game as " + data["username"]);
-
-            _progress = int.Parse(data["progress"]);
-
-            SceneManager.LoadScene("Main Menu");
-            
-        }
-        else
-        {
-            //ask for filling information
-        }
-    }
-
-    void SetupEvents()
-    {
-        AuthenticationService.Instance.SignedIn += () => {
-            // Shows how to get a playerID
-            Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
-
-            // Shows how to get an access token
-            Debug.Log($"Access Token: {AuthenticationService.Instance.AccessToken}");
-
-        };
-
-        AuthenticationService.Instance.SignInFailed += (err) => {
-            Debug.LogError(err);
-        };
-
-        AuthenticationService.Instance.SignedOut += () => {
-            Debug.Log("Player signed out.");
-        };
-
-        AuthenticationService.Instance.Expired += () =>
-        {
-            Debug.Log("Player session could not be refreshed and expired.");
-        };
     }
 
     public int GetAge()
@@ -138,28 +92,9 @@ public class UserData : MonoBehaviour
 
     public async void SaveData()
     {
-        var data = new Dictionary<string, object>
-        {
-            { "username", _username },
-            { "gender", _gender },
-            { "age", _age},
-            {"progress", _progress}
-        };
-        await CloudSaveService.Instance.Data.Player.SaveAsync(data);
-        Debug.Log("Attempted to save data");
-    }
+        Debug.Log("saving data");
 
-    public async Task<Dictionary<string, string>> LoadData()
-    {
-        var keysToLoad = new HashSet<string>
-        {
-            "username",
-            "gender",
-            "age",
-            "progress"
-        };
-        var loadedData = await CloudSaveService.Instance.Data.LoadAsync(keysToLoad);
-        return loadedData;
+        StartCoroutine(_databaseManager.SendPostRequest(_username, _gender, _age, _progress));
     }
 
     /// <summary>
@@ -188,6 +123,7 @@ public class UserData : MonoBehaviour
 
     public void openMenu()
     {
+        SaveData();
         SceneManager.LoadScene("Main Menu");
     }
     

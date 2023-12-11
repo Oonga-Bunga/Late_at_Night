@@ -14,12 +14,8 @@ public class DatabaseManager : MonoBehaviour
     {
         LoadCredentials();
     }
-    void Start()
-    {
-        StartCoroutine(SendPostRequest());
-    }
 
-    string CreateJSON(string tabla, string name, string start, string end)
+    private string CreateJSON(string tabla, string name, string gender, int age, int progress)
     {
         //Construye JSON para la petición REST         
         string json = $@"{{
@@ -28,17 +24,18 @@ public class DatabaseManager : MonoBehaviour
             ""table"":""{tabla}"",
             ""data"": {{
                 ""name"": ""{name}"",
-                ""start"": ""{start}"",
-                ""end"": ""{end}""
+                ""gender"": ""{gender}"",
+                ""age"": {age},
+                ""progress"": {progress},
             }}
         }}";
 
         return json;
     }
 
-    IEnumerator SendPostRequest()
+    public IEnumerator SendPostRequest(string name, string gender, int age, int progress)
     {
-        string data = CreateJSON("test", "tortuguita", "2034-11-01 00:01:00", "2035-12-10 00:01:00");
+        string data = CreateJSON("Users", name, gender, age, progress);
 
         using (UnityWebRequest www = UnityWebRequest.Post(uri, data, contentType))
         {
@@ -55,7 +52,7 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    void LoadCredentials()
+    private void LoadCredentials()
     {
         string configPath = "Assets/Resources/config.json";
 
