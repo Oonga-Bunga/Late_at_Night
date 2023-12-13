@@ -139,6 +139,7 @@ public class EnemyWavesManager : MonoBehaviour
         
         OnAllEnemiesDefeated += () => OnAllWavesDefeated?.Invoke();
 
+        
         yield return null;
     }
 

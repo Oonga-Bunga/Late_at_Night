@@ -14,6 +14,10 @@ public class PlayerHealth : AKillableEntity
     protected override void ChangeHealth(float value, bool IsDamage)
     {
         base.ChangeHealth(value, IsDamage);
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     public override void Die()

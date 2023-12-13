@@ -66,10 +66,6 @@ public abstract class AKillableEntity : MonoBehaviour, IKillableEntity
         {
             _currentHealth = Mathf.Max(_currentHealth - value, 0);
             OnHealthChanged?.Invoke(_currentHealth);
-            if (_currentHealth <= 0)
-            {
-                Die();
-            }
         }
         else
         {
