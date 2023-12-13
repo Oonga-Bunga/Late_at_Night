@@ -37,15 +37,6 @@ namespace Player
 
         private void Awake()
         {
-            if (Application.isMobilePlatform)
-            {
-                _lookFunction = HandleMobileInput;
-            }
-            else
-            {
-                _lookFunction = HandlePCInput;
-            }
-
             _mouseDeltaAction.action.Enable();
             _joystickValueAction.action.Enable();
 
@@ -62,64 +53,6 @@ namespace Player
             if (!GameManager.Instance.IsInGame) return;
 
             _lookFunction();
-        }
-
-        /// <summary>
-        /// Maneja el movimiento de la c�mara usando el delta del rat�n
-        /// </summary>
-        private void HandlePCInput()
-        {
-            Vector2 delta = _mouseDeltaAction.action.ReadValue<Vector2>();
-            rotation.x += delta.x * _sensitivityX;
-            rotation.y += delta.y * _sensitivityY;
-            rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
-
-            var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 30f);
-        }
-
-        /// <summary>
-        /// Maneja el movimiento de la c�mara usando el delta del toque que no est� tocando un elemento de la interfaz
-        /// </summary>
-        private void HandleMobileInput()
-        {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                Touch touch = Input.GetTouch(i);
-
-                if (!_bannedTouches.Contains(touch.fingerId))
-                {
-                    if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                    {
-                        Vector2 delta = touch.deltaPosition;
-                        rotation.x += delta.x * _sensitivityX;
-                        rotation.y += delta.y * _sensitivityY;
-                        rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
-
-                        var targetRotation = Quaternion.Euler(-rotation.y, rotation.x, 0f);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
-                    }
-                    else
-                    {
-                        _bannedTouches.Add(touch.fingerId);
-                    }
-                }
-                else
-                {
-                    if (touch.phase == UnityEngine.TouchPhase.Ended)
-                    {
-                        _bannedTouches.Remove(touch.fingerId);
-                    }
-                }
-            }
-
-            Vector2 delta2 = _joystickValueAction.action.ReadValue<Vector2>();
-            rotation.x += delta2.x * _sensitivityX * 2f;
-            rotation.y += delta2.y * _sensitivityY * 2f;
-            rotation.y = Mathf.Clamp(rotation.y, -_yRotationLimit, _yRotationLimit);
-
-            var targetRotation2 = Quaternion.Euler(-rotation.y, rotation.x, 0f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation2, Time.deltaTime * 30f);
         }
 
         /// <summary>

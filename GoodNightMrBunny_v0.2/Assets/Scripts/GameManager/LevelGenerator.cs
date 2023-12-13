@@ -78,7 +78,7 @@ public class LevelGenerator : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadLevelFromJson()
     {
-        Debug.Log("Loading prefabs");
+        //Debug.Log("Loading prefabs");
 
         foreach (var propPrefab in _prefabsList)
         {
@@ -89,7 +89,7 @@ public class LevelGenerator : MonoBehaviour
 
         SceneData sceneData = JsonUtility.FromJson<SceneData>(jsonString);
 
-        Debug.Log("Generating: ");
+        //Debug.Log("Generating: ");
 
         // Ahora puedes acceder a los datos como objetos C#
         foreach (var sceneObject in sceneData.SceneObjects)
@@ -98,7 +98,7 @@ public class LevelGenerator : MonoBehaviour
 
             if (_prefabDictionary.ContainsKey(sceneObject.ID))
             {
-                Debug.Log("Generating: " + sceneObject.ID);
+                //Debug.Log("Generating: " + sceneObject.ID);
 
                 GameObject sceneObjectPrefab = _prefabDictionary[sceneObject.ID];
                 GenerateObject(sceneObjectPrefab, infoArray[0], infoArray[1], infoArray[2]);
@@ -109,35 +109,35 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("Reading switchNodes");
+        //Debug.Log("Reading switchNodes");
 
         foreach (var switchNode in sceneData.SwitchNodes)
         {
             _switchSpawnLocations.Add(new Vector3(switchNode.X, switchNode.Y, switchNode.Z));
         }
 
-        Debug.Log("Reading groundEnemyNodes");
+        //Debug.Log("Reading groundEnemyNodes");
 
         foreach (var groundEnemyNode in sceneData.GroundEnemyNodes)
         {
             _groundEnemySpawnLocations.Add(new Vector3(groundEnemyNode.X, groundEnemyNode.Y, groundEnemyNode.Z));
         }
 
-        Debug.Log("Reading flyingEnemyNodes");
+        //Debug.Log("Reading flyingEnemyNodes");
 
         foreach (var flyingEnemyNode in sceneData.FlyingEnemyNodes)
         {
             _flyingEnemySpawnLocations.Add(new Vector3(flyingEnemyNode.X, flyingEnemyNode.Y, flyingEnemyNode.Z));
         }
 
-        Debug.Log("Reading ceilingEnemyNodes");
+        //Debug.Log("Reading ceilingEnemyNodes");
 
         foreach (var ceilingEnemyNode in sceneData.CeilingEnemyNodes)
         {
             _ceilingEnemySpawnLocations.Add(new Vector3(ceilingEnemyNode.X, ceilingEnemyNode.Y, ceilingEnemyNode.Z));
         }
 
-        Debug.Log("Reading _player spawn point");
+        //Debug.Log("Reading _player spawn point");
 
         var playerSpawnPointData = sceneData.PlayerSpawnPoint;
         Vector3[] playerInfoArray = playerSpawnPointData.GetInfoAsVector3List();
@@ -145,7 +145,7 @@ public class LevelGenerator : MonoBehaviour
         GameObject emptyGameObject = GenerateObject(new GameObject("EmptyGameObject"), playerInfoArray[0], playerInfoArray[1], playerInfoArray[2]);
         _playerSpawnPoint = emptyGameObject.transform;
 
-        Debug.Log("Sending data to game manager");
+        //Debug.Log("Sending data to game manager");
 
         GameManager gameManager = GameManager.Instance;
         EnemyWavesManager wavesManager = EnemyWavesManager.Instance;
@@ -170,7 +170,7 @@ public class LevelGenerator : MonoBehaviour
             Debug.Log("There is no GameManager in the scene");
         }
 
-        Debug.Log("Generating switches");
+        //Debug.Log("Generating switches");
 
         int nSwitches = Mathf.Min(_switchSpawnLocations.Count, sceneData.TotalSwitches);
         int randomPos;
@@ -182,7 +182,7 @@ public class LevelGenerator : MonoBehaviour
             _switchSpawnLocations.RemoveAt(randomPos);
         }
 
-        Debug.Log("Baking the NavMesh");
+        //Debug.Log("Baking the NavMesh");
 
         _levelHolder.GetComponent<NavMeshSurface>().BuildNavMesh();
         _levelHolder.GetComponent<NavMeshLinks_AutoPlacer>().Generate();
@@ -193,7 +193,7 @@ public class LevelGenerator : MonoBehaviour
             component.BuildNavMesh();
         }
 
-        Debug.Log("Scene generation finished");
+        //Debug.Log("Scene generation finished");
         yield return new WaitForSeconds(2f);
         OnLevelLoaded?.Invoke();
 

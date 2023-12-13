@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     [SerializeField] private PlayerWeapons _playerWeapons; // Referencia al script que maneja los holdable objects del jugador
     [SerializeField] private PlayerInteraction _playerInteraction; // Referencia al script que maneja la interacción del jugador con objetos interactivos
     [SerializeField] private PlayerHealth _playerHealth; // Referencia al script que maneja la vida del jugador
-    [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
+    private Transform _cameraHolder; // Referencia a la cámara principal
 
     public PlayerMovement PlayerMovement => _playerMovement;
     public PlayerWeapons PlayerWeapons => _playerWeapons;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private void Start()
     {
         PlayerInputManager.Instance.Player = this;
+        _cameraHolder = Camera.main.transform;
     }
 
 

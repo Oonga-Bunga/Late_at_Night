@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer; // Capa en la cual se encuentran todos los gameObjects que sirven como suelo al jugador
 
     [Header("References")]
-    [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
+    private Transform _cameraHolder; // Referencia a la cámara principal
     [SerializeField] private Rigidbody _rb; // Referencia al rigidbody del jugador
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _pauseManager = PauseManager.Instance;
+        _cameraHolder = Camera.main.transform;
     }
 
     /// <summary>

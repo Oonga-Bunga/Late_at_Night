@@ -96,7 +96,7 @@ public class EnemyWavesManager : MonoBehaviour
             _enemyWaveList.Add(wave);
         }
 
-        Debug.Log("Finished loading enemies");
+        //Debug.Log("Finished loading enemies");
 
         yield return null;
     }
@@ -107,7 +107,7 @@ public class EnemyWavesManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator EnemyWavesProcessing()
     {
-        Debug.Log("Started enemy spawning");
+        //Debug.Log("Started enemy spawning");
 
         foreach (EnemyWave enemyWave in _enemyWaveList)
         {
@@ -185,7 +185,7 @@ public class EnemyWavesManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Enemy spawned");
+        //Debug.Log("Enemy spawned");
     }
 
     /// <summary>

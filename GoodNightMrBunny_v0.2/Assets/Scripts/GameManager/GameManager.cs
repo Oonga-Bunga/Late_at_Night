@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         #region Search key objects
 
-        Debug.Log("Searching for switches");
+        //Debug.Log("Searching for switches");
 
         List<Switch> tempSwitchList = new List<Switch>();
 
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         
         _switchListInstance = tempSwitchList;
 
-        Debug.Log("Searching for flashlight recharge stations");
+        //Debug.Log("Searching for flashlight recharge stations");
 
         List<FlashlightRechargeStation> tempRechargeStationList = new List<FlashlightRechargeStation>();
 
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
 
         _rechargeStationListInstance = tempRechargeStationList;
 
-        Debug.Log("Searching baby");
+        //Debug.Log("Searching for baby");
 
         Baby baby = FindObjectOfType<Baby>();
 
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 
         #region Instantiate player
 
-        Debug.Log("Positioning _player");
+        //Debug.Log("Positioning _player");
 
         if (_playerInstance == null)
         {
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         #region Wait a bit and start game
 
-        Debug.Log("Loading finished!");
+        //Debug.Log("Loading finished!");
 
         yield return new WaitForSeconds(2);
 

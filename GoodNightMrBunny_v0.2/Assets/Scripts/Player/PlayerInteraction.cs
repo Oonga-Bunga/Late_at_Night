@@ -10,12 +10,13 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask _interactableLayer; // Capa en la cual se encuentran todos los gameObjects con los que el jugador puede interactuar
     public event Action<bool> OnInteractableChanged; // Se invoca cuando el objeto interactivo más cercano cambia
 
-    [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
+    private Transform _cameraHolder; // Referencia a la cámara principal
     private PauseManager _pauseManager; // Referencia al PauseManager que se encarga de manejar la pausa del juego
 
     private void Start()
     {
         _pauseManager = PauseManager.Instance;
+        _cameraHolder = Camera.main.transform;
     }
 
     private void Update()

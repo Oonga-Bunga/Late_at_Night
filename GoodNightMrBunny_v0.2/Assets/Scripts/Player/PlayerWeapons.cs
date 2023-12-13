@@ -8,7 +8,7 @@ public class PlayerWeapons : MonoBehaviour
     [Header("Holdable Objects")]
     [SerializeField] private List<AHoldableObject> _holdableObjectList; // Lista con los objetos que puede llevar encima el jugador
     private AHoldableObject _currentHeldObject; // SceneObject que lleva encima en cada momento
-    [SerializeField] private Transform _cameraHolder; // Referencia a la cámara principal
+    private Transform _cameraHolder; // Referencia a la cámara principal
 
     [Header("Dropping")]
     [SerializeField] private float _dropDistance = 3.5f; // Distancia a la cual el jugador suelta el objeto
@@ -31,6 +31,7 @@ public class PlayerWeapons : MonoBehaviour
     private void Start()
     {
         _pauseManager = PauseManager.Instance;
+        _cameraHolder = Camera.main.transform;
     }
 
     /// <summary>
@@ -87,7 +88,7 @@ public class PlayerWeapons : MonoBehaviour
     /// <param name="force">Fuerza con la que se suelta el objeto</param>
     public void DropHeldObject()
     {
-        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame) return;
+        if (_pauseManager.IsPaused || !GameManager.Instance.IsInGame || _currentHeldObject.HoldableObjectType == IPlayerReceiver.HoldableObjectType.None) return;
 
         _currentHeldObject.Drop(true, _dropDistance, _sphereRaycastRadius, _minimumDistanceFromCollision, _groundLayer);
         _holdableObjectList[0].gameObject.SetActive(true);
