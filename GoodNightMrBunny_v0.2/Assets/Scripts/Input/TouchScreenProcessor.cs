@@ -46,7 +46,7 @@ public class MyValueShiftProcessor : InputProcessor<Vector2>
                 if (!IsPointerOverUIObject(touch))
                 {
                     Debug.Log("bad");
-                    return touch.deltaPosition;
+                    return -touch.deltaPosition;
                 }
                 else
                 {

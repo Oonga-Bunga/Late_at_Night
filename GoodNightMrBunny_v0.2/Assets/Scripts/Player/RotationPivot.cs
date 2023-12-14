@@ -5,10 +5,8 @@ using UnityEngine.ProBuilder;
 
 public class RotationPivot : MonoBehaviour
 {
-    public Camera playerCamera;
-
     void Update()
     {
-        transform.rotation = playerCamera.transform.rotation;
+        transform.rotation = Camera.main.transform.rotation;
     }
 }
