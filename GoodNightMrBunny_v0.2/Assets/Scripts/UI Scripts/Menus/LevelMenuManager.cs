@@ -90,6 +90,7 @@ namespace UI_Scripts.Menus
             else
             {
                 FindObjectOfType<PauseManager>().CanPause = true;
+                FindObjectOfType<PauseManager>().EnableLookAction();
                 _instructionPanel.gameObject.SetActive(false);
                 _optionsCanvas.gameObject.SetActive(false);
                 _gameUI.gameObject.SetActive(true);

@@ -73,7 +73,7 @@ public class PauseManager : MonoBehaviour
         }
         else
         {
-            _lookAction.action.Enable();
+            EnableLookAction();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;
@@ -82,5 +82,10 @@ public class PauseManager : MonoBehaviour
             _pausePanel.gameObject.SetActive(false);
             _optionsCanvas.gameObject.SetActive(false);
         }
+    }
+
+    public void EnableLookAction()
+    {
+        _lookAction.action.Enable();
     }
 }
