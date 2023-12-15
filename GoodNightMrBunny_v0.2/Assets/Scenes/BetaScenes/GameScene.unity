@@ -5146,6 +5146,34 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782642342585625398, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3647385970471330453, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5162,6 +5190,14 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 57754734}
+    - target: {fileID: 4838125136317959381, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1313237761}
+    - target: {fileID: 4838125136317959381, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+      propertyPath: _rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5863608284147599873, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5176,7 +5212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_VerticalAxis.m_MaxSpeed
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_VerticalAxis.m_AccelTime
@@ -5192,15 +5228,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_MaxSpeed
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_AccelTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_DecelTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_SpeedMode
@@ -8222,7 +8258,7 @@ PrefabInstance:
       objectReference: {fileID: 1948211823, guid: 4971646787d45474ab078ba58f4b5878, type: 3}
     - target: {fileID: 22433904, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.21713743
+      value: 0.24936146
       objectReference: {fileID: 0}
     - target: {fileID: 22433904, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8230,15 +8266,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22433904, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2210.5815
+      value: 1924.9166
       objectReference: {fileID: 0}
     - target: {fileID: 22436914, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3359.9
+      value: 2999.9
       objectReference: {fileID: 0}
     - target: {fileID: 22436914, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 4319.7
+      value: 3239.7002
       objectReference: {fileID: 0}
     - target: {fileID: 22437570, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8246,7 +8282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22437570, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 4319.7
+      value: 3239.7002
       objectReference: {fileID: 0}
     - target: {fileID: 22443772, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_Pivot.x
@@ -8334,7 +8370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22488492, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.21713743
+      value: 0.24936146
       objectReference: {fileID: 0}
     - target: {fileID: 22488492, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8342,7 +8378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22488492, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2210.5815
+      value: 1924.9166
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8996,7 +9032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273689931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba1aa53603af98c4d8a106cac89a2089, type: 3}
   m_Name: 
@@ -9995,6 +10031,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310418489}
   m_CullTransparentMesh: 1
+--- !u!1 &1313237761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2879265667702350610, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
+  m_PrefabInstance: {fileID: 717474227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1314375401
 GameObject:
   m_ObjectHideFlags: 0
@@ -12274,7 +12315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1690599203
 AudioListener:
   m_ObjectHideFlags: 0

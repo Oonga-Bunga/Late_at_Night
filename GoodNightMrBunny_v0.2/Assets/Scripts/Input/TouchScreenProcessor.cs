@@ -29,14 +29,6 @@ public class MyValueShiftProcessor : InputProcessor<Vector2>
 
     public override Vector2 Process(Vector2 value, InputControl control)
     {
-        /*
-        Vector2 delta2 = _joystickValueAction.action.ReadValue<Vector2>();
-
-        if (delta2 != Vector2.zero)
-        {
-            return delta2;
-        }
-        */
         for (int i = 0; i < Input.touchCount; i++)
         {
             Touch touch = Input.GetTouch(i);

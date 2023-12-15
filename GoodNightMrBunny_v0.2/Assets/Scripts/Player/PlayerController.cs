@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IPlayerReceiver
     private void Start()
     {
         PlayerInputManager.Instance.Player = this;
-        _cameraHolder = Camera.main.transform;
+        _cameraHolder = Camera.main.transform.parent;
     }
 
 

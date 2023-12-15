@@ -5,8 +5,23 @@ using UnityEngine.ProBuilder;
 
 public class RotationPivot : MonoBehaviour
 {
-    void Update()
+    [SerializeField] private float _rotationSpeed = 30f;
+    [SerializeField] private GameObject _camera;
+    private Vector3 _lastRot = new Vector3(0, 0, 0);
+
+    private void LateUpdate()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        if (_camera.transform.rotation.eulerAngles == _lastRot)
+        {
+            Debug.Log("clone");
+        }
+        else
+        {
+            Debug.Log("change");
+        }
+
+        _lastRot = _camera.transform.rotation.eulerAngles;
+
+        transform.rotation = _camera.transform.rotation;
     }
 }
