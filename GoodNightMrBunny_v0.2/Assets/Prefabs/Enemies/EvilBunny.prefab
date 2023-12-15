@@ -77,6 +77,8 @@ MonoBehaviour:
   _animator: {fileID: 8861253510443811252}
   _deathSound02: {fileID: 1622763283468806433}
   _deathEffect: {fileID: 5231139659937769897, guid: 366659f62fe61d940bee7ffb5f17e205, type: 3}
+  _redEyeMaterial: {fileID: 2100000, guid: 75e8cf6fe70c8f1489d198fed7ca8116, type: 2}
+  _eyeRenderer: {fileID: 1028827129970131319}
 --- !u!136 &6555470703579980555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -402,6 +404,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8228508244211199723}
   m_SourcePrefab: {fileID: 100100000, guid: 8e21576e4cf8cfb45a87a49f631e6460, type: 3}
+--- !u!137 &1028827129970131319 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6679420423134789135, guid: 8e21576e4cf8cfb45a87a49f631e6460, type: 3}
+  m_PrefabInstance: {fileID: 5977738706941362040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6160793258406107283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e21576e4cf8cfb45a87a49f631e6460, type: 3}
@@ -454,9 +461,9 @@ MonoBehaviour:
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"SwitchTime","value":{"$content":0.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"SearchRadius","value":{"$content":20.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"HasTurnedOffSwitch","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"AttackRadius","value":{"$content":1.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"AttackRadius","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"MergeRadius","value":{"$content":4.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Enemy","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"EvilBunny.EvilBunny,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"Enemy","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"EvilBunny,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Hitbox","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Collider,
       UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:

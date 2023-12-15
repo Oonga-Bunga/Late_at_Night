@@ -5212,7 +5212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_VerticalAxis.m_MaxSpeed
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_VerticalAxis.m_AccelTime
@@ -5228,7 +5228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_MaxSpeed
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8368207377158365592, guid: e190debb1a860164182ace0ec53efcc2, type: 3}
       propertyPath: m_HorizontalAxis.m_AccelTime
@@ -8935,6 +8935,8 @@ MonoBehaviour:
   _pausePanel: {fileID: 1398357291}
   _optionsCanvas: {fileID: 31201481}
   _inGameUI: {fileID: 1871246783}
+  _lookAction: {fileID: 7450609400753034794, guid: 197bd0addc772714d89c3ea50659eca2, type: 3}
+  _instructionPanel: {fileID: 374610193}
 --- !u!114 &1273689933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9032,7 +9034,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273689931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba1aa53603af98c4d8a106cac89a2089, type: 3}
   m_Name: 
@@ -11017,7 +11019,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1273689932}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: ClosePauseMenu
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

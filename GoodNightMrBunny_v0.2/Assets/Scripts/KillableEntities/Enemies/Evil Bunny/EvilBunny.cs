@@ -10,6 +10,9 @@ public class EvilBunny : AMonster
 {
     private NavMeshAgent _agent;
     public event Action OnDied;
+    private bool _isEnraged = false;
+
+    public bool IsEnraged => _isEnraged;
 
     // Animator strings
     private const string _animatorIsWalking = "IsWalking";
@@ -20,6 +23,9 @@ public class EvilBunny : AMonster
 
     [SerializeField] private AudioSource _deathSound02;
     [SerializeField] private GameObject _deathEffect;
+
+    [SerializeField] private Material _redEyeMaterial;
+    [SerializeField] private Renderer _eyeRenderer;
 
 
 
@@ -55,6 +61,27 @@ public class EvilBunny : AMonster
     {
         Instantiate(_deathEffect, transform.position + Vector3.up, Quaternion.identity);
         OnDied?.Invoke();
+    }
+
+    private void WarnEvilBunnies()
+    {
+        Collider[] nearbyEvilBunnies = Physics.OverlapSphere(transform.position, 15f, LayerMask.GetMask("Enemy"));
+
+        foreach (Collider evilBunny in nearbyEvilBunnies)
+        {
+            var evil = evilBunny.GetComponent<EvilBunny>();
+
+            if (evil != null)
+            {
+                evil.Enraged();
+            }
+        }
+    }
+
+    public void Enraged()
+    {
+        _isEnraged = true;
+        _eyeRenderer.material = _redEyeMaterial;
     }
 
     public void Merge()
