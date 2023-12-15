@@ -61,6 +61,7 @@ public class EvilBunny : AMonster
     {
         Instantiate(_deathEffect, transform.position + Vector3.up, Quaternion.identity);
         OnDied?.Invoke();
+        WarnEvilBunnies();
     }
 
     private void WarnEvilBunnies()
