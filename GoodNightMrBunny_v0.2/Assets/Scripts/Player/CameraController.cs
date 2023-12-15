@@ -49,7 +49,7 @@ namespace Player
         /// </summary>
         public void PlayerDismounting()
         {
-            Camera.main.transform.localRotation = Quaternion.identity;
+            //Camera.main.transform.localRotation = Quaternion.identity;
             _virtualCamera.SetActive(true);
         }
     }

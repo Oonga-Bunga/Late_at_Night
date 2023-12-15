@@ -100,13 +100,10 @@ namespace UI_Scripts.Menus
         /// </summary>
         public void OpenInstructionsPanel()
         {
-            FindObjectOfType<PauseManager>().CanPause = false;
             _instructionPanel.gameObject.SetActive(true);
-            _optionsCanvas.gameObject.SetActive(false );
+            _optionsCanvas.gameObject.SetActive(false);
             _gameUI.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
+            FindObjectOfType<PauseManager>().PauseGame();
         }
 
         /// <summary>
@@ -114,13 +111,11 @@ namespace UI_Scripts.Menus
         /// </summary>
         public void CloseInstructionsPanel()
         {
+            FindObjectOfType<PauseManager>().PauseGame();
             FindObjectOfType<PauseManager>().CanPause = true;
             _instructionPanel.gameObject.SetActive(false);
             _optionsCanvas.gameObject.SetActive(false);
             _gameUI.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1f;
         }
 
         /// <summary>

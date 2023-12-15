@@ -9,7 +9,7 @@ public class RotationPivot : MonoBehaviour
     [SerializeField] private GameObject _camera;
     private Vector3 _lastRot = new Vector3(0, 0, 0);
 
-    private void LateUpdate()
+    private void Update()
     {
         if (_camera.transform.rotation.eulerAngles == _lastRot)
         {

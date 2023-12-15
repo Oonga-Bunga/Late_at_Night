@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private Canvas _optionsCanvas;
     [SerializeField] private GameObject _inGameUI;
-    private bool canPause = true;
+    private bool _canPause = false;
+    [SerializeField] private InputActionReference _lookAction;
+    [SerializeField] private GameObject _instructionPanel;
 
     public bool IsPaused => _isPaused;
 
@@ -39,7 +42,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame)
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.IsInGame && _canPause)
         {
             PauseGame();
         }
@@ -47,22 +50,8 @@ public class PauseManager : MonoBehaviour
 
     public bool CanPause
     {
-        get { return canPause; }
-        set { canPause = value; }
-    }
-
-    /// <summary>
-    /// Cierra el panel de pausa y reanuda el juego
-    /// </summary>
-    public void ClosePauseMenu()
-    {
-        _isPaused = !_isPaused;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        _inGameUI.gameObject.SetActive(true);
-        _pausePanel.gameObject.SetActive(false);
-        _optionsCanvas.gameObject.SetActive(false);
-        Time.timeScale = 1f;
+        get { return _canPause; }
+        set { _canPause = value; }
     }
 
     /// <summary>
@@ -73,23 +62,25 @@ public class PauseManager : MonoBehaviour
         _isPaused = !_isPaused;
         if (_isPaused)
         {
-            //_camera._enabled = false;
+            _lookAction.action.Disable();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Time.timeScale = 0f;
+            if (_instructionPanel.gameObject.activeSelf) return;
             _pausePanel.gameObject.SetActive(true);
             _optionsCanvas.gameObject.SetActive(false);
             _inGameUI.gameObject.SetActive(false);
-            Time.timeScale = 0f;
         }
         else
         {
-            //_camera._enabled = true;
+            _lookAction.action.Enable();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Time.timeScale = 1f;
+            if (_instructionPanel.gameObject.activeSelf) return;
             _inGameUI.gameObject.SetActive(true);
             _pausePanel.gameObject.SetActive(false);
             _optionsCanvas.gameObject.SetActive(false);
-            Time.timeScale = 1f;
         }
     }
 }
