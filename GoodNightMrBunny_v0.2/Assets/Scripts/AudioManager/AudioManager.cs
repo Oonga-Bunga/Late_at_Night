@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Player;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Slider _fxSlider;
     [SerializeField] private Slider _sensitivitySlider;
     private CameraController _cameraController;
+
+    [SerializeField] private CinemachineVirtualCamera _playerVirtualCamera;
     #endregion
     
     #region Methods
@@ -77,6 +80,8 @@ public class AudioManager : MonoBehaviour
         {
             _cameraController.SensitivityX = value;
             _cameraController.SensitivityY = _cameraController.SensitivityX / 2;
+            _playerVirtualCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = value;
+            _playerVirtualCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = value/2;
         }
             
         PlayerPrefs.SetFloat("CameraSensitivity", value);

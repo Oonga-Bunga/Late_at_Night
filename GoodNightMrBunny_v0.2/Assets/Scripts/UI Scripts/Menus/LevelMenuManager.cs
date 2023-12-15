@@ -83,7 +83,20 @@ namespace UI_Scripts.Menus
             _loadingScreenCamera.SetActive(false);
             Destroy(_loadingScreenCamera.gameObject);
             _gameUI.SetActive(true);
-            OpenInstructionsPanel();
+            if (FindObjectOfType<UserData>().currentLevelPlayed == 1)
+            {
+                OpenInstructionsPanel();
+            }
+            else
+            {
+                FindObjectOfType<PauseManager>().CanPause = true;
+                _instructionPanel.gameObject.SetActive(false);
+                _optionsCanvas.gameObject.SetActive(false);
+                _gameUI.gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale = 1f;
+            }
         }
 
         /// <summary>
