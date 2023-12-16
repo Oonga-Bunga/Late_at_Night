@@ -10,12 +10,17 @@ public class Kitestinger : AMonster
     private CapsuleCollider _capsuleCollider;
     [SerializeField] private Transform _groundDetectionPoint;
     public event Action OnDied;
+    private List<Vector3> _nodeList = new List<Vector3>();
 
     // Animator strings
     private const string _animatorIsWalking = "IsWalking";
 
     [SerializeField] private AudioSource _deathSound02;
     [SerializeField] private GameObject _deathEffect;
+
+    private float _stopTime = 0;
+
+    public float StopTime => _stopTime;
 
 
     protected override void Awake()
@@ -27,9 +32,24 @@ public class Kitestinger : AMonster
         _agent.speed = _walkingSpeed;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        CalculatePath();
+    }
+
     private void Update()
     {
         _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude >= 0.1f);
+        if (_agent.velocity.magnitude < 0.01f && !_animator.GetCurrentAnimatorStateInfo(0).IsName("ThrowingTrap"))
+        {
+            _stopTime += Time.deltaTime;
+        }
+        else
+        {
+            _stopTime = 0;
+        }
     }
 
     public override void TakeHit(float damage, IKillableEntity.AttackSource source)
@@ -95,5 +115,69 @@ public class Kitestinger : AMonster
         }
 
         return false;
+    }
+
+    private void CalculatePath()
+    {
+        Vector3 modifiedBabyPoint = ChangeVector3Y(Baby.Instance.transform.position);
+        List<Vector3> closePoints = new List<Vector3>();
+
+        foreach (Vector3 interestPoint in GameManager.InterestPointsListInstance)
+        {
+            Vector3 modifiedInterestPoint = ChangeVector3Y(interestPoint);
+
+            Vector3 closestPoint = GetClosestPointOnLine(transform.position, modifiedBabyPoint, modifiedInterestPoint);
+
+            if (Vector3.Distance(modifiedInterestPoint, closestPoint) < 20)
+            {
+                closePoints.Add(modifiedInterestPoint);
+            }
+        }
+
+        Vector3 currentCalcPos = transform.position;
+
+        while (closePoints.Count > 0)
+        {
+            float bestDistance = 100000;
+            int bestPoint = -1;
+
+            foreach (Vector3 closePoint in closePoints)
+            {
+                float distance = Vector3.Distance(closePoint, currentCalcPos);
+
+                if (distance < bestDistance)
+                {
+                    bestDistance = distance;
+                    bestPoint = closePoints.IndexOf(closePoint);
+                }
+            }
+
+            _nodeList.Add(closePoints[bestPoint]);
+            currentCalcPos = closePoints[bestPoint];
+            closePoints.RemoveAt(bestPoint);
+        }
+
+        _nodeList.Add(modifiedBabyPoint);
+    }
+
+    private Vector3 GetClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
+    {
+        Vector3 lineDirection = lineEnd - lineStart;
+        float t = Vector3.Dot(point - lineStart, lineDirection) / Vector3.Dot(lineDirection, lineDirection);
+        t = Mathf.Clamp01(t);
+        Vector3 closestPoint = lineStart + t * lineDirection;
+        return closestPoint;
+    }
+
+    private Vector3 ChangeVector3Y(Vector3 point)
+    {
+        return new Vector3(point.x, transform.position.y, point.z);
+    }
+
+    public Vector3 GetNextDestination()
+    {
+        Vector3 dest = _nodeList[0];
+        _nodeList.RemoveAt(0);
+        return dest;
     }
 }

@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     private static List<FlashlightRechargeStation> _rechargeStationListInstance = new List<FlashlightRechargeStation>();
     public static List<FlashlightRechargeStation> RechargeStationListInstance => _rechargeStationListInstance;
 
+    private static List<Vector3> _interestPointsListInstance = new List<Vector3>();
+    public static List<Vector3> InterestPointsListInstance => _interestPointsListInstance;
+
     [SerializeField] private GameObject _playerInstance;
     [SerializeField] private GameObject _playerPrefab;
 
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
         {
             switchComponent.OnTurnedOnOrOff += SwitchChangedState;
             tempSwitchList.Add(switchComponent);
+            _interestPointsListInstance.Add(switchComponent.transform.position);
             if (switchComponent.IsOn)
             {
                 _currentActivatedSwitches++;
@@ -99,9 +103,15 @@ public class GameManager : MonoBehaviour
         foreach (FlashlightRechargeStation rechargeStation in FindObjectsOfType<FlashlightRechargeStation>())
         {
             tempRechargeStationList.Add(rechargeStation);
+            _interestPointsListInstance.Add(rechargeStation.transform.position);
         }
 
         _rechargeStationListInstance = tempRechargeStationList;
+
+        foreach (RocketPlatform rocketPlatform in FindObjectsOfType<RocketPlatform>())
+        {
+            _interestPointsListInstance.Add(rocketPlatform.transform.position);
+        }
 
         //Debug.Log("Searching for baby");
 

@@ -105,7 +105,7 @@ public class LevelGenerator : MonoBehaviour
             }
             else
             {
-                Debug.Log("No corresponding prefab in dictionary");
+                Debug.Log("No corresponding prefab in dictionary = " + sceneObject.ID);
             }
         }
 

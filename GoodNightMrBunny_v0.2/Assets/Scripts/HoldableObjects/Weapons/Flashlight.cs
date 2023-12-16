@@ -125,7 +125,7 @@ public class Flashlight : AHoldableObject
         if (Physics.SphereCast(transform.position, 1f, transform.forward, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             // Obtener el componente del script del enemigo.
-            AMonster enemy = hit.collider.GetComponent<AMonster>();
+            AKillableEntity enemy = hit.collider.GetComponent<AKillableEntity>();
             if (enemy != null)
             {
                 enemy.TakeHit(_baseDamage * Time.deltaTime, IKillableEntity.AttackSource.Flashlight);

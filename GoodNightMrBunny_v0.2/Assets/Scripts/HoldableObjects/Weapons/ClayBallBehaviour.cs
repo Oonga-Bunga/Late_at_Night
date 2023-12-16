@@ -38,7 +38,7 @@ public class ClayBallBehaviour : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.gameObject.GetComponent<AMonster>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
+            collision.gameObject.GetComponent<AKillableEntity>().TakeHit(baseDamage,IKillableEntity.AttackSource.ClayBall);
             Instantiate(_clayEffect, transform.position, quaternion.identity);
             Destroy(gameObject);
         }
