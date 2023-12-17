@@ -67,7 +67,8 @@ HÉCTOR MUÑOZ GÓMEZ
 15. [MAPA DE EMPATIA ...................................................................................................................................... 54 ](#_page53_x69.00_y103.00)
 16. [CAJA DE HERRAMIENTAS .......................................................................................................................... 59 ](#_page58_x69.00_y103.00)
 17. [BUSINESS MODEL CANVAS ....................................................................................................................... 60 ](#_page59_x69.00_y103.00)
-18. [MDA ....................................................................................................................... 60 ](#MDA)   
+18. [MDA ....................................................................................................................... 60 ](#MDA)
+19. [Plan de Marketing ....................................................................................................................... 61 ](#_page63_x69.00_y350.00)
 13. [Miembros del Equipo ................................................................................................................................ 63 ](#_page62_x69.00_y350.00)
 13. [Anexos........................................................................................................................................................... 63 ](#_page62_x69.00_y577.00)
 
@@ -1322,6 +1323,18 @@ Una planificación más detallada y realista desde el principio podría haber mi
 **Flexibilidad y Adaptabilidad:**
 
 Ante las adversidades hemos observado que pueder resulta esencial la habilidad de ajustarse ante imprevistos. Contar con una mentalidad flexible y la capacidad de modificar planes según sea necesario se vuelve fundamental.
+
+# **Plan de marketing<a name="_page63_x69.00_y350.00"></a>** 
+# <a name="_5v9lro3vxb1n"></a>Itch.io
+En itchi.io se han recibido un total de 480 visualizaciones totales desde la publicación de la beta del juego, y un total de 228 partidas jugadas en el browser.
+
+En la última semana se ha producido un incremento en las visualizaciones del juego, como resultado de las acciones de marketing realizadas
+
+# <a name="_669w7nz4h14g"></a>TikTok
+Se han creado 4 videos en Tiktok, con los cuales se han conseguido un total de 2978 visualizaciones. De esos usuarios que han visualizado los videos, predominan los hombres en un 82% respecto a un 18% de mujeres. 
+
+El grupo de edad más importante al que hemos llegado son los jóvenes de entre 18 y 24 años con un 61%, mientras que el resto de personas comprendidos entre las edades 25 y superior representan un 39%.
+
 # **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
 CHRISTIAN CAMPOS PAN  Programación   
