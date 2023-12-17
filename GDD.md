@@ -1331,6 +1331,7 @@ En itchi.io se han recibido un total de 480 visualizaciones totales desde la pub
 En la última semana se ha producido un incremento en las visualizaciones del juego, como resultado de las acciones de marketing realizadas
 
 ![](/Documentacion/MetricasItchio01.png)
+
 ![](/Documentacion/MetricasItchio02.png)
 
 ## <a name="_669w7nz4h14g"></a>TikTok
@@ -1339,7 +1340,8 @@ Se han creado 4 videos en Tiktok, con los cuales se han conseguido un total de 2
 El grupo de edad más importante al que hemos llegado son los jóvenes de entre 18 y 24 años con un 61%, mientras que el resto de personas comprendidos entre las edades 25 y superior representan un 39%.
 
 ![](/Documentacion/MetricasTiktok01.png)
-![](/Documentacion/MetricasTiktok02.png)
+
+![](/Documentacion/MetricasTiktok02.jpeg)
 
 # **Miembros<a name="_page62_x69.00_y350.00"></a> del Equipo** 
 CÉCILE LAURA BELLO DUPREZ  2D, Interfaces y 3D    
