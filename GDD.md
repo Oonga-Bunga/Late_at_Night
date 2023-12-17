@@ -1325,6 +1325,152 @@ Una planificación más detallada y realista desde el principio podría haber mi
 Ante las adversidades hemos observado que pueder resulta esencial la habilidad de ajustarse ante imprevistos. Contar con una mentalidad flexible y la capacidad de modificar planes según sea necesario se vuelve fundamental.
 
 # **Plan de marketing<a name="_page63_x69.00_y350.00"></a>** 
+## <a name="_vodkgki1xena"></a>Twitter
+**SEPTIEMBRE y OCTUBRE:** en estos meses no se publicó ningún contenido del juego, por lo que estos meses son los que menos registros de impresiones tienen. En septiembre se consiguieron 4 impresiones y en octubre 49. Se consiguió un clic en los enlaces.
+### <a name="_wx27dwylm920"></a>Tweet 1:
+**Fecha:** 28/9/23
+
+**Impresiones:** 70 
+
+**Interacciones:** 2
+
+**Me gustas:** 1
+
+**Retweets:** 0
+### <a name="_afyz7cjiz89s"></a>Tweet 2:
+**Fecha:** 2/10/23
+
+**Impresiones:** 74 
+
+**Interacciones:** 5
+
+**Me gustas:** 1
+
+**Retweets:** 0
+
+**NOVIEMBRE:** en este mes se empezó a promocionar material relacionado con el juego. Se consiguió 22 impresiones por día, consiguiendo un total de 667 impresiones en total. La tasa de interacción tuvo su pico máximo el 23 de noviembre. Se consiguieron 12 clics en los enlaces.
+
+![](/Documentacion/MetricasTwitter01.png)
+
+![](/Documentacion/MetricasTwitter02.png)
+
+### <a name="_s0b5rfdjhplc"></a>Tweet 3:
+**Fecha:** 13/11/23
+
+**Impresiones:** 94 
+
+**Interacciones:** 12
+
+**Me gustas:** 4
+
+**Retweets:** 1
+### <a name="_d09w8874z0np"></a>Tweet 4:
+**Fecha:** 13/11/23
+
+**Impresiones:** 128 
+
+**Interacciones:** 3
+
+**Me gustas:** 1
+
+**Retweets:** 0
+### <a name="_n6cxtwzbu6ly"></a>Tweet 5:
+**Fecha:** 20/11/23
+
+**Impresiones:** 81 
+
+**Interacciones:** 13
+
+**Me gustas:** 6
+
+**Retweets:** 1
+### <a name="_ar48h2707ata"></a>Tweet 6:
+**Fecha:** 22/11/23
+
+**Impresiones:** 181 
+
+**Interacciones:** 24
+
+**Me gustas:** 6
+
+**Retweets:** 2
+
+**DICIEMBRE:** de momento se han conseguido 109 impresiones por día, consiguiendo un total de 1.7 mil impresiones en total. La tasa de interacción ha tenido su pico máximo el 4 de diciembre, a partir de entonces se ha mantenido prácticamente nula. A día de hoy se han obtenido 7 clics en los enlaces.
+
+![](/Documentacion/MetricasTwitter03.png)
+
+![](/Documentacion/MetricasTwitter04.png)
+
+### <a name="_vd5i4ej1sxrs"></a>Tweet 7:
+**Fecha:** 2/12/23
+
+**Impresiones:** 49
+
+**Interacciones:** 9
+
+**Me gustas:** 3
+
+**Retweets:** 0
+### <a name="_nzegytimivoc"></a>Tweet 8:
+**Fecha:** 10/12/23
+
+**Impresiones:** 884 
+
+**Interacciones:** 29
+
+**Me gustas:** 14
+
+**Retweets:** 1
+### <a name="_yuzh9fxruj8o"></a>Tweet 9:
+**Fecha:** 11/12/23
+
+**Impresiones:** 62 
+
+**Interacciones:** 5
+
+**Me gustas:** 2
+
+**Retweets:** 1
+### <a name="_vcre6c1xjhzh"></a>Tweet 10:
+**Fecha:** 13/12/23
+
+**Impresiones:** 388 
+
+**Interacciones:** 15
+
+**Me gustas:** 4
+
+**Retweets:** 1
+### <a name="_z8pc531fyveo"></a>Tweet 11:
+**Fecha:** 14/12/23
+
+**Impresiones:** 130 
+
+**Interacciones:** 16
+
+**Me gustas:** 6
+
+**Retweets:** 1
+### <a name="_bgmg00pv3wb5"></a>Tweet 12:
+**Fecha:** 15/12/23
+
+**Impresiones:** 70 
+
+**Interacciones:** 12
+
+**Me gustas:** 4
+
+**Retweets:** 2
+
+## <a name="_hjniac95tpd2"></a>Instagram
+Se han publicado desde el principio material relacionado con el juego. La mayoría de los post son vídeos ya que estos tienen más alcance. 
+
+El vídeo con más reproducciones corresponde a la séptima publicación con 438 respectivamente (179 son repeticiones) y 14 me gusta. 
+
+![](/Documentacion/MetricasInstagram01.png)
+
+Por otra parte el post con más me gusta se corresponde al tercero con 19 en total.
+
 ## <a name="_5v9lro3vxb1n"></a>Itch.io
 En itchi.io se han recibido un total de 480 visualizaciones totales desde la publicación de la beta del juego, y un total de 228 partidas jugadas en el browser.
 
