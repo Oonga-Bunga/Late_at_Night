@@ -24,7 +24,7 @@ public class UserData : MonoBehaviour
     private string _username;
     private string _gender;
     private int _age = -1;
-    private int _progress = 1; //Levels available
+    private int _progress = 3; //Levels available
     private static GameObject sampleInstance;
     [SerializeField] private DatabaseManager _databaseManager;
 
