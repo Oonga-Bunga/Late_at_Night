@@ -100,6 +100,7 @@ Transform:
   - {fileID: 328543212876784654}
   - {fileID: 4478338142907909281}
   - {fileID: 2682192065343383400}
+  - {fileID: 7843923899496095125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7709817172351126385
@@ -133,6 +134,7 @@ MonoBehaviour:
   _stunnedEffect: {fileID: 6083216041206965874}
   _deathSound02: {fileID: 5034878234338539602}
   _deathEffect: {fileID: 5231139659937769897, guid: 366659f62fe61d940bee7ffb5f17e205, type: 3}
+  _flashlightSmoke: {fileID: 681377293542466940}
 --- !u!136 &848195709705540864
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1222,12 +1224,14 @@ MonoBehaviour:
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Hitbox","value":{"$content":1,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Collider,
       UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"Projectile","value":{"$content":2,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"ProjectileSpawnPoint","value":{"$content":3,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.Transform,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"ExclamationEffect","value":{"$content":4,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 7709817172351126385}
     - {fileID: 848195709705540864}
     - {fileID: 3931848135933954382, guid: 7cba2495490c94d419a261db39e36d8f, type: 3}
     - {fileID: 4478338142907909281}
+    - {fileID: 4666481044671390777, guid: ae1f64b271d36654a8b368ff56b8bd2f, type: 3}
 --- !u!95 &2030498358825378942
 Animator:
   serializedVersion: 5
@@ -1335,4 +1339,87 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 408707279836607336, guid: fb93a4e27176418439c4ea71642d46e0, type: 3}
   m_PrefabInstance: {fileID: 5892935757196137754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6525683896128769122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7491814023680301616}
+    m_Modifications:
+    - target: {fileID: 1975525356293223792, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_Name
+      value: Smoke_VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+--- !u!198 &681377293542466940 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6051535957203855646, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+  m_PrefabInstance: {fileID: 6525683896128769122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7843923899496095125 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3914989098096873975, guid: 6f5e617bbaca14542b3e5a61d071e5fa, type: 3}
+  m_PrefabInstance: {fileID: 6525683896128769122}
   m_PrefabAsset: {fileID: 0}

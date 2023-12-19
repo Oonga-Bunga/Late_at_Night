@@ -47,6 +47,9 @@ public class Zanybell : AMonster
     [SerializeField] private AudioSource _deathSound02;
     [SerializeField] private GameObject _deathEffect;
 
+    [SerializeField] private ParticleSystem _flashlightSmoke;
+    private bool _isBeingLit = false;
+
     public Vector3 Target
     {
         get { return _target; }
@@ -60,10 +63,20 @@ public class Zanybell : AMonster
         base.Awake();
 
         _target = new Vector3(-9999, -9999, -9999);
+        _flashlightSmoke.enableEmission = false;
     }
 
     private void Update()
     {
+        if (!_isBeingLit)
+        {
+            _flashlightSmoke.enableEmission = false;
+        }
+        else
+        {
+            _isBeingLit = false;
+        }
+
         if (_target != new Vector3(-9999, -9999, -9999))
         {
 
@@ -138,6 +151,9 @@ public class Zanybell : AMonster
                 {
                     _deathSound02.Play();
                 }
+
+                _isBeingLit = true;
+                _flashlightSmoke.enableEmission = true;
                 break;
             case IKillableEntity.AttackSource.ClayBall:
             case IKillableEntity.AttackSource.Rocket:

@@ -27,7 +27,8 @@ public class EvilBunny : AMonster
     [SerializeField] private Material _redEyeMaterial;
     [SerializeField] private Renderer _eyeRenderer;
 
-
+    [SerializeField] private ParticleSystem _flashlightSmoke;
+    private bool _isBeingLit = false;
 
     protected override void Awake()
     {
@@ -35,10 +36,20 @@ public class EvilBunny : AMonster
 
         _agent = GetComponent<NavMeshAgent>();
         _agent.speed = _walkingSpeed;
+        _flashlightSmoke.enableEmission = false;
     }
 
     private void Update()
     {
+        if (!_isBeingLit)
+        {
+            _flashlightSmoke.enableEmission = false;
+        }
+        else
+        {
+            _isBeingLit = false;
+        }
+
         _animator.SetBool(_animatorIsWalking, _agent.velocity.magnitude >= 0.1f);
     }
 
@@ -48,6 +59,8 @@ public class EvilBunny : AMonster
         {
             case IKillableEntity.AttackSource.Flashlight:
                 ChangeHealth(damage, true);
+                _isBeingLit = true;
+                _flashlightSmoke.enableEmission = true;
                 break;
             case IKillableEntity.AttackSource.ClayBall:
             case IKillableEntity.AttackSource.Rocket:
